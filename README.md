@@ -1,1 +1,31 @@
-# IanMaHKG-2026-Japan_Planner.github.io
+# 🗾 Japan Winter Journey 2026
+
+**A detailed, interactive day-by-day travel itinerary for a family trip to Japan.**
+
+📅 **Dec 20 – Dec 31, 2026** · 👨‍👩‍👦 **Family of 3** · 🚗 **Road Trip + Rail**
+
+## Route
+
+**Tokyo** (Days 1–2) → **Mt Fuji / Kawaguchiko** (Day 3) → **Hakone** (Day 4–5) → **Nagoya** (Day 5–6) → **Kyoto** (Days 6–8) → **Nara** (Day 9) → **Osaka** (Days 9–12)
+
+## Features
+
+- ✨ Beautiful dark-themed interactive design
+- 📅 12 expandable day cards with morning/afternoon/evening schedules
+- 🍽️ Specific restaurant recommendations for every meal
+- 🏷️ Region filter tabs (Tokyo / Mt Fuji / Kansai)
+- 📋 Practical travel tips, packing list & budget estimate
+- 📱 Fully responsive — looks great on mobile
+- 🎌 Winter-specific advice (driving safety, weather, etc.)
+
+## Live Site
+
+🔗 [View the itinerary](https://ianmahkg.github.io/IanMaHKG-2026-Japan_Planner.github.io/)
+
+## Tech
+
+Pure HTML + CSS + JavaScript — no frameworks, no build step. Just open `index.html`.
+
+---
+
+よい旅を！(Yoi tabi wo!) — Have a wonderful journey! 🇯🇵

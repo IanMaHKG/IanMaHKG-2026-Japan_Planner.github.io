@@ -1,5 +1,6 @@
 /* ═══════════════════════════════════════════════════
    JAPAN WINTER JOURNEY 2026 — Design System
+   British Airways × Japan Airlines Colour Fusion
    ═══════════════════════════════════════════════════ */
 
 /* ── Reset & Base ── */
@@ -10,42 +11,56 @@
 }
 
 :root {
-  /* Color Palette — Winter Japan inspired */
-  --bg-primary: #0a0e1a;
-  --bg-secondary: #111827;
-  --bg-card: #1a2236;
-  --bg-card-hover: #1f2a42;
-  --surface: #232d45;
+  /* ── BA × JAL Colour Palette ──
+     BA: Midnight navy #075AAA, Speedmarque red #BA0C2F, white
+     JAL: Crane red #C4002F, deep navy, silver
+     Fusion: premium airline elegance meets Japanese refinement */
 
-  --text-primary: #eef2f9;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
+  --ba-navy: #075AAA;
+  --ba-navy-deep: #053d73;
+  --ba-red: #BA0C2F;
+  --jal-red: #C4002F;
+  --jal-crane: #D4163C;
 
-  --accent-sakura: #f472b6;
-  --accent-gold: #fbbf24;
-  --accent-fuji: #818cf8;
-  --accent-teal: #2dd4bf;
-  --accent-red: #fb7185;
-  --accent-sky: #38bdf8;
+  --bg-primary: #0A1628;
+  --bg-secondary: #0E1E35;
+  --bg-card: #132742;
+  --bg-card-hover: #17304F;
+  --surface: #1B3A5C;
 
-  --gradient-hero: linear-gradient(135deg, #0f172a 0%, #1e1b4b 40%, #312e81 70%, #0f172a 100%);
-  --gradient-sakura: linear-gradient(135deg, #f472b6, #c084fc);
-  --gradient-gold: linear-gradient(135deg, #fbbf24, #f59e0b);
-  --gradient-ocean: linear-gradient(135deg, #38bdf8, #818cf8);
+  --text-primary: #F0F4F8;
+  --text-secondary: #8BA3C1;
+  --text-muted: #5A7A9E;
 
-  --glass-bg: rgba(26, 34, 54, 0.7);
+  --accent-red: #BA0C2F;
+  --accent-crane: #D4163C;
+  --accent-navy: #075AAA;
+  --accent-gold: #C9A96E;
+  --accent-silver: #A8B8CC;
+  --accent-sky: #4A9FD9;
+  --accent-teal: #2AAFAF;
+
+  --gradient-hero: linear-gradient(135deg, #060F1D 0%, #0A1628 25%, #0E2240 50%, #13162A 75%, #0A1628 100%);
+  --gradient-ba-red: linear-gradient(135deg, #BA0C2F, #D4163C);
+  --gradient-ba-navy: linear-gradient(135deg, #075AAA, #4A9FD9);
+  --gradient-gold: linear-gradient(135deg, #C9A96E, #E2C992);
+  --gradient-jal-accent: linear-gradient(135deg, #C4002F, #BA0C2F);
+
+  --glass-bg: rgba(19, 39, 66, 0.75);
   --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-border-light: rgba(255, 255, 255, 0.12);
 
   --radius-sm: 8px;
   --radius-md: 14px;
   --radius-lg: 22px;
   --radius-xl: 32px;
 
-  --shadow-sm: 0 2px 8px rgba(0,0,0,0.2);
-  --shadow-md: 0 8px 32px rgba(0,0,0,0.3);
-  --shadow-lg: 0 16px 64px rgba(0,0,0,0.4);
-  --shadow-glow-sakura: 0 0 30px rgba(244, 114, 182, 0.15);
-  --shadow-glow-fuji: 0 0 30px rgba(129, 140, 248, 0.15);
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.25);
+  --shadow-md: 0 8px 32px rgba(0,0,0,0.35);
+  --shadow-lg: 0 16px 64px rgba(0,0,0,0.45);
+  --shadow-glow-red: 0 0 30px rgba(186, 12, 47, 0.15);
+  --shadow-glow-navy: 0 0 30px rgba(7, 90, 170, 0.2);
+  --shadow-glow-gold: 0 0 25px rgba(201, 169, 110, 0.12);
 
   --font-primary: 'Inter', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
 
@@ -75,7 +90,7 @@ a {
   transition: color var(--transition-fast);
 }
 a:hover {
-  color: var(--accent-sakura);
+  color: var(--accent-crane);
 }
 
 img {
@@ -91,7 +106,7 @@ img {
 
 
 /* ═══════════════════════════════════════════════════
-   HERO
+   HERO — BA Midnight with JAL Crane Red accents
    ═══════════════════════════════════════════════════ */
 #hero {
   position: relative;
@@ -108,10 +123,29 @@ img {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 600px 400px at 30% 20%, rgba(244, 114, 182, 0.08) 0%, transparent 70%),
-    radial-gradient(ellipse 500px 500px at 70% 80%, rgba(129, 140, 248, 0.1) 0%, transparent 60%),
-    radial-gradient(ellipse 400px 300px at 50% 50%, rgba(251, 191, 36, 0.05) 0%, transparent 50%);
+    radial-gradient(ellipse 600px 400px at 30% 20%, rgba(186, 12, 47, 0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 500px 500px at 70% 80%, rgba(7, 90, 170, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 400px 300px at 50% 50%, rgba(201, 169, 110, 0.04) 0%, transparent 50%);
   pointer-events: none;
+}
+
+/* Subtle BA ribbon stripe across top */
+#hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg,
+    var(--accent-red) 0%,
+    var(--accent-red) 33%,
+    var(--accent-navy) 33%,
+    var(--accent-navy) 66%,
+    var(--accent-red) 66%,
+    var(--accent-red) 100%
+  );
+  z-index: 10;
 }
 
 .hero-particles {
@@ -124,7 +158,7 @@ img {
 .particle {
   position: absolute;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(168, 184, 204, 0.12);
   animation: float-particle linear infinite;
   opacity: 0;
 }
@@ -153,7 +187,7 @@ img {
   font-weight: 500;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--accent-sakura);
+  color: var(--accent-crane);
   margin-bottom: 16px;
   animation: hero-fade-in 1.2s ease-out 0.2s backwards;
 }
@@ -176,7 +210,7 @@ img {
 }
 
 .title-line.accent {
-  background: var(--gradient-sakura);
+  background: var(--gradient-ba-red);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -187,7 +221,7 @@ img {
   font-size: clamp(2rem, 6vw, 4rem);
   font-weight: 300;
   letter-spacing: 8px;
-  color: var(--text-secondary);
+  color: var(--accent-silver);
   animation-delay: 0.5s;
 }
 
@@ -211,7 +245,7 @@ img {
 .badge {
   padding: 8px 18px;
   background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
+  border: 1px solid var(--glass-border-light);
   border-radius: 100px;
   font-size: 0.85rem;
   font-weight: 500;
@@ -222,20 +256,20 @@ img {
 .hero-cta {
   display: inline-block;
   padding: 16px 40px;
-  background: var(--gradient-sakura);
+  background: var(--gradient-ba-red);
   color: #fff;
   font-size: 1.05rem;
   font-weight: 700;
   border-radius: 100px;
   letter-spacing: 0.5px;
-  box-shadow: 0 8px 30px rgba(244, 114, 182, 0.3);
+  box-shadow: 0 8px 30px rgba(186, 12, 47, 0.3);
   transition: all var(--transition-smooth);
   animation: hero-fade-in 1.2s ease-out 0.8s backwards;
 }
 
 .hero-cta:hover {
   transform: translateY(-3px) scale(1.03);
-  box-shadow: 0 12px 40px rgba(244, 114, 182, 0.45);
+  box-shadow: 0 12px 40px rgba(186, 12, 47, 0.45);
   color: #fff;
 }
 
@@ -251,7 +285,7 @@ img {
 .scroll-mouse {
   width: 26px;
   height: 42px;
-  border: 2px solid rgba(255, 255, 255, 0.25);
+  border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 14px;
   display: flex;
   justify-content: center;
@@ -261,7 +295,7 @@ img {
 .scroll-dot {
   width: 4px;
   height: 10px;
-  background: var(--accent-sakura);
+  background: var(--accent-crane);
   border-radius: 4px;
   animation: scroll-dot-move 2s ease-in-out infinite;
 }
@@ -278,7 +312,7 @@ img {
 
 
 /* ═══════════════════════════════════════════════════
-   NAV BAR
+   NAV BAR — BA-style ribbon
    ═══════════════════════════════════════════════════ */
 .nav-bar {
   position: fixed;
@@ -298,10 +332,21 @@ img {
 }
 
 .nav-bar.scrolled {
-  background: rgba(10, 14, 26, 0.9);
+  background: rgba(10, 22, 40, 0.92);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--glass-border);
   padding: 8px 0;
+}
+
+/* Red accent line under nav */
+.nav-bar.scrolled::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--gradient-ba-red);
 }
 
 .nav-inner {
@@ -340,7 +385,7 @@ img {
   left: 0;
   right: 0;
   height: 2px;
-  background: var(--gradient-sakura);
+  background: var(--gradient-ba-red);
   border-radius: 2px;
   transform: scaleX(0);
   transition: transform var(--transition-fast);
@@ -394,14 +439,14 @@ img {
   letter-spacing: -1.5px;
   margin-bottom: 12px;
   text-align: center;
-  background: linear-gradient(135deg, var(--text-primary), var(--accent-fuji));
+  background: linear-gradient(135deg, var(--text-primary), var(--accent-sky));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .section-title.light {
-  background: linear-gradient(135deg, var(--text-primary), var(--accent-sakura));
+  background: linear-gradient(135deg, var(--text-primary), var(--accent-crane));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -449,15 +494,15 @@ img {
   left: 0;
   right: 0;
   height: 3px;
-  background: var(--gradient-sakura);
+  background: var(--gradient-ba-red);
   transform: scaleX(0);
   transition: transform var(--transition-smooth);
 }
 
 .overview-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(244, 114, 182, 0.2);
-  box-shadow: var(--shadow-glow-sakura);
+  border-color: rgba(186, 12, 47, 0.2);
+  box-shadow: var(--shadow-glow-red);
 }
 
 .overview-card:hover::before {
@@ -496,11 +541,11 @@ img {
   right: 5%;
   height: 3px;
   background: linear-gradient(to right,
-    var(--accent-sakura),
+    var(--accent-crane),
+    var(--accent-navy),
     var(--accent-gold),
-    var(--accent-fuji),
-    var(--accent-teal),
-    var(--accent-sky));
+    var(--accent-navy),
+    var(--accent-crane));
   border-radius: 3px;
   transform: translateY(-50%);
 }
@@ -526,7 +571,6 @@ img {
   height: 20px;
   border-radius: 50%;
   border: 3px solid var(--bg-primary);
-  box-shadow: 0 0 0 3px var(--accent-sakura), 0 0 15px rgba(244, 114, 182, 0.3);
   transition: all var(--transition-smooth);
   cursor: pointer;
 }
@@ -535,13 +579,13 @@ img {
   transform: scale(1.3);
 }
 
-.stop-dot.tokyo   { background: var(--accent-sakura); box-shadow: 0 0 0 3px var(--accent-sakura), 0 0 15px rgba(244, 114, 182, 0.3); }
-.stop-dot.fuji    { background: var(--accent-gold);   box-shadow: 0 0 0 3px var(--accent-gold), 0 0 15px rgba(251, 191, 36, 0.3); }
-.stop-dot.hakone  { background: var(--accent-fuji);   box-shadow: 0 0 0 3px var(--accent-fuji), 0 0 15px rgba(129, 140, 248, 0.3); }
-.stop-dot.nagoya  { background: var(--accent-teal);   box-shadow: 0 0 0 3px var(--accent-teal), 0 0 15px rgba(45, 212, 191, 0.3); }
-.stop-dot.kyoto   { background: var(--accent-red);    box-shadow: 0 0 0 3px var(--accent-red), 0 0 15px rgba(251, 113, 133, 0.3); }
-.stop-dot.nara    { background: var(--accent-sky);    box-shadow: 0 0 0 3px var(--accent-sky), 0 0 15px rgba(56, 189, 248, 0.3); }
-.stop-dot.osaka   { background: var(--accent-sakura); box-shadow: 0 0 0 3px var(--accent-sakura), 0 0 15px rgba(244, 114, 182, 0.3); }
+.stop-dot.tokyo   { background: var(--accent-crane); box-shadow: 0 0 0 3px var(--accent-crane), 0 0 15px rgba(212, 22, 60, 0.3); }
+.stop-dot.fuji    { background: var(--accent-navy);  box-shadow: 0 0 0 3px var(--accent-navy), 0 0 15px rgba(7, 90, 170, 0.3); }
+.stop-dot.hakone  { background: var(--accent-gold);  box-shadow: 0 0 0 3px var(--accent-gold), 0 0 15px rgba(201, 169, 110, 0.3); }
+.stop-dot.nagoya  { background: var(--accent-teal);  box-shadow: 0 0 0 3px var(--accent-teal), 0 0 15px rgba(42, 175, 175, 0.3); }
+.stop-dot.kyoto   { background: var(--accent-red);   box-shadow: 0 0 0 3px var(--accent-red), 0 0 15px rgba(186, 12, 47, 0.3); }
+.stop-dot.nara    { background: var(--accent-sky);   box-shadow: 0 0 0 3px var(--accent-sky), 0 0 15px rgba(74, 159, 217, 0.3); }
+.stop-dot.osaka   { background: var(--accent-crane); box-shadow: 0 0 0 3px var(--accent-crane), 0 0 15px rgba(212, 22, 60, 0.3); }
 
 .stop-label {
   font-size: 0.85rem;
@@ -557,6 +601,151 @@ img {
   color: var(--text-muted);
   margin-top: 2px;
 }
+
+
+/* ═══════════════════════════════════════════════════
+   INTERACTIVE MAP
+   ═══════════════════════════════════════════════════ */
+#map-section {
+  padding-bottom: 80px;
+}
+
+.map-container {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--glass-border-light);
+  box-shadow: var(--shadow-md);
+  background: var(--bg-card);
+}
+
+#route-map {
+  width: 100%;
+  height: 480px;
+  z-index: 1;
+}
+
+.map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.legend-dot.leg-tokyo  { background: var(--accent-crane); }
+.legend-dot.leg-fuji   { background: var(--accent-navy); }
+.legend-dot.leg-kansai { background: var(--accent-gold); }
+
+/* Leaflet overrides for dark theme */
+.leaflet-container {
+  background: var(--bg-card) !important;
+  font-family: var(--font-primary) !important;
+}
+
+.leaflet-popup-content-wrapper {
+  background: var(--bg-card) !important;
+  color: var(--text-primary) !important;
+  border-radius: var(--radius-sm) !important;
+  box-shadow: var(--shadow-md) !important;
+  border: 1px solid var(--glass-border-light) !important;
+}
+
+.leaflet-popup-tip {
+  background: var(--bg-card) !important;
+}
+
+.leaflet-popup-content {
+  margin: 12px 16px !important;
+  font-size: 0.88rem !important;
+  line-height: 1.5 !important;
+}
+
+.leaflet-popup-content h4 {
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: var(--text-primary);
+}
+
+.leaflet-popup-content p {
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.leaflet-popup-content .popup-days {
+  display: inline-block;
+  padding: 2px 10px;
+  background: rgba(186, 12, 47, 0.15);
+  color: var(--accent-crane);
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+.leaflet-popup-close-button {
+  color: var(--text-muted) !important;
+}
+
+.leaflet-control-zoom a {
+  background: var(--bg-card) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--glass-border) !important;
+}
+
+.leaflet-control-zoom a:hover {
+  background: var(--bg-card-hover) !important;
+}
+
+.leaflet-control-attribution {
+  background: rgba(10, 22, 40, 0.8) !important;
+  color: var(--text-muted) !important;
+  font-size: 0.65rem !important;
+}
+
+.leaflet-control-attribution a {
+  color: var(--accent-sky) !important;
+}
+
+/* Custom map markers */
+.custom-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  line-height: 1;
+}
+
+.custom-marker.marker-tokyo  { background: var(--accent-crane); }
+.custom-marker.marker-fuji   { background: var(--accent-navy); }
+.custom-marker.marker-hakone { background: var(--accent-gold); color: #1a1a1a; }
+.custom-marker.marker-nagoya { background: var(--accent-teal); }
+.custom-marker.marker-kyoto  { background: var(--accent-red); }
+.custom-marker.marker-nara   { background: var(--accent-sky); }
+.custom-marker.marker-osaka  { background: var(--accent-crane); }
 
 
 /* ═══════════════════════════════════════════════════
@@ -578,8 +767,8 @@ img {
 
 .tip-card:hover {
   transform: translateY(-3px);
-  border-color: rgba(129, 140, 248, 0.2);
-  box-shadow: var(--shadow-glow-fuji);
+  border-color: rgba(7, 90, 170, 0.2);
+  box-shadow: var(--shadow-glow-navy);
 }
 
 .tip-header {
@@ -618,7 +807,7 @@ img {
   content: '›';
   position: absolute;
   left: 0;
-  color: var(--accent-fuji);
+  color: var(--accent-navy);
   font-weight: 700;
   font-size: 1.1rem;
 }
@@ -656,12 +845,12 @@ img {
 }
 
 .day-tab:hover {
-  border-color: var(--accent-fuji);
+  border-color: var(--accent-navy);
   color: var(--text-primary);
 }
 
 .day-tab.active {
-  background: var(--gradient-sakura);
+  background: var(--gradient-ba-red);
   border-color: transparent;
   color: #fff;
 }
@@ -682,11 +871,11 @@ img {
   bottom: 0;
   width: 2px;
   background: linear-gradient(to bottom,
-    var(--accent-sakura) 0%,
-    var(--accent-gold) 25%,
-    var(--accent-fuji) 50%,
-    var(--accent-teal) 75%,
-    var(--accent-sakura) 100%
+    var(--accent-crane) 0%,
+    var(--accent-navy) 25%,
+    var(--accent-gold) 50%,
+    var(--accent-navy) 75%,
+    var(--accent-crane) 100%
   );
   opacity: 0.25;
 }
@@ -717,7 +906,7 @@ img {
 
 .day-header:hover {
   background: var(--bg-card-hover);
-  border-color: rgba(244, 114, 182, 0.15);
+  border-color: rgba(186, 12, 47, 0.15);
   box-shadow: var(--shadow-sm);
 }
 
@@ -738,7 +927,7 @@ img {
   font-size: 1.6rem;
   font-weight: 900;
   line-height: 1;
-  background: var(--gradient-sakura);
+  background: var(--gradient-ba-red);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -780,12 +969,12 @@ img {
   letter-spacing: 0.3px;
 }
 
-.tag-city    { background: rgba(244, 114, 182, 0.12); color: var(--accent-sakura); }
-.tag-nature  { background: rgba(45, 212, 191, 0.12);  color: var(--accent-teal); }
-.tag-culture { background: rgba(251, 191, 36, 0.12);  color: var(--accent-gold); }
-.tag-pace    { background: rgba(129, 140, 248, 0.12); color: var(--accent-fuji); }
-.tag-transport { background: rgba(56, 189, 248, 0.12); color: var(--accent-sky); }
-.tag-special { background: rgba(251, 113, 133, 0.12); color: var(--accent-red); }
+.tag-city    { background: rgba(212, 22, 60, 0.12);  color: var(--accent-crane); }
+.tag-nature  { background: rgba(42, 175, 175, 0.12); color: var(--accent-teal); }
+.tag-culture { background: rgba(201, 169, 110, 0.12); color: var(--accent-gold); }
+.tag-pace    { background: rgba(7, 90, 170, 0.12);   color: var(--accent-navy); }
+.tag-transport { background: rgba(74, 159, 217, 0.12); color: var(--accent-sky); }
+.tag-special { background: rgba(186, 12, 47, 0.12);  color: var(--accent-red); }
 
 .day-chevron {
   font-size: 0.8rem;
@@ -826,11 +1015,11 @@ img {
 .time-badge {
   display: inline-block;
   padding: 4px 14px;
-  background: rgba(129, 140, 248, 0.1);
+  background: rgba(7, 90, 170, 0.1);
   border-radius: 100px;
   font-size: 0.78rem;
   font-weight: 600;
-  color: var(--accent-fuji);
+  color: var(--accent-sky);
   margin-bottom: 14px;
   letter-spacing: 0.3px;
 }
@@ -854,10 +1043,10 @@ img {
   font-weight: 600;
 }
 
-/* Meal Recommendations */
+/* Meal Recommendations — Gold accent */
 .meal-rec {
   padding: 14px 18px;
-  background: rgba(251, 191, 36, 0.06);
+  background: rgba(201, 169, 110, 0.06);
   border-left: 3px solid var(--accent-gold);
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
   font-size: 0.88rem;
@@ -875,22 +1064,22 @@ img {
   font-weight: 600;
 }
 
-/* Day Tip */
+/* Day Tip — Navy accent */
 .day-tip {
   padding: 18px 28px;
-  background: rgba(45, 212, 191, 0.05);
-  border-top: 1px solid rgba(45, 212, 191, 0.1);
+  background: rgba(7, 90, 170, 0.05);
+  border-top: 1px solid rgba(7, 90, 170, 0.1);
   font-size: 0.88rem;
   color: var(--text-secondary);
   line-height: 1.6;
 }
 
 .day-tip strong {
-  color: var(--accent-teal);
+  color: var(--accent-sky);
 }
 
 .day-tip a {
-  color: var(--accent-teal);
+  color: var(--accent-sky);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -915,8 +1104,8 @@ img {
 
 .packing-card:hover {
   transform: translateY(-3px);
-  border-color: rgba(244, 114, 182, 0.15);
-  box-shadow: var(--shadow-glow-sakura);
+  border-color: rgba(186, 12, 47, 0.15);
+  box-shadow: var(--shadow-glow-red);
 }
 
 .packing-card h3 {
@@ -945,7 +1134,7 @@ img {
   content: '☐';
   position: absolute;
   left: 0;
-  color: var(--accent-sakura);
+  color: var(--accent-crane);
   font-size: 0.9rem;
 }
 
@@ -982,24 +1171,36 @@ img {
 }
 
 .budget-table tr:hover td {
-  background: rgba(129, 140, 248, 0.03);
+  background: rgba(7, 90, 170, 0.03);
 }
 
 .budget-total td {
-  background: rgba(244, 114, 182, 0.06) !important;
+  background: rgba(186, 12, 47, 0.06) !important;
   color: var(--text-primary) !important;
   font-weight: 700;
-  border-top: 2px solid var(--accent-sakura);
+  border-top: 2px solid var(--accent-red);
 }
 
 
 /* ═══════════════════════════════════════════════════
-   FOOTER
+   FOOTER — BA-style with stripe
    ═══════════════════════════════════════════════════ */
 .footer {
   background: var(--bg-secondary);
   border-top: 1px solid var(--glass-border);
   padding: 60px 0 40px;
+  position: relative;
+}
+
+/* BA red stripe at top of footer */
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-ba-red);
 }
 
 .footer-content {
@@ -1070,11 +1271,17 @@ img {
 
 
 /* ═══════════════════════════════════════════════════
-   RESPONSIVE
+   RESPONSIVE — Mobile-first adaptive design
    ═══════════════════════════════════════════════════ */
+
+/* Tablet (768px and below) */
 @media (max-width: 768px) {
   .section {
     padding: 64px 0;
+  }
+
+  .container {
+    padding: 0 16px;
   }
 
   .nav-links {
@@ -1083,7 +1290,7 @@ img {
     top: 100%;
     left: 0;
     right: 0;
-    background: rgba(10, 14, 26, 0.97);
+    background: rgba(10, 22, 40, 0.97);
     backdrop-filter: blur(20px);
     flex-direction: column;
     padding: 20px 24px;
@@ -1099,12 +1306,21 @@ img {
     display: flex;
   }
 
+  .overview-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .overview-card {
+    padding: 20px 16px;
+  }
+
   .timeline::before {
     left: 22px;
   }
 
   .day-header {
-    padding: 16px 16px;
+    padding: 16px 14px;
     gap: 12px;
   }
 
@@ -1150,19 +1366,54 @@ img {
   .route-visual {
     padding: 30px 0;
   }
-}
 
-@media (max-width: 480px) {
-  .overview-grid {
-    grid-template-columns: 1fr;
+  /* Map responsive */
+  #route-map {
+    height: 350px;
+  }
+
+  .map-legend {
+    gap: 10px;
+    padding: 0 8px;
   }
 
   .tips-grid {
     grid-template-columns: 1fr;
   }
 
+  .budget-table th,
+  .budget-table td {
+    padding: 10px 12px;
+    font-size: 0.82rem;
+  }
+}
+
+/* Small mobile (480px and below) */
+@media (max-width: 480px) {
+  .section {
+    padding: 48px 0;
+  }
+
+  .section-title {
+    font-size: 1.7rem;
+  }
+
+  .section-subtitle {
+    font-size: 0.95rem;
+    margin-bottom: 32px;
+  }
+
+  .overview-grid {
+    grid-template-columns: 1fr;
+  }
+
   .packing-grid {
     grid-template-columns: 1fr;
+  }
+
+  .day-header {
+    padding: 12px 10px;
+    gap: 10px;
   }
 
   .day-tags {
@@ -1173,11 +1424,68 @@ img {
     font-size: 0.65rem;
     padding: 2px 8px;
   }
+
+  .day-info h3 {
+    font-size: 0.88rem;
+  }
+
+  .timeline-block {
+    padding: 14px 12px;
+  }
+
+  .meal-rec {
+    padding: 10px 12px;
+    font-size: 0.82rem;
+  }
+
+  .hero-cta {
+    padding: 14px 32px;
+    font-size: 0.95rem;
+  }
+
+  /* Map responsive */
+  #route-map {
+    height: 280px;
+  }
+
+  .map-legend {
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .budget-table th,
+  .budget-table td {
+    padding: 8px 8px;
+    font-size: 0.78rem;
+  }
+}
+
+/* Large desktop (1200px+) */
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1200px;
+  }
+
+  #route-map {
+    height: 520px;
+  }
+}
+
+/* Very large desktop (1600px+) */
+@media (min-width: 1600px) {
+  .container {
+    max-width: 1320px;
+  }
+
+  .section {
+    padding: 120px 0;
+  }
 }
 
 
 /* ═══════════════════════════════════════════════════
-   CUSTOM SCROLLBAR
+   CUSTOM SCROLLBAR — BA Navy
    ═══════════════════════════════════════════════════ */
 ::-webkit-scrollbar {
   width: 8px;
@@ -1193,14 +1501,69 @@ img {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-fuji);
+  background: var(--accent-navy);
 }
 
 
 /* ═══════════════════════════════════════════════════
-   SELECTION
+   SELECTION — Red accent
    ═══════════════════════════════════════════════════ */
 ::selection {
-  background: rgba(244, 114, 182, 0.3);
+  background: rgba(186, 12, 47, 0.3);
   color: var(--text-primary);
 }
+
+/* ═══════════════════════════════════════════════════
+   LANGUAGE SWITCHER STYLING
+   ═══════════════════════════════════════════════════ */
+.lang-switcher {
+  display: flex;
+  background: rgba(10, 22, 40, 0.6);
+  border: 1px solid var(--glass-border-light);
+  border-radius: 100px;
+  overflow: hidden;
+  padding: 2px;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.lang-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: var(--font-primary);
+}
+
+.lang-btn:hover:not(.active) {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.lang-btn.active {
+  background: var(--gradient-ba-red);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(186, 12, 47, 0.3);
+}
+
+/* Visibility rules */
+body.lang-en .lang-zh { display: none !important; }
+body.lang-zh-hk .lang-en { display: none !important; }
+
+/* Keep inline layout for spans when active */
+body.lang-en span.lang-en { display: inline !important; }
+body.lang-zh-hk span.lang-zh { display: inline !important; }
+
+@media (max-width: 768px) {
+  .lang-switcher {
+    margin-left: 0;
+    margin-top: 10px;
+    align-self: flex-start;
+  }
+}
+

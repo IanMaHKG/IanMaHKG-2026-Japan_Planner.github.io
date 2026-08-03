@@ -6,7 +6,7 @@
 
 ## Route
 
-**Tokyo** (Days 1–2) → **Mt Fuji / Kawaguchiko** (Day 3) → **Hakone** (Day 4–5) → **Nagoya** (Day 5–6) → **Kyoto** (Days 6–8) → **Nara** (Day 9) → **Osaka** (Days 9–12)
+**Tokyo** (Days 1–4) → **Mt Fuji / Kawaguchiko** (Day 5–6) → **Hakone** (Days 6–7) → **Nagoya** (Day 7) → **Kyoto** (Days 8–9) → **Nara** (Day 10) → **Osaka** (Days 11–12)
 
 ## Features
 

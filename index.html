@@ -11,28 +11,50 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet" />
 
+  <!-- Leaflet Map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body class="lang-en">
 
   <!-- ═══════════════════ HERO ═══════════════════ -->
   <header id="hero">
     <div class="hero-overlay"></div>
     <div class="hero-particles" id="particles"></div>
     <div class="hero-content">
-      <p class="hero-eyebrow">🇯🇵 Family Adventure</p>
+      <p class="hero-eyebrow">
+        <span class="lang-en">🇯🇵 Family Adventure</span>
+        <span class="lang-zh">🇯🇵 家族冬日自駕之旅</span>
+      </p>
       <h1 class="hero-title">
         <span class="title-line">Japan</span>
         <span class="title-line accent">Winter Journey</span>
         <span class="title-line year">2026</span>
       </h1>
-      <p class="hero-subtitle">Dec 20 — Dec 31 &nbsp;·&nbsp; Tokyo → Mt Fuji → Kansai</p>
+      <p class="hero-subtitle">
+        <span class="lang-en">Dec 20 — Dec 31 &nbsp;·&nbsp; Tokyo (東京) → Mt Fuji (富士山) → Kansai (關西)</span>
+        <span class="lang-zh">12月20日 — 12月31日 &nbsp;·&nbsp; 東京 → 富士山 → 關西</span>
+      </p>
       <div class="hero-badges">
-        <span class="badge">🏔️ 12 Days</span>
-        <span class="badge">👨‍👩‍👦 Family Trip</span>
-        <span class="badge">🚗 Road Trip + Rail</span>
+        <span class="badge">
+          <span class="lang-en">🏔️ 12 Days</span>
+          <span class="lang-zh">🏔️ 12天行程</span>
+        </span>
+        <span class="badge">
+          <span class="lang-en">👨‍👩‍👦 Family Trip</span>
+          <span class="lang-zh">👨‍👩‍👦 家族同行</span>
+        </span>
+        <span class="badge">
+          <span class="lang-en">🚗 Road Trip + Rail</span>
+          <span class="lang-zh">🚗 自駕遊 + 鐵路</span>
+        </span>
       </div>
-      <a href="#overview" class="hero-cta" id="hero-cta">Explore Itinerary</a>
+      <a href="#overview" class="hero-cta" id="hero-cta">
+        <span class="lang-en">Explore Itinerary</span>
+        <span class="lang-zh">開啟行程</span>
+      </a>
     </div>
     <div class="scroll-indicator">
       <div class="scroll-mouse"><div class="scroll-dot"></div></div>
@@ -42,12 +64,37 @@
   <!-- ═══════════════════ NAV ═══════════════════ -->
   <nav id="main-nav" class="nav-bar">
     <div class="nav-inner">
-      <a href="#hero" class="nav-logo">🗾 Japan 2026</a>
+      <a href="#hero" class="nav-logo">
+        <span class="lang-en">🗾 Japan 2026</span>
+        <span class="lang-zh">🗾 日本冬日遊 2026</span>
+      </a>
       <div class="nav-links" id="nav-links">
-        <a href="#overview">Overview</a>
-        <a href="#tips">Tips</a>
-        <a href="#itinerary">Itinerary</a>
-        <a href="#packing">Packing</a>
+        <a href="#overview">
+          <span class="lang-en">Overview</span>
+          <span class="lang-zh">概覽</span>
+        </a>
+        <a href="#map-section">
+          <span class="lang-en">Map</span>
+          <span class="lang-zh">地圖</span>
+        </a>
+        <a href="#tips">
+          <span class="lang-en">Tips</span>
+          <span class="lang-zh">資訊</span>
+        </a>
+        <a href="#itinerary">
+          <span class="lang-en">Itinerary</span>
+          <span class="lang-zh">行程</span>
+        </a>
+        <a href="#packing">
+          <span class="lang-en">Packing</span>
+          <span class="lang-zh">行李</span>
+        </a>
+        
+        <!-- Language Switcher in Nav -->
+        <div class="lang-switcher">
+          <button class="lang-btn active" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="zh-hk">繁中</button>
+        </div>
       </div>
       <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
         <span></span><span></span><span></span>
@@ -58,29 +105,51 @@
   <!-- ═══════════════════ OVERVIEW ═══════════════════ -->
   <section id="overview" class="section">
     <div class="container">
-      <h2 class="section-title">Trip Overview</h2>
-      <p class="section-subtitle">A balanced, relaxed journey through Japan's most iconic winter landscapes — designed for a family of three.</p>
+      <h2 class="section-title">
+        <span class="lang-en">Trip Overview</span>
+        <span class="lang-zh">行程概覽</span>
+      </h2>
+      <p class="section-subtitle">
+        <span class="lang-en">A balanced, relaxed journey through Japan's most iconic winter landscapes — designed for a family of three.</span>
+        <span class="lang-zh">專為三人家庭設計，在東京、富士山及關西之間，享受平衡且悠閒的日本冬日旅程。</span>
+      </p>
 
       <div class="overview-grid">
         <div class="overview-card" id="overview-route">
           <div class="ov-icon">🗺️</div>
-          <h3>Route</h3>
-          <p>Tokyo → Kawaguchiko → Hakone → Nagoya → Kyoto → Nara → Osaka</p>
+          <h3>
+            <span class="lang-en">Route</span>
+            <span class="lang-zh">路線</span>
+          </h3>
+          <p class="lang-en">Tokyo (東京) → Kawaguchiko (河口湖) → Hakone (箱根) → Nagoya (名古屋) → Kyoto (京都) → Nara (奈良) → Osaka (大阪)</p>
+          <p class="lang-zh">東京 → 河口湖 → 箱根 → 名古屋 → 京都 → 奈良 → 大阪</p>
         </div>
         <div class="overview-card" id="overview-pace">
           <div class="ov-icon">🧘</div>
-          <h3>Pace</h3>
-          <p>Balanced to relaxed. No more than 2–3 activities per day, with rest built in for your parents.</p>
+          <h3>
+            <span class="lang-en">Pace</span>
+            <span class="lang-zh">步調節奏</span>
+          </h3>
+          <p class="lang-en">Balanced to relaxed. No more than 2–3 activities per day, with rest built in for your parents.</p>
+          <p class="lang-zh">平衡且輕鬆。每日安排不超過 2 至 3 個主要活動，為年長父母預留充足休息時間。</p>
         </div>
         <div class="overview-card" id="overview-transport">
           <div class="ov-icon">🚗</div>
-          <h3>Transport</h3>
-          <p>Rental car for Days 3–5 (Mt Fuji drive). Trains & metro for Tokyo and Kansai.</p>
+          <h3>
+            <span class="lang-en">Transport</span>
+            <span class="lang-zh">交通方式</span>
+          </h3>
+          <p class="lang-en">Rental car for Days 5–7 (Mt Fuji drive). Shinkansen (Nagoya → Kyoto) and local trains for Tokyo/Kansai.</p>
+          <p class="lang-zh">第 5 至 7 天自駕租車（富士箱根路段）。名古屋至京都乘搭新幹線。東京及關西市區搭地鐵火車。</p>
         </div>
         <div class="overview-card" id="overview-weather">
           <div class="ov-icon">🌡️</div>
-          <h3>Weather</h3>
-          <p>Crisp & clear. Tokyo 4–13°C, Fuji area 0–8°C, Kansai 3–12°C. Layer up!</p>
+          <h3>
+            <span class="lang-en">Weather</span>
+            <span class="lang-zh">氣候與溫度</span>
+          </h3>
+          <p class="lang-en">Crisp & clear. Tokyo 4–13°C, Fuji area 0–8°C, Kansai 3–12°C. Layer up!</p>
+          <p class="lang-zh">寒冷乾燥且晴朗。東京 4–13°C，富士山區 0–8°C，關西 3–12°C。請準備洋蔥式穿法！</p>
         </div>
       </div>
 
@@ -90,32 +159,95 @@
         <div class="route-stops">
           <div class="route-stop">
             <div class="stop-dot tokyo"></div>
-            <span class="stop-label">Tokyo<br><small>Days 1–2</small></span>
+            <span class="stop-label">
+              <span class="lang-en">Tokyo (東京)<br><small>Days 1–4</small></span>
+              <span class="lang-zh">東京<br><small>第 1–4 天</small></span>
+            </span>
           </div>
           <div class="route-stop">
             <div class="stop-dot fuji"></div>
-            <span class="stop-label">Mt Fuji<br><small>Days 3–4</small></span>
+            <span class="stop-label">
+              <span class="lang-en">Mt Fuji (富士山)<br><small>Days 5–6</small></span>
+              <span class="lang-zh">富士山<br><small>第 5–6 天</small></span>
+            </span>
           </div>
           <div class="route-stop">
             <div class="stop-dot hakone"></div>
-            <span class="stop-label">Hakone<br><small>Day 5</small></span>
+            <span class="stop-label">
+              <span class="lang-en">Hakone (箱根)<br><small>Days 6–7</small></span>
+              <span class="lang-zh">箱根<br><small>第 6–7 天</small></span>
+            </span>
           </div>
           <div class="route-stop">
             <div class="stop-dot nagoya"></div>
-            <span class="stop-label">Nagoya<br><small>Day 6</small></span>
+            <span class="stop-label">
+              <span class="lang-en">Nagoya (名古屋)<br><small>Day 7</small></span>
+              <span class="lang-zh">名古屋<br><small>第 7 天</small></span>
+            </span>
           </div>
           <div class="route-stop">
             <div class="stop-dot kyoto"></div>
-            <span class="stop-label">Kyoto<br><small>Days 7–9</small></span>
+            <span class="stop-label">
+              <span class="lang-en">Kyoto (京都)<br><small>Days 8–9</small></span>
+              <span class="lang-zh">京都<br><small>第 8–9 天</small></span>
+            </span>
           </div>
           <div class="route-stop">
             <div class="stop-dot nara"></div>
-            <span class="stop-label">Nara<br><small>Day 10</small></span>
+            <span class="stop-label">
+              <span class="lang-en">Nara (奈良)<br><small>Day 10</small></span>
+              <span class="lang-zh">奈良<br><small>第 10 天</small></span>
+            </span>
           </div>
           <div class="route-stop">
             <div class="stop-dot osaka"></div>
-            <span class="stop-label">Osaka<br><small>Days 11–12</small></span>
+            <span class="stop-label">
+              <span class="lang-en">Osaka (大阪)<br><small>Days 11–12</small></span>
+              <span class="lang-zh">大阪<br><small>第 11–12 天</small></span>
+            </span>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ ROUTE MAP ═══════════════════ -->
+  <section id="map-section" class="section">
+    <div class="container">
+      <h2 class="section-title">
+        <span class="lang-en">Route Map</span>
+        <span class="lang-zh">路線地圖</span>
+      </h2>
+      <p class="section-subtitle">
+        <span class="lang-en">Your journey across Japan — from Tokyo's skyline to Osaka's neon streets, via Mt Fuji's snowy peaks.</span>
+        <span class="lang-zh">在日本展開跨地區之旅 —— 從繁華的東京地平線到大阪的霓虹街頭，途中穿越白雪皚皚的富士山。</span>
+      </p>
+
+      <div class="map-container">
+        <div id="route-map"></div>
+      </div>
+
+      <div class="map-legend">
+        <div class="legend-item">
+          <div class="legend-dot leg-tokyo"></div>
+          <span>
+            <span class="lang-en">Tokyo (東京) (Days 1–4)</span>
+            <span class="lang-zh">東京 (第 1–4 天)</span>
+          </span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot leg-fuji"></div>
+          <span>
+            <span class="lang-en">Mt Fuji Drive (富士山自駕) (Days 5–7)</span>
+            <span class="lang-zh">富士山自駕路段 (第 5–7 天)</span>
+          </span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot leg-kansai"></div>
+          <span>
+            <span class="lang-en">Kansai (關西) (Days 8–12)</span>
+            <span class="lang-zh">關西地區 (第 8–12 天)</span>
+          </span>
         </div>
       </div>
     </div>
@@ -124,61 +256,129 @@
   <!-- ═══════════════════ PRACTICAL TIPS ═══════════════════ -->
   <section id="tips" class="section section-dark">
     <div class="container">
-      <h2 class="section-title light">Practical Tips</h2>
-      <p class="section-subtitle light">Everything you need to prepare before departure.</p>
+      <h2 class="section-title light">
+        <span class="lang-en">Practical Tips</span>
+        <span class="lang-zh">實用出遊資訊</span>
+      </h2>
+      <p class="section-subtitle light">
+        <span class="lang-en">Everything you need to prepare before departure.</span>
+        <span class="lang-zh">出發前必須做好的準備工作與交通卡券指南。</span>
+      </p>
 
       <div class="tips-grid">
         <div class="tip-card" id="tip-transport">
           <div class="tip-header">
             <span class="tip-icon">🚆</span>
-            <h3>Transport Passes</h3>
+            <h3>
+              <span class="lang-en">Transport Passes</span>
+              <span class="lang-zh">交通卡券</span>
+            </h3>
           </div>
           <ul>
-            <li><strong>Suica / PASMO card</strong> — Tap-and-go for all trains, buses, and convenience stores in Tokyo. Add to Apple/Google Wallet.</li>
-            <li><strong>JR Kansai Area Pass (4-day)</strong> — Covers JR trains in Kyoto, Osaka, Nara, Kobe. Buy online before departure for discount.</li>
-            <li><strong>Rental car</strong> — Book via Nissan Rent-a-Car or Toyota Rent-a-Car. Request <strong>studless winter tires + GPS with English</strong>. One-way drop-off fee applies (Tokyo → Nagoya ≈ ¥15,000–20,000).</li>
-            <li><strong>International Driving Permit (IDP)</strong> — Obtain this in your home country before the trip. Required for all foreign drivers in Japan.</li>
+            <li>
+              <span class="lang-en"><strong>Suica / PASMO card</strong> — Tap-and-go for all trains, buses, and convenience stores in Tokyo. Add to Apple/Google Wallet.</span>
+              <span class="lang-zh"><strong>Suica / PASMO 卡</strong> — 適用於東京所有地鐵、巴士和便利店。可以直接加入 Apple/Google Wallet。</span>
+            </li>
+            <li>
+              <span class="lang-en"><strong>JR Kansai Area Pass (4-day)</strong> — Covers JR trains in Kyoto (京都), Osaka (大阪), Nara (奈良), Kobe (神戶). Buy online before departure for discount.</span>
+              <span class="lang-zh"><strong>JR 關西地區鐵路周遊券 (4日)</strong> — 覆蓋京都、大阪、奈良、神戶的 JR 火車。出發前網上購買享優惠。</span>
+            </li>
+            <li>
+              <span class="lang-en"><strong>Rental car</strong> — Book via Nissan or Toyota Rent-a-Car. Request <strong>studless winter tires + GPS with English</strong>. One-way drop-off fee applies (Tokyo → Nagoya ≈ ¥15,000–20,000).</span>
+              <span class="lang-zh"><strong>自駕租車</strong> — 建議選擇日產 (Nissan) 或豐田 (Toyota) 租車。<strong>必須指定配備雪地無釘輪胎 (Studless Winter Tires)</strong> 及英文 GPS。異地還車（東京借、名古屋還）需收約 ¥15,000–20,000 附加費。</span>
+            </li>
+            <li>
+              <span class="lang-en"><strong>International Driving Permit (IDP)</strong> — Obtain this in your home country before the trip. Required for all foreign drivers in Japan.</span>
+              <span class="lang-zh"><strong>國際駕駛執照 (IDP)</strong> — 出發前必須在香港辦妥（運輸署申領）。在日本駕駛必須隨身攜帶。</span>
+            </li>
           </ul>
         </div>
 
         <div class="tip-card" id="tip-booking">
           <div class="tip-header">
             <span class="tip-icon">🎫</span>
-            <h3>Advance Bookings</h3>
+            <h3>
+              <span class="lang-en">Advance Bookings</span>
+              <span class="lang-zh">景點與餐飲預約</span>
+            </h3>
           </div>
           <ul>
-            <li><strong>Ryokan (Mt Fuji / Hakone)</strong> — Book 2–3 months ahead. Request "Fuji-view" room specifically.</li>
-            <li><strong>teamLab</strong> — Online tickets only, sell out fast. Book 2+ weeks ahead.</li>
-            <li><strong>Restaurants</strong> — Reserve popular spots 3+ weeks ahead for Christmas week. Use Tabelog or ask your hotel concierge.</li>
-            <li><strong>Fushimi Inari</strong> — Free entry, no reservation needed, but go early (before 9 AM) to beat crowds.</li>
+            <li>
+              <span class="lang-en"><strong>Ryokan (Mt Fuji / Hakone)</strong> — Book 2–3 months ahead. Request "Fuji-view" room specifically.</span>
+              <span class="lang-zh"><strong>溫泉旅館（富士山 / 箱根）</strong> — 必須提前 2 至 3 個月預訂。預訂時請特別註明需要「富士山景房 (Fuji-view room)」。</span>
+            </li>
+            <li>
+              <span class="lang-en"><strong>teamLab Borderless</strong> — Online tickets only, sell out fast. Book 2+ weeks ahead.</span>
+              <span class="lang-zh"><strong>teamLab 無界美術館</strong> — 僅限網上預售門票，極快售罄。請至少提早 2 星期預購。</span>
+            </li>
+            <li>
+              <span class="lang-en"><strong>Restaurants</strong> — Reserve popular spots 3+ weeks ahead for Christmas week. Use Tabelog or ask your hotel concierge.</span>
+              <span class="lang-zh"><strong>餐廳預約</strong> — 聖誕黃金周期間，熱門餐廳必須提早 3 星期以上預約。可使用 Tabelog 網站或請酒店禮賓部協助。</span>
+            </li>
+            <li>
+              <span class="lang-en"><strong>Fushimi Inari (伏見稻荷大社)</strong> — Free entry, no reservation needed, but go early (before 9 AM) to beat crowds.</span>
+              <span class="lang-zh"><strong>伏見稻荷大社</strong> — 免費入場，無須預約，但建議早上 9 點前抵達以避開旅行團。</span>
+            </li>
           </ul>
         </div>
 
         <div class="tip-card" id="tip-etiquette">
           <div class="tip-header">
             <span class="tip-icon">🙏</span>
-            <h3>Etiquette & Culture</h3>
+            <h3>
+              <span class="lang-en">Etiquette & Culture</span>
+              <span class="lang-zh">當地禮儀與習俗</span>
+            </h3>
           </div>
           <ul>
-            <li><strong>Shoes off</strong> — Remove shoes when entering homes, ryokans, some restaurants, and temple halls.</li>
-            <li><strong>Quiet trains</strong> — Keep phone on silent; avoid calls or loud conversations on trains.</li>
-            <li><strong>Onsen rules</strong> — Wash thoroughly before entering. Tattoos may need cover-up patches (ask beforehand). Towels stay out of the water.</li>
-            <li><strong>Cash</strong> — Carry ¥10,000–20,000 in cash. Many small restaurants and temples are cash-only. 7-Eleven ATMs accept foreign cards.</li>
-            <li><strong>Tipping</strong> — Never tip in Japan. It can be considered rude.</li>
+            <li>
+              <span class="lang-en"><strong>Shoes off</strong> — Remove shoes when entering homes, ryokans, some restaurants, and temple halls.</span>
+              <span class="lang-zh"><strong>脫鞋禮儀</strong> — 進入傳統溫泉旅館、部分餐廳、日式民居及寺廟大殿時必須脫鞋。</span>
+            </li>
+            <li>
+              <span class="lang-en"><strong>Quiet trains</strong> — Keep phone on silent; avoid calls or loud conversations on trains.</span>
+              <span class="lang-zh"><strong>乘車禮儀</strong> — 乘搭火車及地鐵時，請將電話調至靜音模式，並避免大聲說話或講電話。</span>
+            </li>
+            <li>
+              <span class="lang-en"><strong>Onsen rules</strong> — Wash thoroughly before entering. Tattoos may need cover-up patches (ask beforehand). Towels stay out of the water.</span>
+              <span class="lang-zh"><strong>溫泉守則</strong> — 進入浴池前必須先在淋浴區徹底沖洗乾淨。如有紋身可能需要使用遮蓋貼紙（請先向旅館查詢）。毛巾切勿放入池水中。</span>
+            </li>
+            <li>
+              <span class="lang-en"><strong>Cash</strong> — Carry ¥10,000–20,000 in cash. Many small restaurants and temples are cash-only. 7-Eleven ATMs accept foreign cards.</span>
+              <span class="lang-zh"><strong>現金準備</strong> — 請隨身攜帶至少 ¥10,000–20,000 現金。許多小店、神社及寺廟只收現金。7-Eleven 的 ATM 可用外國信用卡提款。</span>
+            </li>
+            <li>
+              <span class="lang-en"><strong>Tipping</strong> — Never tip in Japan. It can be considered rude.</span>
+              <span class="lang-zh"><strong>小費文化</strong> — 日本完全沒有給小費的習慣，甚至會被視為不禮貌。</span>
+            </li>
           </ul>
         </div>
 
         <div class="tip-card" id="tip-winter">
           <div class="tip-header">
             <span class="tip-icon">❄️</span>
-            <h3>Winter Driving Safety</h3>
+            <h3>
+              <span class="lang-en">Winter Driving Safety</span>
+              <span class="lang-zh">冬季自駕安全</span>
+            </h3>
           </div>
           <ul>
-            <li><strong>Drive in daylight only</strong> — Sunset is ~16:30 in December. Plan arrivals before dark.</li>
-            <li><strong>Check weather daily</strong> — If heavy snow is forecast, skip the drive and take a train instead.</li>
-            <li><strong>Go slow on mountain roads</strong> — Extra caution on bridges, tunnels, and shaded curves where black ice forms.</li>
-            <li><strong>Konbini pit stops</strong> — 7-Eleven, Lawson, FamilyMart are everywhere. Great for snacks, bathrooms, and hot drinks.</li>
-            <li><strong>Keep headlights on</strong> — Even during daytime driving for visibility.</li>
+            <li>
+              <span class="lang-en"><strong>Drive in daylight only</strong> — Sunset is ~16:30 in December. Plan arrivals before dark.</span>
+              <span class="lang-zh"><strong>日光時間駕駛</strong> — 12月日本約下午 4:30 便日落。請務必在天黑前抵達目的地旅館。</span>
+            </li>
+            <li>
+              <span class="lang-en"><strong>Check weather daily</strong> — If heavy snow is forecast, skip the drive and take a train instead.</span>
+              <span class="lang-zh"><strong>每日留意天氣</strong> — 如預測有大雪，應放棄自駕，改乘火車新幹線，安全至上。</span>
+            </li>
+            <li>
+              <span class="lang-en"><strong>Go slow on mountain roads</strong> — Extra caution on bridges, tunnels, and shaded curves where black ice forms.</span>
+              <span class="lang-zh"><strong>山路減速慢行</strong> — 橋樑、隧道出入口及背陰處容易形成肉眼難見的「黑冰 (Black Ice)」，須格外小心。</span>
+            </li>
+            <li>
+              <span class="lang-en"><strong>Konbini pit stops</strong> — 7-Eleven, Lawson, FamilyMart are everywhere. Great for snacks, bathrooms, and hot drinks.</span>
+              <span class="lang-zh"><strong>便利店補給站</strong> — 沿途的便利店是長途駕駛的最佳伴侶，可上洗手間、購買熱飲和點心。</span>
+            </li>
           </ul>
         </div>
       </div>
@@ -188,18 +388,40 @@
   <!-- ═══════════════════ ITINERARY ═══════════════════ -->
   <section id="itinerary" class="section">
     <div class="container">
-      <h2 class="section-title">Day-by-Day Itinerary</h2>
-      <p class="section-subtitle">Click any day to expand the full schedule with meal recommendations.</p>
+      <h2 class="section-title">
+        <span class="lang-en">Day-by-Day Itinerary</span>
+        <span class="lang-zh">每日詳細行程</span>
+      </h2>
+      <p class="section-subtitle">
+        <span class="lang-en">Click any day to expand the full schedule with meal recommendations.</span>
+        <span class="lang-zh">點擊下方任一天數以展開詳細日程及美食推介。</span>
+      </p>
 
       <!-- DAY FILTER TABS -->
       <div class="day-filters" id="day-filters">
-        <button class="day-tab active" data-region="all">All Days</button>
-        <button class="day-tab" data-region="tokyo">Tokyo</button>
-        <button class="day-tab" data-region="fuji">Mt Fuji</button>
-        <button class="day-tab" data-region="kansai">Kansai</button>
+        <button class="day-tab active" data-region="all">
+          <span class="lang-en">All Days</span>
+          <span class="lang-zh">全部天數</span>
+        </button>
+        <button class="day-tab" data-region="tokyo">
+          <span class="lang-en">Tokyo (東京)</span>
+          <span class="lang-zh">東京段</span>
+        </button>
+        <button class="day-tab" data-region="fuji">
+          <span class="lang-en">Mt Fuji Drive (富士自駕)</span>
+          <span class="lang-zh">自駕段</span>
+        </button>
+        <button class="day-tab" data-region="kansai">
+          <span class="lang-en">Kansai (關西)</span>
+          <span class="lang-zh">關西段</span>
+        </button>
       </div>
 
       <div class="timeline" id="timeline">
+
+        <!-- ════════════════════════════════════════
+             TOKYO — Days 1–4
+             ════════════════════════════════════════ -->
 
         <!-- ════ DAY 1 ════ -->
         <div class="day-card" data-region="tokyo" id="day-1">
@@ -209,50 +431,81 @@
               <span class="day-date">Dec 20</span>
             </div>
             <div class="day-info">
-              <h3>Arrival in Tokyo — Asakusa & Skytree</h3>
+              <h3>
+                <span class="lang-en">Arrival in Tokyo (東京) — Asakusa (淺草) & Skytree (晴空塔)</span>
+                <span class="lang-zh">抵達東京 — 淺草寺參拜與登晴空塔賞夜景</span>
+              </h3>
               <div class="day-tags">
-                <span class="tag tag-city">🏙️ Tokyo</span>
-                <span class="tag tag-pace">🧘 Relaxed</span>
+                <span class="tag tag-city">🏙️ Tokyo (東京)</span>
+                <span class="tag tag-pace">
+                  <span class="lang-en">🧘 Relaxed</span>
+                  <span class="lang-zh">🧘 輕鬆悠閒</span>
+                </span>
               </div>
             </div>
             <div class="day-chevron">▼</div>
           </div>
           <div class="day-body">
             <div class="timeline-block">
-              <div class="time-badge">🌅 Morning</div>
+              <div class="time-badge">
+                <span class="lang-en">🌅 Morning</span>
+                <span class="lang-zh">🌅 早上</span>
+              </div>
               <div class="activity">
-                <h4>Arrive at Narita / Haneda Airport</h4>
-                <p>Clear customs, pick up your <strong>Suica card</strong> at the airport station, and take the Narita Express or Limousine Bus to your hotel. Check in and rest after the flight.</p>
+                <h4>
+                  <span class="lang-en">Arrive at Narita (成田) / Haneda (羽田) Airport</span>
+                  <span class="lang-zh">抵達成田 / 羽田機場</span>
+                </h4>
+                <p class="lang-en">Clear customs, pick up your <strong>Suica card</strong> at the airport station, and take the Narita Express or Limousine Bus to your hotel. Check in and rest after the flight.</p>
+                <p class="lang-zh">辦理入境手續，在機場車站領取/購買 <strong>Suica 卡</strong>，乘搭成田特快 (N'EX) 或機場利木津巴士直達市區酒店。登記入住並稍作休息，舒緩飛行疲勞。</p>
                 <div class="meal-rec">
                   <span class="meal-icon">🍳</span>
-                  <strong>Breakfast / Brunch:</strong> Grab a quick meal at a <strong>konbini</strong> (7-Eleven onigiri, sandwiches, and hot coffee) — surprisingly delicious and perfect after a long flight.
+                  <span class="lang-en"><strong>Breakfast / Brunch:</strong> Grab a quick meal at a <strong>konbini (便利店)</strong> (7-Eleven onigiri, sandwiches, and hot coffee) — surprisingly delicious and perfect after a long flight.</span>
+                  <span class="lang-zh"><strong>早餐 / 早午餐：</strong> 在機場或酒店附近的<strong>便利店 (Konbini)</strong> 買點輕食（7-Eleven 御飯糰、三文治和熱咖啡）—— 日式便利店食品水準極高，方便快捷。</span>
                 </div>
               </div>
             </div>
             <div class="timeline-block">
-              <div class="time-badge">🌤️ Afternoon</div>
+              <div class="time-badge">
+                <span class="lang-en">🌤️ Afternoon</span>
+                <span class="lang-zh">🌤️ 下午</span>
+              </div>
               <div class="activity">
-                <h4>Senso-ji Temple & Nakamise-dori</h4>
-                <p>Tokyo's oldest temple. Walk through the iconic <strong>Kaminarimon (Thunder Gate)</strong> and browse the traditional shopping street. Pick up souvenirs, taste <strong>ningyo-yaki</strong> (sweet bean cakes) and <strong>age-manju</strong> (fried pastries).</p>
+                <h4>
+                  <span class="lang-en">Senso-ji Temple (淺草寺) & Nakamise-dori (仲見世通)</span>
+                  <span class="lang-zh">淺草寺與仲見世通</span>
+                </h4>
+                <p class="lang-en">Tokyo's oldest temple. Walk through the iconic <strong>Kaminarimon (雷門 / Thunder Gate)</strong> and browse the traditional shopping street. Pick up souvenirs, taste <strong>ningyo-yaki (人形燒)</strong> (sweet bean cakes) and <strong>age-manju (炸饅頭)</strong> (fried pastries).</p>
+                <p class="lang-zh">參訪東京最古老的寺廟。穿過寫有巨型紅燈籠的<strong>雷門</strong>，沿著<strong>仲見世通</strong>傳統商店街漫步。一邊選購特色手工藝品，一邊品嚐現烤的<strong>人形燒</strong>和酥脆的<strong>炸饅頭</strong>。</p>
                 <div class="meal-rec">
                   <span class="meal-icon">🍜</span>
-                  <strong>Lunch:</strong> <strong>Sometaro</strong> (Asakusa) — A charming, family-friendly spot where you cook your own okonomiyaki on a tabletop griddle. Fun and delicious.
+                  <span class="lang-en"><strong>Lunch:</strong> <strong>Sometaro (染太郎)</strong> (Asakusa) — A charming, family-friendly spot where you cook your own okonomiyaki on a tabletop griddle. Fun and delicious.</span>
+                  <span class="lang-zh"><strong>午餐：</strong> <strong>染太郎 (Sometaro)</strong> （淺草）— 懷舊的塌塌米老店，讓一家人圍著鐵板親自動手煎大阪燒/御好燒，既好玩又美味。</span>
                 </div>
               </div>
             </div>
             <div class="timeline-block">
-              <div class="time-badge">🌆 Evening</div>
+              <div class="time-badge">
+                <span class="lang-en">🌆 Evening</span>
+                <span class="lang-zh">🌆 傍晚與晚上</span>
+              </div>
               <div class="activity">
-                <h4>Tokyo Skytree & Solamachi</h4>
-                <p>Head to <strong>Tokyo Skytree</strong> (634m) for sunset and city lights views. The Tembo Deck offers a 360° panorama. Browse Solamachi shopping complex below.</p>
+                <h4>
+                  <span class="lang-en">Tokyo Skytree (東京晴空塔) & Solamachi (晴空街道)</span>
+                  <span class="lang-zh">東京晴空塔與 Solamachi 購物中心</span>
+                </h4>
+                <p class="lang-en">Head to <strong>Tokyo Skytree (東京晴空塔)</strong> (634m) for sunset and city lights views. The Tembo Deck offers a 360° panorama. Browse Solamachi shopping complex below.</p>
+                <p class="lang-zh">前往高 634 米的<strong>東京晴空塔</strong>。登上帝國觀景台 (Tembo Deck) 俯瞰 360 度東京大都會夕陽與無邊夜景。隨後可到塔下的 Solamachi 商場逛街購物。</p>
                 <div class="meal-rec">
                   <span class="meal-icon">🍱</span>
-                  <strong>Dinner:</strong> <strong>Asakusa Imahan</strong> — A legendary sukiyaki restaurant (est. 1895). The A5 wagyu sukiyaki set is an unforgettable first-night-in-Japan dinner. Reserve ahead.
+                  <span class="lang-en"><strong>Dinner:</strong> <strong>Asakusa Imahan (淺草今半)</strong> — A legendary sukiyaki restaurant (est. 1895). The A5 wagyu sukiyaki set is an unforgettable first-night-in-Japan dinner. Reserve ahead.</span>
+                  <span class="lang-zh"><strong>晚餐：</strong> <strong>淺草今半 (Asakusa Imahan)</strong> — 創立於1895年的壽喜燒百年名店。精選頂級 A5 黑毛和牛壽喜燒套餐，為日本之旅第一晚留下最驚艷的味覺記憶。<strong>（必須提前預約）</strong></span>
                 </div>
               </div>
             </div>
             <div class="day-tip">
-              <strong>💡 Tip:</strong> If arriving early, consider visiting <strong>Ueno Park</strong> (10 min from Asakusa) for a peaceful stroll by Shinobazu Pond. The Ameyoko market nearby is great for snacks.
+              <span class="lang-en"><strong>💡 Tip:</strong> If arriving early, consider visiting <strong>Ueno Park (上野公園)</strong> (10 min from Asakusa) for a peaceful stroll by Shinobazu Pond. The Ameyoko market nearby is great for snacks.</span>
+              <span class="lang-zh"><strong>💡 貼心提示：</strong> 若航班較早抵達，可先到鄰近的<strong>上野公園</strong>不忍池散步，或到旁邊的<strong>阿美橫丁 (Ameyoko)</strong> 感受熱鬧的傳統市場氣氛。</span>
             </div>
           </div>
         </div>
@@ -265,165 +518,262 @@
               <span class="day-date">Dec 21</span>
             </div>
             <div class="day-info">
-              <h3>Tokyo Highlights — Shibuya, Harajuku & Illuminations</h3>
+              <h3>
+                <span class="lang-en">Tokyo Highlights — Shibuya (澀谷), Harajuku (原宿) & Illuminations (冬季燈飾)</span>
+                <span class="lang-zh">東京潮流與自然 — 明治神宮、澀谷 Sky 展望台與浪漫青之洞窟</span>
+              </h3>
               <div class="day-tags">
-                <span class="tag tag-city">🏙️ Tokyo</span>
-                <span class="tag tag-pace">⚖️ Balanced</span>
+                <span class="tag tag-city">🏙️ Tokyo (東京)</span>
+                <span class="tag tag-pace">
+                  <span class="lang-en">⚖️ Balanced</span>
+                  <span class="lang-zh">⚖️ 步調適中</span>
+                </span>
               </div>
             </div>
             <div class="day-chevron">▼</div>
           </div>
           <div class="day-body">
             <div class="timeline-block">
-              <div class="time-badge">🌅 Morning</div>
+              <div class="time-badge">
+                <span class="lang-en">🌅 Morning</span>
+                <span class="lang-zh">🌅 早上</span>
+              </div>
               <div class="activity">
-                <h4>Meiji Shrine & Harajuku</h4>
-                <p>Start with a serene walk through the forested approach to <strong>Meiji Shrine</strong> — one of Tokyo's most important Shinto shrines. Then stroll <strong>Takeshita Street</strong> for Harajuku's famous youth culture and unique shops.</p>
+                <h4>
+                  <span class="lang-en">Meiji Shrine (明治神宮) & Harajuku (原宿)</span>
+                  <span class="lang-zh">明治神宮與原宿散策</span>
+                </h4>
+                <p class="lang-en">Start with a serene walk through the forested approach to <strong>Meiji Shrine (明治神宮)</strong> — one of Tokyo's most important Shinto shrines. Then stroll <strong>Takeshita Street (竹下通)</strong> for Harajuku's famous youth culture and unique shops.</p>
+                <p class="lang-zh">清晨漫步於<strong>明治神宮</strong>被林蔭環繞的碎石步道，感受鬧市中難得的莊嚴與寧靜。隨後步行前往潮流發源地<strong>原宿竹下通</strong>，欣賞獨特的日本街頭文化。</p>
                 <div class="meal-rec">
                   <span class="meal-icon">🍳</span>
-                  <strong>Breakfast:</strong> <strong>Bills Omotesando</strong> — Famous for "the world's best scrambled eggs" and fluffy ricotta pancakes. A relaxed, Western-style brunch your parents will love.
+                  <span class="lang-en"><strong>Breakfast:</strong> <strong>Bills Omotesando (表參道)</strong> — Famous for "the world's best scrambled eggs" and fluffy ricotta pancakes. A relaxed, Western-style brunch your parents will love.</span>
+                  <span class="lang-zh"><strong>早餐：</strong> <strong>Bills 表參道 (Omotesando)</strong> — 被譽為擁有「世界第一早餐」的美名。招牌香蕉蜂蜜法式熱班戟和極致香滑的炒蛋，非常適合帶父母享受精緻悠閒的早晨。</span>
                 </div>
               </div>
             </div>
             <div class="timeline-block">
-              <div class="time-badge">🌤️ Afternoon</div>
+              <div class="time-badge">
+                <span class="lang-en">🌤️ Afternoon</span>
+                <span class="lang-zh">🌤️ 下午</span>
+              </div>
               <div class="activity">
-                <h4>Shibuya Crossing & Shibuya Sky</h4>
-                <p>Experience the world's busiest pedestrian crossing from above at <strong>Shibuya Sky</strong> (230m rooftop observation). Then explore the vibrant streets below. Visit the <strong>Hachiko statue</strong> for the classic photo op.</p>
+                <h4>
+                  <span class="lang-en">Shibuya Crossing (澀谷十字路口) & Shibuya Sky (澀谷 Sky)</span>
+                  <span class="lang-zh">澀谷十字路口與 Shibuya Sky 展望台</span>
+                </h4>
+                <p class="lang-en">Experience the world's busiest pedestrian crossing from above at <strong>Shibuya Sky</strong> (230m rooftop observation). Then explore the vibrant streets below. Visit the <strong>Hachiko statue (忠犬八公像)</strong> for the classic photo op.</p>
+                <p class="lang-zh">登上極具人氣的 <strong>Shibuya Sky 露天展望台</strong>（高 230 米），俯瞰全東京最繁忙的<strong>澀谷十字路口</strong>全景。下樓後可與地標<strong>忠犬八公像</strong>合照留念。</p>
                 <div class="meal-rec">
                   <span class="meal-icon">🍜</span>
-                  <strong>Lunch:</strong> <strong>Gyukatsu Motomura</strong> (Shibuya) — Deep-fried wagyu cutlet served with a hot stone to sear it to your liking. An absolute must-try.
+                  <span class="lang-en"><strong>Lunch:</strong> <strong>Gyukatsu Motomura (牛かつ もと村)</strong> (Shibuya) — Deep-fried wagyu cutlet served with a hot stone to sear it to your liking. An absolute must-try.</span>
+                  <span class="lang-zh"><strong>午餐：</strong> <strong>牛かつ もと村 (Gyukatsu Motomura)</strong> （澀谷）— 吉列炸牛排。外皮酥脆而內裡保持粉嫩的和牛排，讓您在個人小石板上親自加熱煎熟，口感極佳。</span>
                 </div>
               </div>
             </div>
             <div class="timeline-block">
-              <div class="time-badge">🌆 Evening</div>
+              <div class="time-badge">
+                <span class="lang-en">🌆 Evening</span>
+                <span class="lang-zh">🌆 晚上</span>
+              </div>
               <div class="activity">
-                <h4>Omotesando Illuminations & Roppongi</h4>
-                <p>Walk along <strong>Omotesando</strong> boulevard to see the elegant champagne-gold winter illuminations draped across the zelkova trees. Then head to <strong>Roppongi Hills Keyakizaka</strong> for the stunning blue-and-white light tunnel.</p>
+                <h4>
+                  <span class="lang-en">Omotesando Illuminations (表參道燈飾) & Roppongi (六本木)</span>
+                  <span class="lang-zh">表參道與六本木冬日璀璨燈飾</span>
+                </h4>
+                <p class="lang-en">Walk along <strong>Omotesando (表參道)</strong> boulevard to see the elegant champagne-gold winter illuminations draped across the zelkova trees. Then head to <strong>Roppongi Hills Keyakizaka (六本木之丘櫸坂)</strong> for the stunning blue-and-white light tunnel.</p>
+                <p class="lang-zh">沿著<strong>表參道</strong>寬敞的林蔭大道散步，欣賞冬日限定的香檳金路樹燈飾。隨後前往<strong>六本木櫸坂通</strong>，觀賞以藍白光芒點亮、直落東京鐵塔背景的絕美光之隧道。</p>
                 <div class="meal-rec">
                   <span class="meal-icon">🍱</span>
-                  <strong>Dinner:</strong> <strong>Gonpachi Nishi-Azabu</strong> (the "Kill Bill" restaurant) — Beautiful traditional interiors, great soba noodles and yakitori. Fun atmosphere and foreigner-friendly.
+                  <span class="lang-en"><strong>Dinner:</strong> <strong>Gonpachi Nishi-Azabu (權八 西麻布)</strong> (the "Kill Bill" restaurant) — Beautiful traditional interiors, great soba noodles and yakitori. Fun atmosphere and foreigner-friendly.</span>
+                  <span class="lang-zh"><strong>晚餐：</strong> <strong>權八 西麻布 (Gonpachi)</strong> — 《標殺令 (Kill Bill)》經典電影場景靈感來源地。極具傳統大氣的大正時期裝潢，提供優質的日式串燒、蕎麥麵與清酒，氣氛熱鬧且對遊客非常友善。</span>
                 </div>
               </div>
             </div>
             <div class="day-tip">
-              <strong>💡 Tip:</strong> Book <strong>Shibuya Sky</strong> tickets online 1–2 weeks ahead to skip the queue. Sunset time slot (~16:00) is best for both daylight and night views.
+              <span class="lang-en"><strong>💡 Tip:</strong> Book <strong>Shibuya Sky</strong> tickets online 1–2 weeks ahead to skip the queue. Sunset time slot (~16:00) is best for both daylight and night views.</span>
+              <span class="lang-zh"><strong>💡 貼心提示：</strong> <strong>Shibuya Sky 必須提前 1-2 星期上網搶購門票</strong>。最推介挑選下午 4 點左右的日落場次，能同時拍到日落與亮燈後的東京都夜景。</span>
             </div>
           </div>
         </div>
 
         <!-- ════ DAY 3 ════ -->
-        <div class="day-card" data-region="fuji" id="day-3">
+        <div class="day-card" data-region="tokyo" id="day-3">
           <div class="day-header" onclick="toggleDay(this)">
             <div class="day-badge">
               <span class="day-num">03</span>
               <span class="day-date">Dec 22</span>
             </div>
             <div class="day-info">
-              <h3>Drive to Kawaguchiko — Mt Fuji Views</h3>
+              <h3>
+                <span class="lang-en">Tsukiji Market (築地), teamLab & Tokyo Tower (東京鐵塔)</span>
+                <span class="lang-zh">東京海鮮與藝術 — 築地場外市場美食、teamLab 與東京鐵塔</span>
+              </h3>
               <div class="day-tags">
-                <span class="tag tag-nature">🏔️ Mt Fuji</span>
-                <span class="tag tag-transport">🚗 Driving</span>
+                <span class="tag tag-city">🏙️ Tokyo (東京)</span>
+                <span class="tag tag-pace">
+                  <span class="lang-en">⚖️ Balanced</span>
+                  <span class="lang-zh">⚖️ 步調適中</span>
+                </span>
               </div>
             </div>
             <div class="day-chevron">▼</div>
           </div>
           <div class="day-body">
             <div class="timeline-block">
-              <div class="time-badge">🌅 Morning</div>
+              <div class="time-badge">
+                <span class="lang-en">🌅 Morning</span>
+                <span class="lang-zh">🌅 早上</span>
+              </div>
               <div class="activity">
-                <h4>Pick Up Rental Car & Depart Tokyo</h4>
-                <p>Pick up your rental car at <strong>Shinjuku</strong> (Toyota / Nissan Rent-a-Car). Confirm <strong>studless winter tires</strong> and English GPS. Drive west on the <strong>Chuo Expressway</strong> towards Kawaguchiko (~2 hours). Depart by 8:00 AM to avoid traffic and arrive in daylight.</p>
+                <h4>
+                  <span class="lang-en">Tsukiji Outer Market (築地場外市場)</span>
+                  <span class="lang-zh">築地場外市場美食巡禮</span>
+                </h4>
+                <p class="lang-en">The original Tokyo fish market's outer stalls are still bustling with fresh seafood, tamagoyaki (sweet egg omelette), and street food. Arrive by 8:30 AM for the best selection. Walk through the narrow lanes sampling as you go.</p>
+                <p class="lang-zh">保留了傳統風貌的築地場外市場依然活力十足。清晨 8:30 抵達最能避開人潮。漫步於熙來攘往的小巷中，沿途品嚐現燒海鮮、玉子燒及新鮮刺身，這是最道地的東京早餐體驗。</p>
                 <div class="meal-rec">
                   <span class="meal-icon">🍳</span>
-                  <strong>Breakfast:</strong> <strong>Shinjuku station food hall</strong> — Quick and delicious. Try fresh pastries at <strong>Boul'Ange</strong> or a teishoku (set meal) at any station restaurant.
+                  <span class="lang-en"><strong>Breakfast:</strong> <strong>Tsukiji market grazing</strong> — Must-try: fresh sushi at <strong>Sushi Dai (寿司大)</strong> or <strong>Daiwa Sushi (大和寿司)</strong>, tamagoyaki from <strong>Yamazaki (山崎)</strong>, and grilled scallops from street vendors.</span>
+                  <span class="lang-zh"><strong>早餐推薦：</strong> 築地市場掃街 —— 必嚐：<strong>壽司大</strong>或<strong>大和壽司</strong>的即製握壽司、<strong>山崎</strong>的微甜玉子燒，以及現烤的扇貝和生蠔。</span>
                 </div>
               </div>
             </div>
             <div class="timeline-block">
-              <div class="time-badge">🌤️ Afternoon</div>
+              <div class="time-badge">
+                <span class="lang-en">🌤️ Afternoon</span>
+                <span class="lang-zh">🌤️ 下午</span>
+              </div>
               <div class="activity">
-                <h4>Chureito Pagoda & Lake Kawaguchi</h4>
-                <p>Visit the iconic <strong>Chureito Pagoda</strong> — 398 steps up, but the view of Mt Fuji behind the red pagoda is priceless. Then drive to the north shore of <strong>Lake Kawaguchi</strong> for mirror-like reflections of Fuji (best before wind picks up). Stop at <strong>Oishi Park</strong> for a lakeside stroll.</p>
+                <h4>
+                  <span class="lang-en">teamLab Borderless (Azabudai Hills / 麻布台之丘)</span>
+                  <span class="lang-zh">teamLab Borderless 沉浸式數碼藝術展</span>
+                </h4>
+                <p class="lang-en">Immerse yourselves in the stunning <strong>teamLab Borderless</strong> digital art museum in Azabudai Hills. Rooms of flowing light, interactive waterfalls, and infinite crystal universes. It's magical for all ages — your parents will be mesmerized. Allow 2–3 hours.</p>
+                <p class="lang-zh">前往東京新地標麻布台之丘，觀賞世界頂級的 <strong>teamLab Borderless 數位美術館</strong>。置身於流動的光影瀑布、無邊際的水晶宇宙與夢幻茶屋中。視覺震撼非常適合全家同樂。建議遊覽 2 至 3 小時。</p>
                 <div class="meal-rec">
                   <span class="meal-icon">🍜</span>
-                  <strong>Lunch:</strong> <strong>Hoto Fudo</strong> (Kawaguchiko) — Famous for <em>hoto</em>, a hearty flat-noodle miso soup with seasonal vegetables. The ultimate winter comfort food. The cave-like restaurant branch is unique.
+                  <span class="lang-en"><strong>Lunch:</strong> <strong>Azabudai Hills food hall</strong> — Upscale dining options right at the complex. Try <strong>Niku Kappo (肉割烹)</strong> for premium wagyu bowls, or <strong>Afuri (阿夫利)</strong> for their signature yuzu-shio (yuzu salt) ramen.</span>
+                  <span class="lang-zh"><strong>午餐：</strong> 麻布台之丘地下美食廣場 —— 選擇多元且環境極佳。推介品嚐 <strong>肉割烹 (Niku Kappo)</strong> 的頂級和牛丼，或 <strong>AFURI (阿夫利)</strong> 招牌清爽的柚子鹽拉麵。</span>
                 </div>
               </div>
             </div>
             <div class="timeline-block">
-              <div class="time-badge">🌆 Evening</div>
+              <div class="time-badge">
+                <span class="lang-en">🌆 Evening</span>
+                <span class="lang-zh">🌆 晚上</span>
+              </div>
               <div class="activity">
-                <h4>Check In to Ryokan & Onsen</h4>
-                <p>Check into your <strong>ryokan</strong> by Lake Kawaguchi. Enjoy the traditional multi-course <strong>kaiseki dinner</strong> served in your room, followed by a soak in the hot spring baths with views of the snow-capped mountain.</p>
+                <h4>
+                  <span class="lang-en">Tokyo Tower (東京鐵塔) at Night</span>
+                  <span class="lang-zh">東京鐵塔浪漫夜景</span>
+                </h4>
+                <p class="lang-en">A 15-minute walk from Azabudai Hills. See <strong>Tokyo Tower</strong> lit up in its iconic orange glow — especially beautiful in winter. Go up to the Main Deck (150m) for city views, or simply admire it from <strong>Shiba Park (芝公園)</strong> below.</p>
+                <p class="lang-zh">從麻布台之丘步行約 15 分鐘即可抵達。冬日裡散發溫暖橘紅色光芒的東京鐵塔是永恆的經典。可以選擇登上 150 米的主觀景台看夜景，或者在塔下的<strong>芝公園</strong>草地上拍照，感受老東京的復古浪漫情懷。</p>
                 <div class="meal-rec">
                   <span class="meal-icon">🍱</span>
-                  <strong>Dinner:</strong> <strong>Kaiseki at your ryokan</strong> — Included with your stay. Expect 8–12 courses featuring seasonal ingredients, local freshwater fish, and beautifully presented dishes. An experience, not just a meal.
+                  <span class="lang-en"><strong>Dinner:</strong> <strong>Ukai Toriyama (うかい鳥山)</strong> (near Tokyo Tower) — A refined charcoal-grilled chicken restaurant in a beautiful traditional garden setting. Perfect for a special dinner. Or go casual at <strong>T's TanTan</strong> in nearby Tokyo Station for outstanding vegan ramen.</span>
+                  <span class="lang-zh"><strong>晚餐：</strong> <strong>東京芝豆腐屋吉兆 / 鵜飼鳥山 (Ukai)</strong> —— 位於鐵塔腳下，隱密於傳統日式庭園中的高級炭火燒烤與豆腐料理名店，環境極美，是帶父母享用奢華晚餐的不二之選。<strong>（必須提前預約）</strong></span>
                 </div>
               </div>
             </div>
             <div class="day-tip">
-              <strong>💡 Tip:</strong> The <strong>Chureito Pagoda</strong> steps may be icy — wear grip shoes and take it slowly for your parents. If the climb is too much, the lower viewpoint still offers a beautiful photo.
+              <span class="lang-en"><strong>💡 Tip:</strong> <strong>teamLab Borderless</strong> tickets sell out quickly — book online at least 2 weeks ahead! Choose a weekday afternoon slot for fewer crowds.</span>
+              <span class="lang-zh"><strong>💡 貼心提示：</strong> <strong>teamLab 門票必須提前於官網預約</strong>，不設現場售票。館內有許多鏡面地板，建議避免穿裙子前往。</span>
             </div>
           </div>
         </div>
 
         <!-- ════ DAY 4 ════ -->
-        <div class="day-card" data-region="fuji" id="day-4">
+        <div class="day-card" data-region="tokyo" id="day-4">
           <div class="day-header" onclick="toggleDay(this)">
             <div class="day-badge">
               <span class="day-num">04</span>
               <span class="day-date">Dec 23</span>
             </div>
             <div class="day-info">
-              <h3>Kawaguchiko to Hakone — Lakes & Volcanic Valleys</h3>
+              <h3>
+                <span class="lang-en">Imperial Palace (皇居), Akihabara (秋葉原) & Marunouchi Lights (丸之內燈飾)</span>
+                <span class="lang-zh">皇室庭園與動漫天堂 — 皇居東御苑、秋葉原電器街與丸之內金黃燈飾</span>
+              </h3>
               <div class="day-tags">
-                <span class="tag tag-nature">♨️ Hakone</span>
-                <span class="tag tag-transport">🚗 Driving</span>
+                <span class="tag tag-city">🏙️ Tokyo (東京)</span>
+                <span class="tag tag-pace">
+                  <span class="lang-en">🧘 Relaxed</span>
+                  <span class="lang-zh">🧘 輕鬆悠閒</span>
+                </span>
               </div>
             </div>
             <div class="day-chevron">▼</div>
           </div>
           <div class="day-body">
             <div class="timeline-block">
-              <div class="time-badge">🌅 Morning</div>
+              <div class="time-badge">
+                <span class="lang-en">🌅 Morning</span>
+                <span class="lang-zh">🌅 早上</span>
+              </div>
               <div class="activity">
-                <h4>Sunrise at Lake Kawaguchi & Iyashi no Sato</h4>
-                <p>Wake early for a stunning sunrise over Mt Fuji from your ryokan. After breakfast, drive to <strong>Iyashi no Sato</strong> — a reconstructed traditional thatched-roof village with Mt Fuji as backdrop. Peaceful, photogenic, and easy walking for all ages.</p>
+                <h4>
+                  <span class="lang-en">Imperial Palace East Gardens (皇居東御苑)</span>
+                  <span class="lang-zh">皇居外苑與東御苑</span>
+                </h4>
+                <p class="lang-en">Free entry to the serene gardens of the Imperial Palace. Beautifully maintained lawns with historic stone walls, moats, and seasonal plantings. Flat, easy walking — perfect for parents. Walk to the <strong>Nijubashi Bridge (二重橋)</strong> for the classic photo op.</p>
+                <p class="lang-zh">免費進入氣勢磅礴的皇居東御苑。漫步於古色古香的城牆、護城河與日式松柏庭園之間。這裡地勢平坦開闊，非常適合父母散步。隨後前往外苑拍攝著名的地標<strong>二重橋</strong>。</p>
                 <div class="meal-rec">
                   <span class="meal-icon">🍳</span>
-                  <strong>Breakfast:</strong> <strong>Traditional Japanese breakfast at ryokan</strong> — Grilled fish, miso soup, rice, pickled vegetables, tamago (egg). A wholesome and energizing start.
+                  <span class="lang-en"><strong>Breakfast:</strong> Any classic café near Tokyo Station — try a Japanese-style morning toast set at an old-school <strong>kissaten (喫茶店)</strong>.</span>
+                  <span class="lang-zh"><strong>早餐：</strong> 東京站周邊舊式<strong>喫茶店 (Kissaten)</strong> — 品嚐日式傳統「Morning Set」（厚切吐司配水煮蛋及黑咖啡），體驗經典的日本昭和晨間儀式感。</span>
                 </div>
               </div>
             </div>
             <div class="timeline-block">
-              <div class="time-badge">🌤️ Afternoon</div>
+              <div class="time-badge">
+                <span class="lang-en">🌤️ Afternoon</span>
+                <span class="lang-zh">🌤️ 下午</span>
+              </div>
               <div class="activity">
-                <h4>Drive to Hakone (~1.5h) & Owakudani</h4>
-                <p>Scenic drive through mountain roads to Hakone. Visit <strong>Owakudani</strong> volcanic valley (if accessible — check conditions). Try the famous <strong>black eggs (kuro tamago)</strong> boiled in sulfur springs — legend says each adds 7 years to your life!</p>
+                <h4>
+                  <span class="lang-en">Akihabara "Electric Town" (秋葉原電器街)</span>
+                  <span class="lang-zh">秋葉原動漫電器天堂</span>
+                </h4>
+                <p class="lang-en">Take the train to <strong>Akihabara (秋葉原)</strong> — Tokyo's famous electronics and anime district. Browse multi-floor arcades, retro game shops, and electronics outlets. Visit <strong>Yodobashi Camera (友都八喜)</strong> for tax-free shopping.</p>
+                <p class="lang-zh">搭乘地鐵前往次文化重鎮<strong>秋葉原</strong>。即使對動漫不感興趣，琳瑯滿目的高科技電器大樓、懷舊電玩店及色彩斑斕的霓虹招牌也極具視覺衝擊力。可到 <strong>Yodobashi Camera</strong> 購買免稅相機或家庭電器。</p>
                 <div class="meal-rec">
                   <span class="meal-icon">🍜</span>
-                  <strong>Lunch:</strong> <strong>Amazake Chaya</strong> (Hakone Old Road) — A 400-year-old teahouse serving sweet amazake (fermented rice drink) and mochi with kinako. A magical, atmospheric pit stop.
+                  <span class="lang-en"><strong>Lunch:</strong> <strong>Kanda Matsuya (神田まつや)</strong> (near Akihabara) — A beloved 140-year-old soba noodle shop. The cold seiro soba with warm tempura is heavenly. No-frills, authentic, and affordable.</span>
+                  <span class="lang-zh"><strong>午餐：</strong> <strong>神田まつや (Kanda Matsuya)</strong> — 創立超過140年的傳奇蕎麥麵老字號。木質調的老店鋪氣氛極佳，招牌的天婦羅竹蒸蕎麥麵 (Tempura Soba) 麵條爽滑，湯頭鮮美。</span>
                 </div>
               </div>
             </div>
             <div class="timeline-block">
-              <div class="time-badge">🌆 Evening</div>
+              <div class="time-badge">
+                <span class="lang-en">🌆 Evening</span>
+                <span class="lang-zh">🌆 晚上</span>
+              </div>
               <div class="activity">
-                <h4>Hakone Onsen Ryokan</h4>
-                <p>Check into your Hakone ryokan. Enjoy the private <strong>rotenburo (outdoor hot spring bath)</strong> surrounded by mountain scenery. Many ryokans in the Gora or Yumoto areas offer stunning winter atmospheres.</p>
+                <h4>
+                  <span class="lang-en">Ginza (銀座) & Marunouchi Naka-dori (丸之內仲通) Lights</span>
+                  <span class="lang-zh">銀座逛街與丸之內仲通香檳金燈飾</span>
+                </h4>
+                <p class="lang-en">Head to <strong>Ginza (銀座)</strong> for upscale window shopping (Uniqlo flagship, MUJI, and Mitsukoshi). Then walk to <strong>Marunouchi Naka-dori</strong> to see the elegant champagne-gold winter illuminations draped across the zelkova trees along the European-style boulevard.</p>
+                <p class="lang-zh">前往高檔地段<strong>銀座</strong>，朝聖 Uniqlo 全球旗艦店、MUJI 旗艦店及傳統的三越百貨。隨後散步至<strong>丸之內仲通</strong>，此處林蔭大道兩側的樹木在冬季會亮起高貴的香檳金色燈飾，充滿濃厚的節日氣氛。</p>
                 <div class="meal-rec">
                   <span class="meal-icon">🍱</span>
-                  <strong>Dinner:</strong> <strong>Kaiseki at ryokan</strong> — Another exquisite multi-course dinner, this time likely featuring Hakone specialties like tofu dishes and mountain vegetables.
+                  <span class="lang-en"><strong>Dinner:</strong> <strong>Ginza Kagari (銀座 篝)</strong> — Famous for their rich, creamy chicken <em>tori-paitan</em> ramen. Small shop, big flavours. Alternatively, splurge at <strong>Ginza Kyubey (吉兵衛)</strong> for a world-class omakase sushi experience (reserve well ahead).</span>
+                  <span class="lang-zh"><strong>晚餐：</strong> <strong>銀座 篝 (Ginza Kagari)</strong> — 以極其濃郁如濃湯般的雞白湯拉麵聞名遐邇，是拉麵界的人氣王。若想享用精緻日料，亦可選擇前往名店<strong>銀座久兵衛 (Kyubey)</strong> 享用頂級手握壽司（須極早預約）。</span>
                 </div>
               </div>
             </div>
             <div class="day-tip">
-              <strong>💡 Tip:</strong> Owakudani Ropeway may close in bad weather or volcanic activity. Check the <a href="https://www.hakonenavi.jp/en/" target="_blank" rel="noopener">Hakone Navi</a> website the morning of your visit. Have a backup plan to visit the <strong>Hakone Open-Air Museum</strong> instead.
+              <span class="lang-en"><strong>💡 Tip:</strong> This is your last night in Tokyo before the road trip. Pack your bags tonight! Buy any snacks or <strong>Uniqlo HEATTECH</strong> layers you need for the colder Mt Fuji region tomorrow.</span>
+              <span class="lang-zh"><strong>💡 貼心提示：</strong> 明天將開啟自駕之旅前往寒冷的富士山區。建議今晚先整理好行李。銀座 Uniqlo 旗艦店款式齊全，適合出發前為父母添置保暖的 <strong>HEATTECH 內衣/發熱衣</strong>。</span>
             </div>
           </div>
         </div>
+
+        <!-- ════════════════════════════════════════
+             MT FUJI ROAD TRIP — Days 5–7
+             ════════════════════════════════════════ -->
 
         <!-- ════ DAY 5 ════ -->
         <div class="day-card" data-region="fuji" id="day-5">
@@ -433,220 +783,339 @@
               <span class="day-date">Dec 24</span>
             </div>
             <div class="day-info">
-              <h3>Hakone Loop & Drive to Nagoya — Christmas Eve</h3>
+              <h3>
+                <span class="lang-en">Drive to Kawaguchiko (河口湖) — Christmas Eve at Mt Fuji (富士山) 🎄</span>
+                <span class="lang-zh">租車自駕至河口湖 — 聖誕平安夜與富士山溫泉旅館 🎄</span>
+              </h3>
               <div class="day-tags">
-                <span class="tag tag-nature">⛩️ Hakone</span>
-                <span class="tag tag-transport">🚗 Driving</span>
-                <span class="tag tag-special">🎄 Christmas Eve</span>
+                <span class="tag tag-nature">🏔️ Mt Fuji (富士山)</span>
+                <span class="tag tag-transport">🚗 Driving (自駕)</span>
+                <span class="tag tag-special">🎄 Christmas Eve (平安夜)</span>
               </div>
             </div>
             <div class="day-chevron">▼</div>
           </div>
           <div class="day-body">
             <div class="timeline-block">
-              <div class="time-badge">🌅 Morning</div>
+              <div class="time-badge">
+                <span class="lang-en">🌅 Morning</span>
+                <span class="lang-zh">🌅 早上</span>
+              </div>
               <div class="activity">
-                <h4>Lake Ashi Pirate Ship & Hakone Shrine</h4>
-                <p>Take the scenic <strong>pirate ship cruise</strong> across Lake Ashi (20 min) — on clear days, Mt Fuji appears across the lake. Walk to the iconic <strong>Hakone Shrine torii gate</strong> standing in the water — one of Japan's most photographed spots.</p>
+                <h4>
+                  <span class="lang-en">Pick Up Rental Car & Depart Tokyo</span>
+                  <span class="lang-zh">東京市區取車與出發</span>
+                </h4>
+                <p class="lang-en">Pick up your rental car at <strong>Shinjuku (新宿)</strong> (Toyota / Nissan Rent-a-Car). Confirm <strong>studless winter tires</strong> and English GPS. Drive west on the <strong>Chuo Expressway (中央自動車道)</strong> towards Kawaguchiko (~2 hours). Depart by 8:00 AM to avoid traffic.</p>
+                <p class="lang-zh">在<strong>新宿</strong>的豐田或日產租車點取車。<strong>當場確認配備雪地無釘胎</strong>並將導航設定為英文/中文。隨後經由中央自動車道向西往河口湖前進（車程約2小時）。建議早上 8:00 前出發以避開東京早高峰出城車潮。</p>
                 <div class="meal-rec">
                   <span class="meal-icon">🍳</span>
-                  <strong>Breakfast:</strong> <strong>Ryokan breakfast</strong> — Savor another traditional Japanese breakfast before checking out.
+                  <span class="lang-en"><strong>Breakfast:</strong> <strong>Shinjuku station food hall</strong> — Try fresh pastries at <strong>Boul'Ange</strong> or a teishoku (set meal) at any station restaurant.</span>
+                  <span class="lang-zh"><strong>早餐：</strong> 新宿站地下美食街 —— 可到人氣麵包店 <strong>Boul'Ange</strong> 買現烤牛角包，或在傳統日式定食店快吃一份早餐。</span>
                 </div>
               </div>
             </div>
             <div class="timeline-block">
-              <div class="time-badge">🌤️ Afternoon</div>
+              <div class="time-badge">
+                <span class="lang-en">🌤️ Afternoon</span>
+                <span class="lang-zh">🌤️ 下午</span>
+              </div>
               <div class="activity">
-                <h4>Drive to Nagoya (~3h via Tomei Expressway)</h4>
-                <p>Return the rental car in Nagoya or drop at a motorway-adjacent location. The drive along the <strong>Tomei Expressway</strong> passes through beautiful countryside with views of Suruga Bay and the Pacific coast. Stop at a <strong>service area (SA)</strong> along the way for regional snacks.</p>
+                <h4>
+                  <span class="lang-en">Chureito Pagoda (忠靈塔) & Lake Kawaguchi (河口湖)</span>
+                  <span class="lang-zh">新倉山淺間公園忠靈塔與河口湖畔</span>
+                </h4>
+                <p class="lang-en">Visit the iconic <strong>Chureito Pagoda (忠靈塔)</strong> — 398 steps up, but the view of Mt Fuji behind the red pagoda is priceless. Then drive to the north shore of <strong>Lake Kawaguchi</strong> for mirror-like reflections of Fuji. Stop at <strong>Oishi Park (大石公園)</strong> for a lakeside stroll.</p>
+                <p class="lang-zh">前往最經典的明信片取景地<strong>忠靈塔</strong>，拾級而上 398 級階梯（可緩慢步行），便能將朱紅五重塔與富士山同框的絕景收入眼底。隨後駕車沿河口湖北岸行駛，在<strong>大石公園</strong>欣賞冬日湖光山色。</p>
                 <div class="meal-rec">
                   <span class="meal-icon">🍜</span>
-                  <strong>Lunch:</strong> <strong>Expressway Service Area</strong> — Japanese SAs are famous for being excellent! Try regional specialties like Shizuoka green tea ice cream or eel rice at a SA restaurant.
+                  <span class="lang-en"><strong>Lunch:</strong> <strong>Hoto Fudo (ほうとう不動)</strong> (Kawaguchiko) — Famous for <em>hoto</em>, a hearty flat-noodle miso soup with seasonal vegetables. The ultimate winter comfort food. The cave-like restaurant branch is unique.</span>
+                  <span class="lang-zh"><strong>午餐：</strong> <strong>ほうとう不動 (Hoto Fudo)</strong> —— 山梨縣代表性鄉土料理「餺飥麵」（以南瓜及大量冬令蔬菜熬製的味噌扁平粗麵，用鐵鍋呈上）。溫暖驅寒，其東戀路店如白雲般的半球形建築外觀亦非常吸睛。</span>
                 </div>
               </div>
             </div>
             <div class="timeline-block">
-              <div class="time-badge">🌆 Evening</div>
+              <div class="time-badge">
+                <span class="lang-en">🌆 Evening</span>
+                <span class="lang-zh">🌆 晚上</span>
+              </div>
               <div class="activity">
-                <h4>Christmas Eve in Nagoya 🎄</h4>
-                <p>Arrive in Nagoya, drop off the car, and check into your hotel. Japan celebrates Christmas Eve as a romantic, festive occasion. Enjoy the <strong>Nagoya Station Christmas Illuminations</strong> — the massive light displays here are spectacular.</p>
+                <h4>
+                  <span class="lang-en">Christmas Eve Kaiseki at Your Ryokan</span>
+                  <span class="lang-zh">聖誕平安夜：溫泉旅館極致懷石饗宴</span>
+                </h4>
+                <p class="lang-en">Check into your <strong>ryokan</strong> by Lake Kawaguchi. Enjoy a traditional multi-course <strong>kaiseki dinner (懷石料理)</strong> served in your room, followed by a soak in the hot spring baths with snow-capped Mt Fuji glowing under the stars.</p>
+                <p class="lang-zh">入住河口湖畔的一流溫泉旅館。在聖誕平安夜，一家人在房間內享用精緻的頂級日式<strong>懷石料理</strong>。晚飯後，浸泡在露天風呂中，遠眺在星光和夜色下若隱若現的雪白富士山，度過溫馨神聖的夜晚。</p>
                 <div class="meal-rec">
                   <span class="meal-icon">🍱</span>
-                  <strong>Dinner:</strong> <strong>Yabaton</strong> (Nagoya) — Famous for <em>miso katsu</em> (pork cutlet with rich Nagoya-style miso sauce). A hearty, festive Christmas Eve dinner. The Yaesu branch near the station is convenient.
+                  <span class="lang-en"><strong>Dinner:</strong> <strong>Kaiseki (懷石料理) at your ryokan</strong> — Included with your stay. Expect 8–12 courses featuring seasonal ingredients, local freshwater fish, and beautifully presented dishes.</span>
+                  <span class="lang-zh"><strong>晚餐：</strong> <strong>一泊二食溫泉旅館懷石料理</strong> —— 包含於房費內。享用精緻呈獻的 8 至 12 道時令佳餚，包含甲州和牛、名水豆腐及當季鮮魚。</span>
                 </div>
               </div>
             </div>
             <div class="day-tip">
-              <strong>💡 Tip:</strong> In Japan, <strong>Christmas Eve dinner</strong> is a big deal! KFC is a famous tradition, but we've upgraded you to miso katsu 😄. Also, Japanese Christmas cakes (shortcake with strawberries) are sold everywhere — grab one for dessert!
+              <span class="lang-en"><strong>💡 Tip:</strong> The <strong>Chureito Pagoda (忠靈塔)</strong> steps may be icy — wear grip shoes and take it slowly for your parents. If the climb is too much, the lower viewpoint still offers a beautiful photo.</span>
+              <span class="lang-zh"><strong>💡 貼心提示：</strong> 冬季新倉山公園步道可能會有結冰現象，請叮囑父母慢行。若梯級對膝蓋負擔太大，在山腳的淺間神社旁同樣能觀賞到宏偉的富士山。</span>
             </div>
           </div>
         </div>
 
         <!-- ════ DAY 6 ════ -->
-        <div class="day-card" data-region="kansai" id="day-6">
+        <div class="day-card" data-region="fuji" id="day-6">
           <div class="day-header" onclick="toggleDay(this)">
             <div class="day-badge">
               <span class="day-num">06</span>
               <span class="day-date">Dec 25</span>
             </div>
             <div class="day-info">
-              <h3>Nagoya to Kyoto — Christmas Day Arrival</h3>
+              <h3>
+                <span class="lang-en">Kawaguchiko (河口湖) to Hakone (箱根) — Christmas Day 🎄</span>
+                <span class="lang-zh">河口湖自駕前往箱根 — 聖誕節與大涌谷奇觀</span>
+              </h3>
               <div class="day-tags">
-                <span class="tag tag-culture">⛩️ Kyoto</span>
-                <span class="tag tag-pace">🧘 Relaxed</span>
-                <span class="tag tag-special">🎄 Christmas</span>
+                <span class="tag tag-nature">♨️ Hakone (箱根)</span>
+                <span class="tag tag-transport">🚗 Driving (自駕)</span>
+                <span class="tag tag-special">🎄 Christmas (聖誕節)</span>
               </div>
             </div>
             <div class="day-chevron">▼</div>
           </div>
           <div class="day-body">
             <div class="timeline-block">
-              <div class="time-badge">🌅 Morning</div>
+              <div class="time-badge">
+                <span class="lang-en">🌅 Morning</span>
+                <span class="lang-zh">🌅 早上</span>
+              </div>
               <div class="activity">
-                <h4>Nagoya Castle & Morning Stroll</h4>
-                <p>Visit <strong>Nagoya Castle</strong> and the beautifully reconstructed Honmaru Palace. The golden shachihoko (tiger-fish) on the rooftop is iconic. The castle grounds are peaceful in the morning.</p>
+                <h4>
+                  <span class="lang-en">Sunrise at Lake Kawaguchi & Iyashi no Sato (療癒之里根場)</span>
+                  <span class="lang-zh">富士山日出與療癒之里根場合掌屋</span>
+                </h4>
+                <p class="lang-en">Wake early for a stunning Christmas morning sunrise over Mt Fuji. After breakfast, drive to <strong>Iyashi no Sato</strong> — a reconstructed traditional thatched-roof village with Mt Fuji as backdrop. Peaceful and easy walking.</p>
+                <p class="lang-zh">清晨在旅館醒來，迎接聖誕節清晨金黃色的「逆富士」日出奇景。早餐後開車前往被譽為「富士山下合掌村」的<strong>西湖療癒之里根場</strong>。漫步於传统茅草屋之間，以富士山為背景拍照留念。</p>
                 <div class="meal-rec">
                   <span class="meal-icon">🍳</span>
-                  <strong>Breakfast:</strong> <strong>Komeda's Coffee</strong> (Nagoya original) — Order any coffee and get a free <em>morning set</em>: thick toast with red bean paste (ogura toast), a Nagoya specialty!
+                  <span class="lang-en"><strong>Breakfast:</strong> <strong>Traditional Japanese breakfast at ryokan</strong> — Grilled fish, miso soup, rice, and tamago (egg). A wholesome start to Christmas Day.</span>
+                  <span class="lang-zh"><strong>早餐：</strong> <strong>旅館傳統日式早餐</strong> —— 享用鹽烤溪魚、熱味噌湯、日式漬物與溫熱的白飯，健康而暖胃。</span>
                 </div>
               </div>
             </div>
             <div class="timeline-block">
-              <div class="time-badge">🌤️ Afternoon</div>
+              <div class="time-badge">
+                <span class="lang-en">🌤️ Afternoon</span>
+                <span class="lang-zh">🌤️ 下午</span>
+              </div>
               <div class="activity">
-                <h4>Shinkansen to Kyoto (35 min)</h4>
-                <p>Take the <strong>bullet train</strong> from Nagoya to Kyoto (~35 min). Check into your hotel near Kyoto Station or in the Gion area. Spend the afternoon at <strong>Nishiki Market</strong> ("Kyoto's Kitchen") — taste pickles, matcha sweets, fresh seafood skewers, and dashi.</p>
+                <h4>
+                  <span class="lang-en">Drive to Hakone & Owakudani (大涌谷)</span>
+                  <span class="lang-zh">山路自駕至箱根與大涌谷火山遺跡</span>
+                </h4>
+                <p class="lang-en">Scenic drive through mountain roads to Hakone (~1.5 hours). Visit <strong>Owakudani</strong> volcanic valley. Try the famous <strong>black eggs (kuro tamago / 黑玉子)</strong> boiled in sulfur springs — legend says each adds 7 years to your life!</p>
+                <p class="lang-zh">經由御殿場山路開往箱根（約 1.5 小時）。前往地熱谷<strong>大涌谷</strong>，觀察白煙繚繞的硫磺噴氣口。別忘了買一份著名的<strong>黑玉子（溫泉黑雞蛋）</strong>，傳說吃一顆能延長 7 年壽命！</p>
                 <div class="meal-rec">
                   <span class="meal-icon">🍜</span>
-                  <strong>Lunch:</strong> <strong>Nishiki Market grazing</strong> — Walk and eat! Try tamagoyaki (sweet egg), tako tamago (baby octopus stuffed with quail egg), matcha warabi mochi, and fresh yuba (tofu skin).
+                  <span class="lang-en"><strong>Lunch:</strong> <strong>Amazake Chaya (甘酒茶屋)</strong> (Hakone Old Road) — A 400-year-old teahouse serving sweet, alcohol-free amazake and hot mochi. A magical winter pit stop.</span>
+                  <span class="lang-zh"><strong>午餐：</strong> <strong>甘酒茶屋 (Amazake Chaya)</strong> —— 位於箱根舊道上，擁有400年歷史的草頂茶屋。來一杯暖烘烘的不含酒精甘酒（酒釀），搭配現烤的黃豆粉麻糬，非常有懷舊感。</span>
                 </div>
               </div>
             </div>
             <div class="timeline-block">
-              <div class="time-badge">🌆 Evening</div>
+              <div class="time-badge">
+                <span class="lang-en">🌆 Evening</span>
+                <span class="lang-zh">🌆 晚上</span>
+              </div>
               <div class="activity">
-                <h4>Gion District Evening Walk</h4>
-                <p>Wander through the atmospheric <strong>Gion district</strong> — Kyoto's famous geisha quarter. Walk along <strong>Hanamikoji Street</strong> and <strong>Shirakawa Canal</strong> with its weeping willows and stone-paved lanes. You might spot a geiko (geisha) heading to an evening engagement.</p>
+                <h4>
+                  <span class="lang-en">Hakone Onsen Ryokan — Christmas Night</span>
+                  <span class="lang-zh">聖誕夜：箱根高級溫泉名宿</span>
+                </h4>
+                <p class="lang-en">Check into your Hakone ryokan. Enjoy the private <strong>rotenburo (outdoor hot spring bath)</strong> surrounded by mountain scenery. Relax and recuperate in the healing waters.</p>
+                <p class="lang-zh">登記入住箱根（強羅或箱根湯本）的溫泉旅館。在聖誕節的夜晚，全家享受被自然山林環繞的露天風呂溫泉。優良的泉質最能消除連日旅行的舟車勞頓。</p>
                 <div class="meal-rec">
                   <span class="meal-icon">🍱</span>
-                  <strong>Dinner:</strong> <strong>Gion Owatari</strong> — An intimate kaiseki restaurant in the heart of Gion. Seasonal multi-course dinner with impeccable presentation. Reserve well ahead for Christmas week.
+                  <span class="lang-en"><strong>Dinner:</strong> <strong>Kaiseki at ryokan</strong> — Expect Hakone specialties like handmade tofu skin (yuba) dishes, seasonal sashimi, and local mountain vegetables.</span>
+                  <span class="lang-zh"><strong>晚餐：</strong> <strong>溫泉旅館節慶懷石定食</strong> —— 品嚐以箱根名產「豆腐皮 (Yuba)」製作的精緻料理，以及從相模灣新鮮直送的刺身拼盤。</span>
                 </div>
               </div>
             </div>
             <div class="day-tip">
-              <strong>💡 Tip:</strong> Christmas is not a national holiday in Japan, so shops and temples operate normally. It's actually a great day to visit since it's less crowded than the following New Year period!
+              <span class="lang-en"><strong>💡 Tip:</strong> Owakudani Ropeway may close in bad weather or volcanic activity. Check the <a href="https://www.hakonenavi.jp/en/" target="_blank" rel="noopener">Hakone Navi</a> website. Have a backup plan to visit the <strong>Hakone Open-Air Museum (雕刻之森美術館)</strong>.</span>
+              <span class="lang-zh"><strong>💡 貼心提示：</strong> 大涌谷纜車可能因強風或火山氣體濃度高而停駛。出發前請查詢官網。如遇停駛，可改往參觀老少咸宜的<strong>箱根雕刻之森美術館</strong>。</span>
             </div>
           </div>
         </div>
 
         <!-- ════ DAY 7 ════ -->
-        <div class="day-card" data-region="kansai" id="day-7">
+        <div class="day-card" data-region="fuji" id="day-7">
           <div class="day-header" onclick="toggleDay(this)">
             <div class="day-badge">
               <span class="day-num">07</span>
               <span class="day-date">Dec 26</span>
             </div>
             <div class="day-info">
-              <h3>Kyoto — Eastern Temples & Bamboo Grove</h3>
+              <h3>
+                <span class="lang-en">Hakone Loop (箱根環遊), Drive to Nagoya (名古屋) & Shinkansen (新幹線) to Kyoto (京都)</span>
+                <span class="lang-zh">蘆之湖海盜船、長途自駕至名古屋與新幹線飛馳京都</span>
+              </h3>
               <div class="day-tags">
-                <span class="tag tag-culture">⛩️ Kyoto</span>
-                <span class="tag tag-pace">⚖️ Balanced</span>
+                <span class="tag tag-nature">⛩️ Hakone (箱根)</span>
+                <span class="tag tag-transport">🚗 → 🚆 Transit (轉乘)</span>
               </div>
             </div>
             <div class="day-chevron">▼</div>
           </div>
           <div class="day-body">
             <div class="timeline-block">
-              <div class="time-badge">🌅 Morning</div>
+              <div class="time-badge">
+                <span class="lang-en">🌅 Morning</span>
+                <span class="lang-zh">🌅 早上</span>
+              </div>
               <div class="activity">
-                <h4>Fushimi Inari Taisha ⛩️</h4>
-                <p>Arrive by 8:00 AM to beat the crowds at Kyoto's most iconic shrine. Walk through the mesmerizing <strong>thousands of vermillion torii gates</strong> winding up the mountainside. You don't need to climb all the way — the first viewpoint (30 min up) is perfect. The trail is gentle but paced — ideal for parents.</p>
+                <h4>
+                  <span class="lang-en">Lake Ashi (蘆之湖) Pirate Ship & Hakone Shrine (箱根神社)</span>
+                  <span class="lang-zh">蘆之湖海盜觀光船與箱根神社水中鳥居</span>
+                </h4>
+                <p class="lang-en">Take the scenic <strong>pirate ship cruise</strong> across Lake Ashi (20 min). Walk to the iconic <strong>Hakone Shrine torii gate</strong> standing in the water — one of Japan's most photographed spots.</p>
+                <p class="lang-zh">退房後前往碼頭，搭乘華麗的<strong>海盜觀光船</strong>橫渡蘆之湖（約 20 分鐘），晴朗時可於湖上遠眺富士山。下船後沿著古杉步道步行至<strong>箱根神社</strong>，拍攝佇立於湖水中的紅色「和平鳥居」。</p>
                 <div class="meal-rec">
                   <span class="meal-icon">🍳</span>
-                  <strong>Breakfast:</strong> <strong>Vermillion Café</strong> (right near Fushimi Inari station) — Excellent coffee and Western-style breakfasts in a cozy space. Great egg sandwiches.
+                  <span class="lang-en"><strong>Breakfast:</strong> <strong>Ryokan breakfast</strong> — A hearty, final hot breakfast at your resort before setting off on the road.</span>
+                  <span class="lang-zh"><strong>早餐：</strong> <strong>溫泉旅館早餐</strong> —— 退房前吃饱熱呼呼的日式朝食，為今天的長途旅程儲備體力。</span>
                 </div>
               </div>
             </div>
             <div class="timeline-block">
-              <div class="time-badge">🌤️ Afternoon</div>
+              <div class="time-badge">
+                <span class="lang-en">🌤️ Afternoon</span>
+                <span class="lang-zh">🌤️ 下午</span>
+              </div>
               <div class="activity">
-                <h4>Kiyomizu-dera Temple & Higashiyama</h4>
-                <p>Visit the spectacular <strong>Kiyomizu-dera</strong> — the wooden terrace juts out over the hillside with panoramic views of Kyoto. Walk down through <strong>Ninenzaka & Sannenzaka</strong> — charming stone-paved lanes lined with traditional shops and teahouses.</p>
+                <h4>
+                  <span class="lang-en">Drive to Nagoya via Tomei Expressway (東名高速道路)</span>
+                  <span class="lang-zh">東名高速自駕前往名古屋</span>
+                </h4>
+                <p class="lang-en">Drive along the <strong>Tomei Expressway</strong> to Nagoya (~3 hours). Return the rental car in Nagoya. Stop at a <strong>service area (SA)</strong> along the way for regional snacks — Japanese highway rest stops are famously excellent.</p>
+                <p class="lang-zh">經由東名高速公路向名古屋前行（車程約 3 小時），沿途可欣賞駿河灣與太平洋海岸線美景。下午抵達名古屋市區並歸還租用車輛。中途可在高速公路<strong>服務區 (SA)</strong> 停留休息。</p>
                 <div class="meal-rec">
                   <span class="meal-icon">🍜</span>
-                  <strong>Lunch:</strong> <strong>Omen Kodaiji</strong> (Higashiyama) — Handmade udon noodles served with seasonal vegetables and a warm dipping broth. A Kyoto institution.
+                  <span class="lang-en"><strong>Lunch:</strong> <strong>Expressway Service Area</strong> — Try regional specialties like Shizuoka green tea ice cream or grilled eel rice at a SA restaurant. NEOPASA Suruga Bay is recommended.</span>
+                  <span class="lang-zh"><strong>午餐：</strong> 高速公路服務區美食 —— 日本的 SA 設施極為先進。推介在靜岡路段服務區嘗試綠茶雪糕或現場烤製的鰻魚飯定食，味道不輸市區名店。</span>
                 </div>
               </div>
             </div>
             <div class="timeline-block">
-              <div class="time-badge">🌆 Evening</div>
+              <div class="time-badge">
+                <span class="lang-en">🌆 Evening</span>
+                <span class="lang-zh">🌆 晚上</span>
+              </div>
               <div class="activity">
-                <h4>Arashiyama Bamboo Grove (Sunset)</h4>
-                <p>Take a bus or train to <strong>Arashiyama</strong>. Walk through the ethereal <strong>Bamboo Grove</strong> — less crowded in late afternoon. Cross the iconic <strong>Togetsukyo Bridge</strong>. If running in December, the <strong>Arashiyama Hanatouro</strong> illumination event lights up the bamboo and riverside pathways beautifully.</p>
+                <h4>
+                  <span class="lang-en">Shinkansen (新幹線) to Kyoto (京都)</span>
+                  <span class="lang-zh">新幹線中轉與抵達古都京都</span>
+                </h4>
+                <p class="lang-en">Drop off the car in Nagoya, then catch the <strong>Shinkansen</strong> to Kyoto (just 35 minutes!). Check into your Kyoto hotel near <strong>Kyoto Station (京都車站)</strong> or in the <strong>Gion (祇園)</strong> area. Take a gentle evening stroll to unwind.</p>
+                <p class="lang-zh">於名古屋站順利交還租車，隨後乘搭極速的<strong>新幹線</strong>前往京都（僅需 35 分鐘！）。入住鄰近<strong>京都車站</strong>或<strong>祇園</strong>區域的酒店。晚上可在市區漫步，舒緩長途坐車的緊繃感。</p>
                 <div class="meal-rec">
                   <span class="meal-icon">🍱</span>
-                  <strong>Dinner:</strong> <strong>Shoraian</strong> (Arashiyama) — A riverside tofu kaiseki restaurant set on a small island in the Oi River. Beautiful setting, warming winter dishes, and a tranquil end to the day. Reserve ahead.
+                  <span class="lang-en"><strong>Dinner:</strong> <strong>Yabaton (矢場とん)</strong> (Nagoya Station, before Shinkansen) — Famous for <em>miso katsu</em> (pork cutlet with rich Nagoya miso sauce). A hearty Nagoya farewell. Or dine at <strong>Kyoto Station Ramen Street (拉麵小路)</strong>.</span>
+                  <span class="lang-zh"><strong>晚餐：</strong> <strong>矢場豬排 (Yabaton)</strong> （名古屋站內）— 名古屋殿堂級美食「味噌炸豬排」，厚實的多汁豬排淋上香濃的紅味噌醬。或可到抵達後的京都站大樓10樓「拉麵小路」任選一碗熱氣騰騰的拉麵。</span>
                 </div>
               </div>
             </div>
             <div class="day-tip">
-              <strong>💡 Tip:</strong> Kiyomizu-dera is on a steep hill — take the taxi up and walk down through the charming lanes instead. Much easier on knees and just as scenic!
+              <span class="lang-en"><strong>💡 Tip:</strong> This is the longest travel day. Buy your <strong>Shinkansen tickets</strong> at the Nagoya Station JR Ticket Office (Midori-no-窓口). Reserved seats (指定席) are recommended for family comfort.</span>
+              <span class="lang-zh"><strong>💡 貼心提示：</strong> 今天是行程中移動距離最長的一天。抵達名古屋站後可直接在 JR 綠色窗口 (Midori-no-madoguchi) 購買新幹線車票，為父母購買「指定席」（對號入座）最穩妥。</span>
             </div>
           </div>
         </div>
+
+        <!-- ════════════════════════════════════════
+             KANSAI — Days 8–12
+             ════════════════════════════════════════ -->
 
         <!-- ════ DAY 8 ════ -->
         <div class="day-card" data-region="kansai" id="day-8">
           <div class="day-header" onclick="toggleDay(this)">
             <div class="day-badge">
               <span class="day-num">08</span>
-              <span class="day-date">Dec 27</span>
+              <span class="day-date">Dec 26</span>
             </div>
             <div class="day-info">
-              <h3>Kyoto — Golden Pavilion, Tea & Zen Gardens</h3>
+              <h3>
+                <span class="lang-en">Kyoto (京都) — Fushimi Inari (伏見稻荷), Kiyomizu-dera (清水寺) & Gion (祇園)</span>
+                <span class="lang-zh">京都經典巡禮 — 伏見稻荷千本鳥居、清水寺懸空舞台與夜遊祇園</span>
+              </h3>
               <div class="day-tags">
-                <span class="tag tag-culture">⛩️ Kyoto</span>
-                <span class="tag tag-pace">🧘 Relaxed</span>
+                <span class="tag tag-culture">⛩️ Kyoto (京都)</span>
+                <span class="tag tag-pace">
+                  <span class="lang-en">⚖️ Balanced</span>
+                  <span class="lang-zh">⚖️ 步調適中</span>
+                </span>
               </div>
             </div>
             <div class="day-chevron">▼</div>
           </div>
           <div class="day-body">
             <div class="timeline-block">
-              <div class="time-badge">🌅 Morning</div>
+              <div class="time-badge">
+                <span class="lang-en">🌅 Morning</span>
+                <span class="lang-zh">🌅 早上</span>
+              </div>
               <div class="activity">
-                <h4>Kinkaku-ji (Golden Pavilion)</h4>
-                <p>The gold-leaf-covered pavilion reflected in the mirror pond is one of Japan's most stunning sights. Arrive early (~9:00 AM) for the best light and fewest crowds. On cold mornings, mist rising from the pond creates a dreamlike atmosphere.</p>
+                <h4>
+                  <span class="lang-en">Fushimi Inari Taisha (伏見稻荷大社) ⛩️</span>
+                  <span class="lang-zh">伏見稻荷大社千本鳥居</span>
+                </h4>
+                <p class="lang-en">Arrive by 8:00 AM to beat the crowds at Kyoto's most iconic shrine. Walk through the mesmerizing <strong>thousands of vermillion torii gates</strong> winding up the mountainside. Walk to the first viewpoint (30 min up) for parents.</p>
+                <p class="lang-zh">清晨 8:00 前到達，能拍到無人的朱紅色<strong>千本鳥居</strong>通道。步道沿稻荷山蜿蜒而上，空氣清新。帶父母無須登頂，漫步至第一個平台「三德社」（約半小時）即可折返，路況良好。</p>
                 <div class="meal-rec">
                   <span class="meal-icon">🍳</span>
-                  <strong>Breakfast:</strong> <strong>Inoda Coffee</strong> (Sanjo Main Branch) — A beloved Kyoto institution since 1947. Their "Kyoto Breakfast" set with ham, egg, croissant, and fruit is a local morning ritual.
+                  <span class="lang-en"><strong>Breakfast:</strong> <strong>Vermillion Café</strong> (near Fushimi Inari station) — Excellent coffee and Western-style breakfasts in a cozy space overlooking a pond.</span>
+                  <span class="lang-zh"><strong>早餐：</strong> <strong>Vermillion Café</strong> —— 緊鄰神社出口旁，坐擁幽靜池塘景致。提供香醇的澳洲式咖啡與美味的牛油果煙燻三文魚多士，環境休閒。</span>
                 </div>
               </div>
             </div>
             <div class="timeline-block">
-              <div class="time-badge">🌤️ Afternoon</div>
+              <div class="time-badge">
+                <span class="lang-en">🌤️ Afternoon</span>
+                <span class="lang-zh">🌤️ 下午</span>
+              </div>
               <div class="activity">
-                <h4>Ryoan-ji Zen Garden & Tea Ceremony</h4>
-                <p>Walk 15 minutes to <strong>Ryoan-ji Temple</strong> for the world's most famous zen rock garden — 15 stones arranged so you can never see all of them at once. Then enjoy a <strong>private tea ceremony experience</strong> at a nearby tea house (book via your hotel or Camellia Tea Experience in Gion).</p>
+                <h4>
+                  <span class="lang-en">Kiyomizu-dera Temple (清水寺) & Higashiyama (東山) Streets</span>
+                  <span class="lang-zh">清水寺與二年坂、三年坂老街</span>
+                </h4>
+                <p class="lang-en">Visit the spectacular <strong>Kiyomizu-dera</strong> — the wooden terrace juts out over the hillside with panoramic views of Kyoto. Take a taxi up and walk down through <strong>Ninenzaka & Sannenzaka (二年坂及三年坂)</strong> — charming stone-paved lanes.</p>
+                <p class="lang-zh">造訪京都最著名的世界文化遺產<strong>清水寺</strong>，佇立於完全不用一根釘子建成的清水懸空舞台上，俯瞰京都市景。隨後沿著著名的<strong>二年坂與三年坂</strong>石板階梯老街拾級而下，沿途布滿了日式茶屋與手信店。</p>
                 <div class="meal-rec">
                   <span class="meal-icon">🍜</span>
-                  <strong>Lunch:</strong> <strong>Tousuiro</strong> (Kyoto) — Specializes in Kyoto's famous <em>yudofu</em> (simmered tofu) — simple, elegant, and warming. A true Kyoto winter classic.
+                  <span class="lang-en"><strong>Lunch:</strong> <strong>Omen Kodaiji (おめん 高台寺店)</strong> — Handmade udon noodles served with seasonal vegetables, ginger, and a warm dipping broth. A Kyoto institution.</span>
+                  <span class="lang-zh"><strong>午餐：</strong> <strong>名代烏冬 おめん (Omen)</strong> （高台寺店）— 京都著名的手打烏冬麵館。烏冬口感彈牙，搭配當季蔬菜拼盤與濃郁的柴魚醬汁，暖心又健康。</span>
                 </div>
               </div>
             </div>
             <div class="timeline-block">
-              <div class="time-badge">🌆 Evening</div>
+              <div class="time-badge">
+                <span class="lang-en">🌆 Evening</span>
+                <span class="lang-zh">🌆 晚上</span>
+              </div>
               <div class="activity">
-                <h4>Free Evening — Rest or Explore</h4>
-                <p>A relaxed evening for your parents to rest. Options: soak in your hotel's bath, browse <strong>Kyoto Station</strong> underground shopping, or take a gentle walk along the <strong>Kamogawa River</strong> promenade watching the city lights.</p>
+                <h4>
+                  <span class="lang-en">Nishiki Market (錦市場) & Gion (祇園) District Walk</span>
+                  <span class="lang-zh">錦市場探訪與夜遊祇園花見小路</span>
+                </h4>
+                <p class="lang-en">Browse <strong>Nishiki Market</strong> ("Kyoto's Kitchen") for snacks. Then wander the atmospheric <strong>Gion district</strong> geisha quarter. Walk along <strong>Hanamikoji Street (花見小路)</strong> and <strong>Shirakawa Canal (白川運河)</strong>.</p>
+                <p class="lang-zh">下午短暫逛逛有「京都廚房」之稱的<strong>錦市場</strong>，品嚐各式京風小吃。天色漸暗時前往<strong>祇園花見小路</strong>，漫步於石板路和格子木窗紅牆的茶屋街，極有機會邂逅正步履匆匆赴約的藝妓。</p>
                 <div class="meal-rec">
                   <span class="meal-icon">🍱</span>
-                  <strong>Dinner:</strong> <strong>Nishiki Warai</strong> (near Nishiki Market) — Casual and fun Osaka-style okonomiyaki and yakisoba. Great for a relaxed family dinner without needing a reservation.
+                  <span class="lang-en"><strong>Dinner:</strong> <strong>Gion Owatari (祇園大渡)</strong> — An intimate kaiseki restaurant in the heart of Gion. Seasonal multi-course dinner with impeccable presentation. Reserve well ahead.</span>
+                  <span class="lang-zh"><strong>晚餐：</strong> <strong>祇園大渡 (Gion Owatari)</strong> —— 位於祇園小巷內獲得米芝蓮肯定的極致茶懷石料理，主廚手藝精湛且待人親切，為父母帶來最高規格的京都名物享受。<strong>（必須極早預約）</strong></span>
                 </div>
               </div>
             </div>
             <div class="day-tip">
-              <strong>💡 Tip:</strong> The tea ceremony is a beautiful experience for all ages and involves minimal physical activity — just sitting, sipping, and appreciating the art. Many offer English explanations. Budget ~¥3,000–5,000 per person.
+              <span class="lang-en"><strong>💡 Tip:</strong> Kiyomizu-dera is on a steep hill — <strong>take a taxi up to the temple gate and walk down</strong> the slopes. This avoids an exhausting uphill climb for your parents.</span>
+              <span class="lang-zh"><strong>💡 貼心提示：</strong> 清水寺坡度較陡。**強烈建議直接從京都站搭的士（計程車）上到清水寺大門口，然後一路下坡步行下山**，這能為父母的膝蓋省下大量力氣。</span>
             </div>
           </div>
         </div>
@@ -656,53 +1125,84 @@
           <div class="day-header" onclick="toggleDay(this)">
             <div class="day-badge">
               <span class="day-num">09</span>
-              <span class="day-date">Dec 28</span>
+              <span class="day-date">Dec 27</span>
             </div>
             <div class="day-info">
-              <h3>Day Trip to Nara — Deer Park & Ancient Temples</h3>
+              <h3>
+                <span class="lang-en">Kyoto (京都) — Golden Pavilion (金閣寺), Arashiyama (嵐山) & Tea Ceremony (茶道)</span>
+                <span class="lang-zh">京都自然與禪意 — 閃耀金閣寺、嵐山渡月橋與傳統日式茶道體驗</span>
+              </h3>
               <div class="day-tags">
-                <span class="tag tag-culture">🦌 Nara</span>
-                <span class="tag tag-pace">⚖️ Balanced</span>
+                <span class="tag tag-culture">⛩️ Kyoto (京都)</span>
+                <span class="tag tag-pace">
+                  <span class="lang-en">⚖️ Balanced</span>
+                  <span class="lang-zh">⚖️ 步調適中</span>
+                </span>
               </div>
             </div>
             <div class="day-chevron">▼</div>
           </div>
           <div class="day-body">
             <div class="timeline-block">
-              <div class="time-badge">🌅 Morning</div>
+              <div class="time-badge">
+                <span class="lang-en">🌅 Morning</span>
+                <span class="lang-zh">🌅 早上</span>
+              </div>
               <div class="activity">
-                <h4>Train to Nara (45 min) & Nara Park</h4>
-                <p>Take the JR Nara Line from Kyoto (~45 min). Walk to <strong>Nara Park</strong> where 1,200+ friendly deer roam freely. Buy <strong>shika senbei</strong> (deer crackers, ¥200) and feed them — they'll bow to you! Your parents will love this gentle, interactive experience.</p>
+                <h4>
+                  <span class="lang-en">Kinkaku-ji (金閣寺 / Golden Pavilion) & Ryoan-ji (龍安寺)</span>
+                  <span class="lang-zh">金閣寺與龍安寺枯山水庭園</span>
+                </h4>
+                <p class="lang-en">Kinkaku-ji's gold-leaf-covered pavilion reflected in the mirror pond is a breathtaking sight. Arrive at 9:00 AM opening. Then walk to <strong>Ryoan-ji</strong> for the famous zen rock garden containing 15 mysteriously arranged stones.</p>
+                <p class="lang-zh">朝聖京都最耀眼的地標<strong>金閣寺</strong>（舍利殿），金箔覆蓋的樓閣倒映在鏡湖池中，冬日晨光下美不勝收。隨後步行或搭乘巴士前往<strong>龍安寺</strong>，靜坐於方丈庭園前，參悟聞名世界的「枯山水」十五石庭之禪意。</p>
                 <div class="meal-rec">
                   <span class="meal-icon">🍳</span>
-                  <strong>Breakfast:</strong> <strong>Hotel breakfast</strong> in Kyoto before departure, or grab pastries at <strong>Sizuya</strong> (Kyoto Station) — famous for their karashi (mustard) bread rolls.
+                  <span class="lang-en"><strong>Breakfast:</strong> <strong>Inoda Coffee (イノダコーヒ)</strong> (Sanjo Main Branch) — A beloved Kyoto institution since 1947. Their "Kyoto Breakfast" set is a local morning ritual.</span>
+                  <span class="lang-zh"><strong>早餐：</strong> <strong>Inoda Coffee (三條本店)</strong> —— 創於1947年的京都經典咖啡館。點一份招牌「京都的朝食」套餐（牛角包、煎蛋、火腿與新鮮沙律），配上一杯微酸香濃的「阿拉伯珍珠」咖啡。</span>
                 </div>
               </div>
             </div>
             <div class="timeline-block">
-              <div class="time-badge">🌤️ Afternoon</div>
+              <div class="time-badge">
+                <span class="lang-en">🌤️ Afternoon</span>
+                <span class="lang-zh">🌤️ 下午</span>
+              </div>
               <div class="activity">
-                <h4>Todai-ji Temple & Kasuga Taisha</h4>
-                <p>Visit <strong>Todai-ji</strong> — home to the 15-meter bronze <strong>Great Buddha (Daibutsu)</strong>, housed in the world's largest wooden building. Then walk through the atmospheric <strong>Kasuga Taisha</strong> shrine, famous for its thousands of stone and bronze lanterns.</p>
+                <h4>
+                  <span class="lang-en">Arashiyama Bamboo Grove (嵐山竹林) & Togetsukyo Bridge (渡月橋)</span>
+                  <span class="lang-zh">嵐山渡月橋與竹林小徑</span>
+                </h4>
+                <p class="lang-en">Travel to <strong>Arashiyama</strong>. Walk through the ethereal <strong>Bamboo Grove</strong> — towering green stalks sway above you. Cross the iconic <strong>Togetsukyo Bridge</strong> with stunning mountain vistas.</p>
+                <p class="lang-zh">乘火車或的士前往風景名勝區<strong>嵐山</strong>。漫步於清幽無比的<strong>竹林小徑</strong>，聳立的綠竹遮天蔽日，風吹過時沙沙作響。隨後踱步橫跨大堰川的木質外觀<strong>渡月橋</strong>，欣賞冬日嵐山的俊秀山景。</p>
                 <div class="meal-rec">
                   <span class="meal-icon">🍜</span>
-                  <strong>Lunch:</strong> <strong>Kakinoha Sushi Tanaka</strong> (Nara) — Try <em>kakinoha-zushi</em>, Nara's specialty sushi wrapped in persimmon leaves. Delicate, flavorful, and uniquely local.
+                  <span class="lang-en"><strong>Lunch:</strong> <strong>Shoraian (松籟庵)</strong> (Arashiyama) — A riverside tofu kaiseki restaurant set on a small island. Warming winter dishes in a tranquil valley.</span>
+                  <span class="lang-zh"><strong>午餐：</strong> <strong>松籟庵 (Shoraian)</strong> （嵐山）— 隱藏於嵐山溪谷深處的豆腐懷石料理名店。在溪水潺潺的窗景旁，享用如白雪般精緻的熱川豆腐與精緻和食料理。<strong>（必須提前預約）</strong></span>
                 </div>
               </div>
             </div>
             <div class="timeline-block">
-              <div class="time-badge">🌆 Evening</div>
+              <div class="time-badge">
+                <span class="lang-en">🌆 Evening</span>
+                <span class="lang-zh">🌆 晚上</span>
+              </div>
               <div class="activity">
-                <h4>Return to Kyoto → Transfer to Osaka</h4>
-                <p>Take the train back and transfer to <strong>Osaka</strong> (30 min from Kyoto). Check into your Osaka hotel in <strong>Namba or Shinsaibashi</strong> area — the heart of Osaka's food and nightlife scene.</p>
+                <h4>
+                  <span class="lang-en">Authentic Tea Ceremony (茶道體驗) & Kamogawa River (鴨川) Walk</span>
+                  <span class="lang-zh">傳統茶道體驗與鴨川漫步</span>
+                </h4>
+                <p class="lang-en">Experience a <strong>private tea ceremony</strong> (book via <strong>Camellia Tea House</strong>). Beautiful for all ages — learn to whisk your own matcha. Follow with a gentle walk along the <strong>Kamogawa River</strong> promenade.</p>
+                <p class="lang-zh">預約一場傳統<strong>茶道文化體驗</strong>（推介祇園的 Camellia 茶屋）。在茶道大師指導下學習日本茶道禮儀，並親自嘗試擊點抹茶。晚飯前可到市區著名的<strong>鴨川</strong>畔漫步，感受古都的優雅暮色。</p>
                 <div class="meal-rec">
                   <span class="meal-icon">🍱</span>
-                  <strong>Dinner:</strong> <strong>Dotonbori street food</strong> — Your first night in Osaka! Dive into the neon-lit madness of Dotonbori. Must-try: <strong>takoyaki</strong> (octopus balls) from Kukuru, <strong>gyoza</strong> from Chao Chao, and <strong>kushikatsu</strong> (deep-fried skewers) from Daruma.
+                  <span class="lang-en"><strong>Dinner:</strong> <strong>Tousuiro (豆水楼)</strong> (Kyoto) — Specializes in Kyoto's famous <em>yudofu</em> (simmered tofu in hot broth) — simple, elegant, and warming. A winter classic.</span>
+                  <span class="lang-zh"><strong>晚餐：</strong> <strong>豆水樓 (Tousuiro)</strong> — 精緻湯豆腐料理。利用京都優質地下水製作的豆腐在木桶中溫熱慢煮，配上特製醬油與柴魚絲，鮮美暖胃，是極具禪意的冬日名菜。</span>
                 </div>
               </div>
             </div>
             <div class="day-tip">
-              <strong>💡 Tip:</strong> The deer in Nara are wild but accustomed to tourists. They can be slightly pushy when they see crackers — hold them up high and bow before feeding. Keep bags zipped as they'll investigate paper and plastic.
+              <span class="lang-en"><strong>💡 Tip:</strong> The tea ceremony is a seated activity with minimal physical movement, making it very comfortable and relaxing for parents. English instruction is available.</span>
+              <span class="lang-zh"><strong>💡 貼心提示：</strong> 傳統茶道體驗通常設有矮凳，無須全程跪坐，對年長父母的關節非常友善。大部分體驗點均提供流暢的英語講解。</span>
             </div>
           </div>
         </div>
@@ -712,53 +1212,81 @@
           <div class="day-header" onclick="toggleDay(this)">
             <div class="day-badge">
               <span class="day-num">10</span>
-              <span class="day-date">Dec 29</span>
+              <span class="day-date">Dec 28</span>
             </div>
             <div class="day-info">
-              <h3>Osaka — Castle, Street Food & Shinsekai</h3>
+              <h3>
+                <span class="lang-en">Day Trip to Nara (奈良) — Deer Park (奈良公園) & Transfer to Osaka (大阪)</span>
+                <span class="lang-zh">古都奈良小鹿同遊 — 奈良公園、東大寺大佛殿與下榻大阪</span>
+              </h3>
               <div class="day-tags">
-                <span class="tag tag-city">🏙️ Osaka</span>
-                <span class="tag tag-pace">⚖️ Balanced</span>
+                <span class="tag tag-culture">🦌 Nara (奈良)</span>
+                <span class="tag tag-city">🏙️ Osaka (大阪)</span>
               </div>
             </div>
             <div class="day-chevron">▼</div>
           </div>
           <div class="day-body">
             <div class="timeline-block">
-              <div class="time-badge">🌅 Morning</div>
+              <div class="time-badge">
+                <span class="lang-en">🌅 Morning</span>
+                <span class="lang-zh">🌅 早上</span>
+              </div>
               <div class="activity">
-                <h4>Osaka Castle & Park</h4>
-                <p>Visit <strong>Osaka Castle</strong>, surrounded by moats and a large park. Take the elevator to the 8th floor observation deck for panoramic city views. The park's winter plum blossoms may be starting. Easy, flat walking around the grounds — great for parents.</p>
+                <h4>
+                  <span class="lang-en">Train to Nara & Nara Park (奈良公園)</span>
+                  <span class="lang-zh">近鐵前往奈良與奈良公園餵小鹿</span>
+                </h4>
+                <p class="lang-en">Take the train from Kyoto to Nara (~45 min). Walk to <strong>Nara Park</strong> where 1,200+ friendly deer roam freely. Buy <strong>shika senbei (鹿仙貝)</strong> (deer crackers, ¥200) and feed them — they'll bow to you!</p>
+                <p class="lang-zh">在京都站乘火車前往奈良（約 45 分鐘）。步行進入綠草如茵的<strong>奈良公園</strong>，這裡棲息了超過 1200 隻溫馴的神鹿。購買專用的<strong>鹿仙貝</strong>（每份約 ¥200）餵飼，小鹿們還會向您鞠躬點頭討食，極具樂趣。</p>
                 <div class="meal-rec">
                   <span class="meal-icon">🍳</span>
-                  <strong>Breakfast:</strong> <strong>Café Rhinebeck</strong> (Shinsaibashi) — Known for thick, fluffy pancakes and specialty coffee. A relaxed start to the day.
+                  <span class="lang-en"><strong>Breakfast:</strong> Grab pastries at <strong>Sizuya (志津屋)</strong> (Kyoto Station) — famous for their legendary beef cutlet sandwiches and beef buns.</span>
+                  <span class="lang-zh"><strong>早餐：</strong> <strong>志津屋 (Sizuya)</strong> （京都站內）— 京都老牌烘焙店。強烈推介他們的招牌「吉列牛肉三文治 (Gyu-Katsu Sandwich)」，非常美味。</span>
                 </div>
               </div>
             </div>
             <div class="timeline-block">
-              <div class="time-badge">🌤️ Afternoon</div>
+              <div class="time-badge">
+                <span class="lang-en">🌤️ Afternoon</span>
+                <span class="lang-zh">🌤️ 下午</span>
+              </div>
               <div class="activity">
-                <h4>Shinsekai & Kuromon Market</h4>
-                <p>Explore the retro <strong>Shinsekai</strong> district — Osaka's old entertainment quarter with its iconic <strong>Tsutenkaku Tower</strong> and colorful signage. Then visit <strong>Kuromon Market</strong> ("Osaka's Kitchen") for the freshest sashimi, grilled wagyu skewers, and seasonal fruits.</p>
+                <h4>
+                  <span class="lang-en">Todai-ji Temple (東大寺) & Kasuga Taisha (春日大社)</span>
+                  <span class="lang-zh">東大寺大佛殿與春日大社石燈籠</span>
+                </h4>
+                <p class="lang-en">Visit <strong>Todai-ji</strong> — home to the 15-meter bronze <strong>Great Buddha (大佛)</strong>, housed in the world's largest wooden building. Walk to the atmospheric <strong>Kasuga Taisha</strong>, famous for its thousands of mossy stone lanterns.</p>
+                <p class="lang-zh">參觀雄偉的<strong>東大寺</strong>。大佛殿是世界最大的木造建築，殿內供奉著高達 15 米的巨型青銅大佛，氣勢逼人。隨後沿著掛滿古老青銅與石燈籠的林道漫步至<strong>春日大社</strong>。</p>
                 <div class="meal-rec">
                   <span class="meal-icon">🍜</span>
-                  <strong>Lunch:</strong> <strong>Kushikatsu Daruma</strong> (Shinsekai, original branch) — The iconic kushikatsu experience. Golden rule: <em>never double-dip in the communal sauce!</em> Try asparagus, shrimp, lotus root, and cheese skewers.
+                  <span class="lang-en"><strong>Lunch:</strong> <strong>Kakinoha Sushi Tanaka (柿の葉すし たなか)</strong> (Nara) — Try <em>kakinoha-zushi</em>, Nara's specialty sushi wrapped in persimmon leaves. Delicate, flavorful, and uniquely local.</span>
+                  <span class="lang-zh"><strong>午餐：</strong> <strong>柿の葉すし たなか (Tanaka)</strong> （奈良站前）— 奈良代表名產「柿葉壽司」（用柿子葉包裹青花魚或三文魚壽司，帶有淡淡植物清香，利於防腐）。味道溫和細緻。</span>
                 </div>
               </div>
             </div>
             <div class="timeline-block">
-              <div class="time-badge">🌆 Evening</div>
+              <div class="time-badge">
+                <span class="lang-en">🌆 Evening</span>
+                <span class="lang-zh">🌆 晚上</span>
+              </div>
               <div class="activity">
-                <h4>Dotonbori Night Walk & HEP FIVE</h4>
-                <p>Return to <strong>Dotonbori</strong> for the full nighttime experience — the Glico Running Man sign, the moving crab sign at Kani Doraku, and the electric atmosphere. If you want a unique view, ride the <strong>HEP FIVE Ferris Wheel</strong> in Umeda — some cabins have heated kotatsu tables!</p>
+                <h4>
+                  <span class="lang-en">Transfer to Osaka & Dotonbori (道頓堀) Neon Lights</span>
+                  <span class="lang-zh">前往大阪與體驗道頓堀不夜城</span>
+                </h4>
+                <p class="lang-en">Take the train to <strong>Osaka</strong> (~50 min). Check into your hotel in <strong>Namba (難波) / Shinsaibashi (心齋橋)</strong>. Dive straight into the dazzling neon-lit streets of <strong>Dotonbori</strong>.</p>
+                <p class="lang-zh">乘火車前往關西最大城市<strong>大阪</strong>（約 50 分鐘）。登記入住位於繁華中心<strong>難波 / 心齋橋</strong>的酒店。夜幕降臨時，直接投入熱鬧非凡、布滿巨型立體霓虹招牌的<strong>道頓堀</strong>美食街。</p>
                 <div class="meal-rec">
                   <span class="meal-icon">🍱</span>
-                  <strong>Dinner:</strong> <strong>Kani Doraku</strong> (Dotonbori main branch) — The famous crab restaurant under the giant mechanical crab sign. Order the crab kaiseki course for a luxurious multi-course crab feast. Definitely reserve in advance.
+                  <span class="lang-en"><strong>Dinner:</strong> <strong>Dotonbori street food</strong> — Sample local culinary delights: <strong>takoyaki (章魚燒)</strong> from Kukuru, <strong>gyoza (餃子)</strong> from Chao Chao, and <strong>kushikatsu (串炸)</strong> from Daruma. Remember: no double dipping!</span>
+                  <span class="lang-zh"><strong>晚餐：</strong> 道頓堀掃街美食之旅 —— 暢嚐大阪代表小吃：<strong>庫庫嚕 (Kukuru)</strong> 的爆漿章魚燒、<strong>Chao Chao</strong> 的香脆一口餃子，以及<strong>元祖串炸達摩 (Daruma)</strong> 的香脆串炸。**（注意：串炸沾醬嚴禁二次下蘸）**</span>
                 </div>
               </div>
             </div>
             <div class="day-tip">
-              <strong>💡 Tip:</strong> <strong>Dec 29</strong> marks the start of the New Year holiday period. Some smaller shops may begin closing early. Major attractions and restaurants stay open, but double-check any specific spots you want to visit.
+              <span class="lang-en"><strong>💡 Tip:</strong> The deer in Nara are wild but accustomed to tourists. They can be pushy when they see food — hold crackers up high and bow before feeding. Keep bags zipped.</span>
+              <span class="lang-zh"><strong>💡 貼心提示：</strong> 奈良小鹿雖可愛但仍有野性。當牠們看見您手上有鹿仙貝時會主動圍過來。建議將仙貝高舉，並向小鹿輕輕點頭鞠躬，牠們通常也會鞠躬回禮後再行餵食。請看管好手袋及重要衣物。</span>
             </div>
           </div>
         </div>
@@ -771,50 +1299,81 @@
               <span class="day-date">Dec 30</span>
             </div>
             <div class="day-info">
-              <h3>Kobe Day Trip — Harbor, Beef & Chinatown</h3>
+              <h3>
+                <span class="lang-en">Osaka (大阪) — Castle (大阪城), Shinsekai (新世界) & Dotonbori (道頓堀)</span>
+                <span class="lang-zh">大阪古今交融 — 宏偉大阪城天守閣、復古新世界與巨蟹懷石料理</span>
+              </h3>
               <div class="day-tags">
-                <span class="tag tag-city">🌃 Kobe</span>
-                <span class="tag tag-pace">🧘 Relaxed</span>
+                <span class="tag tag-city">🏙️ Osaka (大阪)</span>
+                <span class="tag tag-pace">
+                  <span class="lang-en">⚖️ Balanced</span>
+                  <span class="lang-zh">⚖️ 步調適中</span>
+                </span>
               </div>
             </div>
             <div class="day-chevron">▼</div>
           </div>
           <div class="day-body">
             <div class="timeline-block">
-              <div class="time-badge">🌅 Morning</div>
+              <div class="time-badge">
+                <span class="lang-en">🌅 Morning</span>
+                <span class="lang-zh">🌅 早上</span>
+              </div>
               <div class="activity">
-                <h4>Train to Kobe (30 min) & Kitano-cho</h4>
-                <p>Take the JR train from Osaka to Kobe (~30 min). Start with <strong>Kitano-cho</strong> — a hillside neighborhood of beautifully preserved Western-style mansions (ijinkan) from the Meiji era. The area has a charming European atmosphere and easy walking paths.</p>
+                <h4>
+                  <span class="lang-en">Osaka Castle (大阪城天守閣) & Park</span>
+                  <span class="lang-zh">大阪城公園與天守閣</span>
+                </h4>
+                <p class="lang-en">Visit <strong>Osaka Castle</strong>, surrounded by stone moats and a large park. Take the elevator inside the castle tower to the 8th floor observatory for panoramic city views. Ground paths are flat and easy for parents.</p>
+                <p class="lang-zh">遊覽壯麗的<strong>大阪城公園</strong>，欣賞宏偉的護城河巨石城牆。進入城堡中心的天守閣，乘搭電梯直達 8 樓展望台，鳥瞰大阪市區全景。公園路面寬闊平坦，非常適合父母慢步。</p>
                 <div class="meal-rec">
                   <span class="meal-icon">🍳</span>
-                  <strong>Breakfast:</strong> <strong>Nishimura's Coffee</strong> (Kobe, est. 1948) — A Kobe institution. Try their "Royal Mountain" blend with a morning toast set in an elegant, old-world interior.
+                  <span class="lang-en"><strong>Breakfast:</strong> <strong>Café Rhinebeck</strong> (Shinsaibashi) — Fluffy pancakes and specialty coffee. A relaxed start to the day.</span>
+                  <span class="lang-zh"><strong>早餐：</strong> <strong>Café Rhinebeck (心齋橋)</strong> —— 享用現做鬆軟的厚鬆餅 (Pancakes) 與香濃精品咖啡，開啟悠閒的一天。</span>
                 </div>
               </div>
             </div>
             <div class="timeline-block">
-              <div class="time-badge">🌤️ Afternoon</div>
+              <div class="time-badge">
+                <span class="lang-en">🌤️ Afternoon</span>
+                <span class="lang-zh">🌤️ 下午</span>
+              </div>
               <div class="activity">
-                <h4>Nankinmachi (Kobe Chinatown) & Harborland</h4>
-                <p>Walk down to <strong>Nankinmachi</strong> (Kobe's Chinatown) for street snacks — pork buns, sesame dumplings, and custard tarts. Then head to <strong>Kobe Harborland / Meriken Park</strong> for harbor views, the BE KOBE monument, and the Kobe Port Tower.</p>
+                <h4>
+                  <span class="lang-en">Shinsekai (新世界) & Kuromon Market (黑門市場)</span>
+                  <span class="lang-zh">復古新世界與黑門市場海鮮街</span>
+                </h4>
+                <p class="lang-en">Explore the retro <strong>Shinsekai</strong> district with its iconic <strong>Tsutenkaku Tower (通天閣)</strong>. Then visit <strong>Kuromon Market</strong> for fresh sashimi, grilled Kobe beef skewers, and sweet seasonal fruits.</p>
+                <p class="lang-zh">走訪洋溢著昭和懷舊風情、掛滿河豚大燈籠的<strong>新世界</strong>街區，與地標<strong>通天閣</strong>合影。隨後前往著名的<strong>黑門市場</strong>，品嚐當日新鮮金槍魚刺身、現烤神戶牛肉串及冬季限定的日本大草莓（草莓/多士）。</p>
                 <div class="meal-rec">
                   <span class="meal-icon">🍜</span>
-                  <strong>Lunch:</strong> <strong>Steakland Kobe</strong> (Sannomiya) — Authentic A5 <strong>Kobe beef</strong> teppanyaki at reasonable prices. Watch the chef grill your steak to perfection right in front of you. A must-do in Kobe!
+                  <span class="lang-en"><strong>Lunch:</strong> <strong>Kushikatsu Daruma (串かつだるま)</strong> (Shinsekai) — Try original deep-fried skewers like shrimp, lotus root, asparagus, and cheese. Light, crispy, and delicious.</span>
+                  <span class="lang-zh"><strong>午餐：</strong> <strong>元祖串炸達摩 (Daruma)</strong> （新世界總店）— 體驗道地大阪串炸文化。外皮裹上極薄麵衣炸至金黃，推介大蝦、蓮藕、蘆筍和鵪鶉蛋串。**（注意： communal 醬汁只能沾一次）**</span>
                 </div>
               </div>
             </div>
             <div class="timeline-block">
-              <div class="time-badge">🌆 Evening</div>
+              <div class="time-badge">
+                <span class="lang-en">🌆 Evening</span>
+                <span class="lang-zh">🌆 晚上</span>
+              </div>
               <div class="activity">
-                <h4>Kobe Luminarie (if running) & Return</h4>
-                <p>If the <strong>Kobe Luminarie</strong> winter illumination is still running (check dates — it usually runs in early-mid Dec), it's one of Japan's most spectacular light festivals. Otherwise, enjoy the Harborland night views before returning to Osaka.</p>
+                <h4>
+                  <span class="lang-en">Dotonbori (道頓堀) Cruise & HEP FIVE Ferris Wheel</span>
+                  <span class="lang-zh">道頓堀觀光船與 HEP FIVE 摩天輪夜景</span>
+                </h4>
+                <p class="lang-en">Enjoy the glowing neon streetscapes of Dotonbori. Take a ride on the <strong>HEP FIVE Ferris Wheel</strong> in Umeda (梅田) — some cabins feature heated kotatsu tables for a cozy winter perspective!</p>
+                <p class="lang-zh">再次漫步道頓堀，拍攝固力果奔跑小人的經典標誌。隨後前往梅田搭乘 <strong>HEP FIVE 紅色摩天輪</strong>。在寒冬中，部分車廂會特別配備溫暖的日式「被爐（Kotatsu）」，讓全家舒適地在高空中欣賞大阪夜景。</p>
                 <div class="meal-rec">
                   <span class="meal-icon">🍱</span>
-                  <strong>Dinner:</strong> <strong>Mizuno</strong> (Osaka, Dotonbori) — Back in Osaka for the best <em>okonomiyaki</em> in the city. The yama-imo (mountain yam) batter creates an incredibly fluffy, rich pancake. Worth the wait!
+                  <span class="lang-en"><strong>Dinner:</strong> <strong>Kani Doraku (蟹道楽)</strong> (Dotonbori Main Branch) — Under the famous giant moving crab sign, enjoy a multi-course crab kaiseki feast. Reserve in advance.</span>
+                  <span class="lang-zh"><strong>晚餐：</strong> <strong>蟹道樂 (Kani Doraku)</strong> （道頓堀本店）— 在著名的巨型電動螃蟹招牌下，享用精緻的松葉蟹/鱈場蟹多食懷石宴（包含蟹刺身、烤蟹腳、蟹天婦羅及蟹釜飯）。極受歡迎，<strong>（必須提前數周預訂）</strong>。</span>
                 </div>
               </div>
             </div>
             <div class="day-tip">
-              <strong>💡 Tip:</strong> Kobe beef is regulated — look for the official <strong>Kobe Beef certification mark</strong> (菊の紋) at restaurants to ensure authenticity. Steakland is certified and offers excellent value compared to high-end steakhouses.
+              <span class="lang-en"><strong>💡 Tip:</strong> Today is Dec 30, which is close to the New Year holiday. Some small family shops may close, but major malls, markets, and tourist facilities operate normally.</span>
+              <span class="lang-zh"><strong>💡 貼心提示：</strong> 12月30日已臨近日本新年除夕。個別私人小店可能休業，但大型商場、主要市場及著名景點均正常營業，也是為父母購買日式藥妝和手信的最佳時機。</span>
             </div>
           </div>
         </div>
@@ -827,50 +1386,87 @@
               <span class="day-date">Dec 31</span>
             </div>
             <div class="day-info">
-              <h3>Osaka — Final Day & New Year's Eve 🎊</h3>
+              <h3>
+                <span class="lang-en">Osaka (大阪) — Final Day & New Year's Eve (除夕 / 大晦日) 🎊</span>
+                <span class="lang-zh">大阪除夕跨年夜 — 神木大社參拜、傳統蕎麥麵與深夜敲鐘倒數 🎊</span>
+              </h3>
               <div class="day-tags">
-                <span class="tag tag-city">🏙️ Osaka</span>
-                <span class="tag tag-pace">🧘 Relaxed</span>
-                <span class="tag tag-special">🎊 NYE</span>
+                <span class="tag tag-city">🏙️ Osaka (大阪)</span>
+                <span class="tag tag-pace">
+                  <span class="lang-en">🧘 Relaxed</span>
+                  <span class="lang-zh">🧘 輕鬆悠閒</span>
+                </span>
+                <span class="tag tag-special">
+                  <span class="lang-en">🎊 NYE</span>
+                  <span class="lang-zh">🎊 除夕夜</span>
+                </span>
               </div>
             </div>
             <div class="day-chevron">▼</div>
           </div>
           <div class="day-body">
             <div class="timeline-block">
-              <div class="time-badge">🌅 Morning</div>
+              <div class="time-badge">
+                <span class="lang-en">🌅 Morning</span>
+                <span class="lang-zh">🌅 早上</span>
+              </div>
               <div class="activity">
-                <h4>Sumiyoshi Taisha Shrine</h4>
-                <p>Visit one of Japan's oldest and most important Shinto shrines — <strong>Sumiyoshi Taisha</strong>. The unique architecture predates Chinese-influenced temple styles. As the shrine prepares for <em>hatsumode</em> (New Year's first visit), you'll feel the special atmosphere. The iconic arched bridge is beautiful.</p>
+                <h4>
+                  <span class="lang-en">Option A: Kobe (神戶) Excursion | Option B: Sumiyoshi Taisha (住吉大社)</span>
+                  <span class="lang-zh">選項A：神戶異人館半日遊 | 選項B：住吉大社迎新春</span>
+                </h4>
+                <p class="lang-en"><strong>Option A — Kobe (30 mins from Osaka):</strong> Visit the historic Meiji-era Western mansions in <strong>Kitano-cho (北野町)</strong>. Lunch at <strong>Steakland Kobe</strong>. <br>
+                <strong>Option B — Osaka Base:</strong> Visit <strong>Sumiyoshi Taisha</strong>, one of Japan's oldest Shinto shrines, featuring a stunning arched bridge. Feel the holy buzz as locals prepare for New Year's first prayers.</p>
+                <p class="lang-zh"><strong>選項A（神戶半日遊 - 車程30分鐘）：</strong> 前往神戶山麓的<strong>北野異人館街</strong>，欣賞明治時期留存的歐洲風情洋房。午餐享用頂級神戶牛肉鐵板燒。<br>
+                <strong>選項B（留在大阪）：</strong> 前往參拜擁有千年歷史的<strong>住吉大社</strong>，欣賞其標誌性的拱形紅色「太鼓橋」。此時大社正張燈結彩，準備迎接今晚新年的百萬參拜人潮，氛圍極佳。</p>
                 <div class="meal-rec">
                   <span class="meal-icon">🍳</span>
-                  <strong>Breakfast:</strong> <strong>Gram</strong> (Shinsaibashi) — Famous for their fluffy soufflé pancakes served at limited times (11:00, 15:00, 18:00). Get there early! Alternatively, enjoy a leisurely hotel breakfast.</div>
-              </div>
-            </div>
-            <div class="timeline-block">
-              <div class="time-badge">🌤️ Afternoon</div>
-              <div class="activity">
-                <h4>Last-Minute Shopping & Relaxation</h4>
-                <p>Spend your final afternoon browsing <strong>Shinsaibashi-suji</strong> shopping arcade for souvenirs — matcha Kit-Kats, rice crackers, skincare, and Japanese crafts. Or just relax at a café and soak in the atmosphere of your last day.</p>
-                <div class="meal-rec">
-                  <span class="meal-icon">🍜</span>
-                  <strong>Lunch:</strong> <strong>Rikuro Ojisan</strong> (Namba) — Pick up their famous jiggly cheesecake (¥965), then have a proper lunch at <strong>Ichiran Ramen</strong> (Dotonbori) — individual booths for a focused ramen experience. Perfect for a cold December day.
+                  <span class="lang-en"><strong>Breakfast:</strong> <strong>Gram (心齋橋)</strong> — Famous for premium jiggly soufflé pancakes. Or if in Kobe: <strong>Nishimura's Coffee (西村咖啡店)</strong> — An institution since 1948 with rich vintage interiors.</span>
+                  <span class="lang-zh"><strong>早餐：</strong> <strong>Gram (心齋橋)</strong> — 搶購每日限定、口感如雲朵般軟綿的舒芙蕾厚鬆餅。若去神戶，可前往老字號 <strong>西村咖啡店 (Nishimura's)</strong>，在優雅復古的皮椅上享用英式早餐。</span>
                 </div>
               </div>
             </div>
             <div class="timeline-block">
-              <div class="time-badge">🌆 Evening</div>
+              <div class="time-badge">
+                <span class="lang-en">🌤️ Afternoon</span>
+                <span class="lang-zh">🌤️ 下午</span>
+              </div>
               <div class="activity">
-                <h4>New Year's Eve — Toshikoshi Soba & Temple Bells 🎊</h4>
-                <p>Experience a Japanese New Year's Eve! The tradition is to eat <strong>toshikoshi soba</strong> (year-crossing buckwheat noodles) for longevity. At midnight, temples across Japan ring their bells <strong>108 times</strong> (joya no kane) — representing the 108 earthly desires in Buddhism. Head to <strong>Shitennoji Temple</strong> or return to the bustling Dotonbori area for the countdown atmosphere.</p>
+                <h4>
+                  <span class="lang-en">Last-Minute Souvenir Shopping</span>
+                  <span class="lang-zh">新年大採購與午後休憩</span>
+                </h4>
+                <p class="lang-en">Browse <strong>Shinsaibashi-suji</strong> shopping arcade for souvenirs — matcha Kit-Kats, local skincare, and Japanese crafts. Pick up a freshly baked, jiggly cheesecake from <strong>Rikuro Ojisan (りくろーおじさん)</strong> (¥965).</p>
+                <p class="lang-zh">在長達 600 米的<strong>心齋橋筋商店街</strong>進行最後衝刺。選購藥妝、抹茶零食及特色日式工藝品。別忘了排隊買一個 <strong>Rikuro 老爺爺現烤起司蛋糕</strong>（僅約 ¥965，剛出爐時還會搖晃晃，極香濃軟綿）。</p>
+                <div class="meal-rec">
+                  <span class="meal-icon">🍜</span>
+                  <span class="lang-en"><strong>Lunch:</strong> <strong>Steakland Kobe (神戶)</strong> (Option A) — Premium A5 Kobe beef grilled on a teppan griddle before your eyes. Or <strong>Ichiran Ramen (一蘭拉麵)</strong> (Option B) for hot tonkotsu soup.</span>
+                  <span class="lang-zh"><strong>午餐：</strong> **Steakland Kobe**（若選神戶）— 性價比極高的 A5 神戶牛肉鐵板燒，師傅在您面前現場切片煎烤；或在大阪難波吃一碗經典暖胃的 **一蘭拉麵**（若選選項B）。</span>
+                </div>
+              </div>
+            </div>
+            <div class="timeline-block">
+              <div class="time-badge">
+                <span class="lang-en">🌆 Evening</span>
+                <span class="lang-zh">🌆 晚上與跨年夜</span>
+              </div>
+              <div class="activity">
+                <h4>
+                  <span class="lang-en">New Year's Eve — Toshikoshi Soba (跨年蕎麥麵) & Temple Bells (除夜之鐘)</span>
+                  <span class="lang-zh">日本大年夜大晦日 —— 跨年蕎麥麵與除夜之鐘</span>
+                </h4>
+                <p class="lang-en">Celebrate a traditional Japanese NYE! The local tradition is to eat <strong>toshikoshi soba (年越し蕎麥)</strong> (year-crossing buckwheat noodles) for health and longevity. At midnight, visit <strong>Shitennoji Temple (四天王寺)</strong> to hear the bells ring <strong>108 times</strong> to wash away the 108 earthly desires.</p>
+                <p class="lang-zh">體驗地道的日本跨年夜！日本人習慣在除夕吃「<strong>跨年蕎麥麵 (Toshikoshi Soba)</strong>」，長長的麵條寓意長壽。深夜時分，可帶父母前往<strong>四天王寺</strong>，現場聆聽沉穩肅穆的「<strong>除夜之鐘</strong>」敲響 108 下，驅除過去一年的煩惱，迎來吉祥的一年。</p>
                 <div class="meal-rec">
                   <span class="meal-icon">🍱</span>
-                  <strong>Dinner:</strong> <strong>Toshikoshi soba</strong> — Join the locals! Visit any well-regarded soba restaurant, or try <strong>Shinsaibashi Matsuya</strong> for handmade soba. Follow with a warm <strong>oshiruko</strong> (red bean soup with mochi) from a street stall near the temples.
+                  <span class="lang-en"><strong>Dinner:</strong> <strong>Toshikoshi soba</strong> — Join the locals! Visit any traditional soba noodle shop (like <strong>Matsuya</strong>) for hot tempura soba. Alternatively, dine at <strong>Mizuno (美津の)</strong> for Osaka's best okonomiyaki.</span>
+                  <span class="lang-zh"><strong>晚餐：</strong> <strong>除夕跨年蕎麥麵</strong> —— 入鄉隨俗，到心齋橋的麵館（如<strong>松屋</strong>）吃一碗熱氣騰騰的炸蝦蕎麥麵。或在道頓堀的 <strong>美津の (Mizuno)</strong> 享用招牌山藥大阪燒，暖烘烘地迎接新年。</span>
                 </div>
               </div>
             </div>
             <div class="day-tip">
-              <strong>💡 Tip:</strong> If departing on Jan 1, note that <strong>Kansai International Airport (KIX)</strong> operates normally but trains may run on a holiday schedule. Check your transport timing the night before. Consider packing the evening before to enjoy the NYE celebrations stress-free!
+              <span class="lang-en"><strong>💡 Tip:</strong> If departing on Jan 1, check your transport timing in advance. Trains operate, but might be on a holiday schedule. Make sure to pack the night before so you can enjoy the NYE countdown.</span>
+              <span class="lang-zh"><strong>💡 貼心提示：</strong> 若於 1 月 1 日乘飛機返港，請留意往機場的特急列車可能實施假日班表，務必提前確認。今晚出門前請先收拾好行李，便能無後顧之憂地參與深夜跨年敲鐘。</span>
             </div>
           </div>
         </div>
@@ -882,41 +1478,98 @@
   <!-- ═══════════════════ PACKING ═══════════════════ -->
   <section id="packing" class="section section-dark">
     <div class="container">
-      <h2 class="section-title light">Packing Essentials</h2>
-      <p class="section-subtitle light">A winter-ready checklist for December in Japan.</p>
+      <h2 class="section-title light">
+        <span class="lang-en">Packing Essentials</span>
+        <span class="lang-zh">行李打包清單</span>
+      </h2>
+      <p class="section-subtitle light">
+        <span class="lang-en">A winter-ready checklist for December in Japan.</span>
+        <span class="lang-zh">12月冬遊日本防寒與自駕出行必備物品。</span>
+      </p>
 
       <div class="packing-grid">
         <div class="packing-card" id="pack-clothing">
-          <h3>👕 Clothing</h3>
+          <h3>
+            <span class="lang-en">👕 Clothing</span>
+            <span class="lang-zh">👕 防寒衣物</span>
+          </h3>
           <ul>
-            <li>Warm down jacket / puffer coat</li>
-            <li>Thermal base layers (Uniqlo HEATTECH recommended — buy in Japan!)</li>
-            <li>Comfortable walking shoes (waterproof preferred)</li>
-            <li>Scarf, gloves, warm hat</li>
-            <li>Layers: sweaters, long-sleeve shirts</li>
-            <li>Slip-on shoes (easy for temples)</li>
+            <li>
+              <span class="lang-en">Warm down jacket / puffer coat</span>
+              <span class="lang-zh">防風保暖羽絨大衣 / Puffer外套</span>
+            </li>
+            <li>
+              <span class="lang-en">Thermal base layers (Uniqlo HEATTECH recommended)</span>
+              <span class="lang-zh">保暖內衣 / 發熱衣（推薦 Uniqlo HEATTECH，可在日本添置）</span>
+            </li>
+            <li>
+              <span class="lang-en">Comfortable walking shoes (waterproof preferred)</span>
+              <span class="lang-zh">好走路的防滑運動鞋（鞋面防潑水為佳）</span>
+            </li>
+            <li>
+              <span class="lang-en">Scarf, gloves, warm hat</span>
+              <span class="lang-zh">防寒三件套：圍巾、手套、毛帽</span>
+            </li>
+            <li>
+              <span class="lang-en">Slip-on shoes (convenient for temples/ryokans)</span>
+              <span class="lang-zh">易穿脫的鞋子（出入寺廟及溫泉旅館極方便）</span>
+            </li>
           </ul>
         </div>
         <div class="packing-card" id="pack-tech">
-          <h3>📱 Tech & Travel</h3>
+          <h3>
+            <span class="lang-en">📱 Tech & Travel</span>
+            <span class="lang-zh">📱 電子設備與旅行證件</span>
+          </h3>
           <ul>
-            <li>Pocket Wi-Fi or eSIM (order before departure)</li>
-            <li>Power bank & USB-C cables</li>
-            <li>Universal adapter (Japan uses Type A, 100V)</li>
-            <li>International Driving Permit (IDP)</li>
-            <li>Passport + copies</li>
-            <li>Travel insurance documents</li>
+            <li>
+              <span class="lang-en">Pocket Wi-Fi or eSIM (order before departure)</span>
+              <span class="lang-zh">日本上網 SIM卡 / eSIM 或 Pocket Wi-Fi 蛋</span>
+            </li>
+            <li>
+              <span class="lang-en">Power bank & USB-C cables</span>
+              <span class="lang-zh">行動電源（充電寶）及充電線（低溫環境耗電快）</span>
+            </li>
+            <li>
+              <span class="lang-en">Universal adapter (Japan uses Type A, 100V)</span>
+              <span class="lang-zh">日本旅行插頭轉接器（雙平腳 Type A，電壓 100V）</span>
+            </li>
+            <li>
+              <span class="lang-en">International Driving Permit (IDP)</span>
+              <span class="lang-zh">國際駕駛執照 (IDP) 與香港駕駛執照正本</span>
+            </li>
+            <li>
+              <span class="lang-en">Passport + copies</span>
+              <span class="lang-zh">護照正本（有效期需在6個月以上）及副本</span>
+            </li>
           </ul>
         </div>
         <div class="packing-card" id="pack-misc">
-          <h3>🎒 Handy Items</h3>
+          <h3>
+            <span class="lang-en">🎒 Handy Items</span>
+            <span class="lang-zh">🎒 實用隨身小物</span>
+          </h3>
           <ul>
-            <li>Small towel (for onsen visits)</li>
-            <li>Foldable tote bag (for shopping)</li>
-            <li>Cash in yen (¥50,000+ for the family)</li>
-            <li>Hand warmers (kairo — also sold everywhere in Japan)</li>
-            <li>Basic medications & first aid</li>
-            <li>Grip shoe attachments (for icy Fuji-area walks)</li>
+            <li>
+              <span class="lang-en">Small towel (for onsen foot bath visits)</span>
+              <span class="lang-zh">小毛巾（方便在河口湖/箱根體驗無料足湯時擦腳）</span>
+            </li>
+            <li>
+              <span class="lang-en">Foldable tote bag (for shopping tax-free purchases)</span>
+              <span class="lang-zh">折疊環保購物袋（日本買手信/藥妝不提供免費膠袋）</span>
+            </li>
+            <li>
+              <span class="lang-en">Cash in yen (¥50,000+ for the family)</span>
+              <span class="lang-zh">日元現金（建議全家帶 ¥50,000 以上備用）</span>
+            </li>
+            <li>
+              <span class="lang-en">Hand warmers (kairo — sold everywhere in Japan)</span>
+              <span class="lang-zh">暖貼 / 暖包（Kairo，日本便利店及藥妝店均有售）</span>
+            </li>
+            <li>
+              <span class="lang-en">Basic medications (painkillers, cold medicine)</span>
+              <span class="lang-zh">常備個人藥物（止痛藥、感冒沖劑、腸胃藥）</span>
+            </li>
           </ul>
         </div>
       </div>
@@ -926,61 +1579,109 @@
   <!-- ═══════════════════ BUDGET ═══════════════════ -->
   <section id="budget" class="section">
     <div class="container">
-      <h2 class="section-title">Budget Estimate</h2>
-      <p class="section-subtitle">Approximate costs for 3 people, 12 days (moderate comfort level).</p>
+      <h2 class="section-title">
+        <span class="lang-en">Budget Estimate</span>
+        <span class="lang-zh">預算估算</span>
+      </h2>
+      <p class="section-subtitle">
+        <span class="lang-en">Approximate costs for 3 people, 12 days (moderate comfort level).</span>
+        <span class="lang-zh">三人同行，12天日本之旅大約費用估算（以中等舒適標準計算，未含機票）。</span>
+      </p>
 
       <div class="budget-table-wrap">
         <table class="budget-table" id="budget-table">
           <thead>
             <tr>
-              <th>Category</th>
-              <th>Estimated Cost (¥)</th>
-              <th>~USD</th>
-              <th>Notes</th>
+              <th>
+                <span class="lang-en">Category</span>
+                <span class="lang-zh">項目分類</span>
+              </th>
+              <th>
+                <span class="lang-en">Estimated Cost (¥)</span>
+                <span class="lang-zh">估算金額 (日元)</span>
+              </th>
+              <th>
+                <span class="lang-en">~HKD</span>
+                <span class="lang-zh">~折合港幣</span>
+              </th>
+              <th>
+                <span class="lang-en">Notes</span>
+                <span class="lang-zh">備註說明</span>
+              </th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>✈️ Flights (3 pax, return)</td>
-              <td>—</td>
-              <td>Varies</td>
-              <td>Book early for Dec rates</td>
-            </tr>
-            <tr>
-              <td>🏨 Accommodation (11 nights)</td>
+              <td>
+                <span class="lang-en">🏨 Accommodation (11 nights)</span>
+                <span class="lang-zh">🏨 酒店與溫泉旅館 (11晚)</span>
+              </td>
               <td>¥350,000–500,000</td>
-              <td>$2,300–3,300</td>
-              <td>Mix of hotels + 2 ryokan nights</td>
+              <td>$18,000–26,000</td>
+              <td>
+                <span class="lang-en">Mix of hotels + 2 ryokan nights</span>
+                <span class="lang-zh">優質市區酒店 + 2晚一泊二食溫泉旅館</span>
+              </td>
             </tr>
             <tr>
-              <td>🚗 Car Rental (3 days + fuel + tolls)</td>
+              <td>
+                <span class="lang-en">🚗 Car Rental (3 days + gas/tolls)</span>
+                <span class="lang-zh">🚗 租車自駕 (3天，含路費油費)</span>
+              </td>
               <td>¥50,000–70,000</td>
-              <td>$330–460</td>
-              <td>Incl. winter tires & one-way fee</td>
+              <td>$2,600–3,600</td>
+              <td>
+                <span class="lang-en">Incl. winter tires & one-way fee</span>
+                <span class="lang-zh">包含雪胎配置、保險及異地還車費</span>
+              </td>
             </tr>
             <tr>
-              <td>🚆 Trains & Metro</td>
+              <td>
+                <span class="lang-en">🚆 Trains & Metro</span>
+                <span class="lang-zh">🚆 城市鐵路及新幹線</span>
+              </td>
               <td>¥40,000–55,000</td>
-              <td>$260–360</td>
-              <td>Suica, Shinkansen, JR Pass</td>
+              <td>$2,100–2,800</td>
+              <td>
+                <span class="lang-en">Suica, Shinkansen, JR Pass</span>
+                <span class="lang-zh">新幹線車票、Suica 儲值及關西周遊券</span>
+              </td>
             </tr>
             <tr>
-              <td>🍽️ Food & Drinks</td>
+              <td>
+                <span class="lang-en">🍽️ Food & Drinks</span>
+                <span class="lang-zh">🍽️ 餐飲美食</span>
+              </td>
               <td>¥180,000–250,000</td>
-              <td>$1,200–1,650</td>
-              <td>3 meals/day, mix of casual & nice</td>
+              <td>$9,300–13,000</td>
+              <td>
+                <span class="lang-en">Mix of street food & nice diners</span>
+                <span class="lang-zh">每日三餐，包括拉麵、壽喜燒及和牛料理</span>
+              </td>
             </tr>
             <tr>
-              <td>🎫 Activities & Entrance Fees</td>
+              <td>
+                <span class="lang-en">🎫 Activities & Entrance Fees</span>
+                <span class="lang-zh">🎫 景點門票及體驗活動</span>
+              </td>
               <td>¥25,000–35,000</td>
-              <td>$165–230</td>
-              <td>Temples, Skytree, tea ceremony etc.</td>
+              <td>$1,300–1,800</td>
+              <td>
+                <span class="lang-en">Temples, teamLab, tea ceremony</span>
+                <span class="lang-zh">晴空塔、teamLab及茶道文化體驗門票</span>
+              </td>
             </tr>
             <tr class="budget-total">
-              <td><strong>Total (excl. flights)</strong></td>
+              <td>
+                <span class="lang-en"><strong>Total (excl. flights)</strong></span>
+                <span class="lang-zh"><strong>總預算估算 (不含機票)</strong></span>
+              </td>
               <td><strong>¥645,000–910,000</strong></td>
-              <td><strong>$4,250–6,000</strong></td>
-              <td>For 3 people, 12 days</td>
+              <td><strong>$33,300–47,200</strong></td>
+              <td>
+                <span class="lang-en">For 3 people, 12 days</span>
+                <span class="lang-zh">全家三人 12 天的行程預算</span>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -993,19 +1694,40 @@
     <div class="container">
       <div class="footer-content">
         <div class="footer-brand">
-          <h3>🗾 Japan Winter Journey 2026</h3>
+          <h3>
+            <span class="lang-en">🗾 Japan Winter Journey 2026</span>
+            <span class="lang-zh">🗾 日本冬日家族之旅 2026</span>
+          </h3>
           <p>Dec 20 — Dec 31 &nbsp;|&nbsp; Ma Family Adventure</p>
         </div>
         <div class="footer-links">
-          <a href="#overview">Overview</a>
-          <a href="#tips">Tips</a>
-          <a href="#itinerary">Itinerary</a>
-          <a href="#packing">Packing</a>
-          <a href="#budget">Budget</a>
+          <a href="#overview">
+            <span class="lang-en">Overview</span>
+            <span class="lang-zh">概覽</span>
+          </a>
+          <a href="#map-section">
+            <span class="lang-en">Map</span>
+            <span class="lang-zh">地圖</span>
+          </a>
+          <a href="#tips">
+            <span class="lang-en">Tips</span>
+            <span class="lang-zh">資訊</span>
+          </a>
+          <a href="#itinerary">
+            <span class="lang-en">Itinerary</span>
+            <span class="lang-zh">行程</span>
+          </a>
+          <a href="#packing">
+            <span class="lang-en">Packing</span>
+            <span class="lang-zh">行李</span>
+          </a>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>よい旅を！(Yoi tabi wo!) — Have a wonderful journey! 🇯🇵</p>
+        <p>
+          <span class="lang-en">よい旅を！(Yoi tabi wo!) — Have a wonderful journey! 🇯🇵</span>
+          <span class="lang-zh">祝您與家人旅途愉快！よい旅を！ 🇯🇵</span>
+        </p>
       </div>
     </div>
   </footer>

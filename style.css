@@ -1700,4 +1700,22 @@ body.curr-gbp span.curr-gbp { display: inline !important; }
   }
 }
 
+.budget-attribution {
+  display: block;
+  text-align: right;
+  margin-top: 15px;
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+.budget-attribution a {
+  color: var(--accent-sky);
+  text-decoration: underline;
+}
+
+.budget-attribution a:hover {
+  color: var(--accent-crane);
+}
+
+
 

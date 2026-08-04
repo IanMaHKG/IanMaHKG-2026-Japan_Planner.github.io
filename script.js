@@ -43,6 +43,11 @@ function setLanguage(lang) {
 }
 
 /* ─── Currency Selector ─── */
+let JPY_EXCHANGE_RATES = {
+  hkd: 0.052,
+  gbp: 0.0053
+};
+
 function initCurrencySelector() {
   const currentCurr = localStorage.getItem('user-curr') || 'hkd';
   setCurrency(currentCurr);
@@ -56,6 +61,30 @@ function initCurrencySelector() {
       btns.forEach(b => b.classList.toggle('active', b.dataset.curr === selected));
     });
   });
+
+  // Fetch live exchange rates on init
+  fetchExchangeRates();
+}
+
+async function fetchExchangeRates() {
+  try {
+    const res = await fetch('https://open.er-api.com/v6/latest/JPY');
+    if (!res.ok) throw new Error('API fetch failed');
+    const data = await res.json();
+    if (data && data.result === 'success') {
+      JPY_EXCHANGE_RATES.hkd = data.rates.HKD || JPY_EXCHANGE_RATES.hkd;
+      JPY_EXCHANGE_RATES.gbp = data.rates.GBP || JPY_EXCHANGE_RATES.gbp;
+      
+      const timeStr = data.time_last_update_utc ? new Date(data.time_last_update_utc).toLocaleDateString() : '';
+      document.querySelectorAll('.live-rate-date').forEach(el => {
+        el.innerText = timeStr;
+      });
+    }
+  } catch (err) {
+    console.warn('Failed to load live exchange rates, using fallback rates:', err);
+  } finally {
+    updateConvertedBudgets();
+  }
 }
 
 function setCurrency(curr) {
@@ -66,6 +95,46 @@ function setCurrency(curr) {
     document.body.classList.add('curr-hkd');
   }
   localStorage.setItem('user-curr', curr);
+  updateConvertedBudgets();
+}
+
+function updateConvertedBudgets() {
+  const activeCurr = localStorage.getItem('user-curr') || 'hkd';
+  const rate = JPY_EXCHANGE_RATES[activeCurr];
+  const symbol = activeCurr === 'gbp' ? '£' : '$';
+  const isGbp = activeCurr === 'gbp';
+
+  document.querySelectorAll('.converted-val').forEach(el => {
+    const minJpy = parseFloat(el.getAttribute('data-min'));
+    const maxJpy = parseFloat(el.getAttribute('data-max'));
+
+    if (isNaN(minJpy) || isNaN(maxJpy)) return;
+
+    const rawMin = minJpy * rate;
+    const rawMax = maxJpy * rate;
+
+    let roundedMin, roundedMax;
+    if (isGbp) {
+      // GBP: Round to nearest £5
+      roundedMin = Math.round(rawMin / 5) * 5;
+      roundedMax = Math.round(rawMax / 5) * 5;
+    } else {
+      // HKD: Round to nearest $100
+      roundedMin = Math.round(rawMin / 100) * 100;
+      roundedMax = Math.round(rawMax / 100) * 100;
+    }
+
+    // Format with commas
+    const formattedMin = roundedMin.toLocaleString('en-US');
+    const formattedMax = roundedMax.toLocaleString('en-US');
+
+    // Retain bold tags for total value
+    if (el.classList.contains('budget-total-val')) {
+      el.innerHTML = `<strong>${symbol}${formattedMin}–${symbol}${formattedMax}</strong>`;
+    } else {
+      el.innerHTML = `${symbol}${formattedMin}–${symbol}${formattedMax}`;
+    }
+  });
 }
 
 

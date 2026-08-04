@@ -1582,10 +1582,9 @@ img {
   color: var(--text-primary);
 }
 
-/* ═══════════════════════════════════════════════════
-   LANGUAGE SWITCHER STYLING
-   ═══════════════════════════════════════════════════ */
-.lang-switcher {
+/* ─── Switchers & Sliders Styling ─── */
+.lang-switcher, .currency-switcher {
+  position: relative;
   display: flex;
   background: rgba(10, 22, 40, 0.6);
   border: 1px solid var(--glass-border-light);
@@ -1593,46 +1592,66 @@ img {
   overflow: hidden;
   padding: 2px;
   align-items: center;
-  margin-left: 20px;
+  width: 140px; /* Fixed width for slider logic */
 }
 
-.lang-btn {
-  background: transparent;
+.currency-switcher {
+  width: 170px; /* Slightly wider for currency text */
+}
+
+.switcher-slider {
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  left: 2px;
+  width: calc(50% - 2px);
+  background: var(--gradient-ba-red);
+  box-shadow: 0 4px 12px rgba(186, 12, 47, 0.4);
+  border-radius: 100px;
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Slide Right moves the pill smoothly */
+.lang-switcher.slide-right .switcher-slider,
+.currency-switcher.slide-right .switcher-slider {
+  transform: translateX(100%);
+}
+
+.lang-btn, .curr-btn {
+  position: relative;
+  z-index: 2;
+  background: transparent !important;
   border: none;
   color: var(--text-secondary);
-  padding: 6px 14px;
+  padding: 6px 0;
   font-size: 0.8rem;
   font-weight: 700;
   border-radius: 100px;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.1s ease;
+  transition: color 0.3s ease, transform 0.1s ease;
   font-family: var(--font-primary);
+  width: 50%;
+  text-align: center;
   transform: scale(1);
 }
 
-.lang-btn:hover:not(.active) {
+.lang-btn:hover:not(.active), .curr-btn:hover:not(.active) {
   color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.08);
 }
 
-.lang-btn.active {
-  background: var(--gradient-ba-red);
-  color: #ffffff;
-  box-shadow: 0 4px 12px rgba(186, 12, 47, 0.4);
-  transform: scale(1.03);
+.lang-btn.active, .curr-btn.active {
+  color: #ffffff !important;
 }
 
-.lang-btn:active {
-  transform: scale(0.94) !important;
+.lang-btn:active, .curr-btn:active {
+  transform: scale(0.92);
 }
 
-/* Visibility rules */
-body.lang-en .lang-zh { display: none !important; }
-body.lang-zh-hk .lang-en { display: none !important; }
-
-/* Keep inline layout for spans when active */
-body.lang-en span.lang-en { display: inline !important; }
-body.lang-zh-hk span.lang-zh { display: inline !important; }
+.lang-switcher {
+  margin-left: 20px;
+}
 
 @media (max-width: 768px) {
   .lang-switcher {
@@ -1642,9 +1661,6 @@ body.lang-zh-hk span.lang-zh { display: inline !important; }
   }
 }
 
-/* ═══════════════════════════════════════════════════
-   CURRENCY SWITCHER STYLING
-   ═══════════════════════════════════════════════════ */
 .currency-switcher-container {
   display: flex;
   justify-content: flex-end;
@@ -1659,58 +1675,26 @@ body.lang-zh-hk span.lang-zh { display: inline !important; }
   color: var(--text-secondary);
 }
 
-.currency-switcher {
-  display: flex;
-  background: rgba(10, 22, 40, 0.6);
-  border: 1px solid var(--glass-border-light);
-  border-radius: 100px;
-  overflow: hidden;
-  padding: 2px;
-}
-
-.curr-btn {
-  background: transparent;
-  border: none;
-  color: var(--text-secondary);
-  padding: 6px 14px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  border-radius: 100px;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.1s ease;
-  font-family: var(--font-primary);
-  transform: scale(1);
-}
-
-.curr-btn:hover:not(.active) {
-  color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.curr-btn.active {
-  background: var(--gradient-ba-red);
-  color: #ffffff;
-  box-shadow: 0 4px 12px rgba(186, 12, 47, 0.4);
-  transform: scale(1.03);
-}
-
-.curr-btn:active {
-  transform: scale(0.94) !important;
-}
-
-/* Visibility rules */
-body.curr-hkd .curr-gbp { display: none !important; }
-body.curr-gbp .curr-hkd { display: none !important; }
-
-body.curr-hkd span.curr-hkd { display: inline !important; }
-body.curr-gbp span.curr-gbp { display: inline !important; }
-
 @media (max-width: 768px) {
   .currency-switcher-container {
     justify-content: flex-start;
     margin-bottom: 15px;
   }
 }
+
+/* Visibility rules */
+body.lang-en .lang-zh { display: none !important; }
+body.lang-zh-hk .lang-en { display: none !important; }
+
+/* Keep inline layout for spans when active */
+body.lang-en span.lang-en { display: inline !important; }
+body.lang-zh-hk span.lang-zh { display: inline !important; }
+
+body.curr-hkd .curr-gbp { display: none !important; }
+body.curr-gbp .curr-hkd { display: none !important; }
+
+body.curr-hkd span.curr-hkd { display: inline !important; }
+body.curr-gbp span.curr-gbp { display: inline !important; }
 
 .budget-attribution {
   display: block;

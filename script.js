@@ -39,6 +39,12 @@ function setLanguage(lang) {
     document.body.classList.add('lang-en');
   }
   localStorage.setItem('user-lang', lang);
+
+  const switcher = document.querySelector('.lang-switcher');
+  if (switcher) {
+    switcher.classList.toggle('slide-right', lang === 'zh-hk');
+  }
+
   window.dispatchEvent(new CustomEvent('langchange', { detail: { lang } }));
 }
 
@@ -95,6 +101,12 @@ function setCurrency(curr) {
     document.body.classList.add('curr-hkd');
   }
   localStorage.setItem('user-curr', curr);
+
+  const switcher = document.querySelector('.currency-switcher');
+  if (switcher) {
+    switcher.classList.toggle('slide-right', curr === 'gbp');
+  }
+
   updateConvertedBudgets();
 }
 

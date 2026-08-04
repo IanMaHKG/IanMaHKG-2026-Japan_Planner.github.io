@@ -1588,6 +1588,18 @@
         <span class="lang-zh">三人同行，12天日本之旅大約費用估算（以中等舒適標準計算，未含機票）。</span>
       </p>
 
+      <!-- Currency Switcher in Budget -->
+      <div class="currency-switcher-container">
+        <span class="switcher-label">
+          <span class="lang-en">Convert display currency:</span>
+          <span class="lang-zh">轉換顯示貨幣：</span>
+        </span>
+        <div class="currency-switcher">
+          <button class="curr-btn active" data-curr="hkd">HKD ($)</button>
+          <button class="curr-btn" data-curr="gbp">GBP (£)</button>
+        </div>
+      </div>
+
       <div class="budget-table-wrap">
         <table class="budget-table" id="budget-table">
           <thead>
@@ -1601,8 +1613,14 @@
                 <span class="lang-zh">估算金額 (日元)</span>
               </th>
               <th>
-                <span class="lang-en">~HKD</span>
-                <span class="lang-zh">~折合港幣</span>
+                <span class="curr-hkd">
+                  <span class="lang-en">~HKD ($)</span>
+                  <span class="lang-zh">~折合港幣 ($)</span>
+                </span>
+                <span class="curr-gbp">
+                  <span class="lang-en">~GBP (£)</span>
+                  <span class="lang-zh">~折合英鎊 (£)</span>
+                </span>
               </th>
               <th>
                 <span class="lang-en">Notes</span>
@@ -1617,7 +1635,10 @@
                 <span class="lang-zh">🏨 酒店與溫泉旅館 (11晚)</span>
               </td>
               <td>¥350,000–500,000</td>
-              <td>$18,000–26,000</td>
+              <td>
+                <span class="curr-hkd">$18,000–26,000</span>
+                <span class="curr-gbp">£1,850–2,650</span>
+              </td>
               <td>
                 <span class="lang-en">Mix of hotels + 2 ryokan nights</span>
                 <span class="lang-zh">優質市區酒店 + 2晚一泊二食溫泉旅館</span>
@@ -1629,7 +1650,10 @@
                 <span class="lang-zh">🚗 租車自駕 (3天，含路費油費)</span>
               </td>
               <td>¥50,000–70,000</td>
-              <td>$2,600–3,600</td>
+              <td>
+                <span class="curr-hkd">$2,600–3,600</span>
+                <span class="curr-gbp">£265–370</span>
+              </td>
               <td>
                 <span class="lang-en">Incl. winter tires & one-way fee</span>
                 <span class="lang-zh">包含雪胎配置、保險及異地還車費</span>
@@ -1641,7 +1665,10 @@
                 <span class="lang-zh">🚆 城市鐵路及新幹線</span>
               </td>
               <td>¥40,000–55,000</td>
-              <td>$2,100–2,800</td>
+              <td>
+                <span class="curr-hkd">$2,100–2,800</span>
+                <span class="curr-gbp">£210–290</span>
+              </td>
               <td>
                 <span class="lang-en">Suica, Shinkansen, JR Pass</span>
                 <span class="lang-zh">新幹線車票、Suica 儲值及關西周遊券</span>
@@ -1653,7 +1680,10 @@
                 <span class="lang-zh">🍽️ 餐飲美食</span>
               </td>
               <td>¥180,000–250,000</td>
-              <td>$9,300–13,000</td>
+              <td>
+                <span class="curr-hkd">$9,300–13,000</span>
+                <span class="curr-gbp">£950–1,320</span>
+              </td>
               <td>
                 <span class="lang-en">Mix of street food & nice diners</span>
                 <span class="lang-zh">每日三餐，包括拉麵、壽喜燒及和牛料理</span>
@@ -1665,7 +1695,10 @@
                 <span class="lang-zh">🎫 景點門票及體驗活動</span>
               </td>
               <td>¥25,000–35,000</td>
-              <td>$1,300–1,800</td>
+              <td>
+                <span class="curr-hkd">$1,300–1,800</span>
+                <span class="curr-gbp">£130–185</span>
+              </td>
               <td>
                 <span class="lang-en">Temples, teamLab, tea ceremony</span>
                 <span class="lang-zh">晴空塔、teamLab及茶道文化體驗門票</span>
@@ -1677,7 +1710,10 @@
                 <span class="lang-zh"><strong>總預算估算 (不含機票)</strong></span>
               </td>
               <td><strong>¥645,000–910,000</strong></td>
-              <td><strong>$33,300–47,200</strong></td>
+              <td>
+                <span class="curr-hkd"><strong>$33,300–47,200</strong></span>
+                <span class="curr-gbp"><strong>£3,405–4,815</strong></span>
+              </td>
               <td>
                 <span class="lang-en">For 3 people, 12 days</span>
                 <span class="lang-zh">全家三人 12 天的行程預算</span>

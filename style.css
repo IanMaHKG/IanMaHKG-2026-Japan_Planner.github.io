@@ -1636,3 +1636,68 @@ body.lang-zh-hk span.lang-zh { display: inline !important; }
   }
 }
 
+/* ═══════════════════════════════════════════════════
+   CURRENCY SWITCHER STYLING
+   ═══════════════════════════════════════════════════ */
+.currency-switcher-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.switcher-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.currency-switcher {
+  display: flex;
+  background: rgba(10, 22, 40, 0.6);
+  border: 1px solid var(--glass-border-light);
+  border-radius: 100px;
+  overflow: hidden;
+  padding: 2px;
+}
+
+.curr-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: var(--font-primary);
+}
+
+.curr-btn:hover:not(.active) {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.curr-btn.active {
+  background: var(--gradient-ba-red);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(186, 12, 47, 0.3);
+}
+
+/* Visibility rules */
+body.curr-hkd .curr-gbp { display: none !important; }
+body.curr-gbp .curr-hkd { display: none !important; }
+
+body.curr-hkd span.curr-hkd { display: inline !important; }
+body.curr-gbp span.curr-gbp { display: inline !important; }
+
+@media (max-width: 768px) {
+  .currency-switcher-container {
+    justify-content: flex-start;
+    margin-bottom: 15px;
+  }
+}
+
+

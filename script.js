@@ -5,6 +5,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   initLanguageSelector();
+  initCurrencySelector();
   initParticles();
   initNav();
   initDayCards();
@@ -39,6 +40,32 @@ function setLanguage(lang) {
   }
   localStorage.setItem('user-lang', lang);
   window.dispatchEvent(new CustomEvent('langchange', { detail: { lang } }));
+}
+
+/* ─── Currency Selector ─── */
+function initCurrencySelector() {
+  const currentCurr = localStorage.getItem('user-curr') || 'hkd';
+  setCurrency(currentCurr);
+
+  const btns = document.querySelectorAll('.curr-btn');
+  btns.forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.curr === currentCurr);
+    btn.addEventListener('click', (e) => {
+      const selected = e.target.dataset.curr;
+      setCurrency(selected);
+      btns.forEach(b => b.classList.toggle('active', b.dataset.curr === selected));
+    });
+  });
+}
+
+function setCurrency(curr) {
+  document.body.classList.remove('curr-hkd', 'curr-gbp');
+  if (curr === 'gbp') {
+    document.body.classList.add('curr-gbp');
+  } else {
+    document.body.classList.add('curr-hkd');
+  }
+  localStorage.setItem('user-curr', curr);
 }
 
 

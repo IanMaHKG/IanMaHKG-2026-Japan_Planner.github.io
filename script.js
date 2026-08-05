@@ -165,13 +165,14 @@ function initParticles() {
     p.style.left = Math.random() * 100 + '%';
     p.style.animationDuration = (Math.random() * 15 + 10) + 's';
     p.style.animationDelay = (Math.random() * 10) + 's';
-    // BA-themed particle colours
-    if (Math.random() > 0.7) {
-      p.style.background = 'rgba(186, 12, 47, 0.15)'; // BA red
-    } else if (Math.random() > 0.5) {
-      p.style.background = 'rgba(7, 90, 170, 0.15)'; // BA navy
+    // Hero is dark — use white/light translucent particles
+    const rand = Math.random();
+    if (rand > 0.7) {
+      p.style.background = 'rgba(255, 255, 255, 0.12)'; // white
+    } else if (rand > 0.4) {
+      p.style.background = 'rgba(235, 34, 38, 0.18)';   // BA red
     } else {
-      p.style.background = 'rgba(168, 184, 204, 0.1)'; // Silver
+      p.style.background = 'rgba(7, 90, 170, 0.18)';    // BA blue
     }
     container.appendChild(p);
   }
@@ -184,24 +185,14 @@ function initNav() {
   const toggle = document.getElementById('nav-toggle');
   const links = document.getElementById('nav-links');
 
-  // Show/hide nav on scroll
-  let lastScroll = 0;
-  const heroHeight = document.getElementById('hero')?.offsetHeight || 600;
+  // BA.com style: nav is always visible — permanent Midnight Navy bar
+  nav.classList.add('visible', 'scrolled');
 
   window.addEventListener('scroll', () => {
-    const scroll = window.scrollY;
-
-    // Show nav after hero
-    if (scroll > heroHeight * 0.6) {
-      nav.classList.add('visible', 'scrolled');
-    } else {
-      nav.classList.remove('visible', 'scrolled');
-    }
-
-    // Update active nav link
+    // Update active nav link on scroll
     updateActiveNav();
-    lastScroll = scroll;
   }, { passive: true });
+
 
   // Mobile toggle
   if (toggle && links) {
@@ -386,7 +377,8 @@ function initRouteMap() {
     zoomControl: true
   });
 
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+  // Light (Positron) tile — matches ba.com white theme
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
     subdomains: 'abcd',
     maxZoom: 19

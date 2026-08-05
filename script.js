@@ -344,7 +344,7 @@ function initRouteMap() {
     {
       name: { en: 'Kyoto (京都)', zh: '京都' },
       lat: 35.0116, lng: 135.7681,
-      days: { en: 'Days 8–9', zh: '第 8–9 天' },
+      days: { en: 'Days 7–9', zh: '第 7–9 天' },
       desc: { en: 'Fushimi Inari, Kinkaku-ji, Arashiyama, tea ceremony', zh: '千本鳥居、金閣寺、嵐山竹林、體驗京都傳統茶道' },
       color: COLORS.red,
       markerClass: 'marker-kyoto',
@@ -362,7 +362,7 @@ function initRouteMap() {
     {
       name: { en: 'Osaka (大阪)', zh: '大阪' },
       lat: 34.6937, lng: 135.5023,
-      days: { en: 'Days 11–12', zh: '第 11–12 天' },
+      days: { en: 'Days 10–12', zh: '第 10–12 天' },
       desc: { en: 'Osaka Castle, Dotonbori, street food, New Year\'s Eve', zh: '大阪城天守閣、道頓堀夜景與街頭美食、敲鐘跨年' },
       color: COLORS.crane,
       markerClass: 'marker-osaka',

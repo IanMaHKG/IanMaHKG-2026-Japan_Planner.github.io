@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollReveal();
   initSmoothScroll();
   initRouteMap();
+  initHotelSearch();
 });
 
 /* ─── Language Selector ─── */
@@ -212,7 +213,7 @@ function initNav() {
 }
 
 function updateActiveNav() {
-  const sections = ['overview', 'map-section', 'tips', 'itinerary', 'packing', 'budget'];
+  const sections = ['overview', 'map-section', 'tips', 'itinerary', 'packing', 'budget', 'hotels'];
   const navLinks = document.querySelectorAll('.nav-links a');
   let current = '';
 
@@ -535,3 +536,77 @@ function initSmoothScroll() {
     });
   });
 }
+
+
+/* ─── Booking.com Hotel Search Engine ─── */
+function initHotelSearch() {
+  const form = document.getElementById('hotel-search-form');
+  const destInput = document.getElementById('hotel-destination');
+  const checkinInput = document.getElementById('hotel-checkin');
+  const checkoutInput = document.getElementById('hotel-checkout');
+  const adultsSelect = document.getElementById('hotel-adults');
+  const legPills = document.querySelectorAll('.leg-pill');
+  const legBtns = document.querySelectorAll('.hotel-leg-btn');
+
+  // Helper to build dynamic Booking.com URL matching current user settings
+  function buildBookingUrl(destination, checkin, checkout, adults) {
+    const activeCurr = (localStorage.getItem('user-curr') || 'hkd').toUpperCase();
+    const activeLang = localStorage.getItem('user-lang') || 'en';
+    const bookingLang = (activeLang === 'zh-hk') ? 'zh-tw' : 'en-gb';
+
+    const params = new URLSearchParams({
+      ss: destination,
+      checkin: checkin,
+      checkout: checkout,
+      group_adults: adults || '3',
+      no_rooms: '1',
+      group_children: '0',
+      selected_currency: activeCurr,
+      lang: bookingLang
+    });
+
+    return `https://www.booking.com/searchresults.html?${params.toString()}`;
+  }
+
+  // Quick Leg Pills
+  legPills.forEach(pill => {
+    pill.addEventListener('click', (e) => {
+      e.preventDefault();
+      legPills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+
+      if (destInput) destInput.value = pill.dataset.dest || '';
+      if (checkinInput) checkinInput.value = pill.dataset.checkin || '';
+      if (checkoutInput) checkoutInput.value = pill.dataset.checkout || '';
+    });
+  });
+
+  // Search Form Submit
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const dest = destInput ? destInput.value.trim() : 'Tokyo, Japan';
+      const checkin = checkinInput ? checkinInput.value : '2026-12-20';
+      const checkout = checkoutInput ? checkoutInput.value : '2026-12-24';
+      const adults = adultsSelect ? adultsSelect.value : '3';
+
+      const url = buildBookingUrl(dest, checkin, checkout, adults);
+      window.open(url, '_blank', 'noopener,noreferrer');
+    });
+  }
+
+  // Curated Leg Stay Buttons
+  legBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const dest = btn.dataset.dest || 'Tokyo, Japan';
+      const checkin = btn.dataset.checkin || '2026-12-20';
+      const checkout = btn.dataset.checkout || '2026-12-24';
+      const adults = adultsSelect ? adultsSelect.value : '3';
+
+      const url = buildBookingUrl(dest, checkin, checkout, adults);
+      window.open(url, '_blank', 'noopener,noreferrer');
+    });
+  });
+}
+

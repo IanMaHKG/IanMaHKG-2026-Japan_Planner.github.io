@@ -85,9 +85,13 @@
           <span class="lang-en">Itinerary</span>
           <span class="lang-zh">行程</span>
         </a>
-        <a href="#packing">
-          <span class="lang-en">Packing</span>
-          <span class="lang-zh">行李</span>
+        <a href="#budget">
+          <span class="lang-en">Budget</span>
+          <span class="lang-zh">預算</span>
+        </a>
+        <a href="#hotels">
+          <span class="lang-en">Hotels</span>
+          <span class="lang-zh">酒店</span>
         </a>
         
         <!-- Language Switcher in Nav -->
@@ -1726,6 +1730,271 @@
     </div>
   </section>
 
+  <!-- ═══════════════════ HOTEL SEARCH (BOOKING.COM) ═══════════════════ -->
+  <section id="hotels" class="section section-dark">
+    <div class="container">
+      <h2 class="section-title">
+        <span class="lang-en">Hotel & Ryokan Search</span>
+        <span class="lang-zh">酒店與溫泉旅館搜尋</span>
+      </h2>
+      <p class="section-subtitle">
+        <span class="lang-en">Find and book accommodations directly on Booking.com for all 12 days across Tokyo, Mt Fuji, Hakone, Kyoto & Osaka.</span>
+        <span class="lang-zh">透過 Booking.com 即時搜尋及預訂本次 12 天旅程各站之優質市區酒店及一泊二食溫泉旅館。</span>
+      </p>
+
+      <!-- Hotel Search Widget Box -->
+      <div class="hotel-search-card">
+        <div class="hotel-search-header">
+          <div class="hotel-search-brand">
+            <span class="booking-logo-icon">🛏️</span>
+            <div>
+              <h3>
+                <span class="lang-en">Booking.com Japan Hotel Finder</span>
+                <span class="lang-zh">Booking.com 日本酒店與溫泉旅館搜尋器</span>
+              </h3>
+              <p>
+                <span class="lang-en">Configured for 3 Adults (Family of 3) • Real-time rates</span>
+                <span class="lang-zh">已預設 3 位成人（三人家庭）• 即時即期房價</span>
+              </p>
+            </div>
+          </div>
+          <div class="hotel-quick-legs">
+            <span class="quick-legs-label">
+              <span class="lang-en">Quick Leg:</span>
+              <span class="lang-zh">快速選擇行程：</span>
+            </span>
+            <div class="quick-leg-pills">
+              <button class="leg-pill active" data-dest="Tokyo, Japan" data-checkin="2026-12-20" data-checkout="2026-12-24">
+                <span class="lang-en">Tokyo (Dec 20–24)</span>
+                <span class="lang-zh">東京 (12/20–24)</span>
+              </button>
+              <button class="leg-pill" data-dest="Fujikawaguchiko, Yamanashi, Japan" data-checkin="2026-12-24" data-checkout="2026-12-25">
+                <span class="lang-en">Mt Fuji / Kawaguchiko (Dec 24–25)</span>
+                <span class="lang-zh">河口湖富士山 (12/24–25)</span>
+              </button>
+              <button class="leg-pill" data-dest="Hakone, Kanagawa, Japan" data-checkin="2026-12-25" data-checkout="2026-12-27">
+                <span class="lang-en">Hakone (Dec 25–27)</span>
+                <span class="lang-zh">箱根 (12/25–27)</span>
+              </button>
+              <button class="leg-pill" data-dest="Kyoto, Japan" data-checkin="2026-12-27" data-checkout="2026-12-29">
+                <span class="lang-en">Kyoto (Dec 27–29)</span>
+                <span class="lang-zh">京都 (12/27–29)</span>
+              </button>
+              <button class="leg-pill" data-dest="Osaka, Japan" data-checkin="2026-12-29" data-checkout="2026-12-31">
+                <span class="lang-en">Osaka (Dec 29–31)</span>
+                <span class="lang-zh">大阪 (12/29–31)</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <form id="hotel-search-form" class="hotel-search-form" target="_blank">
+          <div class="form-row">
+            <div class="form-group form-dest">
+              <label for="hotel-destination">
+                <span class="lang-en">Destination / City</span>
+                <span class="lang-zh">目的地 / 城市</span>
+              </label>
+              <div class="input-with-icon">
+                <span class="input-icon">📍</span>
+                <input type="text" id="hotel-destination" name="ss" value="Tokyo, Japan" placeholder="City or region in Japan" required />
+              </div>
+            </div>
+
+            <div class="form-group form-date">
+              <label for="hotel-checkin">
+                <span class="lang-en">Check-in</span>
+                <span class="lang-zh">入住日期</span>
+              </label>
+              <div class="input-with-icon">
+                <span class="input-icon">📅</span>
+                <input type="date" id="hotel-checkin" name="checkin" value="2026-12-20" required />
+              </div>
+            </div>
+
+            <div class="form-group form-date">
+              <label for="hotel-checkout">
+                <span class="lang-en">Check-out</span>
+                <span class="lang-zh">退房日期</span>
+              </label>
+              <div class="input-with-icon">
+                <span class="input-icon">📅</span>
+                <input type="date" id="hotel-checkout" name="checkout" value="2026-12-24" required />
+              </div>
+            </div>
+
+            <div class="form-group form-guests">
+              <label for="hotel-adults">
+                <span class="lang-en">Guests</span>
+                <span class="lang-zh">人數與房間</span>
+              </label>
+              <div class="input-with-icon">
+                <span class="input-icon">👥</span>
+                <select id="hotel-adults" name="group_adults">
+                  <option value="3" selected>3 Adults (三人家庭)</option>
+                  <option value="2">2 Adults (兩位成人)</option>
+                  <option value="1">1 Adult (一位成人)</option>
+                  <option value="4">4 Adults (四位成人)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group form-submit">
+              <label>&nbsp;</label>
+              <button type="submit" class="hotel-search-btn" id="hotel-search-btn">
+                <span class="lang-en">Search Booking.com ↗</span>
+                <span class="lang-zh">在 Booking.com 搜尋 ↗</span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- Curated Itinerary Stay Recommendations Grid -->
+      <div class="itinerary-hotels-grid">
+        <!-- Leg 1: Tokyo -->
+        <div class="hotel-leg-card">
+          <div class="hotel-leg-badge">
+            <span class="lang-en">Leg 1 • 4 Nights</span>
+            <span class="lang-zh">第 1 站 • 4 晚</span>
+          </div>
+          <div class="hotel-leg-body">
+            <h4>
+              <span class="lang-en">Tokyo City Hotels (東京)</span>
+              <span class="lang-zh">東京市區精選酒店</span>
+            </h4>
+            <p class="hotel-leg-dates">🗓️ Dec 20 – Dec 24, 2026</p>
+            <p class="hotel-leg-desc">
+              <span class="lang-en">Convenient base near Asakusa, Ginza, or Shibuya. Look for triple rooms or twin rooms with extra bed near major metro hubs.</span>
+              <span class="lang-zh">推薦入住淺草、銀座或澀谷一帶，交通極為方便，便於三人同住及攜帶行李進出地鐵。</span>
+            </p>
+            <div class="hotel-leg-tags">
+              <span>🚇 Near Metro</span>
+              <span>🛍️ Shopping</span>
+              <span>🛏️ Triple Room</span>
+            </div>
+            <a href="https://www.booking.com/searchresults.html?ss=Tokyo%2C+Japan&checkin=2026-12-20&checkout=2026-12-24&group_adults=3&no_rooms=1" target="_blank" rel="noopener" class="hotel-leg-btn" data-dest="Tokyo, Japan" data-checkin="2026-12-20" data-checkout="2026-12-24">
+              <span class="lang-en">Search Tokyo Hotels ↗</span>
+              <span class="lang-zh">搜尋東京酒店 ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Leg 2: Mt Fuji Kawaguchiko -->
+        <div class="hotel-leg-card highlight-card">
+          <div class="hotel-leg-badge fuji-badge">
+            <span class="lang-en">Leg 2 • 1 Night (Ryokan)</span>
+            <span class="lang-zh">第 2 站 • 1 晚 (溫泉旅館)</span>
+          </div>
+          <div class="hotel-leg-body">
+            <h4>
+              <span class="lang-en">Lake Kawaguchiko Onsen Ryokan (河口湖)</span>
+              <span class="lang-zh">河口湖富士山景溫泉旅館</span>
+            </h4>
+            <p class="hotel-leg-dates">🗓️ Dec 24 – Dec 25, 2026 (Christmas Eve)</p>
+            <p class="hotel-leg-desc">
+              <span class="lang-en">Traditional Japanese ryokan with private open-air hot spring bath (rotenburo), Mt Fuji views, and multi-course Kaiseki dinner.</span>
+              <span class="lang-zh">平安夜入住正宗日式溫泉旅館，享有一泊二食會席料理及房間/露天風呂眺望富士山絕景。</span>
+            </p>
+            <div class="hotel-leg-tags">
+              <span>🗻 Mt Fuji View</span>
+              <span>♨️ Hot Spring</span>
+              <span>🍱 Kaiseki Dinner</span>
+            </div>
+            <a href="https://www.booking.com/searchresults.html?ss=Fujikawaguchiko%2C+Yamanashi%2C+Japan&checkin=2026-12-24&checkout=2026-12-25&group_adults=3&no_rooms=1" target="_blank" rel="noopener" class="hotel-leg-btn" data-dest="Fujikawaguchiko, Yamanashi, Japan" data-checkin="2026-12-24" data-checkout="2026-12-25">
+              <span class="lang-en">Search Fuji Ryokan ↗</span>
+              <span class="lang-zh">搜尋河口湖溫泉 ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Leg 3: Hakone -->
+        <div class="hotel-leg-card">
+          <div class="hotel-leg-badge">
+            <span class="lang-en">Leg 3 • 2 Nights (Onsen Resort)</span>
+            <span class="lang-zh">第 3 站 • 2 晚 (箱根溫泉)</span>
+          </div>
+          <div class="hotel-leg-body">
+            <h4>
+              <span class="lang-en">Hakone Hot Spring Resort (箱根)</span>
+              <span class="lang-zh">箱根溫泉度假酒店 / 旅館</span>
+            </h4>
+            <p class="hotel-leg-dates">🗓️ Dec 25 – Dec 27, 2026 (Christmas Stay)</p>
+            <p class="hotel-leg-desc">
+              <span class="lang-en">Relaxing stay in Hakone Yumoto or Gora. Close to Lake Ashi and Owakudani, perfect for therapeutic mineral onsen baths.</span>
+              <span class="lang-zh">連續兩晚入住箱根湯本或強羅溫泉區，鄰近蘆之湖與大涌谷，享受優質天然礦物溫泉泉質。</span>
+            </p>
+            <div class="hotel-leg-tags">
+              <span>♨️ Natural Onsen</span>
+              <span>🌲 Forest View</span>
+              <span>🚗 Free Parking</span>
+            </div>
+            <a href="https://www.booking.com/searchresults.html?ss=Hakone%2C+Kanagawa%2C+Japan&checkin=2026-12-25&checkout=2026-12-27&group_adults=3&no_rooms=1" target="_blank" rel="noopener" class="hotel-leg-btn" data-dest="Hakone, Kanagawa, Japan" data-checkin="2026-12-25" data-checkout="2026-12-27">
+              <span class="lang-en">Search Hakone Stays ↗</span>
+              <span class="lang-zh">搜尋箱根住宿 ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Leg 4: Kyoto -->
+        <div class="hotel-leg-card">
+          <div class="hotel-leg-badge">
+            <span class="lang-en">Leg 4 • 2 Nights</span>
+            <span class="lang-zh">第 4 站 • 2 晚</span>
+          </div>
+          <div class="hotel-leg-body">
+            <h4>
+              <span class="lang-en">Kyoto Historic Hotels & Machiya (京都)</span>
+              <span class="lang-zh">京都古風酒店與傳統町屋</span>
+            </h4>
+            <p class="hotel-leg-dates">🗓️ Dec 27 – Dec 29, 2026</p>
+            <p class="hotel-leg-desc">
+              <span class="lang-en">Stay near Gion, Shijo-Kawaramachi, or Kyoto Station for easy access to Fushimi Inari and Arashiyama.</span>
+              <span class="lang-zh">建議入住祇園、四條河原町或京都車站周邊，便於前往伏見稻荷大社及嵐山漫步。</span>
+            </p>
+            <div class="hotel-leg-tags">
+              <span>⛩️ Heritage Area</span>
+              <span>🍵 Cultural Vibe</span>
+              <span>🚶 Walkable</span>
+            </div>
+            <a href="https://www.booking.com/searchresults.html?ss=Kyoto%2C+Japan&checkin=2026-12-27&checkout=2026-12-29&group_adults=3&no_rooms=1" target="_blank" rel="noopener" class="hotel-leg-btn" data-dest="Kyoto, Japan" data-checkin="2026-12-27" data-checkout="2026-12-29">
+              <span class="lang-en">Search Kyoto Hotels ↗</span>
+              <span class="lang-zh">搜尋京都酒店 ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Leg 5: Osaka -->
+        <div class="hotel-leg-card">
+          <div class="hotel-leg-badge">
+            <span class="lang-en">Leg 5 • 2 Nights (New Year's Eve)</span>
+            <span class="lang-zh">第 5 站 • 2 晚 (跨年夜)</span>
+          </div>
+          <div class="hotel-leg-body">
+            <h4>
+              <span class="lang-en">Osaka City & Dotonbori Hotels (大阪)</span>
+              <span class="lang-zh">大阪心齋橋 / 難波市區酒店</span>
+            </h4>
+            <p class="hotel-leg-dates">🗓️ Dec 29 – Dec 31, 2026</p>
+            <p class="hotel-leg-desc">
+              <span class="lang-en">Stay near Namba or Umeda to celebrate New Year's Eve, enjoy vibrant street food, and access Kansai Airport (KIX) effortlessly.</span>
+              <span class="lang-zh">入住難波或梅田商圈，近距離體驗道頓堀跨年熱鬧氛圍，並可直達關西國際機場 (KIX)。</span>
+            </p>
+            <div class="hotel-leg-tags">
+              <span>🎆 New Year's Eve</span>
+              <span>🍜 Food Capital</span>
+              <span>✈️ Direct Airport Link</span>
+            </div>
+            <a href="https://www.booking.com/searchresults.html?ss=Osaka%2C+Japan&checkin=2026-12-29&checkout=2026-12-31&group_adults=3&no_rooms=1" target="_blank" rel="noopener" class="hotel-leg-btn" data-dest="Osaka, Japan" data-checkin="2026-12-29" data-checkout="2026-12-31">
+              <span class="lang-en">Search Osaka Hotels ↗</span>
+              <span class="lang-zh">搜尋大阪酒店 ↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ═══════════════════ FOOTER ═══════════════════ -->
   <footer id="footer" class="footer">
     <div class="container">
@@ -1758,6 +2027,14 @@
             <span class="lang-en">Packing</span>
             <span class="lang-zh">行李</span>
           </a>
+          <a href="#budget">
+            <span class="lang-en">Budget</span>
+            <span class="lang-zh">預算</span>
+          </a>
+          <a href="#hotels">
+            <span class="lang-en">Hotels</span>
+            <span class="lang-zh">酒店</span>
+          </a>
         </div>
       </div>
       <div class="footer-bottom">
@@ -1768,6 +2045,7 @@
       </div>
     </div>
   </footer>
+
 
   <script src="script.js"></script>
 </body>

@@ -1,3 +1,7 @@
+<!-- favicon.svg — Browser tab icon for Japan Winter Journey 2026
+     Uses the 🗾 (map of Japan) emoji at 90px on a transparent 100×100 viewport.
+     Works in all modern browsers as an inline SVG favicon. -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <title>Japan Winter Journey 2026</title>
   <text y=".9em" font-size="90">🗾</text>
 </svg>

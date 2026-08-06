@@ -6,12 +6,29 @@
  * STRUCTURE OF window.SITE_DATA:
  *
  *   overview
- *     .cards[]          4 summary cards (route, pace, transport, weather).
+ *     .cards[]          3 summary cards (pace, transport, weather).
  *                       Each: { id, icon, title:{en,zh}, desc:{en,zh} }
- *     .routeStops[]     7 journey stops used by BOTH the route visual strip (render.js)
- *                       and the Leaflet map markers (map.js).
- *                       Each: { dotClass, name:{en,zh}, days:{en,zh}, desc:{en,zh},
- *                               lat, lng, color, markerClass, label }
+ *
+ *     .routeStops[]     7 journey stops used by BOTH:
+ *                         (a) the JR Station Sign route board visual in render.js
+ *                         (b) the Leaflet interactive map markers in map.js
+ *
+ *                       Each stop must have ALL of these fields:
+ *                       {
+ *                         code:       string  — 2-digit station order ("01"–"07")
+ *                         label:      string  — 3-letter code shown on map marker & station badge ("TYO")
+ *                         kanji:      string  — Station name in Japanese Kanji ("東京")
+ *                         hiragana:   string  — Hiragana reading / furigana ("とうきょう")
+ *                         romaji:     string  — Romanised name shown below the track line ("Tokyo")
+ *                         dotClass:   string  — CSS class for stop-dot colour variant ("tokyo")
+ *                         name:       { en, zh }  — Localised full display name
+ *                         days:       { en, zh }  — Travel days label ("Days 1–4" / "第 1–4 天")
+ *                         desc:       { en, zh }  — Short description for Leaflet popup
+ *                         lat:        number  — Latitude (WGS84)
+ *                         lng:        number  — Longitude (WGS84)
+ *                         color:      string  — Hex colour used for station code badge border and dot
+ *                         markerClass: string — CSS class applied to the Leaflet DivIcon
+ *                       }
  *
  *   tips[]              4 practical tip cards (transport, bookings, etiquette, winter driving).
  *                       Each: { id, icon, title:{en,zh}, items:[{en,zh}] }
@@ -32,9 +49,10 @@
  *                       Each: { legNum, nights:{en,zh}, badgeClass, highlight, title:{en,zh},
  *                               dates, desc:{en,zh}, tags[], btnText:{en,zh}, dest, checkin, checkout }
  *
- * TO ADD A NEW TIP: push a new object into the tips[] array following the existing pattern.
- * TO ADD A BUDGET ROW: push into budget.items[] and update budget.total manually.
- * TO CHANGE MAP STOPS: edit routeStops[] — changes apply to both the visual strip and the map.
+ * TO ADD A NEW TIP:     Push a new object into the tips[] array following the existing pattern.
+ * TO ADD A BUDGET ROW:  Push into budget.items[] and update budget.total manually.
+ * TO CHANGE MAP STOPS:  Edit routeStops[] — changes apply to BOTH the JR route board AND the map.
+ * TO ADD AN OVERVIEW CARD: Push into overview.cards[]. style.css uses repeat(3, 1fr) grid.
  */
 
 window.SITE_DATA = {

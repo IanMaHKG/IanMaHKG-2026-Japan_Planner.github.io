@@ -1,6 +1,71 @@
 /* ═══════════════════════════════════════════════════
    JAPAN WINTER JOURNEY 2026 — Design System
    British Airways × Japan Airlines — ba.com inspired
+   ═══════════════════════════════════════════════════
+
+   FILE STRUCTURE (Ctrl+F the section headers below to jump):
+
+   1.  :root — Design Tokens
+         Colour palette, shadows, radii, typography, motion vars.
+         BA Midnight Navy + Lebanese Blue + Funky Red + First Gold.
+
+   2.  Base / Reset
+         box-sizing, html, body, a, img.
+
+   3.  Bilingual Language Toggle
+         body.lang-en .lang-zh { display:none } and vice versa.
+         body.curr-hkd / body.curr-gbp controls currency spans.
+
+   4.  Layout Utilities
+         .container (max-width + horizontal padding),
+         .section (vertical rhythm padding).
+
+   5.  Navigation Bar
+         .nav-bar, .nav-inner, .nav-logo, .nav-links,
+         .nav-actions, .nav-toggle (hamburger),
+         .lang-switcher (always-visible top-bar language pill).
+
+   6.  Hero Section
+         Full-viewport gradient header, particles, scroll indicator.
+
+   7.  Section Titles & Subtitles
+
+   8.  Overview & JR Station Sign Route Board
+         .overview-grid (3-col cards),
+         .jr-board-container, .jr-board-header, .route-track-wrap,
+         .route-line, .route-stops, .jr-station-node (3-row grid),
+         .jr-station-top/dot-wrapper/bottom, .stop-dot variants.
+         ALIGNMENT NOTE: .route-line is at top:90px = Row1(78px) + Row2/2(12px).
+
+   9.  Interactive Map (Leaflet)
+         .map-container, #route-map, .custom-marker variants,
+         .map-legend, popup styles.
+
+   10. Practical Tips
+
+   11. Itinerary Timeline
+         .timeline, .day-card (accordion), .day-header, .day-body,
+         .timeline-block, .time-badge, .meal-rec, .day-tip,
+         .day-tab filter buttons.
+
+   12. Packing Checklist
+
+   13. Budget Table
+
+   14. Hotels & Accommodation
+         .hotel-search-card, .leg-pill, .hotel-leg-card.
+
+   15. Footer
+
+   16. Scroll Reveal Animations (IntersectionObserver)
+
+   17. Switchers & Sliders
+         .lang-switcher, .currency-switcher, .switcher-slider.
+
+   18. Responsive Breakpoints
+         @media (max-width: 768px) — tablet/mobile
+         @media (max-width: 480px) — small phones
+         @media (min-width: 1200px/1600px) — wide screens
    ═══════════════════════════════════════════════════ */
 
 /* ── Reset & Base ── */

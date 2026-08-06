@@ -1,3 +1,45 @@
+<!--
+  ================================================================
+  index.html — Japan Winter Journey 2026 | Semantic Shell
+  ================================================================
+
+  ARCHITECTURE:
+    This file is a "semantic shell" — it contains almost no
+    hardcoded content. All text, cards, and sections are injected
+    at runtime by the JS modules listed below.
+
+  BILINGUAL PATTERN:
+    Two <span> children wrap every piece of content:
+      <span class="lang-en">English text</span>
+      <span class="lang-zh">繁體中文</span>
+    The active language is set as a body class (body.lang-en or
+    body.lang-zh-hk). CSS in style.css uses display:none to hide
+    the inactive language. Switching is handled by ui.js.
+
+  SCRIPT LOAD ORDER (bottom of <body>, in dependency order):
+    1. site-data.js       → window.SITE_DATA  (all section data)
+    2. itinerary-data.js  → window.ITINERARY_DATA  (12-day schedule)
+    3. render.js          → DOM injection functions
+    4. currency.js        → JPY conversion functions
+    5. ui.js              → language/nav/scroll/filter/hotel functions
+    6. map.js             → Leaflet route map function
+    7. script.js          → DOMContentLoaded bootstrap (calls all of the above)
+
+  SECTIONS MAP  (HTML id → JS function that populates it):
+    #hero             — Static HTML (particles injected by ui.js initParticles)
+    #main-nav         — Static HTML (wired by ui.js initNav)
+    #overview         → render.js renderOverview()
+      #overview-grid  → 3 summary cards from SITE_DATA.overview.cards
+      #route-stops    → JR Station Sign route board from SITE_DATA.overview.routeStops
+    #map-section      → map.js initRouteMap() (Leaflet, reads SITE_DATA.overview.routeStops)
+    #tips             → render.js renderTips()
+    #itinerary        → render.js renderItinerary() + ui.js initFilters()
+    #packing          → render.js renderPacking()
+    #budget           → render.js renderBudget() + currency.js updateConvertedBudgets()
+    #hotels           → render.js renderHotels() + ui.js initHotelSearch()
+    #footer           — Static HTML
+  ================================================================
+-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -490,15 +532,23 @@
   </footer>
 
 
-  <!-- Data -->
+  <!-- ─── Script Load Order ────────────────────────────────────────────
+       Data layer must load before render.js; render.js before script.js.
+       All scripts are plain globals — no ES modules, no bundler needed.
+       This means GitHub Pages can serve them directly with zero build step.
+  ──────────────────────────────────────────────────────────────────── -->
+
+  <!-- Data layer: populates window.SITE_DATA and window.ITINERARY_DATA -->
   <script src="site-data.js"></script>
   <script src="itinerary-data.js"></script>
-  <!-- Modules -->
+
+  <!-- Feature modules: define init functions (called by script.js) -->
   <script src="render.js"></script>
   <script src="currency.js"></script>
   <script src="ui.js"></script>
   <script src="map.js"></script>
-  <!-- Entry point -->
+
+  <!-- Entry point: DOMContentLoaded bootstrap — calls all init functions -->
   <script src="script.js"></script>
 </body>
 

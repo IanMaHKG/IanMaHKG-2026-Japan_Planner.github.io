@@ -1,3 +1,11 @@
+# _config.yml — Jekyll / GitHub Pages site metadata
+#
+# GitHub Pages processes this file to set the site title and description.
+# The `theme` key is required to satisfy the Jekyll build pipeline, but has
+# no visible effect because the site uses a custom index.html / style.css
+# rather than a Jekyll theme template. It can be removed if GitHub Pages
+# is switched to "Deploy from a branch" with no Jekyll processing.
+#
 title: Japan Winter Journey 2026
 description: >
   A detailed, interactive day-by-day travel itinerary for a family trip

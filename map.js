@@ -17,7 +17,7 @@
  *        • Tokyo → Kawaguchiko → Hakone → Nagoya   (navy dashed  = self-drive)
  *        • Nagoya → Kyoto                           (red solid    = Shinkansen)
  *        • Kyoto → Nara → Osaka                    (gold solid   = local train)
- *   4. Adds a custom DivIcon marker for each stop with a 3-letter code label.
+ *   4. Adds a custom DivIcon marker for each stop using stop.label as the badge text.
  *   5. Binds a popup to each marker with the stop name, description, and days — text
  *      is set in the active language and re-bound on 'langchange' CustomEvent (fired by ui.js).
  *   6. Opens Tokyo's popup after 1 second (default welcome state).
@@ -25,12 +25,20 @@
  *   8. Enables scroll-wheel zoom after the first user click (prevents accidental page hijack).
  *   9. Calls map.invalidateSize() on window resize to prevent blank tile areas.
  *
- * DATA CONTRACT (each entry in SITE_DATA.overview.routeStops must have):
- *   { dotClass, name:{en,zh}, days:{en,zh}, desc:{en,zh},
- *     lat, lng, color, markerClass, label }
+ * DATA CONTRACT — each entry in SITE_DATA.overview.routeStops must have:
+ *   {
+ *     label:      string  — 3-letter code displayed on the map DivIcon (e.g. "TYO")
+ *     name:       { en, zh }  — Station display name for popup heading
+ *     desc:       { en, zh }  — Short activity summary for popup body
+ *     days:       { en, zh }  — Day label for popup footer (e.g. "Days 1–4")
+ *     lat:        number  — Latitude  (WGS84)
+ *     lng:        number  — Longitude (WGS84)
+ *     markerClass: string — CSS class applied to the Leaflet DivIcon element
+ *     color:      string  — Reserved; not used by map.js (used by render.js for the route board)
+ *   }
  *
- * NOTE: The `color` field on each stop is reserved for future use (e.g. coloured popups).
- * Polyline colours are currently hardcoded to match the BA palette.
+ * NOTE: The `code`, `kanji`, `hiragana`, and `romaji` fields on each stop are used exclusively
+ * by render.js (JR Station Sign route board) and are ignored by this module.
  */
 
 

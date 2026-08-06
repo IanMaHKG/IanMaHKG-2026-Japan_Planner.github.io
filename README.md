@@ -15,16 +15,17 @@
 ## Features
 
 - ✈️ **BA-inspired design** — Midnight Navy, BA Red & Gold palette with glassmorphism cards
+- 🚉 **JR Station Sign Route Board** — Authentic Japanese station sign (駅名標) timeline with Kanji, Furigana, Romaji, Station Codes & day badges
 - 📅 **12 expandable day cards** with morning / afternoon / evening schedules and meal picks
 - 🗺️ **Interactive Leaflet map** — colour-coded route with driving, Shinkansen & rail segments
-- 🎌 **Bilingual** — full English & Traditional Chinese (繁體中文) toggle with smooth slide animation
+- 🎌 **Senior-friendly Bilingual Switcher** — Always-visible English & Traditional Chinese (`EN | 繁中`) toggle in top navigation bar with high-contrast tactile active pills
 - 💴 **Live currency conversion** — JPY → HKD or GBP via open.er-api.com
 - 🏨 **Booking.com hotel search** — pre-filled for each leg (destination, dates, 3 adults)
 - 🏷️ **Region filter tabs** — Tokyo / Mt Fuji Drive / Kansai
 - 📋 **Practical tips** — Transport passes, advance bookings, etiquette, winter driving
 - 🧳 **Packing checklist** — winter-specific, self-drive aware
 - 💰 **Budget estimate table** — per-category with live converted values
-- 📱 **Fully responsive** — mobile-first layout
+- 📱 **Fully responsive** — pixel-aligned desktop and mobile layouts
 
 ---
 

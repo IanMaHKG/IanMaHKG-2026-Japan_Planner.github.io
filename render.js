@@ -61,12 +61,32 @@ function renderOverview() {
   const stopsEl = document.getElementById('route-stops');
   if (stopsEl && data.routeStops) {
     stopsEl.innerHTML = data.routeStops.map(stop => `
-      <div class="route-stop">
-        <div class="stop-dot ${stop.dotClass}"></div>
-        <span class="stop-label">
-          <span class="lang-en">${stop.name.en}<br><small>${stop.days.en}</small></span>
-          <span class="lang-zh">${stop.name.zh}<br><small>${stop.days.zh}</small></span>
-        </span>
+      <div class="route-stop jr-station-node" data-stop="${stop.label}">
+        <!-- Above the line: Station Code + Kanji + Hiragana -->
+        <div class="jr-station-top">
+          <div class="jr-station-code" style="--code-color: ${stop.color};">
+            <span class="jr-code-prefix">${stop.label}</span>
+            <span class="jr-code-num">${stop.code}</span>
+          </div>
+          <div class="jr-station-kanji">${stop.kanji}</div>
+          <div class="jr-station-kana">${stop.hiragana}</div>
+        </div>
+
+        <!-- Middle: Station Dot on the track -->
+        <div class="jr-station-dot-wrapper">
+          <div class="stop-dot ${stop.dotClass}" style="--dot-color: ${stop.color};">
+            <span class="dot-inner-core"></span>
+          </div>
+        </div>
+
+        <!-- Below the line: Romaji + Days Tag -->
+        <div class="jr-station-bottom">
+          <div class="jr-station-romaji">${stop.romaji}</div>
+          <div class="jr-station-days">
+            <span class="lang-en">${stop.days.en}</span>
+            <span class="lang-zh">${stop.days.zh}</span>
+          </div>
+        </div>
       </div>
     `).join('');
   }

@@ -101,17 +101,18 @@
           <span class="lang-en">Hotels</span>
           <span class="lang-zh">酒店</span>
         </a>
-
-        <!-- Language Switcher in Nav -->
-        <div class="lang-switcher">
-          <div class="switcher-slider"></div>
-          <button class="lang-btn active" data-lang="en">EN</button>
-          <button class="lang-btn" data-lang="zh-hk">繁中</button>
-        </div>
       </div>
-      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
-        <span></span><span></span><span></span>
-      </button>
+      <div class="nav-actions">
+        <!-- Always-Visible Language Switcher -->
+        <div class="lang-switcher" aria-label="Language selector">
+          <div class="switcher-slider"></div>
+          <button class="lang-btn active" data-lang="en" aria-label="English">EN</button>
+          <button class="lang-btn" data-lang="zh-hk" aria-label="繁體中文">繁中</button>
+        </div>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
   </nav>
 
@@ -130,10 +131,25 @@
 
       <div class="overview-grid" id="overview-grid"></div>
 
-      <!-- Route Map Visual -->
-      <div class="route-visual">
-        <div class="route-line"></div>
-        <div class="route-stops" id="route-stops"></div>
+      <!-- JR Station Sign Style Journey Route Board -->
+      <div class="route-visual jr-board-container">
+        <div class="jr-board-header">
+          <div class="jr-line-branding">
+            <span class="jr-badge">JR</span>
+            <span class="jr-line-title">
+              <span class="lang-en">Tokaido & Kansai Main Line · Winter 2026</span>
+              <span class="lang-zh">東海道・關西橫斷本線 · 2026 冬</span>
+            </span>
+          </div>
+          <div class="jr-direction">
+            <span class="lang-en">Bound for Osaka 方面 <span class="jr-arrow">▶</span></span>
+            <span class="lang-zh">往 大阪 方面 <span class="jr-arrow">▶</span></span>
+          </div>
+        </div>
+        <div class="route-track-wrap">
+          <div class="route-line"></div>
+          <div class="route-stops" id="route-stops"></div>
+        </div>
       </div>
     </div>
   </section>

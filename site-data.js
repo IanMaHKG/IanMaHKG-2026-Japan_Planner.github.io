@@ -42,15 +42,6 @@ window.SITE_DATA = {
   overview: {
     cards: [
       {
-        id: "overview-route",
-        icon: "🗺️",
-        title: { en: "Route", zh: "路線" },
-        desc: {
-          en: "Tokyo (東京) → Kawaguchiko (河口湖) → Hakone (箱根) → Nagoya (名古屋) → Kyoto (京都) → Nara (奈良) → Osaka (大阪)",
-          zh: "東京 → 河口湖 → 箱根 → 名古屋 → 京都 → 奈良 → 大阪"
-        }
-      },
-      {
         id: "overview-pace",
         icon: "🧘",
         title: { en: "Pace", zh: "步調節奏" },
@@ -80,67 +71,102 @@ window.SITE_DATA = {
     ],
     routeStops: [
       {
+        code: "01",
+        label: "TYO",
+        kanji: "東京",
+        hiragana: "とうきょう",
+        romaji: "Tokyo",
         dotClass: "tokyo",
         name:  { en: "Tokyo (東京)",       zh: "東京"   },
         days:  { en: "Days 1–4",           zh: "第 1–4 天" },
         desc:  { en: "Asakusa, Shibuya, teamLab, Akihabara, winter illuminations",
                  zh: "參訪淺草寺、澀谷、teamLab、秋葉原，賞冬季燈飾" },
         lat: 35.6762, lng: 139.6503,
-        color: "#D4163C", markerClass: "marker-tokyo", label: "TYO"
+        color: "#D4163C", markerClass: "marker-tokyo"
       },
       {
+        code: "02",
+        label: "FUJ",
+        kanji: "河口湖",
+        hiragana: "かわぐちこ",
+        romaji: "Kawaguchiko",
         dotClass: "fuji",
         name:  { en: "Kawaguchiko (河口湖)", zh: "河口湖" },
         days:  { en: "Day 5",               zh: "第 5 天" },
         desc:  { en: "Mt Fuji views, Chureito Pagoda, ryokan & onsen",
                  zh: "賞富士山美景，登新倉山淺間公園忠靈塔，住溫泉旅館" },
         lat: 35.5104, lng: 138.7564,
-        color: "#075AAA", markerClass: "marker-fuji", label: "FUJ"
+        color: "#075AAA", markerClass: "marker-fuji"
       },
       {
+        code: "03",
+        label: "HKN",
+        kanji: "箱根",
+        hiragana: "はこね",
+        romaji: "Hakone",
         dotClass: "hakone",
         name:  { en: "Hakone (箱根)",       zh: "箱根"   },
         days:  { en: "Days 6–7",            zh: "第 6–7 天" },
         desc:  { en: "Owakudani, Lake Ashi, pirate ship, onsen ryokan",
                  zh: "走訪大涌谷地熱景區、搭蘆之湖海盜船、享頂級溫泉" },
         lat: 35.2329, lng: 139.1069,
-        color: "#C9A96E", markerClass: "marker-hakone", label: "HKN"
+        color: "#C9A96E", markerClass: "marker-hakone"
       },
       {
+        code: "04",
+        label: "NGO",
+        kanji: "名古屋",
+        hiragana: "なごや",
+        romaji: "Nagoya",
         dotClass: "nagoya",
         name:  { en: "Nagoya (名古屋)",     zh: "名古屋" },
         days:  { en: "Day 7",              zh: "第 7 天" },
         desc:  { en: "Miso katsu dinner, drop off rental car",
                  zh: "享用味噌炸豬排晚餐，名古屋還車，轉搭新幹線" },
         lat: 35.1815, lng: 136.9066,
-        color: "#2AAFAF", markerClass: "marker-nagoya", label: "NGO"
+        color: "#2AAFAF", markerClass: "marker-nagoya"
       },
       {
+        code: "05",
+        label: "KYO",
+        kanji: "京都",
+        hiragana: "きょうと",
+        romaji: "Kyoto",
         dotClass: "kyoto",
         name:  { en: "Kyoto (京都)",        zh: "京都"   },
         days:  { en: "Days 7–9",            zh: "第 7–9 天" },
         desc:  { en: "Fushimi Inari, Kinkaku-ji, Arashiyama, tea ceremony",
                  zh: "千本鳥居、金閣寺、嵐山竹林、體驗京都傳統茶道" },
         lat: 35.0116, lng: 135.7681,
-        color: "#BA0C2F", markerClass: "marker-kyoto", label: "KYO"
+        color: "#BA0C2F", markerClass: "marker-kyoto"
       },
       {
+        code: "06",
+        label: "NAR",
+        kanji: "奈良",
+        hiragana: "なら",
+        romaji: "Nara",
         dotClass: "nara",
         name:  { en: "Nara (奈良)",         zh: "奈良"   },
         days:  { en: "Day 10",             zh: "第 10 天" },
         desc:  { en: "Deer Park, Todai-ji, Kasuga Taisha",
                  zh: "造訪奈良公園親近小鹿、東大寺大佛殿、春日大社" },
         lat: 34.6851, lng: 135.8048,
-        color: "#4A9FD9", markerClass: "marker-nara", label: "NAR"
+        color: "#4A9FD9", markerClass: "marker-nara"
       },
       {
+        code: "07",
+        label: "OSA",
+        kanji: "大阪",
+        hiragana: "おおさか",
+        romaji: "Osaka",
         dotClass: "osaka",
         name:  { en: "Osaka (大阪)",        zh: "大阪"   },
         days:  { en: "Days 10–12",         zh: "第 10–12 天" },
         desc:  { en: "Osaka Castle, Dotonbori, street food, New Year's Eve",
                  zh: "大阪城天守閣、道頓堀夜景與街頭美食、敲鐘跨年" },
         lat: 34.6937, lng: 135.5023,
-        color: "#D4163C", markerClass: "marker-osaka", label: "OSA"
+        color: "#D4163C", markerClass: "marker-osaka"
       }
     ]
   },
@@ -480,8 +506,8 @@ window.SITE_DATA = {
       {
         legNum: 2,
         nights: { en: "Leg 2 • 1 Night (Ryokan)", zh: "第 2 站 • 1 晚 (溫泉旅館)" },
-        badgeClass: "fuji-badge",
-        highlight: true,
+        badgeClass: "",
+        highlight: false,
         title: { en: "Lake Kawaguchiko Onsen Ryokan (河口湖)", zh: "河口湖富士山景溫泉旅館" },
         dates: "🗓️ Dec 24 – Dec 25, 2026 (Christmas Eve)",
         desc: {

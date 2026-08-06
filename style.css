@@ -2027,23 +2027,24 @@ img {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 8px;
 }
 
 .packing-card li {
   font-size: 0.875rem;
   color: var(--text-secondary);
-  padding-left: 22px;
+  line-height: 1.6;
+  padding-left: 18px;
   position: relative;
-  line-height: 1.5;
 }
 
 .packing-card li::before {
-  content: '☐';
+  content: '›';
   position: absolute;
   left: 0;
   color: var(--ba-blue);
-  font-size: 0.85rem;
+  font-weight: 700;
+  font-size: 1.05rem;
 }
 
 

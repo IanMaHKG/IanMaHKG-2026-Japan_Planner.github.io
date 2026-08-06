@@ -97,10 +97,12 @@ Taiwan-specific vocabulary.
 
 ### Trip Context (do not alter without user approval)
 
-- **Travellers:** 3 adults (Ian + parents in late 50s / early 60s)
-- **Dates:** 20 Dec – 31 Dec 2026 (12 nights)
+- **Travellers:** 3 adults (Parents in late 50s/60s based in Edinburgh, Scotland; Ian based in Bracknell, UK).
+- **Passports:** Mother holds BN(O) & HKSAR; Father holds Portuguese & HKSAR; Ian holds BC, Portuguese & HKSAR. **All 4 passports enjoy 90-day visa-free entry to Japan.**
+- **Driving Licences:** All 3 travellers hold **UK Driving Licences**. Japan requires a **1949 Geneva Convention IDP** obtained from a UK Post Office (£5.50) before departure.
+- **Dates:** 20 Dec – 31 Dec 2026 (12 nights).
 - **Route:** Tokyo → Mt Fuji / Kawaguchiko → Hakone → Nagoya (car return)
-  → Kyoto / Nara → Osaka (fly home from KIX)
+  → Kyoto / Nara → Osaka (fly home from KIX).
 - **Car rental:** Pick up Day 5 (24 Dec) leaving Tokyo; return Day 7
   (26 Dec) immediately after hotel check-in at drop-off city.
 - **Recommended car:** Minivan / MPV (Toyota Alphard / Voxy / Noah,

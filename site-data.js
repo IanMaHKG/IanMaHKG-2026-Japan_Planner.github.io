@@ -85,6 +85,15 @@ window.SITE_DATA = {
           en: "Crisp & clear. Tokyo 4–13°C, Fuji area 0–8°C, Kansai 3–12°C. Layer up!",
           zh: "寒冷乾燥且晴朗。東京 4–13°C，富士山區 0–8°C，關西 3–12°C。請準備洋蔥式穿法！"
         }
+      },
+      {
+        id: "overview-family",
+        icon: "🛂",
+        title: { en: "Travellers & Entry", zh: "家庭成員與入境" },
+        desc: {
+          en: "3 Adults (Parents in Edinburgh, Ian in Bracknell). Passports: BN(O), Portuguese, BC & HKSAR — <strong>all 90-day visa-free</strong>. Drivers hold UK licences + 1949 IDP.",
+          zh: "3 位成人（父母現居愛丁堡，Ian 現居布拉克內爾）。持 BN(O)、葡萄牙、英國公民及特區護照 — <strong>全部 90 天免簽證入境</strong>。司機持英國駕照 + 1949 IDP。"
+        }
       }
     ],
     routeStops: [
@@ -586,8 +595,62 @@ window.SITE_DATA = {
           zh: "<strong>自駕租車</strong> — 建議選擇日產 (Nissan) 或豐田 (Toyota) 租車。<strong>必須指定配備雪地無釘輪胎 (Studless Winter Tires)</strong> 及英文 GPS。異地還車（東京借、名古屋還）需收約 ¥15,000–20,000 附加費。"
         },
         {
-          en: "<strong>International Driving Permit (IDP)</strong> — Obtain this in your home country before the trip. Required for all foreign drivers in Japan.",
-          zh: "<strong>國際駕駛執照 (IDP)</strong> — 出發前必須在香港辦妥（運輸署申領）。在日本駕駛必須隨身攜帶。"
+          en: "<strong>1949 International Driving Permit (IDP 1949)</strong> — As UK licence holders, all drivers must obtain the <strong>1949 Geneva Convention IDP</strong> at a UK Post Office (£5.50) before travelling.",
+          zh: "<strong>1949 公約國際駕駛執照 (1949 IDP)</strong> — 持英國駕照者，出發前須於英國郵局 (Post Office) 申領 <strong>1949 年公約 IDP</strong>（£5.50）。取車時須出示英國駕照正本與 1949 IDP。"
+        }
+      ]
+    },
+    {
+      id: "tip-passports",
+      icon: "🛂",
+      title: { en: "Passport & Visa Entry Requirements", zh: "各護照入境日本簽證要求" },
+      items: [
+        {
+          en: "<strong>British Citizen (BC) Passport (Ian)</strong> — Visa-free entry for up to 90 days for tourism.",
+          zh: "<strong>英國公民護照 (British Citizen / Ian)</strong> — 獲免簽證入境日本最長 90 天（觀光性質）。"
+        },
+        {
+          en: "<strong>BN(O) Passport (Mother)</strong> — Visa-free entry for up to 90 days for tourism.",
+          zh: "<strong>英國國民（海外）護照 (BN(O) / 母親)</strong> — 獲免簽證入境日本最長 90 天（觀光性質）。"
+        },
+        {
+          en: "<strong>HKSAR Passport (Mother, Father, Ian)</strong> — Visa-free entry for up to 90 days for tourism.",
+          zh: "<strong>香港特區護照 (HKSAR / 母親、父親、Ian)</strong> — 獲免簽證入境日本最長 90 天（觀光性質）。"
+        },
+        {
+          en: "<strong>Portuguese / EU Passport (Father, Ian)</strong> — Visa-free entry for up to 90 days for tourism.",
+          zh: "<strong>葡萄牙 / 歐盟護照 (Portugal / 父親、Ian)</strong> — 獲免簽證入境日本最長 90 天（觀光性質）。"
+        },
+        {
+          en: "<strong>Summary & Best Practice</strong> — All 4 passports held by your family enjoy 90-day visa-free entry. Ensure passports have at least 6 months validity. Use the <em>same</em> passport for check-in, Japan immigration, hotel registration, and tax-free shopping throughout the trip.",
+          zh: "<strong>總結與注意事項</strong> — 全家持有的 4 種護照均享 90 天免簽證入境。請確保護照有效期至少有 6 個月。整段行程請統一使用同一本護照辦理登機、入境、酒店登記及退稅。"
+        },
+        {
+          en: "<strong>Visit Japan Web (VJW)</strong> — All travellers should complete online immigration and customs declarations via the official <a href=\"https://services.digital.go.jp/vjw-landing/\" target=\"_blank\" rel=\"noopener\">Visit Japan Web</a> before departure to generate fast-track QR codes.",
+          zh: "<strong>Visit Japan Web 網上申報</strong> — 出發前，全員請於官方 <a href=\"https://services.digital.go.jp/vjw-landing/\" target=\"_blank\" rel=\"noopener\">Visit Japan Web</a> 完成入境及海關申報，獲取 QR Code 以便快捷過關。"
+        }
+      ]
+    },
+    {
+      id: "tip-uk-driving",
+      icon: "🪪",
+      title: { en: "UK Licence & 1949 IDP Rules", zh: "英國駕照與 1949 IDP 國際駕照指南" },
+      items: [
+        {
+          en: "<strong>1949 Geneva Convention Requirement</strong> — Japan strictly requires International Driving Permits issued under the <strong>1949 Geneva Convention</strong>. Standard UK photocard driving licences alone are NOT valid to drive in Japan.",
+          zh: "<strong>必須符合 1949 年日內瓦公約</strong> — 日本僅承認按 <strong>1949 年日內瓦公約</strong> 簽發的國際駕駛執照 (IDP)。單憑英國正本駕駛執照 (UK Photocard Licence) 不能在日本駕駛。"
+        },
+        {
+          en: "<strong>Obtain at UK Post Office (£5.50)</strong> — All drivers must apply over the counter at participating <strong>UK Post Offices</strong> before departure. Bring your UK photocard licence, a passport photo, and £5.50 per permit.",
+          zh: "<strong>於英國郵局辦理 (£5.50)</strong> — 出發前，所有司機須親身到指定<strong>英國郵局 (UK Post Office)</strong> 櫃位辦理。攜帶英國正本駕照、護照相片及 £5.50 申請費即可即時獲發。"
+        },
+        {
+          en: "<strong>Specify the 1949 IDP</strong> — UK Post Offices also issue 1968 Convention IDPs (for Europe). You <strong>must explicitly request the 1949 Convention IDP</strong> for Japan.",
+          zh: "<strong>請務必指定 1949 IDP</strong> — 英國郵局同時提供適用於歐洲的 1968 年公約 IDP。在郵局辦理時，<strong>必須特別指明申請 1949 年公約版本</strong>。"
+        },
+        {
+          en: "<strong>Documents Required at Car Pickup</strong> — When picking up the car in Tokyo (Day 5), present: <strong>1) Original UK Photocard Driving Licence</strong>, <strong>2) 1949 IDP</strong>, and <strong>3) Passport</strong>.",
+          zh: "<strong>取車時所需文件</strong> — 在東京取車時（第 5 天），必須同時出示：<strong>1) 英國駕駛執照正本</strong>、<strong>2) 1949 IDP 國際駕照</strong>及 <strong>3) 護照</strong>。"
         }
       ]
     },
@@ -713,8 +776,8 @@ window.SITE_DATA = {
           zh: "日本旅行插頭轉接器（雙平腳 Type A，電壓 100V）"
         },
         {
-          en: "International Driving Permit (IDP)",
-          zh: "國際駕駛執照 (IDP) 與香港駕駛執照正本"
+          en: "1949 Geneva Convention IDP + UK Photocard Driving Licence",
+          zh: "1949 年公約國際駕駛執照 (IDP) 與英國駕駛執照正本 (UK Photocard Licence)"
         },
         {
           en: "Passport + copies",

@@ -2904,14 +2904,20 @@ body.curr-gbp span.curr-gbp { display: inline !important; }
   /* Hotel Search Widget responsive */
   .hotel-search-card { padding: 20px 16px; }
   .hotel-search-header { flex-direction: column; align-items: flex-start; gap: 16px; }
-  /* Hotel grid: 2-col on tablet so pairs fill each row neatly */
+  /* Hotel grid: 2-col on tablet */
   .itinerary-hotels-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
   }
-  /* Reset 3+2 centering offsets — at 2-col they're not needed */
+  /* Explicitly reset grid-column start/end from desktop 3+2 offsets */
   .itinerary-hotels-grid > .hotel-leg-card:nth-child(4),
-  .itinerary-hotels-grid > .hotel-leg-card:nth-child(5) { grid-column: span 1; }
+  .itinerary-hotels-grid > .hotel-leg-card:nth-child(5) {
+    grid-column: auto / auto !important;
+  }
+  /* Card 5 (Osaka) spans 2 cols on tablet so it sits centered below the 2x2 grid */
+  .itinerary-hotels-grid > .hotel-leg-card:nth-child(5) {
+    grid-column: 1 / -1 !important;
+  }
   .hotel-leg-card { min-width: 0; }
 }
 
@@ -2938,10 +2944,17 @@ body.curr-gbp span.curr-gbp { display: inline !important; }
   .budget-table th, .budget-table td { padding: 8px 8px; font-size: 0.75rem; }
   .quick-leg-pills { gap: 4px; }
   .leg-pill { font-size: 0.72rem; padding: 4px 10px; }
-  /* Hotel grid: single column on small phones */
-  .itinerary-hotels-grid { grid-template-columns: 1fr; }
-  .itinerary-hotels-grid > .hotel-leg-card:nth-child(4),
-  .itinerary-hotels-grid > .hotel-leg-card:nth-child(5) { grid-column: span 1; }
+  /* Hotel grid: flex column layout on phone mode for clean stacking & natural height */
+  .itinerary-hotels-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+  .itinerary-hotels-grid > .hotel-leg-card {
+    grid-column: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
 }
 
 

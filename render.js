@@ -100,6 +100,57 @@ function renderCarRental() {
     `;
   }
 
+  // ── Vehicle size recommendation ──
+  const vehicleEl = document.getElementById('rental-vehicle-rec');
+  if (vehicleEl && data.vehicleRec) {
+    const vr = data.vehicleRec;
+    const picksHtml = vr.picks.map(p => `
+      <div class="vr-card vr-${p.verdict}" id="${p.id}">
+        <div class="vr-card-top">
+          <span class="vr-icon">${p.icon}</span>
+          <div class="vr-info">
+            <h4 class="vr-category">
+              <span class="lang-en">${p.category.en}</span>
+              <span class="lang-zh">${p.category.zh}</span>
+            </h4>
+            <p class="vr-models">
+              <span class="lang-en">${p.models.en}</span>
+              <span class="lang-zh">${p.models.zh}</span>
+            </p>
+          </div>
+          <span class="vr-badge ${p.badgeClass}">
+            <span class="lang-en">${p.badge.en}</span>
+            <span class="lang-zh">${p.badge.zh}</span>
+          </span>
+        </div>
+        <p class="vr-boot">
+          🧳 <span class="lang-en"><strong>Boot:</strong> ${p.boot.en}</span>
+              <span class="lang-zh"><strong>尾箱：</strong>${p.boot.zh}</span>
+        </p>
+        <p class="vr-why">
+          <span class="lang-en">${p.why.en}</span>
+          <span class="lang-zh">${p.why.zh}</span>
+        </p>
+      </div>`).join('');
+
+    vehicleEl.innerHTML = `
+      <div class="vr-heading">
+        <span class="vr-heading-icon">🧳</span>
+        <div>
+          <h3 class="vr-heading-title">
+            <span class="lang-en">Which Car Size for Your Group?</span>
+            <span class="lang-zh">應選哪種車型？</span>
+          </h3>
+          <p class="vr-luggage-context">
+            <span class="lang-en">${vr.luggageContext.en}</span>
+            <span class="lang-zh">${vr.luggageContext.zh}</span>
+          </p>
+        </div>
+      </div>
+      <div class="vr-grid">${picksHtml}</div>
+    `;
+  }
+
   // ── Company cards ──
   const gridEl = document.getElementById('rental-companies-grid');
   if (gridEl) {

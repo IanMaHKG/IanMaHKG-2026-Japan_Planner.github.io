@@ -1590,6 +1590,145 @@ img {
 }
 
 
+/* ── Vehicle Recommendation Block ── */
+.rental-vehicle-rec {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: var(--radius-lg);
+  padding: 24px 28px;
+  margin-bottom: 28px;
+}
+
+/* Heading row */
+.vr-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.vr-heading-icon {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+  line-height: 1;
+  margin-top: 3px;
+}
+
+.vr-heading-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 5px;
+}
+
+.vr-luggage-context {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.vr-luggage-context strong { color: #fff; }
+
+/* 3-col card grid */
+.vr-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+/* Individual vehicle card — white on dark */
+.vr-card {
+  background: #fff;
+  border-radius: var(--radius-md);
+  border-top: 4px solid var(--border-light);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  transition: transform var(--transition-smooth);
+}
+
+.vr-card:hover { transform: translateY(-3px); }
+
+/* Verdict-coloured top border */
+.vr-recommended { border-top-color: #22c55e; }
+.vr-alternative  { border-top-color: #f59e0b; }
+.vr-avoid        { border-top-color: #ef4444; }
+
+/* Card top row: icon + name/models + badge */
+.vr-card-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.vr-icon { font-size: 1.8rem; flex-shrink: 0; line-height: 1; }
+
+.vr-info { flex: 1; min-width: 0; }
+
+.vr-category {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--ba-midnight);
+  margin: 0 0 2px;
+}
+
+.vr-models {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* Verdict badges */
+.vr-badge {
+  font-size: 0.66rem;
+  font-weight: 700;
+  padding: 4px 9px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+  align-self: flex-start;
+  flex-shrink: 0;
+}
+
+.vbadge-green { background: #dcfce7; color: #15803d; border: 1px solid #86efac; }
+.vbadge-amber { background: #fef9c3; color: #a16207; border: 1px solid #fde047; }
+.vbadge-red   { background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; }
+
+/* Boot capacity line */
+.vr-boot {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.vr-boot strong { color: var(--ba-midnight); }
+
+/* Explanation paragraph */
+.vr-why {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.vr-why strong { color: var(--ba-midnight); font-weight: 600; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .vr-grid { grid-template-columns: repeat(2, 1fr); }
+  /* Show recommended first on mobile */
+  .vr-recommended { order: -1; }
+}
+@media (max-width: 560px) {
+  .vr-grid { grid-template-columns: 1fr; }
+  .rental-vehicle-rec { padding: 18px 16px; }
+}
+
+
 /* ═══════════════════════════════════════════════════
    ITINERARY TIMELINE
    ═══════════════════════════════════════════════════ */

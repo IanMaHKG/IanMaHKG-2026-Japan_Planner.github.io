@@ -420,6 +420,62 @@ window.SITE_DATA = {
       { label: { en: "Haneda Airport (arrival day)", zh: "羽田機場（抵達當日）" }, location: "Haneda Airport, Tokyo" },
       { label: { en: "Narita Airport (arrival day)", zh: "成田機場（抵達當日）" }, location: "Narita Airport, Chiba" }
     ],
+
+    /* ─── Vehicle Recommendation ──────────────────────────────────────
+     * Luggage context: 3 adults × (1 large suitcase + 1 cabin bag + 1 backpack)
+     *   = 3 large suitcases (≈75L each) + 3 cabin bags + 3 backpacks
+     * verdict: "recommended" | "alternative" | "avoid"
+     * ──────────────────────────────────────────────────────────────── */
+    vehicleRec: {
+      luggageContext: {
+        en: "Your party: <strong>3 adults</strong> — each bringing 1 large suitcase (check-in size, ~75L), 1 cabin bag, and 1 backpack. That's <strong>9 pieces of luggage total</strong>. You also need boot space for winter gear and snacks for the Mt Fuji drive.",
+        zh: "你們共 <strong>3 位成人</strong>，每人各攜帶 1 件大型行李箱（寄艙尺寸，約 75L）、1 件手提行李及 1 個背包，合共 <strong>9 件行李</strong>。另需預留車尾空間放置冬季裝備及富士山路段補給。"
+      },
+      picks: [
+        {
+          id: "vehicle-minivan",
+          verdict: "recommended",
+          icon: "🚐",
+          category: { en: "Minivan / MPV", zh: "廂式客貨車 / 七人車" },
+          models: { en: "Toyota Alphard, Toyota Voxy/Noah, Nissan Serena", zh: "Toyota Alphard、Toyota Voxy/Noah、Nissan Serena" },
+          boot: { en: "~500–900L (rear seats folded / in use)", zh: "~500–900L（後座摺疊或正常使用）" },
+          why: {
+            en: "The <strong>only category that comfortably fits 3 large suitcases in the boot with all rear seats occupied</strong>. Sliding rear doors make loading/unloading effortless at Mt Fuji car parks. High ride height also gives great visibility on snowy Hakone roads. The Alphard is premium and spacious; the Voxy/Noah and Serena are excellent mid-range choices.",
+            zh: "<strong>三件大型行李箱可同時放入尾箱，後座全體乘坐</strong>的唯一車型。滑動式後車門令富士山停車場上落行李輕鬆無比。較高車身視野開闊，應對箱根積雪路面更有優勢。Alphard 豪華寬敞；Voxy/Noah 及 Serena 為性價比極高的中檔之選。"
+          },
+          badge: { en: "✅ Best for your group", zh: "✅ 最適合你們" },
+          badgeClass: "vbadge-green"
+        },
+        {
+          id: "vehicle-suv",
+          verdict: "alternative",
+          icon: "🚙",
+          category: { en: "Mid-size SUV", zh: "中型 SUV" },
+          models: { en: "Toyota RAV4, Nissan X-Trail, Honda CR-V", zh: "Toyota RAV4、Nissan X-Trail、Honda CR-V" },
+          boot: { en: "~500–580L (rear seats up)", zh: "~500–580L（後座正常使用）" },
+          why: {
+            en: "A large SUV can <strong>just about fit 3 large suitcases</strong> in the boot if packed carefully (2 upright + 1 on its side). Cabin bags and backpacks go on laps or in footwells — it will feel tight. Good 4WD/AWD option for Hakone in snow, but the boot is borderline. Only choose this if minivans are sold out.",
+            zh: "大型 SUV 若行李擺放得當（2 件直立、1 件橫放），<strong>勉強可裝下 3 件大型行李箱</strong>。手提行李和背包只能放膝蓋上或腳踏位，會較擠迫。箱根積雪路段 4WD/AWD 功能具優勢，但尾箱空間僅夠用。如廂式車售罄才考慮此選項。"
+          },
+          badge: { en: "⚠️ Borderline — tight fit", zh: "⚠️ 勉強合適 — 略為擠迫" },
+          badgeClass: "vbadge-amber"
+        },
+        {
+          id: "vehicle-compact",
+          verdict: "avoid",
+          icon: "🚗",
+          category: { en: "Compact / Sedan", zh: "小型車 / 房車" },
+          models: { en: "Toyota Corolla, Nissan Note, Honda Fit", zh: "Toyota Corolla、Nissan Note、Honda Fit" },
+          boot: { en: "~220–340L — not enough", zh: "~220–340L — 空間不足" },
+          why: {
+            en: "<strong>Do not book a compact or standard sedan.</strong> The boot will only fit 1–2 large suitcases. You would need to stack bags on the rear seat and passengers would have almost no space. Roof box rental is possible but adds cost and wind noise. Avoid.",
+            zh: "<strong>切勿預訂小型車或普通房車。</strong>車尾箱只能放入 1–2 件大型行李箱，其餘行李只能堆放後座，乘客幾乎無空間。雖可加租車頂行李箱，但成本增加且行車噪音大。建議避免。"
+          },
+          badge: { en: "❌ Not suitable", zh: "❌ 不適合" },
+          badgeClass: "vbadge-red"
+        }
+      ]
+    },
     companies: [
       {
         id: "rental-toyota",

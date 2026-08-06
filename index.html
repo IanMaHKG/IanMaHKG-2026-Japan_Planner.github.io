@@ -255,6 +255,31 @@
     </div>
   </section>
 
+  <!-- ═══════════════════ CAR RETURN DECISION ═══════════════════ -->
+  <!-- This section is populated by render.js renderCarReturn()    -->
+  <!-- Data source: SITE_DATA.carReturn in site-data.js            -->
+  <section id="car-return" class="section">
+    <div class="container">
+      <h2 class="section-title">
+        <span class="lang-en">🚗 Car Return Decision</span>
+        <span class="lang-zh">🚗 租車歸還地點比較</span>
+      </h2>
+      <p class="section-subtitle">
+        <span class="lang-en">Compare returning your rental car in Nagoya, Kyoto, or Osaka — and the luggage impact of each choice.</span>
+        <span class="lang-zh">比較在名古屋、京都或大阪歸還租車的利與弊，以及對行李攜帶的實際影響。</span>
+      </p>
+
+      <!-- Context paragraph (injected by renderCarReturn) -->
+      <p class="cr-context" id="car-return-context"></p>
+
+      <!-- 3-option comparison cards (injected by renderCarReturn) -->
+      <div class="cr-grid" id="car-return-grid"></div>
+
+      <!-- Bottom recommendation callout (injected by renderCarReturn) -->
+      <div class="cr-recommendation" id="car-return-rec"></div>
+    </div>
+  </section>
+
   <!-- ═══════════════════ ITINERARY ═══════════════════ -->
   <section id="itinerary" class="section">
     <div class="container">

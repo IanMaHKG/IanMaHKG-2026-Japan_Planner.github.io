@@ -189,6 +189,91 @@ window.SITE_DATA = {
     ]
   },
 
+  /* ─── Car Return Decision Helper ───────────────────────────────────
+   * Displays a 3-option pros/cons comparison for where to return the
+   * rental car: Nagoya (current plan), Kyoto, or Osaka.
+   * Each option has: id, icon, title, subtitle, verdict, pros[], cons[].
+   * Rendered by render.js renderCarReturn() → #car-return-grid.
+   * ──────────────────────────────────────────────────────────────────*/
+  carReturn: {
+    question: {
+      en: "Where should you return the rental car?",
+      zh: "租車應在哪裡歸還？"
+    },
+    context: {
+      en: "Your rental car is picked up in Tokyo and used for the Mt Fuji / Hakone self-drive segment (Days 5–7). After that, you no longer need a car — Kyoto, Nara, and Osaka are best explored by train. The key question is: which city to drop it off in?",
+      zh: "租車於東京取車，用作第 5 至 7 天的富士山 / 箱根自駕段。之後行程以公共交通為主，京都、奈良及大阪均無需駕車。關鍵問題是：應在哪個城市歸還租車？"
+    },
+    recommendation: {
+      en: "🏆 Our pick: <strong>Nagoya</strong> — lowest cost, keeps luggage light through Kyoto, and a quick Shinkansen hop gets you there.",
+      zh: "🏆 建議選擇：<strong>名古屋</strong> — 費用最低，令你輕裝遊覽京都，且搭新幹線往返方便快捷。"
+    },
+    options: [
+      {
+        id: "car-return-nagoya",
+        icon: "🚗",
+        title: { en: "Nagoya", zh: "名古屋" },
+        subtitle: { en: "Current Plan · Day 7 transit stop", zh: "現行方案 · 第 7 天中途站" },
+        verdict: "current",
+        verdictLabel: { en: "Current Plan", zh: "現行方案" },
+        pros: [
+          { en: "<strong>Cheapest one-way fee</strong> — Tokyo→Nagoya drop-off costs approx ¥15,000–¥20,000 (vs ¥25,000–¥35,000 to Kyoto/Osaka)", zh: "<strong>異地還車費用最低</strong> — 東京→名古屋約 ¥15,000–¥20,000（京都/大阪則需 ¥25,000–¥35,000）" },
+          { en: "<strong>No driving stress in Kansai</strong> — Kyoto city centre and Osaka are notoriously car-unfriendly (narrow streets, expensive parking)", zh: "<strong>無需在關西開車</strong> — 京都市區巷道窄小、停車費高昂；大阪市區行車亦複雜" },
+          { en: "<strong>Shinkansen to Kyoto in 35 min</strong> — Fast, comfortable, luggage goes in overhead rack or coin locker at Nagoya station", zh: "<strong>35 分鐘新幹線直達京都</strong> — 快捷舒適，行李可放行李架或名古屋站儲物櫃" },
+          { en: "<strong>Miso katsu dinner</strong> — Makes for a natural, enjoyable transit stop with a local specialty meal", zh: "<strong>順道品嚐味噌炸豬排</strong> — 名古屋特色晚餐，讓中途換車成為享受" },
+          { en: "<strong>Lighter in Kyoto</strong> — Arriving by train means you walk off with only day bags; full luggage can go to your Kyoto hotel by takkyubin delivery", zh: "<strong>京都輕裝遊覽</strong> — 以火車抵達，只需帶隨身小包，大件行李可由名古屋酒店宅配到京都酒店" }
+        ],
+        cons: [
+          { en: "<strong>Nagoya is a transit-only stop</strong> — You won't have time to explore it as a tourist destination", zh: "<strong>名古屋只作中途換乘</strong> — 沒有額外時間深度遊覽名古屋景點" },
+          { en: "<strong>One-way drop-off surcharge still applies</strong> — ¥15,000–¥20,000 fee on top of rental cost", zh: "<strong>仍需支付異地還車附加費</strong> — 約 ¥15,000–¥20,000 額外收費" },
+          { en: "<strong>Need to plan luggage logistics</strong> — Consider takkyubin (宅配便) from Nagoya hotel to Kyoto hotel (¥2,000–¥3,000 per bag)", zh: "<strong>需安排行李物流</strong> — 建議使用宅配便（¥2,000–¥3,000/件）從名古屋酒店寄往京都酒店" }
+        ]
+      },
+      {
+        id: "car-return-kyoto",
+        icon: "⛩️",
+        title: { en: "Kyoto", zh: "京都" },
+        subtitle: { en: "Drive straight to Kyoto · Day 7", zh: "直接駕車至京都 · 第 7 天" },
+        verdict: "caution",
+        verdictLabel: { en: "Possible — But Tricky", zh: "可行，但需注意" },
+        pros: [
+          { en: "<strong>No Nagoya detour needed</strong> — Drive Hakone → Kyoto directly (approx 3.5–4 hrs via Route 1 / Tomei-Meishin expressway)", zh: "<strong>無需繞道名古屋</strong> — 從箱根直接駕車往京都（約 3.5–4 小時，走名神高速）" },
+          { en: "<strong>Can carry all luggage directly</strong> — No need to pre-ship bags; everything arrives with you in Kyoto", zh: "<strong>行李可直接帶到京都</strong> — 毋須預先宅配行李，隨車抵達" },
+          { en: "<strong>Flexible timing</strong> — You're not tied to a Shinkansen schedule on the drive day", zh: "<strong>時間彈性較大</strong> — 無需配合新幹線班次，可按自身節奏出發" },
+          { en: "<strong>One-way fee may be similar</strong> — Tokyo→Kyoto drop-off fee can be negotiated with some rental companies", zh: "<strong>異地費用或可議價</strong> — 部分租車公司東京→京都異地費可協商" }
+        ],
+        cons: [
+          { en: "<strong>Parking in Kyoto is expensive and scarce</strong> — City centre parking costs ¥500–¥1,000/hour; many temples have no parking at all", zh: "<strong>京都市區停車費高且難找</strong> — 市中心停車約 ¥500–¥1,000/小時，許多神社寺院更無停車場" },
+          { en: "<strong>Driving in Kyoto is stressful</strong> — Narrow lanes, tourist crowds on roads, and unfamiliar one-way streets near Gion / Fushimi", zh: "<strong>在京都駕車壓力大</strong> — 祗園、伏見等地巷道狹窄、遊客多、單行道複雜" },
+          { en: "<strong>Higher one-way drop fee</strong> — Tokyo→Kyoto typically ¥25,000–¥35,000", zh: "<strong>異地還車費用較高</strong> — 東京→京都通常 ¥25,000–¥35,000" },
+          { en: "<strong>Car drop-off location may not be central</strong> — Rental offices are often near Kyoto Station, away from hotel clusters in Gion / Arashiyama", zh: "<strong>還車地點未必方便</strong> — 租車公司多在京都車站附近，而非住宿較集中的祗園 / 嵐山一帶" },
+          { en: "<strong>Luggage then becomes a problem in Kyoto</strong> — Lugging suitcases on narrow Kyoto streets and temple steps defeats the purpose", zh: "<strong>京都行李管理仍是難題</strong> — 大件行李在京都狹窄街道及寺院石階間移動非常不便" }
+        ]
+      },
+      {
+        id: "car-return-osaka",
+        icon: "🏙️",
+        title: { en: "Osaka", zh: "大阪" },
+        subtitle: { en: "Keep car through Kyoto · Return Day 10–12", zh: "繼續開車遊關西 · 第 10–12 天歸還" },
+        verdict: "notrecommended",
+        verdictLabel: { en: "Not Recommended", zh: "不建議" },
+        pros: [
+          { en: "<strong>Maximum flexibility for Kansai segment</strong> — Could theoretically drive Kyoto → Nara → Osaka at your own pace", zh: "<strong>關西段行程最靈活</strong> — 理論上可自駕 京都→奈良→大阪，按自訂節奏遊覽" },
+          { en: "<strong>Useful if visiting rural Nara or off-route spots</strong> — Some outer Nara temples (e.g. Hōryū-ji) are easier with a car", zh: "<strong>若遊覽奈良郊區景點較方便</strong> — 部分奈良郊外寺院（如法隆寺）有車更易到達" },
+          { en: "<strong>No mid-trip vehicle switch needed</strong> — Everything in one booking for the full duration", zh: "<strong>全程一張合約</strong> — 無需中途更換預訂或安排換車" }
+        ],
+        cons: [
+          { en: "<strong>Highest one-way drop fee</strong> — Tokyo→Osaka can cost ¥35,000–¥50,000+", zh: "<strong>異地還車費用最高</strong> — 東京→大阪可達 ¥35,000–¥50,000 甚至以上" },
+          { en: "<strong>Parking in Kyoto AND Osaka is very costly</strong> — You'll pay ¥500–¥1,500/hour across multiple days in the city", zh: "<strong>京都及大阪泊車費用高昂</strong> — 多天市區停車每小時 ¥500–¥1,500，費用可觀" },
+          { en: "<strong>Osaka city driving is complex</strong> — Heavy traffic, taxi/bus lanes, and aggressive drivers near Dotonbori / Namba", zh: "<strong>大阪市區行車複雜</strong> — 道頓堀 / 難波一帶交通繁忙、的士巴士專線多，駕車壓力大" },
+          { en: "<strong>Negates the benefit of JR Kansai Pass</strong> — You'd be driving instead of using the pass you likely already purchased", zh: "<strong>浪費 JR 關西周遊券</strong> — 若已購入關西鐵路券卻選擇自駕，變相重複花費" },
+          { en: "<strong>Luggage in Kyoto problem remains</strong> — Having a car parked somewhere doesn't help carrying bags between Kyoto temples", zh: "<strong>京都行李問題依然存在</strong> — 即使有車停在某處，在京都各寺院間搬運行李仍非常不便" },
+          { en: "<strong>New Year period parking</strong> — Dec 30–31 in Osaka is extremely congested; parking around Dotonbori / Tsutenkaku can be near-impossible", zh: "<strong>跨年期間泊車幾乎不可能</strong> — 12 月 30–31 日大阪道頓堀 / 通天閣一帶人山人海，泊車位極為罕有" }
+        ]
+      }
+    ]
+  },
+
   /* ─── Practical Tips Section ─── */
   tips: [
     {

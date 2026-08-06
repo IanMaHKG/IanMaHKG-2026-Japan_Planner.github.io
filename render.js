@@ -40,10 +40,105 @@
 /* ─── Orchestrator ─── */
 function renderSiteContent() {
   renderOverview();
+  renderCarReturn();
   renderTips();
   renderPacking();
   renderBudget();
   renderHotels();
+}
+
+
+/* ─── Car Return Decision Helper Section ───
+ *  Reads SITE_DATA.carReturn and populates:
+ *    #car-return-context  — introductory paragraph
+ *    #car-return-grid     — three option cards (Nagoya / Kyoto / Osaka)
+ *    #car-return-rec      — bottom recommendation callout
+ *
+ *  Each card uses verdict CSS classes:
+ *    .verdict-current        — green "Current Plan" badge
+ *    .verdict-caution        — amber "Possible — But Tricky" badge
+ *    .verdict-notrecommended — red  "Not Recommended" badge
+ * ────────────────────────────────────────── */
+function renderCarReturn() {
+  if (!window.SITE_DATA || !window.SITE_DATA.carReturn) return;
+  const data = window.SITE_DATA.carReturn;
+  const lang = document.body.classList.contains('lang-zh-hk') ? 'zh' : 'en';
+
+  // Context paragraph
+  const ctxEl = document.getElementById('car-return-context');
+  if (ctxEl) {
+    ctxEl.innerHTML = `
+      <span class="lang-en">${data.context.en}</span>
+      <span class="lang-zh">${data.context.zh}</span>
+    `;
+  }
+
+  // Option cards
+  const gridEl = document.getElementById('car-return-grid');
+  if (gridEl) {
+    gridEl.innerHTML = data.options.map(opt => {
+      const prosHtml = opt.pros.map(p => `
+        <li class="cr-pro">
+          <span class="cr-bullet cr-bullet-pro">✓</span>
+          <span class="lang-en">${p.en}</span>
+          <span class="lang-zh">${p.zh}</span>
+        </li>`).join('');
+
+      const consHtml = opt.cons.map(c => `
+        <li class="cr-con">
+          <span class="cr-bullet cr-bullet-con">✗</span>
+          <span class="lang-en">${c.en}</span>
+          <span class="lang-zh">${c.zh}</span>
+        </li>`).join('');
+
+      return `
+        <div class="cr-card verdict-${opt.verdict}" id="${opt.id}">
+          <div class="cr-card-header">
+            <div class="cr-city-icon">${opt.icon}</div>
+            <div class="cr-city-info">
+              <h3 class="cr-city-name">
+                <span class="lang-en">${opt.title.en}</span>
+                <span class="lang-zh">${opt.title.zh}</span>
+              </h3>
+              <p class="cr-subtitle">
+                <span class="lang-en">${opt.subtitle.en}</span>
+                <span class="lang-zh">${opt.subtitle.zh}</span>
+              </p>
+            </div>
+            <div class="cr-verdict-badge verdict-badge-${opt.verdict}">
+              <span class="lang-en">${opt.verdictLabel.en}</span>
+              <span class="lang-zh">${opt.verdictLabel.zh}</span>
+            </div>
+          </div>
+          <div class="cr-lists">
+            <div class="cr-list-col">
+              <h4 class="cr-list-heading cr-pros-heading">
+                <span class="lang-en">✅ Pros</span>
+                <span class="lang-zh">✅ 優點</span>
+              </h4>
+              <ul class="cr-list">${prosHtml}</ul>
+            </div>
+            <div class="cr-list-col">
+              <h4 class="cr-list-heading cr-cons-heading">
+                <span class="lang-en">❌ Cons</span>
+                <span class="lang-zh">❌ 缺點</span>
+              </h4>
+              <ul class="cr-list">${consHtml}</ul>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  // Bottom recommendation callout
+  const recEl = document.getElementById('car-return-rec');
+  if (recEl) {
+    recEl.innerHTML = `
+      <span class="lang-en">${data.recommendation.en}</span>
+      <span class="lang-zh">${data.recommendation.zh}</span>
+    `;
+  }
 }
 
 

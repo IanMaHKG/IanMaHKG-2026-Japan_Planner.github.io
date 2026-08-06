@@ -1630,10 +1630,10 @@ img {
 
 .vr-luggage-context strong { color: #fff; }
 
-/* 3-col card grid */
+/* 4-col grid — all 4 vehicle picks in one row on desktop */
 .vr-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 16px;
 }
 

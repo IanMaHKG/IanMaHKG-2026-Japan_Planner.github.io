@@ -473,6 +473,20 @@ window.SITE_DATA = {
           },
           badge: { en: "❌ Not suitable", zh: "❌ 不適合" },
           badgeClass: "vbadge-red"
+        },
+        {
+          id: "vehicle-kei",
+          verdict: "avoid",
+          icon: "🚗",
+          category: { en: "Kei Car (軽自動車)", zh: "輕型車（軽自動車）" },
+          models: { en: "Honda N-Box, Daihatsu Tanto, Suzuki Jimny, Suzuki Alto", zh: "Honda N-Box、Daihatsu Tanto、Suzuki Jimny、Suzuki Alto" },
+          boot: { en: "~100–200L — far too small", zh: "~100–200L — 空間嚴重不足" },
+          why: {
+            en: "<strong>Absolutely not for this group.</strong> Kei cars are Japan's <em>micro</em>-cars (engine ≤660cc). Even with 3 adults seated, the boot fits at best 1 small suitcase. The Suzuki Jimny is fun off-road but has virtually zero boot with rear seats up. The 660cc engine also struggles on expressways and mountain passes — particularly the steep Hakone Skyline in December snow. Kei cars are great for solo day-trips, not family winter drives with 9 pieces of luggage.",
+            zh: "<strong>絕對不適合。</strong>輕型車是日本的<em>超小型車</em>（引擎排量 ≤660cc）。即使 3 位成人坐下，尾箱最多只能放入 1 件小型行李箱。Suzuki Jimny 雖是越野玩意兒，但後座坐人後車尾箱幾乎為零。660cc 引擎在高速公路及山路行駛亦吃力 — 尤其是 12 月積雪的箱根高原，爬坡力不足。輕型車適合單人短途，絕非攜帶 9 件行李的家庭冬日自駕之選。"
+          },
+          badge: { en: "❌ Absolutely not", zh: "❌ 絕對不適合" },
+          badgeClass: "vbadge-red"
         }
       ]
     },

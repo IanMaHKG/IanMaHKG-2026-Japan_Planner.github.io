@@ -89,10 +89,10 @@ window.SITE_DATA = {
       {
         id: "overview-family",
         icon: "🛂",
-        title: { en: "Travellers & Entry", zh: "家庭成員與入境" },
+        title: { en: "Travellers & Entry", zh: "同行成員與入境" },
         desc: {
-          en: "3 Adults (Parents in Edinburgh, Ian in Bracknell). Passports: BN(O), Portuguese, BC & HKSAR — <strong>all 90-day visa-free</strong>. Drivers hold UK licences + 1949 IDP.",
-          zh: "3 位成人（父母現居愛丁堡，Ian 現居布拉克內爾）。持 BN(O)、葡萄牙、英國公民及特區護照 — <strong>全部 90 天免簽證入境</strong>。司機持英國駕照 + 1949 IDP。"
+          en: "3 Adults. Passports held: British Citizen, BN(O), HKSAR & Portuguese — <strong>all 90-day visa-free for Japan</strong>. Drivers hold UK licences + 1949 IDP.",
+          zh: "3 位成人。持有護照：英國公民、BN(O)、香港特區護照及葡萄牙護照 — <strong>全部 90 天免簽證入境日本</strong>。司機持英國駕照 + 1949 IDP。"
         }
       }
     ],
@@ -606,20 +606,20 @@ window.SITE_DATA = {
       title: { en: "Passport & Visa Entry Requirements", zh: "各護照入境日本簽證要求" },
       items: [
         {
-          en: "<strong>British Citizen (BC) Passport (Ian)</strong> — Visa-free entry for up to 90 days for tourism.",
-          zh: "<strong>英國公民護照 (British Citizen / Ian)</strong> — 獲免簽證入境日本最長 90 天（觀光性質）。"
+          en: "<strong>British Citizen (BC) Passport</strong> — Visa-free entry for up to 90 days for tourism.",
+          zh: "<strong>英國公民護照 (British Citizen)</strong> — 獲免簽證入境日本最長 90 天（觀光性質）。"
         },
         {
-          en: "<strong>BN(O) Passport (Mother)</strong> — Visa-free entry for up to 90 days for tourism.",
-          zh: "<strong>英國國民（海外）護照 (BN(O) / 母親)</strong> — 獲免簽證入境日本最長 90 天（觀光性質）。"
+          en: "<strong>BN(O) Passport (British National (Overseas))</strong> — Visa-free entry for up to 90 days for tourism.",
+          zh: "<strong>英國國民（海外）護照 (BN(O))</strong> — 獲免簽證入境日本最長 90 天（觀光性質）。"
         },
         {
-          en: "<strong>HKSAR Passport (Mother, Father, Ian)</strong> — Visa-free entry for up to 90 days for tourism.",
-          zh: "<strong>香港特區護照 (HKSAR / 母親、父親、Ian)</strong> — 獲免簽證入境日本最長 90 天（觀光性質）。"
+          en: "<strong>HKSAR Passport (Hong Kong SAR)</strong> — Visa-free entry for up to 90 days for tourism.",
+          zh: "<strong>香港特區護照 (HKSAR)</strong> — 獲免簽證入境日本最長 90 天（觀光性質）。"
         },
         {
-          en: "<strong>Portuguese / EU Passport (Father, Ian)</strong> — Visa-free entry for up to 90 days for tourism.",
-          zh: "<strong>葡萄牙 / 歐盟護照 (Portugal / 父親、Ian)</strong> — 獲免簽證入境日本最長 90 天（觀光性質）。"
+          en: "<strong>Portuguese / EU Passport (Portugal)</strong> — Visa-free entry for up to 90 days for tourism.",
+          zh: "<strong>葡萄牙 / 歐盟護照 (Portugal)</strong> — 獲免簽證入境日本最長 90 天（觀光性質）。"
         },
         {
           en: "<strong>Summary & Best Practice</strong> — All 4 passports held by your family enjoy 90-day visa-free entry. Ensure passports have at least 6 months validity. Use the <em>same</em> passport for check-in, Japan immigration, hotel registration, and tax-free shopping throughout the trip.",

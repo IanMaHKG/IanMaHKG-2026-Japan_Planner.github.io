@@ -97,8 +97,8 @@ Taiwan-specific vocabulary.
 
 ### Trip Context (do not alter without user approval)
 
-- **Travellers:** 3 adults (Parents in late 50s/60s based in Edinburgh, Scotland; Ian based in Bracknell, UK).
-- **Passports:** Mother holds BN(O) & HKSAR; Father holds Portuguese & HKSAR; Ian holds BC, Portuguese & HKSAR. **All 4 passports enjoy 90-day visa-free entry to Japan.**
+- **Privacy & PII Protection:** Do NOT display personal names (e.g. "Ian"), specific family member mappings ("Mother", "Father"), or home cities ("Edinburgh", "Bracknell") in website text. State passport rules strictly by passport type (BC, BN(O), HKSAR, Portuguese).
+- **Passports:** BN(O), Portuguese, BC & HKSAR passports. **All 4 passports enjoy 90-day visa-free entry to Japan.**
 - **Driving Licences:** All 3 travellers hold **UK Driving Licences**. Japan requires a **1949 Geneva Convention IDP** obtained from a UK Post Office (£5.50) before departure.
 - **Dates:** 20 Dec – 31 Dec 2026 (12 nights).
 - **Route:** Tokyo → Mt Fuji / Kawaguchiko → Hakone → Nagoya (car return)

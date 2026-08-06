@@ -201,8 +201,8 @@ window.SITE_DATA = {
       zh: "租車應在哪裡歸還？"
     },
     context: {
-      en: "Your rental car is picked up in Tokyo and used for the Mt Fuji / Hakone self-drive segment (Days 5–7). After that, you no longer need a car — Kyoto, Nara, and Osaka are best explored by train. The key question is: which city to drop it off in?",
-      zh: "租車於東京取車，用作第 5 至 7 天的富士山 / 箱根自駕段。之後行程以公共交通為主，京都、奈良及大阪均無需駕車。關鍵問題是：應在哪個城市歸還租車？"
+      en: "The plan: <strong>pick up the car on Day 5 (Dec 24, Christmas Eve) when leaving Tokyo</strong>, use it for the Mt Fuji / Kawaguchiko / Hakone self-drive segment (Days 5–7), then <strong>return it on Day 7 (Dec 26) as soon as you have checked in at your destination city</strong>. After drop-off, you're free — Kyoto, Nara, and Osaka are all best explored by train.",
+      zh: "計劃安排：<strong>第 5 天（12 月 24 日平安夜）離開東京時取車</strong>，用於富士山/河口湖/箱根自駕路段（第 5 至 7 天），然後在<strong>第 7 天（12 月 26 日）辦妥目的地酒店入住後即行歸還</strong>。還車後全程以公共交通出行 — 京都、奈良及大阪均最適合以火車遊覽。"
     },
     recommendation: {
       en: "🏆 Our pick: <strong>Nagoya</strong> — lowest cost, keeps luggage light through Kyoto, and a quick Shinkansen hop gets you there.",
@@ -412,13 +412,13 @@ window.SITE_DATA = {
    * ──────────────────────────────────────────────────────────────────*/
   carRental: {
     intro: {
-      en: "All three companies offer <strong>one-way (異地還車)</strong> rentals, English GPS, and studless winter tyres on request. Book online at least 4–6 weeks ahead for December availability.",
-      zh: "三家公司均提供<strong>異地還車</strong>服務、英文 GPS 及冬季無釘雪地輪胎（需提前指定）。12 月份車輛緊張，建議至少提前 4–6 週於官網預訂。"
+      en: "<strong>Plan:</strong> Pick up on <strong>Day 5 (Dec 24)</strong> when leaving Tokyo → drive Mt Fuji / Kawaguchiko / Hakone → return the car on <strong>Day 7 (Dec 26) immediately after hotel check-in</strong> at your chosen drop-off city. All three companies support one-way (異地還車) rentals, English GPS, and studless winter tyres on request. Book at least 4–6 weeks ahead — December is peak season.",
+      zh: "<strong>計劃安排：</strong><strong>第 5 天（12 月 24 日）</strong>離開東京時取車 → 自駕遊覽富士山/河口湖/箱根 → 在<strong>第 7 天（12 月 26 日）辦妥目的地酒店入住後立即歸還</strong>。三家公司均提供異地還車、英文 GPS 及冬季無釘雪地輪胎（需指定）。12 月為旺季，請至少提前 4–6 週預訂。"
     },
     quickPickup: [
-      { label: { en: "Tokyo (Dec 20)", zh: "東京 (12月20日)" }, location: "Shinjuku, Tokyo" },
-      { label: { en: "Haneda Airport", zh: "羽田機場" }, location: "Haneda Airport, Tokyo" },
-      { label: { en: "Narita Airport", zh: "成田機場" }, location: "Narita Airport, Chiba" }
+      { label: { en: "Tokyo (Day 5 · Dec 24)", zh: "東京（第 5 天 · 12月24日）" }, location: "Shinjuku, Tokyo" },
+      { label: { en: "Haneda Airport (arrival day)", zh: "羽田機場（抵達當日）" }, location: "Haneda Airport, Tokyo" },
+      { label: { en: "Narita Airport (arrival day)", zh: "成田機場（抵達當日）" }, location: "Narita Airport, Chiba" }
     ],
     companies: [
       {
@@ -440,8 +440,8 @@ window.SITE_DATA = {
           { en: "✔ ETC card rental available for expressway toll auto-pay", zh: "✔ 提供 ETC 卡租用，高速公路過路費自動繳付" }
         ],
         note: {
-          en: "Recommended pickup branch: <strong>Toyota Rent-a-Car Shinjuku Station East</strong> or <strong>Haneda Airport Terminal 3</strong> if arriving by flight.",
-          zh: "推薦取車分店：<strong>トヨタレンタカー新宿駅東口店</strong>，或乘飛機入境者可選<strong>羽田機場第 3 航廈店</strong>。"
+          en: "<strong>Pickup:</strong> Toyota Rent-a-Car Shinjuku Station East or Haneda Airport Terminal 3 on <strong>Day 5, Dec 24</strong>. <strong>Return:</strong> Drop off on <strong>Day 7 (Dec 26) at the branch closest to your hotel, immediately after check-in</strong> — hand over the keys and head straight to your room.",
+          zh: "<strong>取車：</strong>豐田租車新宿駅東口店或羽田機場第 3 航廈店，<strong>第 5 天（12 月 24 日）</strong>辦理取車手續。<strong>還車：</strong>在<strong>第 7 天（12 月 26 日）辦妥酒店入住後立即</strong>前往最近分店歸還 — 交還鑰匙後即可輕鬆入房。"
         },
         searchUrl: "https://rent.toyota.co.jp/en/"
       },
@@ -464,8 +464,8 @@ window.SITE_DATA = {
           { en: "✔ Transparent pricing, no hidden fuel surcharges on EV models", zh: "✔ 定價透明，電動車款無隱藏燃油附加費" }
         ],
         note: {
-          en: "Note: EV range may be reduced in cold December weather. Plan charging stops around Mt Fuji — use Nissan's route planner or Google Maps to locate chargers along the Fuji Five Lakes area.",
-          zh: "注意：12 月低溫會令電動車續航里程下降。請事先規劃富士山周邊充電站路線，可使用日産路線規劃工具或 Google Maps 查找五湖地區充電點。"
+          en: "<strong>Pickup:</strong> Nissan Rent-a-Car Shinjuku or Ikebukuro on <strong>Day 5, Dec 24</strong>. Note: EV range is reduced in cold December weather — plan charging stops around Mt Fuji. <strong>Return:</strong> Day 7 (Dec 26) immediately after hotel check-in at your chosen city.",
+          zh: "<strong>取車：</strong>日産租車新宿或池袋分店，<strong>第 5 天（12 月 24 日）</strong>辦理。注意：12 月低溫令電動車續航下降，請提前規劃富士山周邊充電點。<strong>還車：</strong>第 7 天（12 月 26 日）於目的地酒店辦妥入住後立即歸還。"
         },
         searchUrl: "https://nissan-rentacar.com/en/"
       },
@@ -488,8 +488,8 @@ window.SITE_DATA = {
           { en: "✔ Over 500 branches across Japan including all major airports", zh: "✔ 全日本逾 500 間分店，涵蓋各主要機場" }
         ],
         note: {
-          en: "Recommended for budget-conscious families. Compare Nippon's one-way fee for Tokyo→Nagoya against Toyota before booking — it is frequently ¥3,000–¥5,000 cheaper.",
-          zh: "推薦注重預算的家庭選用。預訂前不妨比較 Nippon 與豐田在東京→名古屋的異地還車費，前者通常便宜 ¥3,000–¥5,000。"
+          en: "<strong>Pickup:</strong> Nippon Rent-A-Car Shinjuku or nearest Tokyo branch on <strong>Day 5, Dec 24</strong>. <strong>Return:</strong> Day 7 (Dec 26) immediately after hotel check-in — the earlier you return, the lower your daily charge. Compare Nippon's Tokyo→Nagoya one-way fee against Toyota before booking; it is frequently ¥3,000–¥5,000 cheaper.",
+          zh: "<strong>取車：</strong>Nippon 租車新宿店或最近的東京分店，<strong>第 5 天（12 月 24 日）</strong>辦理。<strong>還車：</strong>第 7 天（12 月 26 日）辦妥酒店入住後盡早歸還 — 越早還車費用越低。預訂前請比較 Nippon 與豐田的東京→名古屋異地還車費，前者通常便宜 ¥3,000–¥5,000。"
         },
         searchUrl: "https://www.nipponrentacar.co.jp/en/"
       }

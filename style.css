@@ -1342,6 +1342,239 @@ img {
 
 
 /* ═══════════════════════════════════════════════════
+   CAR RENTAL SEARCH SECTION
+   (dark background section — mirrors hotel search UI)
+   ═══════════════════════════════════════════════════ */
+
+/* ── Search card container ── */
+.rental-search-card {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: var(--radius-lg);
+  padding: 24px 28px;
+  margin-bottom: 28px;
+}
+
+/* ── Brand header row ── */
+.rental-search-header { display: flex; flex-direction: column; gap: 18px; }
+
+.rental-search-brand {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.rental-brand-icon {
+  font-size: 2.4rem;
+  flex-shrink: 0;
+  line-height: 1;
+  margin-top: 2px;
+}
+
+.rental-search-brand h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 4px;
+}
+
+.rental-intro {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.rental-intro strong { color: #fff; }
+
+/* ── Pickup pills row ── */
+.rental-pickup-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.rental-pickup-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.70);
+  white-space: nowrap;
+}
+
+.rental-pickup-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.rental-pickup-pill {
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid rgba(255,255,255,0.30);
+  background: transparent;
+  color: rgba(255,255,255,0.80);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font-primary);
+  transition: all var(--transition-fast);
+}
+
+.rental-pickup-pill:hover {
+  border-color: rgba(255,255,255,0.65);
+  color: #fff;
+}
+
+.rental-pickup-pill.active {
+  background: rgba(255,255,255,0.18);
+  border-color: #fff;
+  color: #fff;
+}
+
+/* ── 3-column company card grid ── */
+.rental-companies-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* ── Individual company card ── */
+.rental-card {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
+}
+
+.rental-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.25);
+}
+
+/* ── Card header ── */
+.rental-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid var(--border-light);
+  flex-wrap: wrap;
+}
+
+.rental-logo {
+  font-size: 2.2rem;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.rental-name-wrap { flex: 1; min-width: 0; }
+
+.rental-name {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--ba-midnight);
+  margin: 0 0 2px;
+  line-height: 1.2;
+}
+
+.rental-name-jp {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* ── Verdict-style badges ── */
+.rental-badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+  align-self: flex-start;
+  flex-shrink: 0;
+}
+
+.badge-blue  { background: #dbeafe; color: #1d4ed8; border: 1px solid #93c5fd; }
+.badge-green { background: #dcfce7; color: #15803d; border: 1px solid #86efac; }
+.badge-gold  { background: #fef9c3; color: #a16207; border: 1px solid #fde047; }
+
+/* ── Tagline ── */
+.rental-tagline {
+  font-size: 0.83rem;
+  color: var(--text-secondary);
+  padding: 12px 20px 0;
+  margin: 0;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+/* ── Feature list ── */
+.rental-features {
+  list-style: none;
+  padding: 12px 20px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  flex: 1;
+}
+
+.rental-features li {
+  font-size: 0.81rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.rental-features li strong { color: var(--ba-midnight); }
+
+/* ── Note callout ── */
+.rental-note {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-light);
+  padding: 10px 20px;
+  line-height: 1.55;
+}
+
+.rental-note strong { color: var(--ba-midnight); font-weight: 600; }
+
+/* ── Book button ── */
+.rental-book-btn {
+  display: block;
+  text-align: center;
+  margin: 0;
+  padding: 14px 20px;
+  background: var(--ba-midnight);
+  color: #fff;
+  font-size: 0.88rem;
+  font-weight: 700;
+  font-family: var(--font-primary);
+  text-decoration: none;
+  border-top: 1px solid var(--border-light);
+  transition: background var(--transition-fast);
+}
+
+.rental-book-btn:hover { background: var(--ba-blue); }
+
+/* ── Responsive: 2-col on tablet, 1-col on phone ── */
+@media (max-width: 900px) {
+  .rental-companies-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .rental-companies-grid { grid-template-columns: 1fr; }
+  .rental-search-card { padding: 18px 16px; }
+  .rental-pickup-row { flex-direction: column; align-items: flex-start; }
+}
+
+
+/* ═══════════════════════════════════════════════════
    ITINERARY TIMELINE
    ═══════════════════════════════════════════════════ */
 

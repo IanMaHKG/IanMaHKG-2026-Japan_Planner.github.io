@@ -392,6 +392,110 @@ window.SITE_DATA = {
     ]
   },
 
+  /* ─── Car Rental Search Section ─────────────────────────────────────
+   * Displays a search widget + 3 rental company cards below the
+   * Car Return Decision section.
+   * Rendered by render.js renderCarRental() → #car-rental-section.
+   *
+   * quickPickup[]  — preset pickup location pills (same idea as hotel
+   *                  quickLegs). Each: { label:{en,zh}, location }
+   *                  where `location` is the text pre-filled in the
+   *                  pickup input.
+   *
+   * companies[]    — 3 rental company cards.
+   *                  Each: { id, logo (emoji), name, nameJp, tagline:{en,zh},
+   *                          features:[{en,zh}], note:{en,zh},
+   *                          badge:{en,zh}, badgeClass,
+   *                          searchUrl  — deep-link to the company's
+   *                          English search page with pickup location
+   *                          pre-set to Tokyo. }
+   * ──────────────────────────────────────────────────────────────────*/
+  carRental: {
+    intro: {
+      en: "All three companies offer <strong>one-way (異地還車)</strong> rentals, English GPS, and studless winter tyres on request. Book online at least 4–6 weeks ahead for December availability.",
+      zh: "三家公司均提供<strong>異地還車</strong>服務、英文 GPS 及冬季無釘雪地輪胎（需提前指定）。12 月份車輛緊張，建議至少提前 4–6 週於官網預訂。"
+    },
+    quickPickup: [
+      { label: { en: "Tokyo (Dec 20)", zh: "東京 (12月20日)" }, location: "Shinjuku, Tokyo" },
+      { label: { en: "Haneda Airport", zh: "羽田機場" }, location: "Haneda Airport, Tokyo" },
+      { label: { en: "Narita Airport", zh: "成田機場" }, location: "Narita Airport, Chiba" }
+    ],
+    companies: [
+      {
+        id: "rental-toyota",
+        logo: "🚙",
+        name: "Toyota Rent a Car",
+        nameJp: "トヨタレンタカー",
+        tagline: {
+          en: "Japan's largest rental network — most locations, widest vehicle choice.",
+          zh: "日本最大租車網絡 — 分店最多、車款選擇最廣。"
+        },
+        badge: { en: "Most Locations", zh: "分店最多" },
+        badgeClass: "badge-blue",
+        features: [
+          { en: "✔ One-way drop-off nationwide (Tokyo → Nagoya / Kyoto / Osaka)", zh: "✔ 全國異地還車（東京→名古屋/京都/大阪）" },
+          { en: "✔ English online booking & English GPS available", zh: "✔ 提供英文網上預訂及英文 GPS" },
+          { en: "✔ Studless winter tyres — request at booking (必須指定)", zh: "✔ 無釘雪地輪胎 — 預訂時請特別指定（必須指定）" },
+          { en: "✔ Wide range: compact → 7-seat MPV for 3 people + luggage", zh: "✔ 車型齊全：小型車至 7 人 MPV，適合三人大件行李" },
+          { en: "✔ ETC card rental available for expressway toll auto-pay", zh: "✔ 提供 ETC 卡租用，高速公路過路費自動繳付" }
+        ],
+        note: {
+          en: "Recommended pickup branch: <strong>Toyota Rent-a-Car Shinjuku Station East</strong> or <strong>Haneda Airport Terminal 3</strong> if arriving by flight.",
+          zh: "推薦取車分店：<strong>トヨタレンタカー新宿駅東口店</strong>，或乘飛機入境者可選<strong>羽田機場第 3 航廈店</strong>。"
+        },
+        searchUrl: "https://rent.toyota.co.jp/en/"
+      },
+      {
+        id: "rental-nissan",
+        logo: "🚘",
+        name: "Nissan Rent a Car",
+        nameJp: "日産レンタカー",
+        tagline: {
+          en: "Great value EV & hybrid fleet — Nissan LEAFs available nationwide.",
+          zh: "超值油電/純電車隊 — 日產 LEAF 電動車全國可租。"
+        },
+        badge: { en: "Best for EV / Hybrid", zh: "電動車首選" },
+        badgeClass: "badge-green",
+        features: [
+          { en: "✔ One-way rentals: Tokyo → Nagoya / Kyoto / Osaka available", zh: "✔ 提供異地還車：東京→名古屋/京都/大阪" },
+          { en: "✔ Nissan LEAF (electric) & Note e-POWER (hybrid) ideal for Mt Fuji drive", zh: "✔ 日產 LEAF（電動）及 Note e-POWER（油電）— 富士山路段理想之選" },
+          { en: "✔ English GPS system available at most branches", zh: "✔ 大多數分店提供英文 GPS" },
+          { en: "✔ Studless winter tyres — available on request", zh: "✔ 提供無釘雪地輪胎（需預訂時指定）" },
+          { en: "✔ Transparent pricing, no hidden fuel surcharges on EV models", zh: "✔ 定價透明，電動車款無隱藏燃油附加費" }
+        ],
+        note: {
+          en: "Note: EV range may be reduced in cold December weather. Plan charging stops around Mt Fuji — use Nissan's route planner or Google Maps to locate chargers along the Fuji Five Lakes area.",
+          zh: "注意：12 月低溫會令電動車續航里程下降。請事先規劃富士山周邊充電站路線，可使用日産路線規劃工具或 Google Maps 查找五湖地區充電點。"
+        },
+        searchUrl: "https://nissan-rentacar.com/en/"
+      },
+      {
+        id: "rental-nippon",
+        logo: "🚐",
+        name: "Nippon Rent-A-Car",
+        nameJp: "ニッポンレンタカー",
+        tagline: {
+          en: "Nationwide budget-friendly option — great for families watching costs.",
+          zh: "全國性經濟之選 — 注重預算的家庭首選。"
+        },
+        badge: { en: "Best Value", zh: "最佳性價比" },
+        badgeClass: "badge-gold",
+        features: [
+          { en: "✔ Competitive one-way fees — often lower than Toyota/Nissan for Tokyo→Nagoya", zh: "✔ 極具競爭力的異地還車費 — 東京→名古屋路段費用常低於豐田/日産" },
+          { en: "✔ English online reservation system", zh: "✔ 提供英文網上預訂系統" },
+          { en: "✔ Studless winter tyres available (冬用スタッドレスタイヤ)", zh: "✔ 提供冬季無釘雪地輪胎（冬用スタッドレスタイヤ）" },
+          { en: "✔ Good selection of minivans & compact SUVs for family trips", zh: "✔ 廂式客貨車及 SUV 選擇充裕，適合家庭旅遊" },
+          { en: "✔ Over 500 branches across Japan including all major airports", zh: "✔ 全日本逾 500 間分店，涵蓋各主要機場" }
+        ],
+        note: {
+          en: "Recommended for budget-conscious families. Compare Nippon's one-way fee for Tokyo→Nagoya against Toyota before booking — it is frequently ¥3,000–¥5,000 cheaper.",
+          zh: "推薦注重預算的家庭選用。預訂前不妨比較 Nippon 與豐田在東京→名古屋的異地還車費，前者通常便宜 ¥3,000–¥5,000。"
+        },
+        searchUrl: "https://www.nipponrentacar.co.jp/en/"
+      }
+    ]
+  },
+
   /* ─── Practical Tips Section ─── */
   tips: [
     {

@@ -41,11 +41,115 @@
 function renderSiteContent() {
   renderOverview();
   renderCarReturn();
+  renderCarRental();
   renderTips();
   renderPacking();
   renderBudget();
   renderHotels();
 }
+
+
+/* ─── Car Rental Search Section ───────────────────────────────
+ *  Reads SITE_DATA.carRental and populates:
+ *    #rental-search-card    — intro callout + pickup location pills
+ *    #rental-companies-grid — 3 company cards (Toyota / Nissan / Nippon)
+ *
+ *  Pickup pills pre-fill a hidden input; clicking a company's
+ *  "Book Now" button opens the company's English search page in a
+ *  new tab. The pickup value is appended as a query param where
+ *  supported, or just shown as a context label.
+ * ──────────────────────────────────────────────────────────── */
+function renderCarRental() {
+  if (!window.SITE_DATA || !window.SITE_DATA.carRental) return;
+  const data = window.SITE_DATA.carRental;
+
+  // ── Search card: intro + pickup pills ──
+  const searchEl = document.getElementById('rental-search-card');
+  if (searchEl) {
+    const pillsHtml = data.quickPickup.map((p, i) => `
+      <button class="rental-pickup-pill${i === 0 ? ' active' : ''}"
+              onclick="selectRentalPickup(this)"
+              data-location="${p.location}">
+        <span class="lang-en">${p.label.en}</span>
+        <span class="lang-zh">${p.label.zh}</span>
+      </button>`).join('');
+
+    searchEl.innerHTML = `
+      <div class="rental-search-header">
+        <div class="rental-search-brand">
+          <span class="rental-brand-icon">🚗</span>
+          <div>
+            <h3>
+              <span class="lang-en">Japan Rental Car Finder</span>
+              <span class="lang-zh">日本租車搜尋器</span>
+            </h3>
+            <p class="rental-intro">
+              <span class="lang-en">${data.intro.en}</span>
+              <span class="lang-zh">${data.intro.zh}</span>
+            </p>
+          </div>
+        </div>
+        <div class="rental-pickup-row">
+          <span class="rental-pickup-label">
+            <span class="lang-en">📍 Pickup location:</span>
+            <span class="lang-zh">📍 取車地點：</span>
+          </span>
+          <div class="rental-pickup-pills">${pillsHtml}</div>
+        </div>
+      </div>
+    `;
+  }
+
+  // ── Company cards ──
+  const gridEl = document.getElementById('rental-companies-grid');
+  if (gridEl) {
+    gridEl.innerHTML = data.companies.map(co => {
+      const featuresHtml = co.features.map(f => `
+        <li>
+          <span class="lang-en">${f.en}</span>
+          <span class="lang-zh">${f.zh}</span>
+        </li>`).join('');
+
+      return `
+        <div class="rental-card" id="${co.id}">
+          <div class="rental-card-header">
+            <span class="rental-logo">${co.logo}</span>
+            <div class="rental-name-wrap">
+              <h3 class="rental-name">${co.name}</h3>
+              <p class="rental-name-jp">${co.nameJp}</p>
+            </div>
+            <span class="rental-badge ${co.badgeClass}">
+              <span class="lang-en">${co.badge.en}</span>
+              <span class="lang-zh">${co.badge.zh}</span>
+            </span>
+          </div>
+          <p class="rental-tagline">
+            <span class="lang-en">${co.tagline.en}</span>
+            <span class="lang-zh">${co.tagline.zh}</span>
+          </p>
+          <ul class="rental-features">${featuresHtml}</ul>
+          <div class="rental-note">
+            <span class="lang-en">${co.note.en}</span>
+            <span class="lang-zh">${co.note.zh}</span>
+          </div>
+          <a href="${co.searchUrl}" target="_blank" rel="noopener"
+             class="rental-book-btn" id="${co.id}-btn">
+            <span class="lang-en">Book on ${co.name} ↗</span>
+            <span class="lang-zh">前往 ${co.nameJp} 預訂 ↗</span>
+          </a>
+        </div>
+      `;
+    }).join('');
+  }
+}
+
+/* Allow pickup pills to highlight active state (no page reload needed) */
+function selectRentalPickup(btn) {
+  const all = btn.closest('.rental-pickup-pills').querySelectorAll('.rental-pickup-pill');
+  all.forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+window.selectRentalPickup = selectRentalPickup;
 
 
 /* ─── Car Return Decision Helper Section ───

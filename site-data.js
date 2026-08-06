@@ -125,8 +125,8 @@ window.SITE_DATA = {
         dotClass: "hakone",
         name:  { en: "Hakone (箱根)",       zh: "箱根"   },
         days:  { en: "Days 6–7",            zh: "第 6–7 天" },
-        desc:  { en: "Owakudani, Lake Ashi, pirate ship, onsen ryokan",
-                 zh: "走訪大涌谷地熱景區、搭蘆之湖海盜船、享頂級溫泉" },
+        desc:  { en: "Explore Owakudani volcanic valley, pirate ship on Lake Ashi, stay at a top luxury hot spring ryokan",
+                 zh: "走訪大涌谷地熱景點、搭蘆之湖海盜船、享頂級溫泉" },
         lat: 35.2329, lng: 139.1069,
         color: "#C9A96E", markerClass: "marker-hakone"
       },
@@ -213,9 +213,9 @@ window.SITE_DATA = {
         id: "car-return-nagoya",
         icon: "🚗",
         title: { en: "Nagoya", zh: "名古屋" },
-        subtitle: { en: "Current Plan · Day 7 transit stop", zh: "現行方案 · 第 7 天中途站" },
+        subtitle: { en: "Current Plan · Day 7 transit stop", zh: "現有計劃 · 第 7 天中途站" },
         verdict: "current",
-        verdictLabel: { en: "Current Plan", zh: "現行方案" },
+        verdictLabel: { en: "Current Plan", zh: "現有計劃" },
         pros: [
           { en: "<strong>Cheapest one-way fee</strong> — Tokyo→Nagoya drop-off costs approx ¥15,000–¥20,000 (vs ¥25,000–¥35,000 to Kyoto/Osaka)", zh: "<strong>異地還車費用最低</strong> — 東京→名古屋約 ¥15,000–¥20,000（京都/大阪則需 ¥25,000–¥35,000）" },
           { en: "<strong>No driving stress in Kansai</strong> — Kyoto city centre and Osaka are notoriously car-unfriendly (narrow streets, expensive parking)", zh: "<strong>無需在關西開車</strong> — 京都市區巷道窄小、停車費高昂；大阪市區行車亦複雜" },

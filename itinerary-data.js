@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @file itinerary-data.js
  * @description DATA SOURCE — the complete 12-day Japan Winter Journey 2026 schedule.
  * Sets window.ITINERARY_DATA, an array of day objects consumed by renderItinerary() in render.js.
@@ -71,12 +71,12 @@ window.ITINERARY_DATA = [
           },
           desc: {
             en: "Clear customs, pick up your <strong>Suica card</strong> at the airport station, and take the Narita Express or Limousine Bus to your hotel. Check in and rest after the flight.",
-            zh: "辦理入境手續，在機場車站領取/購買 <strong>Suica 卡</strong>，乘搭成田特快 (N'EX) 或機場利木津巴士直達市區酒店。登記入住並稍作休息，舒緩飛行疲勞。"
+            zh: "辦理入境手續，在機場車站領取/購買 <strong>Suica 卡</strong>，乘搭成田特快 (N'EX) 或機場利木津巴士直達市區酒店。辦理 Check-in 並稍作休息，舒緩飛行疲勞。"
           },
           meal: {
             icon: "🍳",
             en: "<strong>Breakfast / Brunch:</strong> Grab a quick meal at a <strong>konbini (便利店)</strong> (7-Eleven onigiri, sandwiches, and hot coffee) — surprisingly delicious and perfect after a long flight.",
-            zh: "<strong>早餐 / 早午餐：</strong> 在機場或酒店附近的<strong>便利店 (Konbini)</strong> 買點輕食（7-Eleven 御飯糰、三文治和熱咖啡）—— 日式便利店食品水準極高，方便快捷。"
+            zh: "<strong>早餐 / 早午餐：</strong> 在機場或酒店附近的<strong>便利店 (Konbini)</strong> 買點輕食（7-Eleven 飯糰、三文治和熱咖啡）—— 日式便利店食品水準極高，方便快捷。"
           }
         }
       },
@@ -119,7 +119,7 @@ window.ITINERARY_DATA = [
     ],
     tip: {
       en: "<strong>💡 Tip:</strong> If arriving early, consider visiting <strong>Ueno Park (上野公園)</strong> (10 min from Asakusa) for a peaceful stroll by Shinobazu Pond. The Ameyoko market nearby is great for snacks.",
-      zh: "<strong>💡 貼心提示：</strong> 若航班較早抵達，可先到鄰近的<strong>上野公園</strong>不忍池散步，或到旁邊的<strong>阿美橫丁 (Ameyoko)</strong> 感受熱鬧的傳統市場氣氛。"
+      zh: "<strong>💡 實用貼士：</strong> 若航班較早抵達，可先到鄰近的<strong>上野公園</strong>不忍池散步，或到旁邊的<strong>阿美橫丁 (Ameyoko)</strong> 感受熱鬧的傳統市場氣氛。"
     }
   },
 
@@ -195,7 +195,7 @@ window.ITINERARY_DATA = [
     ],
     tip: {
       en: "<strong>💡 Tip:</strong> Book <strong>Shibuya Sky</strong> tickets online 1–2 weeks ahead to skip the queue. Sunset time slot (~16:00) is best for both daylight and night views.",
-      zh: "<strong>💡 貼心提示：</strong> <strong>Shibuya Sky 必須提前 1-2 星期上網搶購門票</strong>。最推介挑選下午 4 點左右的日落場次，能同時拍到日落與亮燈後的東京都夜景。"
+      zh: "<strong>💡 實用貼士：</strong> <strong>Shibuya Sky 必須提前 1-2 星期上網搶購門票</strong>。最推介挑選下午 4 點左右的日落場次，能同時拍到日落與亮燈後的東京都夜景。"
     }
   },
 
@@ -223,7 +223,7 @@ window.ITINERARY_DATA = [
           },
           desc: {
             en: "The original Tokyo fish market's outer stalls are still bustling with fresh seafood, tamagoyaki (sweet egg omelette), and street food. Arrive by 8:30 AM for the best selection. Walk through the narrow lanes sampling as you go.",
-            zh: "保留了傳統風貌的築地場外市場依然活力十足。清晨 8:30 抵達最能避開人潮。漫步於熙來攘往的小巷中，沿途品嚐現燒海鮮、玉子燒及新鮮刺身，這是最道地的東京早餐體驗。"
+            zh: "保留了傳統風貌的築地場外市場依然活力十足。清晨 8:30 抵達最能避開人潮。漫步於熙來攘往的小巷中，沿途品嚐現燒海鮮、玉子燒及新鮮刺身，這是最地道的東京早餐體驗。"
           },
           meal: {
             icon: "🍳",
@@ -271,7 +271,7 @@ window.ITINERARY_DATA = [
     ],
     tip: {
       en: "<strong>💡 Tip:</strong> <strong>teamLab Borderless</strong> tickets sell out quickly — book online at least 2 weeks ahead! Choose a weekday afternoon slot for fewer crowds.",
-      zh: "<strong>💡 貼心提示：</strong> <strong>teamLab 門票必須提前於官網預約</strong>，不設現場售票。館內有許多鏡面地板，建議避免穿裙子前往。"
+      zh: "<strong>💡 實用貼士：</strong> <strong>teamLab 門票必須提前於官網預約</strong>，不設現場售票。館內有許多鏡面地板，建議避免穿裙子前往。"
     }
   },
 
@@ -304,7 +304,7 @@ window.ITINERARY_DATA = [
           meal: {
             icon: "🍳",
             en: "<strong>Breakfast:</strong> Any classic café near Tokyo Station — try a Japanese-style morning toast set at an old-school <strong>kissaten (喫茶店)</strong>.",
-            zh: "<strong>早餐：</strong> 東京站周邊舊式<strong>喫茶店 (Kissaten)</strong> — 品嚐日式傳統「Morning Set」（厚切吐司配水煮蛋及黑咖啡），體驗經典的日本昭和晨間儀式感。"
+            zh: "<strong>早餐：</strong> 東京站周邊舊式<strong>喫茶店 (Kissaten)</strong> — 品嚐日式傳統「Morning Set」（厚切多士配水煮蛋及黑咖啡），體驗經典的日本昭和晨間儀式感。"
           }
         }
       },
@@ -347,7 +347,7 @@ window.ITINERARY_DATA = [
     ],
     tip: {
       en: "<strong>💡 Tip:</strong> This is your last night in Tokyo before the road trip. Pack your bags tonight! Buy any snacks or <strong>Uniqlo HEATTECH</strong> layers you need for the colder Mt Fuji region tomorrow.",
-      zh: "<strong>💡 貼心提示：</strong> 明天將開啟自駕之旅前往寒冷的富士山區。建議今晚先整理好行李。銀座 Uniqlo 旗艦店款式齊全，適合出發前為父母添置保暖的 <strong>HEATTECH 內衣/發熱衣</strong>。"
+      zh: "<strong>💡 實用貼士：</strong> 明天將開啟自駕之旅前往寒冷的富士山區。建議今晚先整理好行李。銀座 Uniqlo 旗艦店款式齊全，適合出發前為父母添置保暖的 <strong>HEATTECH 保暖內衣</strong>。"
     }
   },
 
@@ -424,7 +424,7 @@ window.ITINERARY_DATA = [
     ],
     tip: {
       en: "<strong>💡 Tip:</strong> The <strong>Chureito Pagoda (忠靈塔)</strong> steps may be icy — wear grip shoes and take it slowly for your parents. If the climb is too much, the lower viewpoint still offers a beautiful photo.",
-      zh: "<strong>💡 貼心提示：</strong> 冬季新倉山公園步道可能會有結冰現象，請叮囑父母慢行。若梯級對膝蓋負擔太大，在山腳的淺間神社旁同樣能觀賞到宏偉的富士山。"
+      zh: "<strong>💡 實用貼士：</strong> 冬季新倉山公園步道可能會有結冰現象，請叮囑父母慢行。若梯級對膝蓋負擔太大，在山腳的淺間神社旁同樣能觀賞到宏偉的富士山。"
     }
   },
 
@@ -501,7 +501,7 @@ window.ITINERARY_DATA = [
     ],
     tip: {
       en: "<strong>💡 Tip:</strong> Owakudani Ropeway may close in bad weather or volcanic activity. Check the <a href=\"https://www.hakonenavi.jp/en/\" target=\"_blank\" rel=\"noopener\">Hakone Navi</a> website. Have a backup plan to visit the <strong>Hakone Open-Air Museum (雕刻之森美術館)</strong>.",
-      zh: "<strong>💡 貼心提示：</strong> 大涌谷纜車可能因強風或火山氣體濃度高而停駛。出發前請查詢官網。如遇停駛，可改往參觀老少咸宜的<strong>箱根雕刻之森美術館</strong>。"
+      zh: "<strong>💡 實用貼士：</strong> 大涌谷纜車可能因強風或火山氣體濃度高而停駛。出發前請查詢官網。如遇停駛，可改往參觀老少咸宜的<strong>箱根雕刻之森美術館</strong>。"
     }
   },
 
@@ -577,7 +577,7 @@ window.ITINERARY_DATA = [
     ],
     tip: {
       en: "<strong>💡 Tip:</strong> This is the longest travel day. Buy your <strong>Shinkansen tickets</strong> at the Nagoya Station JR Ticket Office (Midori-no-窓口). Reserved seats (指定席) are recommended for family comfort.",
-      zh: "<strong>💡 貼心提示：</strong> 今天是行程中移動距離最長的一天。抵達名古屋站後可直接在 JR 綠色窗口 (Midori-no-madoguchi) 購買新幹線車票，為父母購買「指定席」（對號入座）最穩妥。"
+      zh: "<strong>💡 實用貼士：</strong> 今天是行程中移動距離最長的一天。抵達名古屋站後可直接在 JR 綠色窗口 (Midori-no-madoguchi) 購買新幹線車票，為父母購買「指定席」（對號入座）最穩妥。"
     }
   },
 
@@ -653,7 +653,7 @@ window.ITINERARY_DATA = [
     ],
     tip: {
       en: "<strong>💡 Tip:</strong> Kiyomizu-dera is on a steep hill — <strong>take a taxi up to the temple gate and walk down</strong> the slopes. This avoids an exhausting uphill climb for your parents.",
-      zh: "<strong>💡 貼心提示：</strong> 清水寺坡度較陡。**強烈建議直接從京都站搭的士（計程車）上到清水寺大門口，然後一路下坡步行下山**，這能為父母的膝蓋省下大量力氣。"
+      zh: "<strong>💡 實用貼士：</strong> 清水寺坡度較陡。**強烈建議直接從京都站搭的士上到清水寺大門口，然後一路下坡步行下山**，這能為父母的膝蓋省下大量力氣。"
     }
   },
 
@@ -729,7 +729,7 @@ window.ITINERARY_DATA = [
     ],
     tip: {
       en: "<strong>💡 Tip:</strong> The tea ceremony is a seated activity with minimal physical movement, making it very comfortable and relaxing for parents. English instruction is available.",
-      zh: "<strong>💡 貼心提示：</strong> 傳統茶道體驗通常設有矮凳，無須全程跪坐，對年長父母的關節非常友善。大部分體驗點均提供流暢的英語講解。"
+      zh: "<strong>💡 實用貼士：</strong> 傳統茶道體驗通常設有矮凳，無須全程跪坐，對年長父母的關節非常友善。大部分體驗點均提供流暢的英語講解。"
     }
   },
 
@@ -805,7 +805,7 @@ window.ITINERARY_DATA = [
     ],
     tip: {
       en: "<strong>💡 Tip:</strong> The deer in Nara are wild but accustomed to tourists. They can be pushy when they see food — hold crackers up high and bow before feeding. Keep bags zipped.",
-      zh: "<strong>💡 貼心提示：</strong> 奈良小鹿雖可愛但仍有野性。當牠們看見您手上有鹿仙貝時會主動圍過來。建議將仙貝高舉，並向小鹿輕輕點頭鞠躬，牠們通常也會鞠躬回禮後再行餵食。請看管好手袋及重要衣物。"
+      zh: "<strong>💡 實用貼士：</strong> 奈良小鹿雖可愛但仍有野性。當牠們看見您手上有鹿仙貝時會主動圍過來。建議將仙貝高舉，並向小鹿輕輕點頭鞠躬，牠們通常也會鞠躬回禮後再行餵食。請看管好手袋及重要衣物。"
     }
   },
 
@@ -856,7 +856,7 @@ window.ITINERARY_DATA = [
           meal: {
             icon: "🍜",
             en: "<strong>Lunch:</strong> <strong>Kushikatsu Daruma (串かつだるま)</strong> (Shinsekai) — Try original deep-fried skewers like shrimp, lotus root, asparagus, and cheese. Light, crispy, and delicious.",
-            zh: "<strong>午餐：</strong> <strong>元祖串炸達摩 (Daruma)</strong> （新世界總店）— 體驗道地大阪串炸文化。外皮裹上極薄麵衣炸至金黃，推介大蝦、蓮藕、蘆筍和鵪鶉蛋串。**（注意： communal 醬汁只能沾一次）**"
+            zh: "<strong>午餐：</strong> <strong>元祖串炸達摩 (Daruma)</strong> （新世界總店）— 體驗地道大阪串炸文化。外皮裹上極薄麵衣炸至金黃，推介大蝦、蓮藕、蘆筍和鵪鶉蛋串。**（注意： 醬汁絕不可二次蘸用，只可蘸一次）**"
           }
         }
       },
@@ -881,7 +881,7 @@ window.ITINERARY_DATA = [
     ],
     tip: {
       en: "<strong>💡 Tip:</strong> Today is Dec 30, which is close to the New Year holiday. Some small family shops may close, but major malls, markets, and tourist facilities operate normally.",
-      zh: "<strong>💡 貼心提示：</strong> 12月30日已臨近日本新年除夕。個別私人小店可能休業，但大型商場、主要市場及著名景點均正常營業，也是為父母購買日式藥妝和手信的最佳時機。"
+      zh: "<strong>💡 實用貼士：</strong> 12月30日已臨近日本新年除夕。個別私人小店可能休業，但大型商場、主要市場及著名景點均正常營業，也是為父母購買日式藥妝和手信的最佳時機。"
     }
   },
 
@@ -958,7 +958,8 @@ window.ITINERARY_DATA = [
     ],
     tip: {
       en: "<strong>💡 Tip:</strong> If departing on Jan 1, check your transport timing in advance. Trains operate, but might be on a holiday schedule. Make sure to pack the night before so you can enjoy the NYE countdown.",
-      zh: "<strong>💡 貼心提示：</strong> 若於 1 月 1 日乘飛機返港，請留意往機場的特急列車可能實施假日班表，務必提前確認。今晚出門前請先收拾好行李，便能無後顧之憂地參與深夜跨年敲鐘。"
+      zh: "<strong>💡 實用貼士：</strong> 若於 1 月 1 日乘飛機返港，請留意往機場的特急列車可能實施假日班表，務必提前確認。今晚出門前請先收拾好行李，便能無後顧之憂地參與深夜跨年敲鐘。"
     }
   }
 ];
+

@@ -1343,8 +1343,24 @@ img {
 
 /* ═══════════════════════════════════════════════════
    CAR RENTAL SEARCH SECTION
-   (dark background section — mirrors hotel search UI)
+   (explicit dark navy bg — mirrors the nav bar colour)
    ═══════════════════════════════════════════════════ */
+
+/* Force dark navy background regardless of section-dark override */
+#car-rental {
+  background: var(--ba-midnight) !important;
+}
+
+/* Section heading and subtitle override for dark bg */
+#car-rental .section-title {
+  color: #fff;
+}
+#car-rental .section-title::after {
+  background: var(--ba-blue);
+}
+#car-rental .section-subtitle {
+  color: rgba(255,255,255,0.75);
+}
 
 /* ── Search card container ── */
 .rental-search-card {

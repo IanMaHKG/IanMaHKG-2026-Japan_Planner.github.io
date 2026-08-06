@@ -109,9 +109,13 @@ Taiwan-specific vocabulary.
   Nissan Serena) — fits 3 adults + 9 bags (3 large + 3 cabin + 3 backpack).
 - **Language switch:** Always visible top of page next to hamburger menu.
 
-### Column / Grid Layout Rule
+### Column / Grid Layout Rule (CRITICAL)
 
-- **Never leave a single item alone in the last row** of any card grid.
-- All multi-item rows must contain **2–4 items per row**.
-- Preferred patterns: 5 items → 3+2 centred; 4 items → 2+2 or 4-across.
-- Use 6-column backbone with nth-child offsets to centre partial rows.
+- **Strict Requirement:** **NEVER leave a single item alone in the last row** of any card grid.
+- **Each row MUST contain 2–4 items.** Single-item orphan rows (e.g. 5+1 or 4+1) are strictly unacceptable.
+- **Do NOT use `repeat(auto-fit, minmax(...))` for card grids.** On wide desktop monitors (1320px–1600px container), `auto-fit` dynamically calculates 5+ columns and spills a single item onto the last row.
+- **Explicit Grid Rules by Item Count:**
+  - **6 items** (e.g. `.tips-grid`): Use `repeat(3, 1fr)` on desktop (2 rows of 3: 3+3), `repeat(2, 1fr)` on tablet (3 rows of 2: 2+2+2), `1fr` on mobile.
+  - **5 items** (e.g. `.itinerary-hotels-grid`): Use a 6-column backbone (`grid-template-columns: repeat(6, 1fr)`) with `grid-column: span 2` and `nth-child(4)` / `nth-child(5)` offsets so the last 2 items sit centered (3+2 layout).
+  - **4 items** (e.g. `.overview-grid`, `.vr-grid`): Use `repeat(4, 1fr)` on desktop (1 row of 4), `repeat(2, 1fr)` on tablet (2 rows of 2).
+  - **3 items** (e.g. `.packing-grid`, `.cr-grid`, `.rental-companies-grid`): Use `repeat(3, 1fr)` on desktop (1 row of 3), `repeat(2, 1fr)` or `1fr` on tablet/mobile.

@@ -1254,6 +1254,92 @@ img {
 
 .cr-recommendation strong { color: var(--ba-midnight); }
 
+/* ── Tips accordion toggle button ── */
+.cr-tips-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 20px;
+  border-top: 1px solid var(--border-light);
+  cursor: pointer;
+  user-select: none;
+  background: var(--bg-secondary);
+  transition: background var(--transition-fast);
+}
+
+.cr-tips-toggle:hover { background: var(--bg-card-hover); }
+
+.cr-tips-toggle-icon { font-size: 1rem; flex-shrink: 0; }
+
+.cr-tips-toggle-label {
+  flex: 1;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--ba-midnight);
+}
+
+.cr-chevron {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  transition: transform var(--transition-fast);
+  display: inline-block;
+}
+
+/* ── Collapsible tips panel ── */
+.cr-tips-panel {
+  display: none;
+  padding: 0 20px;
+  border-top: 1px solid var(--border-light);
+  background: var(--bg-secondary);
+}
+
+.cr-tips-panel.open {
+  display: block;
+  animation: crPanelFadeIn 0.22s ease both;
+}
+
+@keyframes crPanelFadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Individual tip item (icon + label + detail) ── */
+.cr-tip-item {
+  display: flex;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.cr-tip-item:last-child { border-bottom: none; }
+
+.cr-tip-icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  width: 26px;
+  text-align: center;
+  margin-top: 1px;
+}
+
+.cr-tip-body { flex: 1; min-width: 0; }
+
+.cr-tip-label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--ba-midnight);
+  margin-bottom: 3px;
+}
+
+.cr-tip-detail {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.cr-tip-detail strong { color: var(--ba-midnight); font-weight: 600; }
+
 
 /* ═══════════════════════════════════════════════════
    ITINERARY TIMELINE

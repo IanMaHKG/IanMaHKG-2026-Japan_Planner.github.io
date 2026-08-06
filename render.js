@@ -91,6 +91,23 @@ function renderCarReturn() {
           <span class="lang-zh">${c.zh}</span>
         </li>`).join('');
 
+      // Tips panel ("If you choose this" recommendations)
+      const tipsHtml = (opt.tips || []).map(tip => `
+        <div class="cr-tip-item">
+          <span class="cr-tip-icon">${tip.icon}</span>
+          <div class="cr-tip-body">
+            <strong class="cr-tip-label">
+              <span class="lang-en">${tip.label.en}</span>
+              <span class="lang-zh">${tip.label.zh}</span>
+            </strong>
+            <p class="cr-tip-detail">
+              <span class="lang-en">${tip.detail.en}</span>
+              <span class="lang-zh">${tip.detail.zh}</span>
+            </p>
+          </div>
+        </div>
+      `).join('');
+
       return `
         <div class="cr-card verdict-${opt.verdict}" id="${opt.id}">
           <div class="cr-card-header">
@@ -126,6 +143,18 @@ function renderCarReturn() {
               <ul class="cr-list">${consHtml}</ul>
             </div>
           </div>
+          ${tipsHtml ? `
+          <div class="cr-tips-toggle" onclick="toggleCarTips(this)" role="button" aria-expanded="false">
+            <span class="cr-tips-toggle-icon">🗺️</span>
+            <span class="cr-tips-toggle-label">
+              <span class="lang-en">If you choose this — Hotels, Food &amp; Logistics</span>
+              <span class="lang-zh">若選擇此方案 — 住宿、美食及行李安排</span>
+            </span>
+            <span class="cr-chevron">▼</span>
+          </div>
+          <div class="cr-tips-panel">
+            ${tipsHtml}
+          </div>` : ''}
         </div>
       `;
     }).join('');
@@ -140,6 +169,20 @@ function renderCarReturn() {
     `;
   }
 }
+
+
+/* ─── Car Tips Accordion Toggle ───
+ * Called by onclick="toggleCarTips(this)" on .cr-tips-toggle elements.
+ * Toggles .open on the sibling .cr-tips-panel and rotates the chevron.
+ * ─────────────────────────────── */
+function toggleCarTips(btn) {
+  const panel = btn.nextElementSibling; // .cr-tips-panel
+  const chevron = btn.querySelector('.cr-chevron');
+  const isOpen = panel.classList.toggle('open');
+  btn.setAttribute('aria-expanded', isOpen);
+  if (chevron) chevron.style.transform = isOpen ? 'rotate(180deg)' : '';
+}
+window.toggleCarTips = toggleCarTips; // expose for inline onclick
 
 
 /* ─── Overview Section ─── */

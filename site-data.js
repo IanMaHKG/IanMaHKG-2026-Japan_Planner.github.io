@@ -227,6 +227,48 @@ window.SITE_DATA = {
           { en: "<strong>Nagoya is a transit-only stop</strong> — You won't have time to explore it as a tourist destination", zh: "<strong>名古屋只作中途換乘</strong> — 沒有額外時間深度遊覽名古屋景點" },
           { en: "<strong>One-way drop-off surcharge still applies</strong> — ¥15,000–¥20,000 fee on top of rental cost", zh: "<strong>仍需支付異地還車附加費</strong> — 約 ¥15,000–¥20,000 額外收費" },
           { en: "<strong>Need to plan luggage logistics</strong> — Consider takkyubin (宅配便) from Nagoya hotel to Kyoto hotel (¥2,000–¥3,000 per bag)", zh: "<strong>需安排行李物流</strong> — 建議使用宅配便（¥2,000–¥3,000/件）從名古屋酒店寄往京都酒店" }
+        ],
+        tips: [
+          {
+            icon: "🏨",
+            label: { en: "Where to Stay", zh: "住宿建議" },
+            detail: {
+              en: "Stay <strong>near Nagoya Station</strong> — all rental offices are within a 5-min taxi. Good options: <strong>JR Gate Tower Hotel</strong> (right above the station, stunning city views), <strong>Marriott Associa Nagoya</strong> (connected to the station), or the more affordable <strong>Mitsui Garden Hotel Nagoya Premier</strong>. Book 1 night.",
+              zh: "建議住在<strong>名古屋車站附近</strong> — 所有租車公司均在車站 5 分鐘的士範圍內。推薦酒店：<strong>JR Gate Tower Hotel</strong>（直接連接車站，城市景觀一流）、<strong>Marriott Associa 名古屋</strong>（車站連接）或性價比更高的 <strong>Mitsui Garden Hotel 名古屋 Premier</strong>。建議預訂 1 晚。"
+            }
+          },
+          {
+            icon: "🍽️",
+            label: { en: "What to Eat", zh: "美食推介" },
+            detail: {
+              en: "Don't miss Nagoya's signature dishes: <strong>Miso Katsu</strong> (味噌豬排 — Yabaton is the classic chain; Misokatsu Matsunoya for sit-down), <strong>Hitsumabushi</strong> (ひつまぶし — grilled eel rice eaten three ways; try Atsuta Horaiken near the station), and <strong>Tebasaki</strong> (手羽先 — spicy chicken wings at Yamachan).",
+              zh: "必嚐名古屋特色美食：<strong>味噌炸豬排</strong>（矢場とん是經典連鎖；松乃家為舒適坐食選擇）、<strong>鰻魚飯三吃（Hitsumabushi）</strong>（推薦車站附近的熱田蓬萊軒）及<strong>手羽先（Tebasaki）</strong>（炸辣雞翼，推薦山ちゃん）。"
+            }
+          },
+          {
+            icon: "🧳",
+            label: { en: "Luggage Strategy", zh: "行李安排策略" },
+            detail: {
+              en: "<strong>Ship bags ahead to Kyoto before departure day.</strong> Ask your Nagoya hotel's front desk to arrange <strong>takkyubin (宅配便)</strong> pickup — Yamato Transport or Sagawa. Bags sent by 12:00 noon typically arrive at your Kyoto hotel the next morning. Travel the Shinkansen Nagoya→Kyoto with only a small day bag. This transforms Kyoto into a completely stress-free experience.",
+              zh: "<strong>出發前一天，在名古屋酒店安排宅配便（Yamato 黑貓宅急便 / 佐川急便）寄送行李。</strong>中午前交給前台，行李通常翌日早上送達京都酒店。持小型隨身包搭新幹線前往京都，令京都旅程輕鬆無負擔。"
+            }
+          },
+          {
+            icon: "🚗",
+            label: { en: "Car Rental Return", zh: "還車安排" },
+            detail: {
+              en: "Major rental offices near Nagoya Station: <strong>Toyota Rent-a-Car Nagoya Ekimae</strong>, <strong>Nissan Rent-a-Car Nagoya Station</strong>, <strong>Times Car Rental Nagoya Station</strong>. Return the car first (takes ~30 min including inspection), then check in to your hotel. Tip: pre-take photos of the car at Hakone before driving to document pre-existing marks.",
+              zh: "名古屋車站附近主要租車公司：<strong>Toyota 租車名古屋駅前店</strong>、<strong>Nissan 租車名古屋站</strong>、<strong>Times Car Rental 名古屋站</strong>。建議先還車（含驗車約 30 分鐘），再辦理酒店入住。還車前記得在箱根出發時先拍攝車身照片，記錄原有損傷。"
+            }
+          },
+          {
+            icon: "🚅",
+            label: { en: "Nagoya → Kyoto Transfer", zh: "名古屋→京都交通" },
+            detail: {
+              en: "Take the <strong>JR Tokaido Shinkansen (Nozomi or Hikari)</strong> from Nagoya Station to Kyoto Station — journey is <strong>35 min (Nozomi)</strong> or 40 min (Hikari). Trains run every 10–15 min. Buy tickets at the Shinkansen ticket counter or use reserved seat booking on the JR app. Non-reserved seats are fine for a short hop.",
+              zh: "在名古屋站乘搭 <strong>JR 東海道新幹線（希望號 Nozomi 或光號 Hikari）</strong>前往京都站，車程 <strong>35 分鐘（希望號）</strong>或 40 分鐘（光號）。班次頻密，每 10–15 分鐘一班。可在新幹線售票窗口或 JR App 預訂指定座席，短途亦可購自由席。"
+            }
+          }
         ]
       },
       {
@@ -248,6 +290,48 @@ window.SITE_DATA = {
           { en: "<strong>Higher one-way drop fee</strong> — Tokyo→Kyoto typically ¥25,000–¥35,000", zh: "<strong>異地還車費用較高</strong> — 東京→京都通常 ¥25,000–¥35,000" },
           { en: "<strong>Car drop-off location may not be central</strong> — Rental offices are often near Kyoto Station, away from hotel clusters in Gion / Arashiyama", zh: "<strong>還車地點未必方便</strong> — 租車公司多在京都車站附近，而非住宿較集中的祗園 / 嵐山一帶" },
           { en: "<strong>Luggage then becomes a problem in Kyoto</strong> — Lugging suitcases on narrow Kyoto streets and temple steps defeats the purpose", zh: "<strong>京都行李管理仍是難題</strong> — 大件行李在京都狹窄街道及寺院石階間移動非常不便" }
+        ],
+        tips: [
+          {
+            icon: "🏨",
+            label: { en: "Where to Stay", zh: "住宿建議" },
+            detail: {
+              en: "Stay <strong>near Kyoto Station</strong> — this is where rental offices are clustered and convenient for both arrival and onward trips to Osaka/Nara. Good options: <strong>Daiwa Roynet Hotel Kyoto-Ekimae</strong> (budget-mid, 2-min walk to station), <strong>Hotel Granvia Kyoto</strong> (directly connected to JR Kyoto station), or <strong>Kyoto Tower Sando Hotel</strong> for mid-range. If your heart is set on Gion area, use <strong>The Screen Kyoto</strong> or <strong>Kyoto Granbell Hotel</strong> — but note you'll need a taxi or bus from the rental drop-off.",
+              zh: "建議住在<strong>京都車站附近</strong> — 此區租車公司集中，且方便前往大阪/奈良。推薦酒店：<strong>Daiwa Roynet Hotel 京都駅前</strong>（性價比高，步行 2 分鐘至車站）、<strong>Hotel Granvia Kyoto</strong>（JR 京都站直接連接）或中價位的<strong>京都 Tower Sando Hotel</strong>。若想住祗園區，可選 <strong>The Screen Kyoto</strong> 或 <strong>Kyoto Granbell Hotel</strong>，但需留意從還車地點需乘的士或巴士。"
+            }
+          },
+          {
+            icon: "🚗",
+            label: { en: "Car Rental Return", zh: "還車安排" },
+            detail: {
+              en: "Rental offices in Kyoto: <strong>Toyota Rent-a-Car Kyoto Station</strong> (closest to JR Kyoto), <strong>Nissan Rent-a-Car Kyoto Eki-Mae</strong>. <strong>Important:</strong> avoid arriving in Kyoto during rush hour (17:00–19:00) or on weekends — parking is almost impossible. Plan to arrive by 15:00 at the latest to return the car without stress. Do NOT drive into Gion / Higashiyama with the car — park at Kyoto Station and walk or taxi from there.",
+              zh: "京都還車地點：<strong>Toyota 租車京都站</strong>（最近 JR 京都站）、<strong>Nissan 租車京都駅前</strong>。<strong>重要提示：</strong>避免在繁忙時段（17:00–19:00）或週末駕車進京都 — 停車幾乎不可能。建議最遲 15:00 前抵達，確保還車順暢。切勿開車進入祗園 / 東山 — 建議把車停在京都站還掉，再步行或乘的士前往。"
+            }
+          },
+          {
+            icon: "🧳",
+            label: { en: "Luggage Strategy", zh: "行李安排策略" },
+            detail: {
+              en: "Even though you drove here with all your bags, <strong>do not drag suitcases around Kyoto</strong>. On your first morning, use your hotel's concierge to <strong>ship bags forward to your Osaka hotel via takkyubin</strong> before heading out for the day. This way you travel Kyoto light (small backpack only) and your bags magically appear in Osaka when you arrive. Alternatively, Kyoto Station has large-capacity coin lockers (reserve in advance at www.ecbo.io).",
+              zh: "即使你駕車帶齊行李到達，<strong>切勿帶著行李箱遊覽京都。</strong>入住首日早上，請酒店協助安排<strong>宅配便，將大件行李寄往大阪酒店</strong>，再輕裝出發遊覽。如此一來，你在大阪入住時行李已準時送達。另一選擇是利用京都站的大容量儲物櫃（可在 www.ecbo.io 提前預訂）。"
+            }
+          },
+          {
+            icon: "🚌",
+            label: { en: "Getting Around Kyoto", zh: "京都市內交通" },
+            detail: {
+              en: "Once the car is returned, use the <strong>Kyoto City Bus Day Pass (¥700/day)</strong> for unlimited rides to Kinkaku-ji, Arashiyama, Fushimi Inari, and Gion. Buy from the bus driver or at the tourist info counter inside Kyoto Station. <strong>IC card (Suica / ICOCA)</strong> also works on all buses. Taxis are available outside Kyoto Station for direct door-to-door service to Gion ryokans.",
+              zh: "還車後，建議購買<strong>京都市巴士一日乘車券（¥700/日）</strong>，可無限次搭乘前往金閣寺、嵐山、伏見稻荷、祗園等地。可在巴士司機處或京都站內旅遊訊息中心購買。<strong>Suica / ICOCA 交通卡</strong>亦可在所有巴士上使用。祗園旅館住客可直接在京都站外乘的士。"
+            }
+          },
+          {
+            icon: "🍽️",
+            label: { en: "Day 7 Dinner in Kyoto", zh: "第 7 天京都晚餐" },
+            detail: {
+              en: "After returning the car and settling in, walk to <strong>Nishiki Market (錦市場)</strong> for street food tastings (closes ~18:00), then head to Gion for dinner. Try <strong>Gion Nanba</strong> for kaiseki, or the more casual <strong>Ippudo Ramen (一風堂)</strong> near the station if you're exhausted from driving. Pontocho Alley (先斗町) is a 5-min walk from Gion and has dozens of atmospheric restaurants.",
+              zh: "還車安頓後，可步行前往<strong>錦市場</strong>品嚐街頭小吃（約 18:00 收攤），再到祗園吃晚飯。推薦<strong>祗園南羽</strong>（懷石料理）或若長途駕駛後疲累，可選車站附近輕便的<strong>一風堂拉麵</strong>。先斗町（Pontocho Alley）離祗園步行 5 分鐘，有數十間氣氛一流的餐廳。"
+            }
+          }
         ]
       },
       {
@@ -269,6 +353,40 @@ window.SITE_DATA = {
           { en: "<strong>Negates the benefit of JR Kansai Pass</strong> — You'd be driving instead of using the pass you likely already purchased", zh: "<strong>浪費 JR 關西周遊券</strong> — 若已購入關西鐵路券卻選擇自駕，變相重複花費" },
           { en: "<strong>Luggage in Kyoto problem remains</strong> — Having a car parked somewhere doesn't help carrying bags between Kyoto temples", zh: "<strong>京都行李問題依然存在</strong> — 即使有車停在某處，在京都各寺院間搬運行李仍非常不便" },
           { en: "<strong>New Year period parking</strong> — Dec 30–31 in Osaka is extremely congested; parking around Dotonbori / Tsutenkaku can be near-impossible", zh: "<strong>跨年期間泊車幾乎不可能</strong> — 12 月 30–31 日大阪道頓堀 / 通天閣一帶人山人海，泊車位極為罕有" }
+        ],
+        tips: [
+          {
+            icon: "🏨",
+            label: { en: "Where to Stay", zh: "住宿建議" },
+            detail: {
+              en: "If returning in Osaka, stay near <strong>Osaka Station / Umeda</strong> or <strong>Namba</strong>. Rental offices are typically near Osaka Station. Recommended: <strong>Hotel Monterey Grasmere Osaka</strong> (Osaka Station area, mid-range), <strong>Cross Hotel Osaka</strong> (Shinsaibashi, great location), or the modern <strong>Daiwa Roynet Hotel Osaka-Kitahama</strong>. Avoid hotels near Dotonbori if you have a car — parking in that area on New Year's Eve is effectively impossible.",
+              zh: "若選擇在大阪還車，建議住在<strong>大阪站 / 梅田</strong>或<strong>難波</strong>附近。租車公司通常在大阪站一帶。推薦酒店：<strong>Monterey Grasmere Osaka</strong>（大阪站周邊，中價）、<strong>Cross Hotel 大阪</strong>（心齋橋，地點優越）或新潮的 <strong>Daiwa Roynet Hotel 大阪北濱</strong>。如在跨年夜（12/31）仍持有租車，切勿選擇道頓堀附近酒店 — 泊車幾乎不可能。"
+            }
+          },
+          {
+            icon: "🚗",
+            label: { en: "Car Rental Return", zh: "還車安排" },
+            detail: {
+              en: "Rental offices near Osaka Station: <strong>Toyota Rent-a-Car Osaka Umeda</strong>, <strong>Nissan Rent-a-Car Osaka Ekimae</strong>, <strong>OTS Rent-a-Car Osaka</strong>. <strong>Return as early as possible on your chosen day</strong> — do not wait until the last day of your Osaka stay. Returning on Day 10 (the day you arrive from Nara) is recommended. After return, immediately switch to Osaka Metro or JR for the rest of your stay.",
+              zh: "大阪站附近還車地點：<strong>Toyota 租車大阪梅田</strong>、<strong>Nissan 租車大阪駅前</strong>、<strong>OTS 租車大阪</strong>。<strong>建議盡早還車</strong>，不要等到大阪住宿最後一天才還。推薦在第 10 天（從奈良抵達大阪當日）立即還車，之後改乘大阪地鐵或 JR。"
+            }
+          },
+          {
+            icon: "⚠️",
+            label: { en: "New Year's Warning", zh: "跨年特別提示" },
+            detail: {
+              en: "If you keep the car into Osaka, <strong>return it on Day 10 (Dec 29) at the absolute latest</strong>. Dec 30–31 in Osaka sees massive crowds — Dotonbori, Shinsaibashi, and Namba are pedestrian-priority during countdown events. Even parking garages near Osaka Castle fill up before noon. Do not risk being stranded in a car on New Year's Eve.",
+              zh: "若持車到大阪，<strong>務必最遲在第 10 天（12 月 29 日）還車。</strong>12 月 30–31 日大阪人潮洶湧 — 道頓堀、心齋橋及難波在跨年倒數期間封路管制。即使是大阪城附近的停車場也在中午前爆滿。切勿在跨年夜持有租車，以免陷入交通困境。"
+            }
+          },
+          {
+            icon: "🧳",
+            label: { en: "Luggage Through Kyoto", zh: "京都段行李安排" },
+            detail: {
+              en: "Even if keeping the car, <strong>do not drive it around Kyoto sightseeing</strong>. Park at a hotel near Kyoto Station for the duration of your Kyoto stay, and take daily transit. Ship suitcases to your Osaka hotel by takkyubin on your last Kyoto morning so the car is lighter and you travel unencumbered. Parking at a hotel for 2–3 days typically costs ¥2,500–¥4,000/night extra.",
+              zh: "即使持車前往關西，<strong>切勿開車在京都市內觀光。</strong>建議把車停在京都站附近酒店停車場，整段京都行程改乘公共交通。最後一個京都早上，用宅配便把行李箱送往大阪酒店，讓行程更輕鬆。酒店停車費通常每晚額外收費 ¥2,500–¥4,000。"
+            }
+          }
         ]
       }
     ]

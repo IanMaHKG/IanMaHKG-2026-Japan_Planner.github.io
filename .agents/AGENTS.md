@@ -1,4 +1,4 @@
-﻿# Japan Trip Planner — Agent Rules
+# Japan Trip Planner — Agent Rules
 # ──────────────────────────────────────────────────────────────────────
 # These rules apply to ALL AI-assisted work on this repository.
 # Read and follow them before writing or editing any content.
@@ -55,23 +55,31 @@ Taiwan-specific vocabulary.
 | Topic | HK Convention |
 |---|---|
 | Script | 繁體中文 (Traditional characters only) |
+| Tone / Register | Natural Hong Kong written Chinese (港式繁體中文/書面語) as written by a HK native. |
+| Expressions | Use natural HK Cantonese written terms (e.g. 有型, 好玩, 車尾箱, 貼士, 上落). |
 | Currency | 港幣 (HKD), 日圓 (JPY) — not 元 alone |
-| Transport | 新幹線, 地鐵, 電車, 的士 |
-| Hotel | 酒店 (not 旅館 for modern hotels); 旅館/民宿 for ryokan/guesthouses |
-| Luggage | 行李箱 (suitcase), 手提行李 (cabin bag), 背包 (backpack) |
+| Transport | 新幹線, 地鐵, 電車, 的士 (never 出租車/打的) |
+| Hotel | 酒店 (not 旅館 for modern hotels); 溫泉旅館/民宿 for ryokan/guesthouses |
+| Luggage | 行李箱 (suitcase), 手提行李 (cabin bag), 背包 (backpack), 車尾箱 (boot) |
 | Meals | 早餐, 午餐, 晚餐 |
 | Days | 第 X 天 (not 第X日) |
-| Tone/register | Polite, natural Cantonese-influenced written Chinese; avoid Mainland PRC formal bureaucratic phrasing |
 | Numbers | Use Arabic numerals for quantities (3 件, not 三件) unless in a fixed idiomatic phrase |
 
-#### Common Mainland/Taiwan words to AVOID
+#### Words & Expressions to AVOID (Mainland / Beijing / Taiwan)
 
-| ❌ Mainland / Taiwan | ✅ Hong Kong |
+| ❌ Avoid (Mainland / Beijing / Northern / Taiwan) | ✅ Hong Kong Native Equivalent |
 |---|---|
-| 出租车 | 的士 |
+| 玩意兒 / 玩意 (Beijing 兒化音) | 好玩 / 玩意 / 嘢 / 有型 |
+| 出租车 / 打的 | 的士 / 搭的士 |
 | 地铁 / 捷運 | 地鐵 |
-| 打的 | 搭的士 |
-| 優化 (overused Mainland) | 改善 / 提升 |
+| 後備箱 / 行李廂 | 車尾箱 / 尾箱 |
+| 排量 (engine capacity) | CC 數 / 引擎排氣量 |
+| 超小型車 (PRC classification term) | 微型車 / K-Car / 輕型車 |
+| 優化 (overused Mainland term) | 改善 / 提升 / 優化 (only if appropriate) |
+| 景區 (PRC travel term) | 景點 / 旅遊點 |
+| 攻略 (Mainland internet slang) | 指南 / 貼士 / 行程建議 |
+| 溫馨提示 (PRC/Taiwan sign phrase) | 實用貼士 / 注意事項 |
+| 套餐 (when referring to meals) | 定食 / 套餐 / 菜單 |
 
 ---
 

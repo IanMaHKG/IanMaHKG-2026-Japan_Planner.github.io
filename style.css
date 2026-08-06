@@ -1910,17 +1910,18 @@ img {
 }
 
 /* Curated Itinerary Hotels Grid */
+/* 6-column backbone so 5 cards always land as 3+2 (centered).
+   Each card spans 2 of 6 cols. Cards 4 & 5 are shifted right by 1 col
+   so the partial row sits centred rather than left-aligned. */
 .itinerary-hotels-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
   gap: 20px;
 }
 
 .hotel-leg-card {
-  flex: 1 1 320px;
-  max-width: 380px;
-  min-width: 290px;
+  grid-column: span 2;
+  min-width: 0;     /* let grid control width, not content */
   background: var(--bg-card);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
@@ -1936,6 +1937,12 @@ img {
   box-shadow: var(--shadow-card-hover);
   border-color: rgba(7, 90, 170, 0.25);
 }
+
+/* Centre the 2-card partial last row (cards 4 & 5 of 5) in the 6-col grid.
+   Card 4 starts at col 2 (offset 1) and card 5 starts at col 4 (offset 2),
+   so the pair visually centres under the 3 full-row cards above. */
+.itinerary-hotels-grid > .hotel-leg-card:nth-child(4) { grid-column: 2 / span 2; }
+.itinerary-hotels-grid > .hotel-leg-card:nth-child(5) { grid-column: 4 / span 2; }
 
 .hotel-leg-card.highlight-card {
   border-color: rgba(235, 34, 38, 0.25);
@@ -2500,8 +2507,15 @@ body.curr-gbp span.curr-gbp { display: inline !important; }
   /* Hotel Search Widget responsive */
   .hotel-search-card { padding: 20px 16px; }
   .hotel-search-header { flex-direction: column; align-items: flex-start; gap: 16px; }
-  .itinerary-hotels-grid { gap: 16px; }
-  .hotel-leg-card { max-width: 100%; min-width: 0; width: 100%; }
+  /* Hotel grid: 2-col on tablet so pairs fill each row neatly */
+  .itinerary-hotels-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  /* Reset 3+2 centering offsets — at 2-col they're not needed */
+  .itinerary-hotels-grid > .hotel-leg-card:nth-child(4),
+  .itinerary-hotels-grid > .hotel-leg-card:nth-child(5) { grid-column: span 1; }
+  .hotel-leg-card { min-width: 0; }
 }
 
 @media (max-width: 480px) {
@@ -2527,6 +2541,10 @@ body.curr-gbp span.curr-gbp { display: inline !important; }
   .budget-table th, .budget-table td { padding: 8px 8px; font-size: 0.75rem; }
   .quick-leg-pills { gap: 4px; }
   .leg-pill { font-size: 0.72rem; padding: 4px 10px; }
+  /* Hotel grid: single column on small phones */
+  .itinerary-hotels-grid { grid-template-columns: 1fr; }
+  .itinerary-hotels-grid > .hotel-leg-card:nth-child(4),
+  .itinerary-hotels-grid > .hotel-leg-card:nth-child(5) { grid-column: span 1; }
 }
 
 

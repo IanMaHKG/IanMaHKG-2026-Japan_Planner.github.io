@@ -670,15 +670,34 @@ function toggleDay(header) {
   // Toggle current card
   card.classList.toggle('open', !wasOpen);
 
-  // Lazy-init the mini map when opening
-  if (!wasOpen && typeof window.initDayMap === 'function') {
-    const dayId = card.id;
-    // Small delay so the card is visible before Leaflet measures the container
-    setTimeout(() => window.initDayMap(dayId), 80);
-  }
-
-  // Smooth scroll into view when opening
   if (!wasOpen) {
+    const dayId = card.id;
+    const mapEl = document.getElementById('day-map-' + dayId);
+
+    if (mapEl && typeof window.initDayMap === 'function') {
+      // Listen for the CSS transition on the map container to finish so
+      // Leaflet always measures the real final pixel dimensions — never 0×0.
+      // We filter by propertyName so border/margin transitions don’t trigger early.
+      const targetProp = window.matchMedia('(orientation: landscape) and (min-width: 800px)').matches
+        ? 'width' : 'height';
+
+      const onMapRevealed = (e) => {
+        if (e.propertyName !== targetProp) return;
+        mapEl.removeEventListener('transitionend', onMapRevealed);
+
+        if (mapEl.dataset.mapInited) {
+          // Already initialised — just refit after re-open
+          if (mapEl._leafletMap) mapEl._leafletMap.invalidateSize();
+          if (mapEl._leafletFitAll) mapEl._leafletFitAll();
+        } else {
+          // First open — full initialisation
+          window.initDayMap(dayId);
+        }
+      };
+      mapEl.addEventListener('transitionend', onMapRevealed);
+    }
+
+    // Smooth scroll into view
     setTimeout(() => {
       card.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 150);
@@ -691,7 +710,6 @@ window.toggleDay = toggleDay;
 
 /* ─── Day Cards Init ─── */
 function initDayCards() {
-  // Open the first day card by default
-  const firstCard = document.querySelector('.day-card');
-  if (firstCard) firstCard.classList.add('open');
+  // All cards start collapsed — the user opens whichever they want.
+  // (No default-open; the map can’t render correctly against a 0×0 container.)
 }

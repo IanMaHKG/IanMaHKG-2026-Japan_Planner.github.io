@@ -168,17 +168,9 @@ function initDayMap(dayId) {
   const mapEl = document.getElementById('day-map-' + dayId);
   if (!mapEl) return;
 
-  // Guard: only initialise once
-  if (mapEl.dataset.mapInited) {
-    // Already inited — re-open: invalidate size then refit all markers
-    if (mapEl._leafletMap && mapEl._leafletFitAll) {
-      setTimeout(() => {
-        mapEl._leafletMap.invalidateSize();
-        mapEl._leafletFitAll();
-      }, 450);
-    }
-    return;
-  }
+  // Guard: only initialise once.
+  // Re-open (invalidateSize + fitAll) is handled by toggleDay's transitionend listener.
+  if (mapEl.dataset.mapInited) return;
   mapEl.dataset.mapInited = 'true';
 
   // Collect all location points from the day
@@ -279,12 +271,13 @@ function initDayMap(dayId) {
     });
   });
 
-  // Fit all markers AFTER the CSS reveal animation has finished.
-  // Portrait: height animates for 600ms (day-body) + 400ms (day-map) = fits at 450ms
-  // Landscape: width animates for 400ms — same window.
-  // We also call invalidateSize first so Leaflet has correct pixel dimensions.
-  setTimeout(() => map.invalidateSize(), 120);          // early resize
-  setTimeout(() => { map.invalidateSize(); fitAll(); }, 500); // post-transition fit
+  // initDayMap is called from a transitionend listener, so the container
+  // already has its final pixel dimensions. One short tick lets the browser
+  // paint the final layout before Leaflet measures and fits.
+  setTimeout(() => {
+    map.invalidateSize();
+    fitAll();
+  }, 30);
 }
 
 window.initDayMap = initDayMap;

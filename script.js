@@ -13,7 +13,7 @@
  *   4. currency.js         → defines initCurrencySelector(), fetchExchangeRates(), updateConvertedBudgets()
  *   5. ui.js               → defines initLanguageSelector(), initNav(), initParticles(),
  *                            initScrollReveal(), initSmoothScroll(), initFilters(), initHotelSearch()
- *   6. map.js              → defines initRouteMap()
+ *   6. map.js              → defines initRouteMap(), initDayMap(dayId)
  *   7. script.js  ← (this file) — calls everything once DOM is ready
  *
  * HOW TO ADD A NEW FEATURE:
@@ -25,7 +25,10 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  /* ── Step 1: Inject all data-driven HTML content ───────────────
+  /* ── Step 0: Theme — must run first to avoid flash of wrong theme ──── */
+  initTheme();             // ui.js — wires #theme-toggle; fires 'themechange'
+
+  /* ── Step 1: Inject all data-driven HTML content ─────────────────────
      render.js reads SITE_DATA / ITINERARY_DATA and populates the
      empty container divs in index.html before any other init runs,
      so that subsequent initialisers (scroll reveal, hotel search, etc.)
@@ -45,8 +48,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initSmoothScroll();       // ui.js      — smooth scroll for all #anchor links
   initHotelSearch();        // ui.js      — Booking.com search widget + leg pill wiring
 
-  /* ── Step 3: Map (last) ─────────────────────────────────────────
-     Leaflet must be initialised after its container (#route-map)
+  /* ── Step 3: Map (last) ────────────────────────────────────
+     MapLibre must be initialised after its container (#route-map)
      is visible / in the DOM.                                        */
-  initRouteMap();           // map.js     — Leaflet interactive route map
+  initRouteMap();           // map.js     — MapLibre interactive route map
 });

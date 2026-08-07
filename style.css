@@ -144,6 +144,119 @@
   --transition-bounce: 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
+/* ═══════════════════════════════════════════════
+   DARK MODE PALETTE
+   All theme-sensitive variables are overridden here.
+   Brand colours (—ba-*, —accent-*) and the nav/footer background
+   stay navy in both modes.
+   ═══════════════════════════════════════════════ */
+[data-theme="dark"] {
+  /* Backgrounds */
+  --bg-primary:     #0D1117;
+  --bg-secondary:   #161B22;
+  --bg-card:        #1C2128;
+  --bg-card-hover:  #242A34;
+  /* --bg-nav and --bg-footer stay #01295C (navy) */
+
+  /* Text */
+  --text-primary:   #E6EDF3;
+  --text-secondary: #8B949E;
+  --text-muted:     #6E7681;
+
+  /* Borders */
+  --border-light:   #30363D;
+  --border-mid:     #3D444D;
+
+  /* Shadows — deeper, less blue-tinted */
+  --shadow-card:        0 1px 3px rgba(0,0,0,0.4), 0 4px 16px rgba(0,0,0,0.3);
+  --shadow-card-hover:  0 4px 24px rgba(0,0,0,0.5), 0 1px 4px rgba(0,0,0,0.3);
+  --shadow-nav:         0 2px 8px rgba(0,0,0,0.5);
+
+  /* Brand blues — lightened so they're visible on dark backgrounds */
+  --ba-blue:        #5DAAFF;   /* #075AAA → bright cornflower blue */
+  --accent-navy:    #5DAAFF;   /* mirrors ba-blue (used for <a> links) */
+  --accent-sky:     #7ECFFF;   /* slightly lighter for secondary accents */
+}
+
+/* Broad smooth transition — active only during theme switch (see setTheme in ui.js) */
+.theme-transitioning,
+.theme-transitioning * {
+  transition:
+    background-color 0.35s ease,
+    color 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   DARK MODE — ELEMENT-LEVEL OVERRIDES
+   These fix elements that use hardcoded colours or --ba-midnight
+   as text colour (which is too dark on dark backgrounds).
+   ═══════════════════════════════════════════════════ */
+
+/* ─ Section headings ─ */
+[data-theme="dark"] .section-title,
+[data-theme="dark"] .section-title.light { color: var(--text-primary); }
+
+/* ─ JR Route Board: hardcoded white background ─ */
+[data-theme="dark"] .route-visual.jr-board-container {
+  background: var(--bg-card);
+  border-color: var(--border-light);
+  box-shadow: var(--shadow-card);
+}
+[data-theme="dark"] .jr-board-header  { border-bottom-color: var(--border-light); }
+[data-theme="dark"] .jr-line-title    { color: var(--text-primary); }
+[data-theme="dark"] .jr-station-romaji,
+[data-theme="dark"] .jr-station-days  { color: var(--text-secondary); }
+
+/* Station dot centre: white bg → card bg so it blends with board */
+[data-theme="dark"] .stop-dot { background: var(--bg-card); }
+
+/* ─ Hotel search inputs ─ */
+[data-theme="dark"] .input-with-icon input,
+[data-theme="dark"] .input-with-icon select {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border-color: var(--border-mid);
+}
+[data-theme="dark"] .input-with-icon input::placeholder { color: var(--text-muted); }
+
+/* ─ Activity / timeline headings ─ */
+[data-theme="dark"] .activity h4,
+[data-theme="dark"] .timeline-block h4,
+[data-theme="dark"] .meal-rec strong,
+[data-theme="dark"] .day-tip strong { color: var(--text-primary); }
+
+/* ─ Tip & highlight card headings ─ */
+[data-theme="dark"] .tip-card h3,
+[data-theme="dark"] .tip-card li strong,
+[data-theme="dark"] .cr-con strong,
+[data-theme="dark"] .cr-recommendation strong,
+[data-theme="dark"] .cr-tip-detail strong,
+[data-theme="dark"] .vr-boot strong,
+[data-theme="dark"] .vr-why strong    { color: var(--text-primary); }
+
+/* ─ Rental / packing / tips section strong text ─ */
+[data-theme="dark"] .rental-features li strong,
+[data-theme="dark"] .rental-note strong,
+[data-theme="dark"] strong             { color: var(--text-primary); }
+
+/* ─ Tags — brighter in dark mode for legibility ─ */
+[data-theme="dark"] .tag-city      { background: rgba(235,34,38,0.18);   color: #FF8E8E; }
+[data-theme="dark"] .tag-nature    { background: rgba(42,175,175,0.18);  color: #5FE5D7; }
+[data-theme="dark"] .tag-culture   { background: rgba(201,169,110,0.18); color: #D9B870; }
+[data-theme="dark"] .tag-pace      { background: rgba(7,90,170,0.18);    color: #7DBEF7; }
+[data-theme="dark"] .tag-transport { background: rgba(90,160,240,0.15);  color: #7DBEF7; }
+[data-theme="dark"] .tag-special   { background: rgba(235,34,38,0.18);   color: #FF8E8E; }
+
+/* ─ Hardcoded #fff / #FFFDFC card backgrounds in a few sections ─ */
+[data-theme="dark"] .rental-card,
+[data-theme="dark"] .packing-card  { background: var(--bg-card); border-color: var(--border-light); }
+
+/* ─ Budget table ─ */
+[data-theme="dark"] .budget-table th { background: var(--bg-secondary); color: var(--text-primary); }
+[data-theme="dark"] .budget-table td { color: var(--text-primary); border-color: var(--border-light); }
+
 html {
   scroll-behavior: smooth;
   font-size: 16px;
@@ -293,6 +406,41 @@ img {
   background: var(--text-on-dark);
   transition: all var(--transition-fast);
   border-radius: 2px;
+}
+
+/* ─── Dark Mode Toggle Button ─── */
+/* Always sits on the navy navbar, so colours are fixed (not theme-variable) */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.18);
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  flex-shrink: 0;
+  transition: background var(--transition-fast), transform var(--transition-bounce);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.theme-toggle:hover {
+  background: rgba(255,255,255,0.18);
+  transform: scale(1.1) rotate(20deg);
+}
+
+/* 🌙 in light mode → click to go dark; ☀️ in dark mode → click to go light */
+.theme-toggle::before {
+  content: '🌙';
+  font-size: 0.9rem;
+}
+
+[data-theme="dark"] .theme-toggle::before {
+  content: '☀️';
+  font-size: 0.85rem;
 }
 
 
@@ -921,40 +1069,39 @@ img {
 .legend-dot.leg-fuji   { background: var(--ba-blue); }
 .legend-dot.leg-kansai { background: var(--ba-gold); }
 
-/* Leaflet overrides for light theme */
-.leaflet-container {
-  background: var(--bg-secondary) !important;
-  font-family: var(--font-primary) !important;
+/* MapLibre GL JS overrides — BA light theme */
+.maplibregl-map {
+  background: var(--bg-secondary);
+  font-family: var(--font-primary);
 }
 
-.leaflet-popup-content-wrapper {
+/* Popup box */
+.maplibregl-popup-content {
   background: var(--bg-card) !important;
   color: var(--text-primary) !important;
   border-radius: var(--radius-md) !important;
   box-shadow: 0 4px 20px rgba(1,41,92,0.15) !important;
   border: 1px solid var(--border-light) !important;
-}
-
-.leaflet-popup-tip { background: var(--bg-card) !important; }
-
-.leaflet-popup-content {
-  margin: 12px 16px !important;
+  padding: 12px 16px !important;
   font-size: 0.875rem !important;
   line-height: 1.5 !important;
+  font-family: var(--font-primary) !important;
 }
 
-.leaflet-popup-content h4 {
+.maplibregl-popup-tip { border-top-color: var(--bg-card) !important; }
+
+.maplibregl-popup-content h4 {
   font-weight: 700;
   margin-bottom: 4px;
   color: var(--ba-midnight);
 }
 
-.leaflet-popup-content p {
+.maplibregl-popup-content p {
   color: var(--text-secondary);
   margin: 0;
 }
 
-.leaflet-popup-content .popup-days {
+.maplibregl-popup-content .popup-days {
   display: inline-block;
   padding: 2px 10px;
   background: rgba(7, 90, 170, 0.08);
@@ -965,23 +1112,32 @@ img {
   margin-top: 6px;
 }
 
-.leaflet-popup-close-button { color: var(--text-muted) !important; }
+.maplibregl-popup-close-button {
+  color: var(--text-muted) !important;
+  font-size: 1rem !important;
+  padding: 4px 8px !important;
+}
 
-.leaflet-control-zoom a {
+/* Zoom control */
+.maplibregl-ctrl-group button {
   background: var(--bg-card) !important;
   color: var(--ba-midnight) !important;
   border-color: var(--border-light) !important;
 }
 
-.leaflet-control-zoom a:hover { background: var(--bg-card-hover) !important; }
+.maplibregl-ctrl-group button:hover {
+  background: var(--bg-card-hover) !important;
+}
 
-.leaflet-control-attribution {
+/* Attribution bar */
+.maplibregl-ctrl-attrib {
   background: rgba(255,255,255,0.88) !important;
   color: var(--text-muted) !important;
   font-size: 0.65rem !important;
 }
 
-.leaflet-control-attribution a { color: var(--ba-blue) !important; }
+.maplibregl-ctrl-attrib-inner a { color: var(--ba-blue) !important; }
+
 
 /* Custom map markers */
 .custom-marker {
@@ -2710,7 +2866,7 @@ body.curr-gbp span.curr-gbp { display: inline !important; }
   height: 280px;
 }
 
-/* Numbered marker — base element (Leaflet DivIcon) */
+/* Numbered marker — base element (MapLibre custom marker) */
 .day-map-marker {
   background: transparent !important;
   border: none !important;
@@ -2743,23 +2899,20 @@ body.curr-gbp span.curr-gbp { display: inline !important; }
   background: var(--ba-blue);
 }
 
-/* Leaflet popup inside day map — minimal BA style */
-.day-map .leaflet-popup-content-wrapper {
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-card-hover);
-  padding: 0;
+/* MapLibre popup inside day map — minimal BA style */
+.day-map .maplibregl-popup-content {
+  border-radius: var(--radius-md) !important;
+  box-shadow: var(--shadow-card-hover) !important;
+  padding: 8px 12px !important;
+  font-family: var(--font-primary) !important;
+  font-size: 0.8rem !important;
+  color: var(--text-primary) !important;
+  line-height: 1.4 !important;
+  border: none !important;
 }
 
-.day-map .leaflet-popup-content {
-  margin: 8px 12px;
-  font-family: var(--font-primary);
-  font-size: 0.8rem;
-  color: var(--text-primary);
-  line-height: 1.4;
-}
-
-.day-map .leaflet-popup-tip {
-  background: #FFFFFF;
+.day-map .maplibregl-popup-tip {
+  border-top-color: #FFFFFF !important;
 }
 
 
@@ -3092,3 +3245,182 @@ body.curr-gbp span.curr-gbp { display: inline !important; }
   .container { max-width: 1600px; }
   .section { padding: 80px 0; }
 }
+
+/* ═══════════════════════════════════════════════════
+   DARK MODE — LATE OVERRIDES
+   MUST stay at the very end of this file.
+   Equal-specificity rules: later declaration wins,
+   so these beat all same-specificity component styles above.
+   ═══════════════════════════════════════════════════ */
+
+/* ── Broad fallback: all <strong> and heading text ───────────── */
+[data-theme="dark"] strong                { color: var(--text-primary); }
+[data-theme="dark"] h2                    { color: var(--text-primary); }
+[data-theme="dark"] h3:not(.nav-links *)  { color: var(--text-primary); }
+[data-theme="dark"] h4                    { color: var(--text-primary); }
+
+/* ── Overview cards ──────────────────────────────────────────── */
+[data-theme="dark"] .overview-card h3     { color: var(--text-primary); }
+
+/* ── Day card header title ───────────────────────────────────── */
+[data-theme="dark"] .day-info h3          { color: var(--text-primary); }
+
+/* ── Activity / timeline blocks ──────────────────────────────── */
+[data-theme="dark"] .activity h4          { color: var(--text-primary); }
+[data-theme="dark"] .activity strong      { color: var(--text-primary); }
+
+/* ── Meal recommendation box ─────────────────────────────────── */
+[data-theme="dark"] .meal-rec {
+  background: rgba(201, 169, 110, 0.12);
+  border-left-color: var(--ba-gold);
+  color: var(--text-secondary);
+}
+[data-theme="dark"] .meal-rec strong { color: var(--ba-gold); }
+
+/* ── Day tip box ─────────────────────────────────────────────── */
+[data-theme="dark"] .day-tip {
+  background: rgba(7, 90, 170, 0.12);
+  border-top-color: rgba(7, 90, 170, 0.3);
+  color: var(--text-secondary);
+}
+[data-theme="dark"] .day-tip strong { color: var(--accent-sky); }
+
+/* ── Section titles (all) ────────────────────────────────────── */
+[data-theme="dark"] .section-title,
+[data-theme="dark"] .section-title.light  { color: var(--text-primary); }
+
+/* ── JR board ────────────────────────────────────────────────── */
+[data-theme="dark"] .jr-line-title        { color: var(--text-primary); }
+[data-theme="dark"] .jr-station-code {
+  background: var(--bg-secondary) !important;
+  border-color: var(--border-light) !important;
+  color: var(--text-secondary) !important;
+}
+
+/* ── Hotel leg cards ─────────────────────────────────────────── */
+[data-theme="dark"] .hotel-leg-body h4    { color: var(--text-primary); }
+[data-theme="dark"] .hotel-leg-card.highlight-card {
+  background: var(--bg-card);
+  border-color: rgba(235, 34, 38, 0.3);
+}
+
+/* ── Budget table total row (uses !important in component CSS) ── */
+[data-theme="dark"] .budget-total td {
+  background: rgba(7, 90, 170, 0.18) !important;
+  color: var(--text-primary) !important;
+  border-top-color: var(--ba-blue);
+}
+
+/* ── Car return section ──────────────────────────────────────── */
+[data-theme="dark"] .cr-pros-heading      { color: #4ADE80; }
+[data-theme="dark"] .cr-con strong        { color: var(--text-primary); }
+[data-theme="dark"] .cr-recommendation strong { color: var(--text-primary); }
+[data-theme="dark"] .cr-option-card h3    { color: var(--text-primary); }
+[data-theme="dark"] .cr-tip-detail strong { color: var(--text-primary); }
+
+/* ── VR cards ────────────────────────────────────────────────── */
+[data-theme="dark"] .vr-card h3           { color: var(--text-primary); }
+
+/* ── Packing section ─────────────────────────────────────────── */
+[data-theme="dark"] .packing-card h3      { color: var(--text-primary); }
+
+/* ── Rental section ──────────────────────────────────────────── */
+[data-theme="dark"] .rental-features li strong { color: var(--text-primary); }
+[data-theme="dark"] .rental-note strong        { color: var(--text-primary); }
+
+/* ── Hardcoded light backgrounds ─────────────────────────────── */
+[data-theme="dark"] .route-visual.jr-board-container {
+  background: var(--bg-card);
+  border-color: var(--border-light);
+}
+
+/* ── Inputs & selects ────────────────────────────────────────── */
+[data-theme="dark"] .input-with-icon input,
+[data-theme="dark"] .input-with-icon select {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border-color: var(--border-mid);
+}
+[data-theme="dark"] .input-with-icon input::placeholder { color: var(--text-muted); }
+
+/* ── Tags (with !important to beat any earlier specificity) ──── */
+[data-theme="dark"] .tag-city      { background: rgba(235,34,38,0.18)   !important; color: #FF8E8E !important; }
+[data-theme="dark"] .tag-nature    { background: rgba(42,175,175,0.18)  !important; color: #5FE5D7 !important; }
+[data-theme="dark"] .tag-culture   { background: rgba(201,169,110,0.18) !important; color: #D9B870 !important; }
+[data-theme="dark"] .tag-pace      { background: rgba(7,90,170,0.18)    !important; color: #7DBEF7 !important; }
+[data-theme="dark"] .tag-transport { background: rgba(90,160,240,0.15)  !important; color: #7DBEF7 !important; }
+[data-theme="dark"] .tag-special   { background: rgba(235,34,38,0.18)   !important; color: #FF8E8E !important; }
+
+/* ── Car size recommendation cards (“Which Car Size for Your Group?”) ── */
+[data-theme="dark"] .vr-card {
+  background: var(--bg-card);
+  box-shadow: var(--shadow-card);
+}
+[data-theme="dark"] .vr-category { color: var(--text-primary); }
+
+/* Verdict badges — dark mode: translucent tinted instead of light solid */
+[data-theme="dark"] .vbadge-green {
+  background: rgba(34,197,94,0.15);
+  color: #4ADE80;
+  border-color: rgba(34,197,94,0.35);
+}
+[data-theme="dark"] .vbadge-amber {
+  background: rgba(245,158,11,0.15);
+  color: #FCD34D;
+  border-color: rgba(245,158,11,0.35);
+}
+[data-theme="dark"] .vbadge-red {
+  background: rgba(239,68,68,0.15);
+  color: #FCA5A5;
+  border-color: rgba(239,68,68,0.35);
+}
+
+/* ── Elements using --ba-midnight as text that are NOT h2/h3/h4/strong ── */
+
+/* Car return section */
+[data-theme="dark"] .cr-city-name             { color: var(--text-primary); }
+[data-theme="dark"] .cr-tips-toggle-label     { color: var(--text-primary); }
+[data-theme="dark"] .cr-tip-label             { color: var(--text-primary); }
+[data-theme="dark"] .cr-cons-heading          { color: #F87171; }
+
+/* Car return verdict badges (hardcoded light colours) */
+[data-theme="dark"] .verdict-badge-current {
+  background: rgba(34,197,94,0.15);
+  color: #4ADE80;
+  border-color: rgba(34,197,94,0.35);
+}
+[data-theme="dark"] .verdict-badge-caution {
+  background: rgba(245,158,11,0.15);
+  color: #FCD34D;
+  border-color: rgba(245,158,11,0.35);
+}
+[data-theme="dark"] .verdict-badge-notrecommended {
+  background: rgba(239,68,68,0.15);
+  color: #FCA5A5;
+  border-color: rgba(239,68,68,0.35);
+}
+
+/* Itinerary day number badge */
+[data-theme="dark"] .day-num                  { color: var(--text-primary); }
+
+/* Car rental names */
+[data-theme="dark"] .rental-name              { color: var(--text-primary); }
+
+/* Hotel search labels */
+[data-theme="dark"] .quick-legs-label         { color: var(--text-secondary); }
+[data-theme="dark"] .form-group label         { color: var(--text-secondary); }
+
+/* Hotel "Search X Hotels" button — has !important in component CSS */
+[data-theme="dark"] .hotel-leg-btn            { color: var(--text-primary) !important; }
+
+/* MapLibre popup close button — has !important in component CSS */
+[data-theme="dark"] .maplibregl-popup-close-button { color: var(--text-secondary) !important; }
+
+/* ── JR Route Board text colours (all hardcoded near-black / mid-grey) ── */
+[data-theme="dark"] .jr-station-kanji  { color: var(--text-primary); }
+[data-theme="dark"] .jr-station-kana   { color: var(--text-secondary); }
+[data-theme="dark"] .jr-station-romaji { color: var(--text-primary); }
+
+/* Station dot white fill — match card bg so coloured border rings pop */
+[data-theme="dark"] .stop-dot          { background: var(--bg-card); }
+[data-theme="dark"] .dot-inner-core    { background: var(--dot-color, var(--ba-midnight)); }

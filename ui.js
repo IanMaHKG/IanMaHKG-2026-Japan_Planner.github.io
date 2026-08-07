@@ -19,7 +19,7 @@
  *                             Randomises size, position, duration, delay, and colour (white/red/blue).
  *   - initScrollReveal()      Adds .reveal and .reveal-delay-N classes to card/section elements.
  *                             Uses IntersectionObserver to add .visible when they scroll into view.
- *                             Also triggers Leaflet map.invalidateSize() when #map-container appears.
+ *                             Calls map.resize() via the MapLibre shim on #map-container appear.
  *   - initSmoothScroll()      Intercepts all <a href="#..."> clicks for smooth 80px-offset scroll.
  *   - initFilters()           Wires .day-tab buttons → shows/hides .day-card by data-region.
  *   - initHotelSearch()       Wires:
@@ -58,6 +58,8 @@ function initLanguageSelector() {
 function setLanguage(lang) {
   document.body.classList.remove('lang-en', 'lang-zh-hk');
   document.body.classList.add(lang === 'zh-hk' ? 'lang-zh-hk' : 'lang-en');
+  // Update <html lang> for screen readers and browser translation tools
+  document.documentElement.setAttribute('lang', lang === 'zh-hk' ? 'zh-Hant' : 'en');
   localStorage.setItem('user-lang', lang);
 
   const switcher = document.querySelector('.lang-switcher');
@@ -65,6 +67,38 @@ function setLanguage(lang) {
 
   // Notify other modules (e.g. map.js popup rebind)
   window.dispatchEvent(new CustomEvent('langchange', { detail: { lang } }));
+}
+
+
+/* ─── Theme (Dark / Light Mode) ─── */
+function initTheme() {
+  // Theme may already be applied by the flash-prevention <script> in <head>.
+  // This function's job is to wire the toggle button click.
+  const saved = localStorage.getItem('user-theme') || 'light';
+  setTheme(saved, /* initial */ true);
+
+  const btn = document.getElementById('theme-toggle');
+  if (btn) {
+    btn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+  }
+}
+
+function setTheme(theme, isInitial = false) {
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('user-theme', theme);
+
+  // Apply .theme-transitioning briefly so CSS can animate
+  // the colour change without permanently slowing down other transitions.
+  if (!isInitial) {
+    document.documentElement.classList.add('theme-transitioning');
+    setTimeout(() => document.documentElement.classList.remove('theme-transitioning'), 400);
+  }
+
+  // Notify map.js (and any other listener) to switch map style
+  window.dispatchEvent(new CustomEvent('themechange', { detail: { theme } }));
 }
 
 
@@ -151,7 +185,10 @@ function initScrollReveal() {
     '.packing-card',
     '.route-visual',
     '.budget-table-wrap',
-    '.map-container'
+    '.map-container',
+    '.hotel-leg-card',
+    '.vr-card',
+    '.cr-card'
   ];
 
   selectors.forEach(sel => {
@@ -164,17 +201,6 @@ function initScrollReveal() {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
       entry.target.classList.add('visible');
-
-      // Trigger Leaflet resize when map scrolls into view
-      if (entry.target.classList.contains('map-container')) {
-        const mapEl = document.getElementById('route-map');
-        if (mapEl && mapEl._leaflet_id) {
-          setTimeout(() => {
-            const m = mapEl._leaflet_map;
-            if (m) m.invalidateSize();
-          }, 500);
-        }
-      }
 
       observer.unobserve(entry.target);
     });

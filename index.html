@@ -22,7 +22,7 @@
     3. render.js          → DOM injection functions
     4. currency.js        → JPY conversion functions
     5. ui.js              → language/nav/scroll/filter/hotel functions
-    6. map.js             → Leaflet route map function
+    6. map.js             → MapLibre GL JS overview + per-day mini maps
     7. script.js          → DOMContentLoaded bootstrap (calls all of the above)
 
   SECTIONS MAP  (HTML id → JS function that populates it):
@@ -50,6 +50,15 @@
   <meta name="description"
     content="A detailed day-by-day Japan travel itinerary from Tokyo to Kansai, December 20–31, 2026. Includes Mount Fuji road trip, Kyoto temples, Osaka street food, and practical tips." />
 
+  <!-- Open Graph / social sharing (WhatsApp, iMessage, Slack previews) -->
+  <meta property="og:title"       content="Japan Winter Journey 2026" />
+  <meta property="og:description" content="Day-by-day family itinerary: Tokyo → Mt Fuji → Hakone → Kyoto → Nara → Osaka, Dec 20–31." />
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://ianmahkg.github.io/IanMaHKG-2026-Japan_Planner.github.io/" />
+  <meta name="twitter:card"       content="summary" />
+  <meta name="twitter:title"      content="Japan Winter Journey 2026" />
+  <meta name="twitter:description" content="Day-by-day family itinerary: Tokyo → Mt Fuji → Hakone → Kyoto → Nara → Osaka, Dec 20–31." />
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -57,12 +66,15 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
     rel="stylesheet" />
 
-  <!-- Leaflet Map -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <!-- MapLibre GL JS — open source, WebGL rendering, no API key required -->
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4/dist/maplibre-gl.css" crossorigin="" />
+  <script src="https://unpkg.com/maplibre-gl@4/dist/maplibre-gl.js" crossorigin=""></script>
 
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Theme flash prevention: apply saved theme before first CSS paint -->
+  <script>(function(){var t=localStorage.getItem('user-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}());</script>
 </head>
 
 <body class="lang-en">
@@ -151,6 +163,9 @@
           <button class="lang-btn active" data-lang="en" aria-label="English">EN</button>
           <button class="lang-btn" data-lang="zh-hk" aria-label="繁體中文">繁中</button>
         </div>
+        <!-- Dark Mode Toggle -->
+        <button class="theme-toggle" id="theme-toggle"
+                aria-label="Toggle dark mode" title="Toggle dark mode"></button>
         <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
           <span></span><span></span><span></span>
         </button>
@@ -538,7 +553,7 @@
             <span class="lang-en">🗾 Japan Winter Journey 2026</span>
             <span class="lang-zh">🗾 日本冬日家族之旅 2026</span>
           </h3>
-          <p>Dec 20 — Dec 31 &nbsp;|&nbsp; Ma Family Adventure</p>
+          <p>Dec 20 — Dec 31 &nbsp;|&nbsp; A Family Adventure 🇯🇵</p>
         </div>
         <div class="footer-links">
           <a href="#overview">

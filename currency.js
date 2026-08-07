@@ -31,10 +31,11 @@
  */
 
 
-/* Fallback rates used when the API is unavailable */
+/* Fallback rates used when the API is unavailable.
+   Last updated: Aug 2026. Refresh before the December trip if needed. */
 let JPY_EXCHANGE_RATES = {
-  hkd: 0.052,
-  gbp: 0.0053
+  hkd: 0.051,   // approx. Aug 2026 (was 0.052)
+  gbp: 0.0050   // approx. Aug 2026 (was 0.0053)
 };
 
 

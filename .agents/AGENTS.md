@@ -107,7 +107,10 @@ Taiwan-specific vocabulary.
   (26 Dec) immediately after hotel check-in at drop-off city.
 - **Recommended car:** Minivan / MPV (Toyota Alphard / Voxy / Noah,
   Nissan Serena) — fits 3 adults + 9 bags (3 large + 3 cabin + 3 backpack).
-- **Language switch:** Always visible top of page next to hamburger menu.
+- **Language switch:** Always visible top of page next to the theme toggle and hamburger menu.
+- **Dark mode toggle:** Moon/sun button in the nav bar (between the language switcher and hamburger);
+  persists in `localStorage` as `user-theme`; dispatches a `'themechange'` CustomEvent that
+  switches MapLibre map styles (Positron ↔ Fiord) and re-applies all CSS variable overrides.
 
 ### Column / Grid Layout Rule (CRITICAL)
 

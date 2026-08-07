@@ -662,9 +662,12 @@ function toggleDay(header) {
   const card = header.closest('.day-card');
   const wasOpen = card.classList.contains('open');
 
-  // Close all other open cards
+  // Close all other open cards and destroy their map contexts
   document.querySelectorAll('.day-card.open').forEach(c => {
-    if (c !== card) c.classList.remove('open');
+    if (c !== card) {
+      c.classList.remove('open');
+      if (typeof window.destroyDayMap === 'function') window.destroyDayMap(c.id);
+    }
   });
 
   // Toggle current card
@@ -676,8 +679,8 @@ function toggleDay(header) {
 
     if (mapEl && typeof window.initDayMap === 'function') {
       // Listen for the CSS transition on the map container to finish so
-      // Leaflet always measures the real final pixel dimensions — never 0×0.
-      // We filter by propertyName so border/margin transitions don’t trigger early.
+      // MapLibre always measures the real final pixel dimensions — never 0×0.
+      // We filter by propertyName so border/margin transitions don't trigger early.
       const targetProp = window.matchMedia('(orientation: landscape) and (min-width: 800px)').matches
         ? 'width' : 'height';
 
@@ -701,6 +704,9 @@ function toggleDay(header) {
     setTimeout(() => {
       card.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 150);
+  } else {
+    // User explicitly closed this card — release its WebGL context
+    if (typeof window.destroyDayMap === 'function') window.destroyDayMap(card.id);
   }
 }
 

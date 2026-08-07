@@ -15,9 +15,11 @@
 ## Features
 
 - ✈️ **BA-inspired design** — Midnight Navy, BA Red & Gold palette with glassmorphism cards
+- 🌙 **Dark / Light mode toggle** — persistent across sessions via `localStorage`; maps switch styles automatically (Positron ↔ Fiord)
 - 🚉 **JR Station Sign Route Board** — Authentic Japanese station sign (駅名標) timeline with Kanji, Furigana, Romaji, Station Codes & day badges
 - 📅 **12 expandable day cards** with morning / afternoon / evening schedules and meal picks
-- 🗺️ **Interactive Leaflet map** — colour-coded route with driving, Shinkansen & rail segments
+- 🗺️ **Interactive route map** (MapLibre GL JS) — colour-coded route with driving, Shinkansen & rail segments
+- 🗾 **Per-day mini-maps** — lazy-initialised MapLibre map inside each accordion day card
 - 🎌 **Senior-friendly Bilingual Switcher** — Always-visible English & Traditional Chinese (`EN | 繁中`) toggle in top navigation bar with high-contrast tactile active pills
 - 💴 **Live currency conversion** — JPY → HKD or GBP via open.er-api.com
 - 🏨 **Booking.com hotel search** — pre-filled for each leg (destination, dates, 3 adults)
@@ -39,15 +41,15 @@
 
 ```
 ├── index.html          # Semantic shell (no hardcoded content)
-├── style.css           # Full design system — BA tokens, components, responsive
+├── style.css           # Full design system — BA tokens, components, dark mode, responsive
 │
 ├── site-data.js        # Overview, Tips, Packing, Budget, Hotels data (SITE_DATA)
 ├── itinerary-data.js   # 12-day itinerary (ITINERARY_DATA)
 │
 ├── render.js           # DOM injection — all section renderers
 ├── currency.js         # Exchange rate fetch, HKD/GBP conversion, switcher
-├── ui.js               # Nav, language toggle, particles, scroll reveal, hotel search
-├── map.js              # Leaflet interactive route map
+├── ui.js               # Nav, language toggle, dark mode toggle, particles, scroll reveal, hotel search
+├── map.js              # MapLibre GL JS — route overview map + per-day mini maps
 └── script.js           # Entry point — DOMContentLoaded bootstrap only
 ```
 
@@ -91,6 +93,7 @@ flowchart LR
     %% ── ui.js ────────────────────────────────────────────────────
     subgraph UI["🎛️ ui.js"]
         direction TB
+        uTHEME["initTheme()\nsetTheme()\n'themechange' event"]
         uLANG["initLanguageSelector()\nsetLanguage()"]
         uNAV["initNav()\nupdateActiveNav()"]
         uPART["initParticles()"]
@@ -102,18 +105,19 @@ flowchart LR
 
     %% ── map.js ───────────────────────────────────────────────────
     subgraph MAP["🗺️ map.js"]
-        mMAP["initRouteMap()\nLeaflet.js"]
+        mROUTE["initRouteMap()\nMapLibre GL JS\n+ OpenFreeMap"]
+        mDAY["initDayMap(dayId)\nlazy per-day mini-map"]
     end
 
     %% ── HTML sections ────────────────────────────────────────────
     subgraph HTML["📄 index.html — Target Sections"]
         direction TB
         H_HERO["✨ Hero\n#hero · #particles"]
-        H_NAV["🧭 Nav\n#main-nav · #nav-links"]
+        H_NAV["🧭 Nav\n#main-nav · #nav-links\n#theme-toggle"]
         H_OV["🗺️ Overview\n#overview-grid · #route-stops"]
         H_RMAP["🗾 Route Map\n#route-map"]
         H_TIP["💡 Tips\n#tips-grid"]
-        H_IT["📅 Itinerary\n#timeline · .day-card · .day-tab"]
+        H_IT["📅 Itinerary\n#timeline · .day-card · .day-tab\n.day-map-*"]
         H_PACK["🧳 Packing\n#packing-grid"]
         H_BUD["💰 Budget\n#budget-tbody · .converted-val · .live-rate-date"]
         H_HOT["🏨 Hotels\n#itinerary-hotels-grid\n#quick-leg-pills · #hotel-search-form"]
@@ -122,15 +126,16 @@ flowchart LR
     end
 
     %% ── Orchestration ────────────────────────────────────────────
+    BOOT --> UI
     BOOT --> RENDER
     BOOT --> CURR
-    BOOT --> UI
     BOOT --> MAP
 
     %% ── Data feeds ───────────────────────────────────────────────
     SD --> rOV & rTIP & rPACK & rBUD & rHOT
-    SD --> mMAP
+    SD --> mROUTE
     ID --> rIT
+    ID --> mDAY
 
     %% ── render.js → HTML ─────────────────────────────────────────
     rOV   --> H_OV
@@ -145,16 +150,19 @@ flowchart LR
     cUPD  --> H_BUD
 
     %% ── map.js → HTML ────────────────────────────────────────────
-    mMAP --> H_RMAP
+    mROUTE --> H_RMAP
+    mDAY   --> H_IT
 
     %% ── ui.js → HTML ─────────────────────────────────────────────
-    uLANG --> H_LANG
-    uNAV  --> H_NAV
-    uPART --> H_HERO
-    uFILT --> H_IT
-    uHOT  --> H_HOT
-    uREV  -. "adds .reveal to all sections" .-> HTML
-    uSCR  -. "intercepts all anchor links" .-> HTML
+    uTHEME -. "'themechange' event → map style switch" .-> MAP
+    uTHEME --> H_NAV
+    uLANG  --> H_LANG
+    uNAV   --> H_NAV
+    uPART  --> H_HERO
+    uFILT  --> H_IT
+    uHOT   --> H_HOT
+    uREV   -. "adds .reveal to all sections" .-> HTML
+    uSCR   -. "intercepts all anchor links" .-> HTML
 
     %% ── Styles ───────────────────────────────────────────────────
     classDef data    fill:#e8f4fd,stroke:#075AAA,color:#01295C,font-weight:bold
@@ -168,12 +176,13 @@ flowchart LR
     class BOOT boot
 ```
 
-**Arrow key:** solid `-->` = direct injection or data supply · dashed `-.->` = ambient effect across all sections
+**Arrow key:** solid `-->` = direct injection or data supply · dashed `-.->`= ambient effect across all sections
 
 | Section | Rendered by | Data source | Also touched by |
 |---|---|---|---|
 | Overview | `renderOverview()` | `SITE_DATA.overview` | `initScrollReveal()` |
-| Route Map | `initRouteMap()` | `SITE_DATA.overview.routeStops` | `langchange` event |
+| Route Map | `initRouteMap()` | `SITE_DATA.overview.routeStops` | `themechange` event, `langchange` event |
+| Day Maps | `initDayMap(dayId)` | `ITINERARY_DATA[n].blocks[].activity.locations` | `themechange` event |
 | Tips | `renderTips()` | `SITE_DATA.tips` | `initScrollReveal()` |
 | Itinerary | `renderItinerary()` | `ITINERARY_DATA` | `initFilters()`, `initScrollReveal()` |
 | Packing | `renderPacking()` | `SITE_DATA.packing` | `initScrollReveal()` |
@@ -186,8 +195,8 @@ flowchart LR
 
 Pure **HTML + CSS + JavaScript** — no frameworks, no build step. Open `index.html` directly or deploy to any static host.
 
-- [Leaflet.js](https://leafletjs.com/) — interactive map
-- [CartoDB Positron](https://carto.com/basemaps/) — map tiles
+- [MapLibre GL JS](https://maplibre.org/) — interactive WebGL maps (open source, no API key)
+- [OpenFreeMap](https://openfreemap.org/) — free map tiles, no account required (Positron light / Fiord dark)
 - [open.er-api.com](https://www.exchangerate-api.com) — live JPY exchange rates
 - [Google Fonts](https://fonts.google.com/) — Inter + Noto Sans JP
 

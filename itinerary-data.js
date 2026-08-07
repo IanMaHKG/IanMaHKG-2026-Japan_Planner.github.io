@@ -1,4 +1,4 @@
-﻿/**
+/**
  * @file itinerary-data.js
  * @description DATA SOURCE — the complete 12-day Japan Winter Journey 2026 schedule.
  * Sets window.ITINERARY_DATA, an array of day objects consumed by renderItinerary() in render.js.
@@ -77,7 +77,11 @@ window.ITINERARY_DATA = [
             icon: "🍳",
             en: "<strong>Breakfast / Brunch:</strong> Grab a quick meal at a <strong>konbini (便利店)</strong> (7-Eleven onigiri, sandwiches, and hot coffee) — surprisingly delicious and perfect after a long flight.",
             zh: "<strong>早餐 / 早午餐：</strong> 在機場或酒店附近的<strong>便利店 (Konbini)</strong> 買點輕食（7-Eleven 飯糰、三文治和熱咖啡）—— 日式便利店食品水準極高，方便快捷。"
-          }
+          },
+          locations: [
+            { lat: 35.7720, lng: 140.3929, label: { en: "Narita Airport", zh: "成田機場" } },
+            { lat: 35.5494, lng: 139.7798, label: { en: "Haneda Airport", zh: "羽田機場" } }
+          ]
         }
       },
       {
@@ -95,7 +99,11 @@ window.ITINERARY_DATA = [
             icon: "🍜",
             en: "<strong>Lunch:</strong> <strong>Sometaro (染太郎)</strong> (Asakusa) — A charming, family-friendly spot where you cook your own okonomiyaki on a tabletop griddle. Fun and delicious.",
             zh: "<strong>午餐：</strong> <strong>染太郎 (Sometaro)</strong> （淺草）— 懷舊的塌塌米老店，讓一家人圍著鐵板親自動手煎大阪燒/御好燒，既好玩又美味。"
-          }
+          },
+          locations: [
+            { lat: 35.7148, lng: 139.7967, label: { en: "Senso-ji Temple", zh: "淺草寺" } },
+            { lat: 35.7116, lng: 139.7972, label: { en: "Nakamise-dori", zh: "仲見世通" } }
+          ]
         }
       },
       {
@@ -113,7 +121,10 @@ window.ITINERARY_DATA = [
             icon: "🍱",
             en: "<strong>Dinner:</strong> <strong>Asakusa Imahan (淺草今半)</strong> — A legendary sukiyaki restaurant (est. 1895). The A5 wagyu sukiyaki set is an unforgettable first-night-in-Japan dinner. Reserve ahead.",
             zh: "<strong>晚餐：</strong> <strong>淺草今半 (Asakusa Imahan)</strong> — 創立於1895年的壽喜燒百年名店。精選頂級 A5 黑毛和牛壽喜燒套餐，為日本之旅第一晚留下最驚艷的味覺記憶。<strong>（必須提前預約）</strong>"
-          }
+          },
+          locations: [
+            { lat: 35.7101, lng: 139.8107, label: { en: "Tokyo Skytree", zh: "東京晴空塔" } }
+          ]
         }
       }
     ],
@@ -153,7 +164,11 @@ window.ITINERARY_DATA = [
             icon: "🍳",
             en: "<strong>Breakfast:</strong> <strong>Bills Omotesando (表參道)</strong> — Famous for \"the world's best scrambled eggs\" and fluffy ricotta pancakes. A relaxed, Western-style brunch your parents will love.",
             zh: "<strong>早餐：</strong> <strong>Bills 表參道 (Omotesando)</strong> — 被譽為擁有「世界第一早餐」的美名。招牌香蕉蜂蜜法式熱班戟和極致香滑的炒蛋，非常適合帶父母享受精緻悠閒的早晨。"
-          }
+          },
+          locations: [
+            { lat: 35.6763, lng: 139.6993, label: { en: "Meiji Shrine", zh: "明治神宮" } },
+            { lat: 35.6715, lng: 139.7025, label: { en: "Harajuku / Takeshita St.", zh: "原宿竹下通" } }
+          ]
         }
       },
       {
@@ -171,7 +186,11 @@ window.ITINERARY_DATA = [
             icon: "🍜",
             en: "<strong>Lunch:</strong> <strong>Gyukatsu Motomura (牛かつ もと村)</strong> (Shibuya) — Deep-fried wagyu cutlet served with a hot stone to sear it to your liking. An absolute must-try.",
             zh: "<strong>午餐：</strong> <strong>牛かつ もと村 (Gyukatsu Motomura)</strong> （澀谷）— 吉列炸牛排。外皮酥脆而內裡保持粉嫩的和牛排，讓您在個人小石板上親自加熱煎熟，口感極佳。"
-          }
+          },
+          locations: [
+            { lat: 35.6595, lng: 139.7004, label: { en: "Shibuya Crossing", zh: "澀谷十字路口" } },
+            { lat: 35.6580, lng: 139.7016, label: { en: "Hachiko Statue", zh: "忠犬八公像" } }
+          ]
         }
       },
       {
@@ -189,7 +208,11 @@ window.ITINERARY_DATA = [
             icon: "🍱",
             en: "<strong>Dinner:</strong> <strong>Gonpachi Nishi-Azabu (權八 西麻布)</strong> (the \"Kill Bill\" restaurant) — Beautiful traditional interiors, great soba noodles and yakitori. Fun atmosphere and foreigner-friendly.",
             zh: "<strong>晚餐：</strong> <strong>權八 西麻布 (Gonpachi)</strong> — 《標殺令 (Kill Bill)》經典電影場景靈感來源地。極具傳統大氣的大正時期裝潢，提供優質的日式串燒、蕎麥麵與清酒，氣氛熱鬧且對遊客非常友善。"
-          }
+          },
+          locations: [
+            { lat: 35.6653, lng: 139.7129, label: { en: "Omotesando", zh: "表參道" } },
+            { lat: 35.6605, lng: 139.7292, label: { en: "Roppongi Hills", zh: "六本木之丘" } }
+          ]
         }
       }
     ],
@@ -229,7 +252,10 @@ window.ITINERARY_DATA = [
             icon: "🍳",
             en: "<strong>Breakfast:</strong> <strong>Tsukiji market grazing</strong> — Must-try: fresh sushi at <strong>Sushi Dai (寿司大)</strong> or <strong>Daiwa Sushi (大和寿司)</strong>, tamagoyaki from <strong>Yamazaki (山崎)</strong>, and grilled scallops from street vendors.",
             zh: "<strong>早餐推薦：</strong> 築地市場掃街 —— 必嚐：<strong>壽司大</strong>或<strong>大和壽司</strong>的即製握壽司、<strong>山崎</strong>的微甜玉子燒，以及現烤的扇貝和生蠔。"
-          }
+          },
+          locations: [
+            { lat: 35.6654, lng: 139.7707, label: { en: "Tsukiji Outer Market", zh: "築地場外市場" } }
+          ]
         }
       },
       {
@@ -247,7 +273,11 @@ window.ITINERARY_DATA = [
             icon: "🍜",
             en: "<strong>Lunch:</strong> <strong>Azabudai Hills food hall</strong> — Upscale dining options right at the complex. Try <strong>Niku Kappo (肉割烹)</strong> for premium wagyu bowls, or <strong>Afuri (阿夫利)</strong> for their signature yuzu-shio (yuzu salt) ramen.",
             zh: "<strong>午餐：</strong> 麻布台之丘地下美食廣場 —— 選擇多元且環境極佳。推介品嚐 <strong>肉割烹 (Niku Kappo)</strong> 的頂級和牛丼，或 <strong>AFURI (阿夫利)</strong> 招牌清爽的柚子鹽拉麵。"
-          }
+          },
+          locations: [
+            { lat: 35.6563, lng: 139.7378, label: { en: "teamLab Borderless", zh: "teamLab Borderless" } },
+            { lat: 35.6563, lng: 139.7378, label: { en: "Azabudai Hills", zh: "麻布台之丘" } }
+          ]
         }
       },
       {
@@ -265,7 +295,11 @@ window.ITINERARY_DATA = [
             icon: "🍱",
             en: "<strong>Dinner:</strong> <strong>Ukai Toriyama (うかい鳥山)</strong> (near Tokyo Tower) — A refined charcoal-grilled chicken restaurant in a beautiful traditional garden setting. Perfect for a special dinner. Or go casual at <strong>T's TanTan</strong> in nearby Tokyo Station for outstanding vegan ramen.",
             zh: "<strong>晚餐：</strong> <strong>東京芝豆腐屋吉兆 / 鵜飼鳥山 (Ukai)</strong> —— 位於鐵塔腳下，隱密於傳統日式庭園中的高級炭火燒烤與豆腐料理名店，環境極美，是帶父母享用奢華晚餐的不二之選。<strong>（必須提前預約）</strong>"
-          }
+          },
+          locations: [
+            { lat: 35.6585, lng: 139.7454, label: { en: "Tokyo Tower", zh: "東京鐵塔" } },
+            { lat: 35.6566, lng: 139.7491, label: { en: "Shiba Park", zh: "芝公園" } }
+          ]
         }
       }
     ],
@@ -305,7 +339,11 @@ window.ITINERARY_DATA = [
             icon: "🍳",
             en: "<strong>Breakfast:</strong> Any classic café near Tokyo Station — try a Japanese-style morning toast set at an old-school <strong>kissaten (喫茶店)</strong>.",
             zh: "<strong>早餐：</strong> 東京站周邊舊式<strong>喫茶店 (Kissaten)</strong> — 品嚐日式傳統「Morning Set」（厚切多士配水煮蛋及黑咖啡），體驗經典的日本昭和晨間儀式感。"
-          }
+          },
+          locations: [
+            { lat: 35.6852, lng: 139.7528, label: { en: "Imperial Palace Gardens", zh: "皇居東御苑" } },
+            { lat: 35.6800, lng: 139.7530, label: { en: "Nijubashi Bridge", zh: "二重橋" } }
+          ]
         }
       },
       {
@@ -323,7 +361,10 @@ window.ITINERARY_DATA = [
             icon: "🍜",
             en: "<strong>Lunch:</strong> <strong>Kanda Matsuya (神田まつや)</strong> (near Akihabara) — A beloved 140-year-old soba noodle shop. The cold seiro soba with warm tempura is heavenly. No-frills, authentic, and affordable.",
             zh: "<strong>午餐：</strong> <strong>神田まつや (Kanda Matsuya)</strong> — 創立超過140年的傳奇蕎麥麵老字號。木質調的老店鋪氣氛極佳，招牌的天婦羅竹蒸蕎麥麵 (Tempura Soba) 麵條爽滑，湯頭鮮美。"
-          }
+          },
+          locations: [
+            { lat: 35.7022, lng: 139.7741, label: { en: "Akihabara", zh: "秋葉原" } }
+          ]
         }
       },
       {
@@ -341,7 +382,11 @@ window.ITINERARY_DATA = [
             icon: "🍱",
             en: "<strong>Dinner:</strong> <strong>Ginza Kagari (銀座 篝)</strong> — Famous for their rich, creamy chicken <em>tori-paitan</em> ramen. Small shop, big flavours. Alternatively, splurge at <strong>Ginza Kyubey (吉兵衛)</strong> for a world-class omakase sushi experience (reserve well ahead).",
             zh: "<strong>晚餐：</strong> <strong>銀座 篝 (Ginza Kagari)</strong> — 以極其濃郁如濃湯般的雞白湯拉麵聞名遐邇，是拉麵界的人氣王。若想享用精緻日料，亦可選擇前往名店<strong>銀座久兵衛 (Kyubey)</strong> 享用頂級手握壽司（須極早預約）。"
-          }
+          },
+          locations: [
+            { lat: 35.6717, lng: 139.7650, label: { en: "Ginza", zh: "銀座" } },
+            { lat: 35.6805, lng: 139.7633, label: { en: "Marunouchi Naka-dori", zh: "丸之內仲通" } }
+          ]
         }
       }
     ],
@@ -382,7 +427,10 @@ window.ITINERARY_DATA = [
             icon: "🍳",
             en: "<strong>Breakfast:</strong> <strong>Shinjuku station food hall</strong> — Try fresh pastries at <strong>Boul'Ange</strong> or a teishoku (set meal) at any station restaurant.",
             zh: "<strong>早餐：</strong> 新宿站地下美食街 —— 可到人氣麵包店 <strong>Boul'Ange</strong> 買現烤牛角包，或在傳統日式定食店快吃一份早餐。"
-          }
+          },
+          locations: [
+            { lat: 35.6896, lng: 139.7006, label: { en: "Shinjuku (Car Pickup)", zh: "新宿（取車）" } }
+          ]
         }
       },
       {
@@ -400,7 +448,12 @@ window.ITINERARY_DATA = [
             icon: "🍜",
             en: "<strong>Lunch:</strong> <strong>Hoto Fudo (ほうとう不動)</strong> (Kawaguchiko) — Famous for <em>hoto</em>, a hearty flat-noodle miso soup with seasonal vegetables. The ultimate winter comfort food. The cave-like restaurant branch is unique.",
             zh: "<strong>午餐：</strong> <strong>ほうとう不動 (Hoto Fudo)</strong> —— 山梨縣代表性鄉土料理「餺飥麵」（以南瓜及大量冬令蔬菜熬製的味噌扁平粗麵，用鐵鍋呈上）。溫暖驅寒，其東戀路店如白雲般的半球形建築外觀亦非常吸睛。"
-          }
+          },
+          locations: [
+            { lat: 35.4986, lng: 138.7730, label: { en: "Chureito Pagoda", zh: "忠靈塔" } },
+            { lat: 35.5116, lng: 138.7650, label: { en: "Lake Kawaguchi", zh: "河口湖" } },
+            { lat: 35.5155, lng: 138.7451, label: { en: "Oishi Park", zh: "大石公園" } }
+          ]
         }
       },
       {
@@ -418,7 +471,10 @@ window.ITINERARY_DATA = [
             icon: "🍱",
             en: "<strong>Dinner:</strong> <strong>Kaiseki (懷石料理) at your ryokan</strong> — Included with your stay. Expect 8–12 courses featuring seasonal ingredients, local freshwater fish, and beautifully presented dishes.",
             zh: "<strong>晚餐：</strong> <strong>一泊二食溫泉旅館懷石料理</strong> —— 包含於房費內。享用精緻呈獻的 8 至 12 道時令佳餚，包含甲州和牛、名水豆腐及當季鮮魚。"
-          }
+          },
+          locations: [
+            { lat: 35.5100, lng: 138.7600, label: { en: "Kawaguchiko Ryokan", zh: "河口湖溫泉旅館" } }
+          ]
         }
       }
     ],
@@ -459,7 +515,11 @@ window.ITINERARY_DATA = [
             icon: "🍳",
             en: "<strong>Breakfast:</strong> <strong>Traditional Japanese breakfast at ryokan</strong> — Grilled fish, miso soup, rice, and tamago (egg). A wholesome start to Christmas Day.",
             zh: "<strong>早餐：</strong> <strong>旅館傳統日式早餐</strong> —— 享用鹽烤溪魚、熱味噌湯、日式漬物與溫熱的白飯，健康而暖胃。"
-          }
+          },
+          locations: [
+            { lat: 35.5100, lng: 138.7600, label: { en: "Lake Kawaguchi (Sunrise)", zh: "河口湖日出" } },
+            { lat: 35.4858, lng: 138.6872, label: { en: "Iyashi no Sato", zh: "療癒之里根場" } }
+          ]
         }
       },
       {
@@ -477,7 +537,10 @@ window.ITINERARY_DATA = [
             icon: "🍜",
             en: "<strong>Lunch:</strong> <strong>Amazake Chaya (甘酒茶屋)</strong> (Hakone Old Road) — A 400-year-old teahouse serving sweet, alcohol-free amazake and hot mochi. A magical winter pit stop.",
             zh: "<strong>午餐：</strong> <strong>甘酒茶屋 (Amazake Chaya)</strong> —— 位於箱根舊道上，擁有400年歷史的草頂茶屋。來一杯暖烘烘的不含酒精甘酒（酒釀），搭配現烤的黃豆粉麻糬，非常有懷舊感。"
-          }
+          },
+          locations: [
+            { lat: 35.2494, lng: 139.0199, label: { en: "Owakudani", zh: "大涌谷" } }
+          ]
         }
       },
       {
@@ -495,7 +558,10 @@ window.ITINERARY_DATA = [
             icon: "🍱",
             en: "<strong>Dinner:</strong> <strong>Kaiseki at ryokan</strong> — Expect Hakone specialties like handmade tofu skin (yuba) dishes, seasonal sashimi, and local mountain vegetables.",
             zh: "<strong>晚餐：</strong> <strong>溫泉旅館節慶懷石定食</strong> —— 品嚐以箱根名產「豆腐皮 (Yuba)」製作的精緻料理，以及從相模灣新鮮直送的刺身拼盤。"
-          }
+          },
+          locations: [
+            { lat: 35.2332, lng: 139.0560, label: { en: "Hakone Ryokan", zh: "箱根溫泉旅館" } }
+          ]
         }
       }
     ],
@@ -535,7 +601,11 @@ window.ITINERARY_DATA = [
             icon: "🍳",
             en: "<strong>Breakfast:</strong> <strong>Ryokan breakfast</strong> — A hearty, final hot breakfast at your resort before setting off on the road.",
             zh: "<strong>早餐：</strong> <strong>溫泉旅館早餐</strong> —— 退房前吃饱熱呼呼的日式朝食，為今天的長途旅程儲備體力。"
-          }
+          },
+          locations: [
+            { lat: 35.1897, lng: 139.0210, label: { en: "Lake Ashi Pier", zh: "蘆之湖碼頭" } },
+            { lat: 35.1981, lng: 139.0249, label: { en: "Hakone Shrine", zh: "箱根神社" } }
+          ]
         }
       },
       {
@@ -553,7 +623,10 @@ window.ITINERARY_DATA = [
             icon: "🍜",
             en: "<strong>Lunch:</strong> <strong>Expressway Service Area</strong> — Try regional specialties like Shizuoka green tea ice cream or grilled eel rice at a SA restaurant. NEOPASA Suruga Bay is recommended.",
             zh: "<strong>午餐：</strong> 高速公路服務區美食 —— 日本的 SA 設施極為先進。推介在靜岡路段服務區嘗試綠茶雪糕或現場烤製的鰻魚飯定食，味道不輸市區名店。"
-          }
+          },
+          locations: [
+            { lat: 35.1815, lng: 136.9066, label: { en: "Nagoya (Car Return)", zh: "名古屋（還車）" } }
+          ]
         }
       },
       {
@@ -571,7 +644,11 @@ window.ITINERARY_DATA = [
             icon: "🍱",
             en: "<strong>Dinner:</strong> <strong>Yabaton (矢場とん)</strong> (Nagoya Station, before Shinkansen) — Famous for <em>miso katsu</em> (pork cutlet with rich Nagoya miso sauce). A hearty Nagoya farewell. Or dine at <strong>Kyoto Station Ramen Street (拉麵小路)</strong>.",
             zh: "<strong>晚餐：</strong> <strong>矢場豬排 (Yabaton)</strong> （名古屋站內）— 名古屋殿堂級美食「味噌炸豬排」，厚實的多汁豬排淋上香濃的紅味噌醬。或可到抵達後的京都站大樓10樓「拉麵小路」任選一碗熱氣騰騰的拉麵。"
-          }
+          },
+          locations: [
+            { lat: 34.9854, lng: 135.7588, label: { en: "Kyoto Station", zh: "京都車站" } },
+            { lat: 35.0037, lng: 135.7758, label: { en: "Gion District", zh: "祇園" } }
+          ]
         }
       }
     ],
@@ -611,7 +688,10 @@ window.ITINERARY_DATA = [
             icon: "🍳",
             en: "<strong>Breakfast:</strong> <strong>Vermillion Café</strong> (near Fushimi Inari station) — Excellent coffee and Western-style breakfasts in a cozy space overlooking a pond.",
             zh: "<strong>早餐：</strong> <strong>Vermillion Café</strong> —— 緊鄰神社出口旁，坐擁幽靜池塘景致。提供香醇的澳洲式咖啡與美味的牛油果煙燻三文魚多士，環境休閒。"
-          }
+          },
+          locations: [
+            { lat: 34.9671, lng: 135.7727, label: { en: "Fushimi Inari Taisha", zh: "伏見稻荷大社" } }
+          ]
         }
       },
       {
@@ -629,7 +709,11 @@ window.ITINERARY_DATA = [
             icon: "🍜",
             en: "<strong>Lunch:</strong> <strong>Omen Kodaiji (おめん 高台寺店)</strong> — Handmade udon noodles served with seasonal vegetables, ginger, and a warm dipping broth. A Kyoto institution.",
             zh: "<strong>午餐：</strong> <strong>名代烏冬 おめん (Omen)</strong> （高台寺店）— 京都著名的手打烏冬麵館。烏冬口感彈牙，搭配當季蔬菜拼盤與濃郁的柴魚醬汁，暖心又健康。"
-          }
+          },
+          locations: [
+            { lat: 34.9949, lng: 135.7850, label: { en: "Kiyomizu-dera", zh: "清水寺" } },
+            { lat: 34.9986, lng: 135.7815, label: { en: "Ninenzaka / Sannenzaka", zh: "二年坂 / 三年坂" } }
+          ]
         }
       },
       {
@@ -647,7 +731,11 @@ window.ITINERARY_DATA = [
             icon: "🍱",
             en: "<strong>Dinner:</strong> <strong>Gion Owatari (祇園大渡)</strong> — An intimate kaiseki restaurant in the heart of Gion. Seasonal multi-course dinner with impeccable presentation. Reserve well ahead.",
             zh: "<strong>晚餐：</strong> <strong>祇園大渡 (Gion Owatari)</strong> —— 位於祇園小巷內獲得米芝蓮肯定的極致茶懷石料理，主廚手藝精湛且待人親切，為父母帶來最高規格的京都名物享受。<strong>（必須極早預約）</strong>"
-          }
+          },
+          locations: [
+            { lat: 35.0050, lng: 135.7681, label: { en: "Nishiki Market", zh: "錦市場" } },
+            { lat: 35.0037, lng: 135.7758, label: { en: "Gion / Hanamikoji St.", zh: "祇園花見小路" } }
+          ]
         }
       }
     ],
@@ -687,7 +775,11 @@ window.ITINERARY_DATA = [
             icon: "🍳",
             en: "<strong>Breakfast:</strong> <strong>Inoda Coffee (イノダコーヒ)</strong> (Sanjo Main Branch) — A beloved Kyoto institution since 1947. Their \"Kyoto Breakfast\" set is a local morning ritual.",
             zh: "<strong>早餐：</strong> <strong>Inoda Coffee (三條本店)</strong> —— 創於1947年的京都經典咖啡館。點一份招牌「京都的朝食」套餐（牛角包、煎蛋、火腿與新鮮沙律），配上一杯微酸香濃的「阿拉伯珍珠」咖啡。"
-          }
+          },
+          locations: [
+            { lat: 35.0394, lng: 135.7292, label: { en: "Kinkaku-ji (Golden Pavilion)", zh: "金閣寺" } },
+            { lat: 35.0345, lng: 135.7182, label: { en: "Ryoan-ji", zh: "龍安寺" } }
+          ]
         }
       },
       {
@@ -705,7 +797,11 @@ window.ITINERARY_DATA = [
             icon: "🍜",
             en: "<strong>Lunch:</strong> <strong>Shoraian (松籟庵)</strong> (Arashiyama) — A riverside tofu kaiseki restaurant set on a small island. Warming winter dishes in a tranquil valley.",
             zh: "<strong>午餐：</strong> <strong>松籟庵 (Shoraian)</strong> （嵐山）— 隱藏於嵐山溪谷深處的豆腐懷石料理名店。在溪水潺潺的窗景旁，享用如白雪般精緻的熱川豆腐與精緻和食料理。<strong>（必須提前預約）</strong>"
-          }
+          },
+          locations: [
+            { lat: 35.0171, lng: 135.6762, label: { en: "Arashiyama Bamboo Grove", zh: "嵐山竹林" } },
+            { lat: 35.0095, lng: 135.6781, label: { en: "Togetsukyo Bridge", zh: "渡月橋" } }
+          ]
         }
       },
       {
@@ -723,7 +819,11 @@ window.ITINERARY_DATA = [
             icon: "🍱",
             en: "<strong>Dinner:</strong> <strong>Tousuiro (豆水楼)</strong> (Kyoto) — Specializes in Kyoto's famous <em>yudofu</em> (simmered tofu in hot broth) — simple, elegant, and warming. A winter classic.",
             zh: "<strong>晚餐：</strong> <strong>豆水樓 (Tousuiro)</strong> — 精緻湯豆腐料理。利用京都優質地下水製作的豆腐在木桶中溫熱慢煮，配上特製醬油與柴魚絲，鮮美暖胃，是極具禪意的冬日名菜。"
-          }
+          },
+          locations: [
+            { lat: 35.0032, lng: 135.7727, label: { en: "Camellia Tea House", zh: "茶道體驗" } },
+            { lat: 35.0105, lng: 135.7714, label: { en: "Kamogawa River", zh: "鴨川" } }
+          ]
         }
       }
     ],
@@ -763,7 +863,10 @@ window.ITINERARY_DATA = [
             icon: "🍳",
             en: "<strong>Breakfast:</strong> Grab pastries at <strong>Sizuya (志津屋)</strong> (Kyoto Station) — famous for their legendary beef cutlet sandwiches and beef buns.",
             zh: "<strong>早餐：</strong> <strong>志津屋 (Sizuya)</strong> （京都站內）— 京都老牌烘焙店。強烈推介他們的招牌「吉列牛肉三文治 (Gyu-Katsu Sandwich)」，非常美味。"
-          }
+          },
+          locations: [
+            { lat: 34.6851, lng: 135.8331, label: { en: "Nara Park", zh: "奈良公園" } }
+          ]
         }
       },
       {
@@ -781,7 +884,11 @@ window.ITINERARY_DATA = [
             icon: "🍜",
             en: "<strong>Lunch:</strong> <strong>Kakinoha Sushi Tanaka (柿の葉すし たなか)</strong> (Nara) — Try <em>kakinoha-zushi</em>, Nara's specialty sushi wrapped in persimmon leaves. Delicate, flavorful, and uniquely local.",
             zh: "<strong>午餐：</strong> <strong>柿の葉すし たなか (Tanaka)</strong> （奈良站前）— 奈良代表名產「柿葉壽司」（用柿子葉包裹青花魚或三文魚壽司，帶有淡淡植物清香，利於防腐）。味道溫和細緻。"
-          }
+          },
+          locations: [
+            { lat: 34.6888, lng: 135.8398, label: { en: "Todai-ji Temple", zh: "東大寺" } },
+            { lat: 34.6814, lng: 135.8491, label: { en: "Kasuga Taisha", zh: "春日大社" } }
+          ]
         }
       },
       {
@@ -799,7 +906,11 @@ window.ITINERARY_DATA = [
             icon: "🍱",
             en: "<strong>Dinner:</strong> <strong>Dotonbori street food</strong> — Sample local culinary delights: <strong>takoyaki (章魚燒)</strong> from Kukuru, <strong>gyoza (餃子)</strong> from Chao Chao, and <strong>kushikatsu (串炸)</strong> from Daruma. Remember: no double dipping!",
             zh: "<strong>晚餐：</strong> 道頓堀掃街美食之旅 —— 暢嚐大阪代表小吃：<strong>庫庫嚕 (Kukuru)</strong> 的爆漿章魚燒、<strong>Chao Chao</strong> 的香脆一口餃子，以及<strong>元祖串炸達摩 (Daruma)</strong> 的香脆串炸。**（注意：串炸沾醬嚴禁二次下蘸）**"
-          }
+          },
+          locations: [
+            { lat: 34.6687, lng: 135.5005, label: { en: "Dotonbori", zh: "道頓堀" } },
+            { lat: 34.6686, lng: 135.4985, label: { en: "Namba / Shinsaibashi", zh: "難波 / 心齋橋" } }
+          ]
         }
       }
     ],
@@ -839,7 +950,10 @@ window.ITINERARY_DATA = [
             icon: "🍳",
             en: "<strong>Breakfast:</strong> <strong>Café Rhinebeck</strong> (Shinsaibashi) — Fluffy pancakes and specialty coffee. A relaxed start to the day.",
             zh: "<strong>早餐：</strong> <strong>Café Rhinebeck (心齋橋)</strong> —— 享用現做鬆軟的厚鬆餅 (Pancakes) 與香濃精品咖啡，開啟悠閒的一天。"
-          }
+          },
+          locations: [
+            { lat: 34.6873, lng: 135.5262, label: { en: "Osaka Castle", zh: "大阪城" } }
+          ]
         }
       },
       {
@@ -857,7 +971,11 @@ window.ITINERARY_DATA = [
             icon: "🍜",
             en: "<strong>Lunch:</strong> <strong>Kushikatsu Daruma (串かつだるま)</strong> (Shinsekai) — Try original deep-fried skewers like shrimp, lotus root, asparagus, and cheese. Light, crispy, and delicious.",
             zh: "<strong>午餐：</strong> <strong>元祖串炸達摩 (Daruma)</strong> （新世界總店）— 體驗地道大阪串炸文化。外皮裹上極薄麵衣炸至金黃，推介大蝦、蓮藕、蘆筍和鵪鶉蛋串。**（注意： 醬汁絕不可二次蘸用，只可蘸一次）**"
-          }
+          },
+          locations: [
+            { lat: 34.6520, lng: 135.5063, label: { en: "Shinsekai / Tsutenkaku", zh: "新世界 / 通天閣" } },
+            { lat: 34.6663, lng: 135.5074, label: { en: "Kuromon Market", zh: "黑門市場" } }
+          ]
         }
       },
       {
@@ -875,7 +993,11 @@ window.ITINERARY_DATA = [
             icon: "🍱",
             en: "<strong>Dinner:</strong> <strong>Kani Doraku (蟹道楽)</strong> (Dotonbori Main Branch) — Under the famous giant moving crab sign, enjoy a multi-course crab kaiseki feast. Reserve in advance.",
             zh: "<strong>晚餐：</strong> <strong>蟹道樂 (Kani Doraku)</strong> （道頓堀本店）— 在著名的巨型電動螃蟹招牌下，享用精緻的松葉蟹/鱈場蟹多食懷石宴（包含蟹刺身、烤蟹腳、蟹天婦羅及蟹釜飯）。極受歡迎，<strong>（必須提前數周預訂）</strong>。"
-          }
+          },
+          locations: [
+            { lat: 34.6687, lng: 135.5005, label: { en: "Dotonbori", zh: "道頓堀" } },
+            { lat: 34.7025, lng: 135.4984, label: { en: "HEP FIVE (Umeda)", zh: "HEP FIVE 摩天輪（梅田）" } }
+          ]
         }
       }
     ],
@@ -916,7 +1038,11 @@ window.ITINERARY_DATA = [
             icon: "🍳",
             en: "<strong>Breakfast:</strong> <strong>Gram (心齋橋)</strong> — Famous for premium jiggly soufflé pancakes. Or if in Kobe: <strong>Nishimura's Coffee (西村咖啡店)</strong> — An institution since 1948 with rich vintage interiors.",
             zh: "<strong>早餐：</strong> <strong>Gram (心齋橋)</strong> — 搶購每日限定、口感如雲朵般軟綿的舒芙蕾厚鬆餅。若去神戶，可前往老字號 <strong>西村咖啡店 (Nishimura's)</strong>，在優雅復古的皮椅上享用英式早餐。"
-          }
+          },
+          locations: [
+            { lat: 34.6964, lng: 135.1939, label: { en: "Kitano-cho, Kobe (Option A)", zh: "神戶北野異人館（選項A）" } },
+            { lat: 34.6120, lng: 135.4930, label: { en: "Sumiyoshi Taisha (Option B)", zh: "住吉大社（選項B）" } }
+          ]
         }
       },
       {
@@ -934,7 +1060,10 @@ window.ITINERARY_DATA = [
             icon: "🍜",
             en: "<strong>Lunch:</strong> <strong>Steakland Kobe (神戶)</strong> (Option A) — Premium A5 Kobe beef grilled on a teppan griddle before your eyes. Or <strong>Ichiran Ramen (一蘭拉麵)</strong> (Option B) for hot tonkotsu soup.",
             zh: "<strong>午餐：</strong> **Steakland Kobe**（若選神戶）— 性價比極高的 A5 神戶牛肉鐵板燒，師傅在您面前現場切片煎烤；或在大阪難波吃一碗經典暖胃的 **一蘭拉麵**（若選選項B）。"
-          }
+          },
+          locations: [
+            { lat: 34.6729, lng: 135.5002, label: { en: "Shinsaibashi Shopping", zh: "心齋橋筋商店街" } }
+          ]
         }
       },
       {
@@ -952,7 +1081,10 @@ window.ITINERARY_DATA = [
             icon: "🍱",
             en: "<strong>Dinner:</strong> <strong>Toshikoshi soba</strong> — Join the locals! Visit any traditional soba noodle shop (like <strong>Matsuya</strong>) for hot tempura soba. Alternatively, dine at <strong>Mizuno (美津の)</strong> for Osaka's best okonomiyaki.",
             zh: "<strong>晚餐：</strong> <strong>除夕跨年蕎麥麵</strong> —— 入鄉隨俗，到心齋橋的麵館（如<strong>松屋</strong>）吃一碗熱氣騰騰的炸蝦蕎麥麵。或在道頓堀的 <strong>美津の (Mizuno)</strong> 享用招牌山藥大阪燒，暖烘烘地迎接新年。"
-          }
+          },
+          locations: [
+            { lat: 34.6540, lng: 135.5159, label: { en: "Shitennoji Temple", zh: "四天王寺" } }
+          ]
         }
       }
     ],

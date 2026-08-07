@@ -1906,9 +1906,18 @@ img {
   border-radius: 0 0 var(--radius-md) var(--radius-md);
   transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: var(--shadow-card);
+  /* Flex column by default — landscape overrides to row */
+  display: flex;
+  flex-direction: column;
 }
 
-.day-card.open .day-body { max-height: 2000px; }
+.day-card.open .day-body { max-height: 3000px; }
+
+/* Content wrapper (blocks + tip) — flex column, fills available space */
+.day-body-content {
+  flex: 1;
+  min-width: 0;   /* prevent flex overflow */
+}
 
 /* Timeline Blocks */
 .timeline-block {
@@ -2683,6 +2692,119 @@ body.curr-gbp span.curr-gbp { display: inline !important; }
 
 
 /* ═══════════════════════════════════════════════════
+   DAY CARD MINI MAP
+   ═══════════════════════════════════════════════════ */
+
+/* Container — hidden until the card is open */
+.day-map {
+  height: 0;
+  overflow: hidden;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  border-top: 1px solid var(--border-light);
+  margin: 0 -1px -1px;    /* bleed to card edges */
+  transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Show map when the accordion is open */
+.day-card.open .day-map {
+  height: 280px;
+}
+
+/* Numbered marker — base element (Leaflet DivIcon) */
+.day-map-marker {
+  background: transparent !important;
+  border: none !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Inner badge — navy circle with white number */
+.day-map-marker-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--ba-midnight);
+  color: #FFFFFF;
+  font-family: var(--font-primary);
+  font-size: 0.72rem;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(1, 41, 92, 0.35);
+  border: 2px solid #FFFFFF;
+  transition: transform var(--transition-fast);
+  cursor: pointer;
+}
+
+.day-map-marker-num:hover {
+  transform: scale(1.15);
+  background: var(--ba-blue);
+}
+
+/* Leaflet popup inside day map — minimal BA style */
+.day-map .leaflet-popup-content-wrapper {
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card-hover);
+  padding: 0;
+}
+
+.day-map .leaflet-popup-content {
+  margin: 8px 12px;
+  font-family: var(--font-primary);
+  font-size: 0.8rem;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.day-map .leaflet-popup-tip {
+  background: #FFFFFF;
+}
+
+
+/* ═══════════════════════════════════════════════════
+   DAY MAP — LANDSCAPE SIDE-BY-SIDE LAYOUT
+   When the screen is wider than it is tall (landscape / desktop),
+   the map slides in as a right-hand panel beside the itinerary blocks.
+   ═══════════════════════════════════════════════════ */
+@media (orientation: landscape) and (min-width: 800px) {
+  /* Switch day-body to a horizontal flex row */
+  .day-body {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  /* Content column scrolls vertically if very long */
+  .day-body-content {
+    overflow-y: auto;
+  }
+
+  /* Map: transition WIDTH instead of HEIGHT when in landscape */
+  .day-map {
+    height: auto;            /* override portrait height: 0 */
+    min-height: 300px;       /* guarantee a renderable area */
+    width: 0;                /* animate from 0 → side panel width */
+    border-top: none;        /* no top border — it's a side panel now */
+    border-left: 1px solid var(--border-light);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    margin: -1px -1px -1px 0;   /* bleed right & bottom, not left */
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .day-card.open .day-map {
+    width: 460px;            /* side panel width */
+    height: auto;            /* override portrait height: 280px */
+  }
+}
+
+/* Medium landscape (tablet in landscape, e.g. iPad) */
+@media (orientation: landscape) and (min-width: 800px) and (max-width: 1100px) {
+  .day-card.open .day-map { width: 380px; }
+}
+
+
+/* ═══════════════════════════════════════════════════
    RESPONSIVE — Mobile & Tablet
    ═══════════════════════════════════════════════════ */
 @media (max-width: 768px) {
@@ -2909,16 +3031,17 @@ body.curr-gbp span.curr-gbp { display: inline !important; }
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
   }
-  /* Explicitly reset grid-column start/end from desktop 3+2 offsets */
-  .itinerary-hotels-grid > .hotel-leg-card:nth-child(4),
-  .itinerary-hotels-grid > .hotel-leg-card:nth-child(5) {
-    grid-column: auto / auto !important;
+  /* Reset all cards from desktop 6-col span-2 to span-1 for 2-col tablet grid */
+  .itinerary-hotels-grid > .hotel-leg-card {
+    grid-column: span 1 !important;
+    min-width: 0;
   }
-  /* Card 5 (Osaka) spans 2 cols on tablet so it sits centered below the 2x2 grid */
+  /* Card 5 (Osaka) spans full width so it sits centered below the 2x2 grid */
   .itinerary-hotels-grid > .hotel-leg-card:nth-child(5) {
     grid-column: 1 / -1 !important;
   }
-  .hotel-leg-card { min-width: 0; }
+  /* Day mini-map: slightly shorter on tablet */
+  .day-card.open .day-map { height: 220px; }
 }
 
 @media (max-width: 480px) {
@@ -2955,6 +3078,8 @@ body.curr-gbp span.curr-gbp { display: inline !important; }
     width: 100% !important;
     max-width: 100% !important;
   }
+  /* Day mini-map: compact on small phones */
+  .day-card.open .day-map { height: 180px; }
 }
 
 

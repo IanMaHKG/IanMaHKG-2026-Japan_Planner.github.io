@@ -644,8 +644,11 @@ function renderItinerary() {
           <div class="day-chevron">▼</div>
         </div>
         <div class="day-body">
-          ${blocksHtml}
-          ${tipHtml}
+          <div class="day-body-content">
+            ${blocksHtml}
+            ${tipHtml}
+          </div>
+          <div class="day-map" id="day-map-${day.id}"></div>
         </div>
       </div>`;
   }).join('\n');
@@ -666,6 +669,13 @@ function toggleDay(header) {
 
   // Toggle current card
   card.classList.toggle('open', !wasOpen);
+
+  // Lazy-init the mini map when opening
+  if (!wasOpen && typeof window.initDayMap === 'function') {
+    const dayId = card.id;
+    // Small delay so the card is visible before Leaflet measures the container
+    setTimeout(() => window.initDayMap(dayId), 80);
+  }
 
   // Smooth scroll into view when opening
   if (!wasOpen) {

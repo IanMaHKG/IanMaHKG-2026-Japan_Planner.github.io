@@ -1,43 +1,62 @@
-# Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+# Deploys the Japan 2026 Trip Planner static site to GitHub Pages.
+name: Deploy to GitHub Pages
 
 on:
-  # Runs on pushes targeting the default branch
+  # Deploy on every push to main
   push:
     branches: ["main"]
 
-  # Allows you to run this workflow manually from the Actions tab
+  # Allow manual re-deploy from the Actions tab
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+# Minimal token permissions required for Pages deployment
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+# Only one active deployment at a time.
+# Queued runs are skipped; the in-progress deploy is always allowed to finish
+# so production is never left in a broken state.
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
 jobs:
-  # Single deploy job since we're just deploying
   deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10         # Prevent zombie runs blocking the concurrency group
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 1        # Shallow clone — only the latest snapshot is needed
+
+      - name: Filter site files
+        run: |
+          # Copy only web-facing assets to _site/.
+          # Excludes developer tooling (.github, .agents) and docs (*.md)
+          # that have no business being publicly served on the CDN.
+          rsync -a \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            --exclude='.agents/' \
+            --exclude='*.md' \
+            --exclude='_site/' \
+            . _site/
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
-          path: '.'
+          path: '_site'
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5

@@ -145,3 +145,146 @@ function initRouteMap() {
   // Invalidate size on window resize
   window.addEventListener('resize', () => map.invalidateSize());
 }
+
+
+/* ─── Per-Day Mini Map ─── */
+/**
+ * initDayMap(dayId)
+ *
+ * Lazily initialises a compact Leaflet map inside the `.day-map` container of a
+ * given day card when the accordion opens. Called by toggleDay() in render.js.
+ *
+ * - Collects all `locations` arrays from every block in the matching ITINERARY_DATA day.
+ * - Renders numbered DivIcon markers (1, 2, 3…) + a polyline connecting them.
+ * - Binds bilingual popups; updates on the `langchange` CustomEvent.
+ * - Calls map.invalidateSize() after a short delay to handle the CSS reveal animation.
+ *
+ * DATA CONTRACT: each block's activity may optionally have:
+ *   locations: [ { lat, lng, label: { en, zh } } ]
+ */
+function initDayMap(dayId) {
+  if (typeof L === 'undefined' || !window.ITINERARY_DATA) return;
+
+  const mapEl = document.getElementById('day-map-' + dayId);
+  if (!mapEl) return;
+
+  // Guard: only initialise once
+  if (mapEl.dataset.mapInited) {
+    // Already inited — re-open: invalidate size then refit all markers
+    if (mapEl._leafletMap && mapEl._leafletFitAll) {
+      setTimeout(() => {
+        mapEl._leafletMap.invalidateSize();
+        mapEl._leafletFitAll();
+      }, 450);
+    }
+    return;
+  }
+  mapEl.dataset.mapInited = 'true';
+
+  // Collect all location points from the day
+  const day = window.ITINERARY_DATA.find(d => d.id === dayId);
+  if (!day) return;
+
+  const points = [];
+  day.blocks.forEach(block => {
+    if (block.activity && block.activity.locations) {
+      block.activity.locations.forEach(loc => points.push(loc));
+    }
+  });
+
+  if (points.length === 0) {
+    // No locations — hide the map container
+    mapEl.style.display = 'none';
+    return;
+  }
+
+  // Determine the map centre
+  const centre = [
+    points.reduce((s, p) => s + p.lat, 0) / points.length,
+    points.reduce((s, p) => s + p.lng, 0) / points.length
+  ];
+
+  const map = L.map(mapEl, {
+    center: centre,
+    zoom: 13,
+    scrollWheelZoom: false,
+    zoomControl: true,
+    attributionControl: true
+  });
+
+  // Store reference for invalidateSize on re-open
+  mapEl._leafletMap = map;
+
+  // CartoDB Positron — identical tile layer as the main route map
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    subdomains: 'abcd',
+    maxZoom: 19
+  }).addTo(map);
+
+  // Draw polyline connecting all points
+  if (points.length > 1) {
+    L.polyline(points.map(p => [p.lat, p.lng]), {
+      color: '#075AAA',
+      weight: 2.5,
+      opacity: 0.65,
+      dashArray: '5, 6',
+      lineJoin: 'round'
+    }).addTo(map);
+  }
+
+  // Helper: get current language
+  const getLang = () => document.body.classList.contains('lang-zh-hk') ? 'zh' : 'en';
+
+  // Add numbered markers
+  const markers = points.map((point, idx) => {
+    const num = idx + 1;
+    const icon = L.divIcon({
+      className: 'day-map-marker',
+      html: `<span class="day-map-marker-num">${num}</span>`,
+      iconSize: [28, 28],
+      iconAnchor: [14, 14],
+      popupAnchor: [0, -16]
+    });
+    const marker = L.marker([point.lat, point.lng], { icon }).addTo(map);
+    const lang = getLang();
+    marker.bindPopup(`<strong>${point.label[lang]}</strong>`, { maxWidth: 200, closeButton: false });
+    return { marker, point };
+  });
+
+  // Helper: fit all location markers into view with comfortable padding.
+  // Defined as a closure so it can be called again on every re-open.
+  const fitAll = () => {
+    if (points.length === 1) {
+      map.setView([points[0].lat, points[0].lng], 14);
+    } else {
+      map.fitBounds(
+        L.latLngBounds(points.map(p => [p.lat, p.lng])),
+        { padding: [40, 40], maxZoom: 15 }
+      );
+    }
+  };
+
+  // Store so the re-open guard can call it
+  mapEl._leafletFitAll = fitAll;
+
+  // Enable scroll wheel zoom after first click
+  map.once('click', () => map.scrollWheelZoom.enable());
+
+  // Update popup labels on language switch
+  window.addEventListener('langchange', (e) => {
+    const lang = e.detail.lang === 'zh-hk' ? 'zh' : 'en';
+    markers.forEach(({ marker, point }) => {
+      marker.setPopupContent(`<strong>${point.label[lang]}</strong>`);
+    });
+  });
+
+  // Fit all markers AFTER the CSS reveal animation has finished.
+  // Portrait: height animates for 600ms (day-body) + 400ms (day-map) = fits at 450ms
+  // Landscape: width animates for 400ms — same window.
+  // We also call invalidateSize first so Leaflet has correct pixel dimensions.
+  setTimeout(() => map.invalidateSize(), 120);          // early resize
+  setTimeout(() => { map.invalidateSize(); fitAll(); }, 500); // post-transition fit
+}
+
+window.initDayMap = initDayMap;

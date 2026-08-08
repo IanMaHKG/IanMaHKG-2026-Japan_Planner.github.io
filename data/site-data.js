@@ -55,7 +55,7 @@
  * TO ADD AN OVERVIEW CARD: Push into overview.cards[]. style.css uses repeat(3, 1fr) grid.
  */
 
-window.SITE_DATA = {
+const SITE_DATA = {
   /* ─── Overview Section ─── */
   overview: {
     cards: [
@@ -109,7 +109,7 @@ window.SITE_DATA = {
         desc:  { en: "Asakusa, Shibuya, teamLab, Akihabara, winter illuminations",
                  zh: "參訪淺草寺、澀谷、teamLab、秋葉原，賞冬季燈飾" },
         lat: 35.6762, lng: 139.6503,
-        color: "#D4163C", markerClass: "marker-tokyo"
+        color: "var(--marker-tokyo)", markerClass: "marker-tokyo"
       },
       {
         code: "02",
@@ -123,7 +123,7 @@ window.SITE_DATA = {
         desc:  { en: "Mt Fuji views, Chureito Pagoda, ryokan & onsen",
                  zh: "賞富士山美景，登新倉山淺間公園忠靈塔，住溫泉旅館" },
         lat: 35.5104, lng: 138.7564,
-        color: "#075AAA", markerClass: "marker-fuji"
+        color: "var(--marker-fuji)", markerClass: "marker-fuji"
       },
       {
         code: "03",
@@ -137,7 +137,7 @@ window.SITE_DATA = {
         desc:  { en: "Explore Owakudani volcanic valley, pirate ship on Lake Ashi, stay at a top luxury hot spring ryokan",
                  zh: "走訪大涌谷地熱景點、搭蘆之湖海盜船、享頂級溫泉" },
         lat: 35.2329, lng: 139.1069,
-        color: "#C9A96E", markerClass: "marker-hakone"
+        color: "var(--marker-hakone)", markerClass: "marker-hakone"
       },
       {
         code: "04",
@@ -151,7 +151,7 @@ window.SITE_DATA = {
         desc:  { en: "Miso katsu dinner, drop off rental car",
                  zh: "享用味噌炸豬排晚餐，名古屋還車，轉搭新幹線" },
         lat: 35.1815, lng: 136.9066,
-        color: "#2AAFAF", markerClass: "marker-nagoya"
+        color: "var(--marker-nagoya)", markerClass: "marker-nagoya"
       },
       {
         code: "05",
@@ -165,7 +165,7 @@ window.SITE_DATA = {
         desc:  { en: "Fushimi Inari, Kinkaku-ji, Arashiyama, tea ceremony",
                  zh: "千本鳥居、金閣寺、嵐山竹林、體驗京都傳統茶道" },
         lat: 35.0116, lng: 135.7681,
-        color: "#BA0C2F", markerClass: "marker-kyoto"
+        color: "var(--marker-kyoto)", markerClass: "marker-kyoto"
       },
       {
         code: "06",
@@ -179,7 +179,7 @@ window.SITE_DATA = {
         desc:  { en: "Deer Park, Todai-ji, Kasuga Taisha",
                  zh: "造訪奈良公園親近小鹿、東大寺大佛殿、春日大社" },
         lat: 34.6851, lng: 135.8048,
-        color: "#4A9FD9", markerClass: "marker-nara"
+        color: "var(--marker-nara)", markerClass: "marker-nara"
       },
       {
         code: "07",
@@ -193,7 +193,7 @@ window.SITE_DATA = {
         desc:  { en: "Osaka Castle, Dotonbori, street food, New Year's Eve",
                  zh: "大阪城天守閣、道頓堀夜景與街頭美食、敲鐘跨年" },
         lat: 34.6937, lng: 135.5023,
-        color: "#D4163C", markerClass: "marker-osaka"
+        color: "var(--marker-osaka)", markerClass: "marker-osaka"
       }
     ]
   },
@@ -1032,3 +1032,7 @@ window.SITE_DATA = {
     ]
   }
 };
+
+if (typeof window !== 'undefined') {
+  window.SITE_DATA = SITE_DATA;
+}

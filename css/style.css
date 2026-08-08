@@ -1,0 +1,10 @@
+/* ═══════════════════════════════════════════════════
+   JAPAN WINTER JOURNEY 2026 — Master Stylesheet
+   British Airways × Japan Airlines — Design System
+   ═══════════════════════════════════════════════════ */
+
+@import 'palette.css';
+@import 'base.css';
+@import 'components.css';
+@import 'sections.css';
+@import 'responsive.css';

@@ -1,6 +1,6 @@
 # 🗾 Japan Winter Journey 2026
 
-**A detailed, interactive day-by-day family travel itinerary for Japan.**
+**A modern, modular, interactive day-by-day family travel itinerary for Japan.**
 
 📅 **Dec 20 – Dec 31, 2026** · 👨‍👩‍👦 **Family of 3** · 🚗 **Self-drive + Shinkansen**
 
@@ -15,6 +15,9 @@
 ## Features
 
 - ✈️ **BA-inspired design** — Midnight Navy, BA Red & Gold palette with glassmorphism cards
+- 🎨 **Modular Design System** — Centralised design tokens in `palette.css`, componentised CSS for maintainability
+- ⚡ **Universal Modular Architecture** — Clean JavaScript modules supporting static hosting and local browser preview with zero build requirements
+- 📱 **Progressive Web App (PWA)** — Offline support via Service Worker (`sw.js`) and installable web app manifest (`manifest.json`)
 - 🌙 **Dark / Light mode toggle** — persistent across sessions via `localStorage`; maps switch styles automatically (Positron ↔ Fiord)
 - 🚉 **JR Station Sign Route Board** — Authentic Japanese station sign (駅名標) timeline with Kanji, Furigana, Romaji, Station Codes & day badges
 - 📅 **12 expandable day cards** with morning / afternoon / evening schedules and meal picks
@@ -27,7 +30,8 @@
 - 📋 **Practical tips** — Transport passes, advance bookings, etiquette, winter driving
 - 🧳 **Packing checklist** — winter-specific, self-drive aware
 - 💰 **Budget estimate table** — per-category with live converted values
-- 📱 **Fully responsive** — pixel-aligned desktop and mobile layouts
+- ♿ **Accessibility (a11y)** — Full keyboard navigation (`Tab`, `Enter`, `Space`), ARIA expanded states, semantic HTML
+- 📱 **Fully responsive** — pixel-aligned desktop, tablet, and mobile layouts
 
 ---
 
@@ -40,40 +44,53 @@
 ## Project Structure
 
 ```
-├── index.html          # Semantic shell (no hardcoded content)
-├── style.css           # Full design system — BA tokens, components, dark mode, responsive
+├── index.html              # Semantic shell & PWA configuration
+├── manifest.json           # PWA Web App Manifest
+├── sw.js                   # Service Worker (offline cache & network strategies)
 │
-├── site-data.js        # Overview, Tips, Packing, Budget, Hotels data (SITE_DATA)
-├── itinerary-data.js   # 12-day itinerary (ITINERARY_DATA)
+├── assets/                 # Static media and icons
+│   └── favicon.svg         # SVG browser icon & PWA icon
 │
-├── render.js           # DOM injection — all section renderers
-├── currency.js         # Exchange rate fetch, HKD/GBP conversion, switcher
-├── ui.js               # Nav, language toggle, dark mode toggle, particles, scroll reveal, hotel search
-├── map.js              # MapLibre GL JS — route overview map + per-day mini maps
-└── script.js           # Entry point — DOMContentLoaded bootstrap only
+├── css/                    # Modular Design System & Styles
+│   ├── palette.css         # Colour tokens, typography, dark mode overrides
+│   ├── base.css            # CSS reset, typography, containers, section headers
+│   ├── components.css      # UI components (buttons, badges, JR signs, markers)
+│   ├── sections.css        # Layouts for Hero, Map, Timeline, Hotels, Budget
+│   ├── responsive.css      # Mobile, tablet, and orientation media queries
+│   └── style.css           # Master orchestrator (@import manager)
+│
+├── data/                   # Data Modules (Universal format)
+│   ├── site-data.js        # Overview, tips, packing, budget, hotels, car rental
+│   └── itinerary-data.js   # 12-day schedule, blocks, location coordinates
+│
+└── js/                     # Application Logic (Modular scripts)
+    ├── currency.js         # Exchange rate fetch, HKD/GBP conversion
+    ├── map.js              # MapLibre GL JS — overview & lazy day maps
+    ├── render.js           # Semantic DOM injection & accordion handling
+    ├── ui.js               # Navigation, language/theme selectors, observers
+    └── script.js           # Application bootstrapper & SW registration
 ```
 
-### JS → HTML Lineage Map
-
-The diagram below traces every data source and module function to the exact HTML container it populates.
+### Modular Architecture Lineage Map
 
 ```mermaid
 flowchart LR
 
     %% ── Entry point ──────────────────────────────────────────────
-    BOOT["⚙️ script.js\nDOMContentLoaded"]
+    BOOT["⚙️ js/script.js\nUniversal Bootstrap\n+ sw.js registration"]
 
     %% ── Data layer ───────────────────────────────────────────────
-    subgraph DATA["📦 Data Layer"]
+    subgraph DATA["📦 Data Layer (data/)"]
         direction TB
-        SD["site-data.js\nwindow.SITE_DATA\n\nOverview · Tips · Packing\nBudget · Hotels · Map stops"]
-        ID["itinerary-data.js\nwindow.ITINERARY_DATA\n\n12-day schedule\nblocks · tags · tips"]
+        SD["data/site-data.js\nSITE_DATA\n\nOverview · Tips · Packing\nBudget · Hotels · Car Rental"]
+        ID["data/itinerary-data.js\nITINERARY_DATA\n\n12-day schedule\nblocks · tags · tips"]
     end
 
-    %% ── render.js ────────────────────────────────────────────────
-    subgraph RENDER["🖨️ render.js"]
+    %% ── js/render.js ─────────────────────────────────────────────
+    subgraph RENDER["🖨️ js/render.js"]
         direction TB
         rOV["renderOverview()"]
+        rCAR["renderCarRental()\nrenderCarReturn()"]
         rTIP["renderTips()"]
         rPACK["renderPacking()"]
         rBUD["renderBudget()"]
@@ -81,8 +98,8 @@ flowchart LR
         rIT["renderItinerary()\ninitDayCards()"]
     end
 
-    %% ── currency.js ──────────────────────────────────────────────
-    subgraph CURR["💴 currency.js"]
+    %% ── js/currency.js ───────────────────────────────────────────
+    subgraph CURR["💴 js/currency.js"]
         direction TB
         cINIT["initCurrencySelector()"]
         cFETCH["fetchExchangeRates()\nopen.er-api.com"]
@@ -90,8 +107,8 @@ flowchart LR
         cINIT --> cFETCH --> cUPD
     end
 
-    %% ── ui.js ────────────────────────────────────────────────────
-    subgraph UI["🎛️ ui.js"]
+    %% ── js/ui.js ─────────────────────────────────────────────────
+    subgraph UI["🎛️ js/ui.js"]
         direction TB
         uTHEME["initTheme()\nsetTheme()\n'themechange' event"]
         uLANG["initLanguageSelector()\nsetLanguage()"]
@@ -103,8 +120,8 @@ flowchart LR
         uHOT["initHotelSearch()"]
     end
 
-    %% ── map.js ───────────────────────────────────────────────────
-    subgraph MAP["🗺️ map.js"]
+    %% ── js/map.js ────────────────────────────────────────────────
+    subgraph MAP["🗺️ js/map.js"]
         mROUTE["initRouteMap()\nMapLibre GL JS\n+ OpenFreeMap"]
         mDAY["initDayMap(dayId)\nlazy per-day mini-map"]
     end
@@ -132,13 +149,14 @@ flowchart LR
     BOOT --> MAP
 
     %% ── Data feeds ───────────────────────────────────────────────
-    SD --> rOV & rTIP & rPACK & rBUD & rHOT
+    SD --> rOV & rCAR & rTIP & rPACK & rBUD & rHOT
     SD --> mROUTE
     ID --> rIT
     ID --> mDAY
 
     %% ── render.js → HTML ─────────────────────────────────────────
     rOV   --> H_OV
+    rCAR  --> HTML
     rTIP  --> H_TIP
     rIT   --> H_IT
     rPACK --> H_PACK
@@ -176,29 +194,16 @@ flowchart LR
     class BOOT boot
 ```
 
-**Arrow key:** solid `-->` = direct injection or data supply · dashed `-.->`= ambient effect across all sections
-
-| Section | Rendered by | Data source | Also touched by |
-|---|---|---|---|
-| Overview | `renderOverview()` | `SITE_DATA.overview` | `initScrollReveal()` |
-| Route Map | `initRouteMap()` | `SITE_DATA.overview.routeStops` | `themechange` event, `langchange` event |
-| Day Maps | `initDayMap(dayId)` | `ITINERARY_DATA[n].blocks[].activity.locations` | `themechange` event |
-| Tips | `renderTips()` | `SITE_DATA.tips` | `initScrollReveal()` |
-| Itinerary | `renderItinerary()` | `ITINERARY_DATA` | `initFilters()`, `initScrollReveal()` |
-| Packing | `renderPacking()` | `SITE_DATA.packing` | `initScrollReveal()` |
-| Budget | `renderBudget()` | `SITE_DATA.budget` | `updateConvertedBudgets()` (currency.js) |
-| Hotels | `renderHotels()` | `SITE_DATA.hotels` | `initHotelSearch()` (ui.js) |
-
 ---
 
-## Tech
+## Tech Stack
 
-Pure **HTML + CSS + JavaScript** — no frameworks, no build step. Open `index.html` directly or deploy to any static host.
-
-- [MapLibre GL JS](https://maplibre.org/) — interactive WebGL maps (open source, no API key)
-- [OpenFreeMap](https://openfreemap.org/) — free map tiles, no account required (Positron light / Fiord dark)
-- [open.er-api.com](https://www.exchangerate-api.com) — live JPY exchange rates
-- [Google Fonts](https://fonts.google.com/) — Inter + Noto Sans JP
+- **MapLibre GL JS** — interactive WebGL maps (open source, no API key)
+- **OpenFreeMap** — free map tiles (Positron light / Fiord dark)
+- **open.er-api.com** — live JPY exchange rates
+- **Vanilla CSS (Modular Design System)** — custom properties, dark mode tokens, responsive layout
+- **Universal JavaScript Modules & Service Worker** — zero build step, PWA offline caching
+- **Google Fonts** — Inter + Noto Sans JP
 
 ---
 

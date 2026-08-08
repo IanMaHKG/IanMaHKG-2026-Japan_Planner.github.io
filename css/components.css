@@ -1,0 +1,279 @@
+/* ═══════════════════════════════════════════════════
+   JAPAN WINTER JOURNEY 2026 — UI Components
+   Buttons, tags, badges, switchers, markers, animations
+   ═══════════════════════════════════════════════════ */
+
+/* ── Dark Mode Toggle Button ── */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  flex-shrink: 0;
+  transition: background var(--transition-fast), transform var(--transition-bounce);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.18);
+  transform: scale(1.1) rotate(20deg);
+}
+
+.theme-toggle::before {
+  content: '🌙';
+  font-size: 0.9rem;
+}
+
+[data-theme="dark"] .theme-toggle::before {
+  content: '☀️';
+  font-size: 0.85rem;
+}
+
+/* ── Badges & Chips ── */
+.badge {
+  padding: 7px 16px;
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius-pill);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.80);
+  backdrop-filter: blur(8px);
+}
+
+/* ── Itinerary Activity Tags ── */
+.tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.tag-city      { background: var(--tag-city-bg);      color: var(--tag-city-color); }
+.tag-nature    { background: var(--tag-nature-bg);    color: var(--tag-nature-color); }
+.tag-culture   { background: var(--tag-culture-bg);   color: var(--tag-culture-color); }
+.tag-pace      { background: var(--tag-pace-bg);      color: var(--tag-pace-color); }
+.tag-transport { background: var(--tag-transport-bg); color: var(--tag-transport-color); }
+.tag-special   { background: var(--tag-special-bg);   color: var(--tag-special-color); }
+
+/* ── Verdict Badges ── */
+.verdict-badge-current        { background: #dcfce7; color: #15803d; border: 1px solid #86efac; }
+.verdict-badge-caution        { background: #fef9c3; color: #a16207; border: 1px solid #fde047; }
+.verdict-badge-notrecommended { background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; }
+
+.vbadge-green { background: #dcfce7; color: #15803d; border: 1px solid #86efac; }
+.vbadge-amber { background: #fef9c3; color: #a16207; border: 1px solid #fde047; }
+.vbadge-red   { background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; }
+
+.badge-blue  { background: #dbeafe; color: #1d4ed8; border: 1px solid #93c5fd; }
+.badge-green { background: #dcfce7; color: #15803d; border: 1px solid #86efac; }
+.badge-gold  { background: #fef9c3; color: #a16207; border: 1px solid #fde047; }
+
+/* Dark mode verdict badge overrides */
+[data-theme="dark"] .vbadge-green,
+[data-theme="dark"] .verdict-badge-current {
+  background: rgba(34, 197, 94, 0.15);
+  color: #4ADE80;
+  border-color: rgba(34, 197, 94, 0.35);
+}
+
+[data-theme="dark"] .vbadge-amber,
+[data-theme="dark"] .verdict-badge-caution {
+  background: rgba(245, 158, 11, 0.15);
+  color: #FCD34D;
+  border-color: rgba(245, 158, 11, 0.35);
+}
+
+[data-theme="dark"] .vbadge-red,
+[data-theme="dark"] .verdict-badge-notrecommended {
+  background: rgba(239, 68, 68, 0.15);
+  color: #FCA5A5;
+  border-color: rgba(239, 68, 68, 0.35);
+}
+
+/* ── Switchers & Sliders ── */
+.lang-switcher {
+  position: relative;
+  display: flex;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  padding: 2px;
+  align-items: center;
+  width: 126px;
+  height: 34px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+  backdrop-filter: blur(8px);
+}
+
+.currency-switcher {
+  position: relative;
+  display: flex;
+  width: 170px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-mid);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  padding: 2px;
+  align-items: center;
+}
+
+.switcher-slider {
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  left: 2px;
+  width: calc(50% - 2px);
+  background: var(--ba-red);
+  box-shadow: 0 2px 8px rgba(235, 34, 38, 0.45);
+  border-radius: var(--radius-pill);
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.currency-switcher .switcher-slider {
+  background: var(--ba-midnight);
+  box-shadow: 0 2px 8px rgba(1, 41, 92, 0.25);
+}
+
+.lang-switcher.slide-right .switcher-slider,
+.currency-switcher.slide-right .switcher-slider {
+  transform: translateX(100%);
+}
+
+.lang-btn, .curr-btn {
+  position: relative;
+  z-index: 2;
+  background: transparent !important;
+  border: none;
+  color: rgba(255, 255, 255, 0.85);
+  padding: 5px 0;
+  font-size: 0.82rem;
+  font-weight: 700;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: color 0.25s ease, transform 0.1s ease;
+  font-family: var(--font-primary);
+  width: 50%;
+  text-align: center;
+  transform: scale(1);
+  letter-spacing: 0.3px;
+}
+
+.curr-btn {
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+}
+
+.lang-btn:hover:not(.active) { color: #ffffff; }
+.curr-btn:hover:not(.active) { color: var(--text-primary); }
+
+.lang-btn.active {
+  color: #ffffff !important;
+  font-weight: 800;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+.curr-btn.active { color: #ffffff !important; }
+
+.lang-btn:active, .curr-btn:active { transform: scale(0.92); }
+
+.currency-switcher-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.switcher-label {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+/* ── Custom Map Markers (MapLibre GL JS) ── */
+.custom-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2.5px solid #fff;
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: #fff;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  line-height: 1;
+}
+
+.custom-marker.marker-tokyo  { background: var(--marker-tokyo); }
+.custom-marker.marker-fuji   { background: var(--marker-fuji); }
+.custom-marker.marker-hakone { background: var(--marker-hakone); color: var(--text-primary); }
+.custom-marker.marker-nagoya { background: var(--marker-nagoya); }
+.custom-marker.marker-kyoto  { background: var(--marker-kyoto); }
+.custom-marker.marker-nara   { background: var(--marker-nara); }
+.custom-marker.marker-osaka  { background: var(--marker-osaka); }
+
+/* Day Card Mini-Map Marker */
+.day-map-marker {
+  background: transparent !important;
+  border: none !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.day-map-marker-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--ba-midnight);
+  color: #FFFFFF;
+  font-family: var(--font-primary);
+  font-size: 0.72rem;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(1, 41, 92, 0.35);
+  border: 2px solid #FFFFFF;
+  transition: transform var(--transition-fast);
+  cursor: pointer;
+}
+
+.day-map-marker-num:hover {
+  transform: scale(1.15);
+  background: var(--ba-blue);
+}
+
+/* ── Scroll Animations (IntersectionObserver) ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }

@@ -46,7 +46,7 @@
  * TO CHANGE REGION FILTERS: update the `region` field here AND the .day-tab buttons in index.html.
  */
 
-window.ITINERARY_DATA = [
+const ITINERARY_DATA = [
   /* ════ DAY 1 ════ */
   {
     id: "day-1",
@@ -1094,4 +1094,8 @@ window.ITINERARY_DATA = [
     }
   }
 ];
+
+if (typeof window !== 'undefined') {
+  window.ITINERARY_DATA = ITINERARY_DATA;
+}
 

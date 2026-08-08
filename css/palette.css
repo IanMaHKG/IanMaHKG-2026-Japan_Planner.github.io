@@ -1,0 +1,145 @@
+/* ═══════════════════════════════════════════════════
+   JAPAN WINTER JOURNEY 2026 — Master Colour Palette
+   All design tokens, brand colours, and dark mode palette variables
+   are centralized in this file.
+   ═══════════════════════════════════════════════════ */
+
+:root {
+  /* ── Primary Brand Colours (BA & JAL Guidelines) ── */
+  --ba-midnight: #01295C;      /* BA Midnight Navy — nav, headings */
+  --ba-blue: #075AAA;          /* BA Lebanese Blue — links, CTAs, interactive */
+  --ba-red: #EB2226;           /* BA Funky Red — accents, speedmarque */
+  --jal-red: #C4002F;          /* JAL Crane Red — hero stripe & special badges */
+  --ba-gold: #C9A96E;          /* First Class Gold — premium accents */
+  --ba-gold-light: #E2C992;    /* Light gold for gradients */
+
+  /* ── Background Palette — Light Mode ── */
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F5F7FA;     /* ba.com section alternation */
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #F0F4F9;
+  --bg-nav: #01295C;           /* Always midnight navy */
+  --bg-footer: #01295C;
+
+  /* ── Text Colours — Light Mode ── */
+  --text-primary: #1A1A2E;
+  --text-secondary: #4A5568;
+  --text-muted: #718096;
+  --text-on-dark: #FFFFFF;
+  --text-on-dark-2: rgba(255, 255, 255, 0.72);
+
+  /* ── Borders & Dividers ── */
+  --border-light: #E2E8F0;
+  --border-mid: #CBD5E0;
+  --border-nav: rgba(255, 255, 255, 0.12);
+
+  /* ── Semantic Accents ── */
+  --accent-navy: #075AAA;
+  --accent-red: #EB2226;
+  --accent-gold: #C9A96E;
+  --accent-teal: #2AAFAF;
+  --accent-sky: #4A9FD9;
+
+  /* ── Marker Accent Colours ── */
+  --marker-tokyo: #D4163C;
+  --marker-fuji: #075AAA;
+  --marker-hakone: #C9A96E;
+  --marker-nagoya: #2AAFAF;
+  --marker-kyoto: #BA0C2F;
+  --marker-nara: #4A9FD9;
+  --marker-osaka: #D4163C;
+
+  /* ── Map Route Line Colours — Light Mode ── */
+  --route-drive: #075AAA;
+  --route-shinkansen: #BA0C2F;
+  --route-local: #C9A96E;
+
+  /* ── Tag & Badge Palette — Light Mode ── */
+  --tag-city-bg: rgba(235, 34, 38, 0.08);
+  --tag-city-color: #C42026;
+  --tag-nature-bg: rgba(42, 175, 175, 0.10);
+  --tag-nature-color: #1D8888;
+  --tag-culture-bg: rgba(201, 169, 110, 0.12);
+  --tag-culture-color: #8A6A2E;
+  --tag-pace-bg: rgba(7, 90, 170, 0.09);
+  --tag-pace-color: #075AAA;
+  --tag-transport-bg: rgba(1, 41, 92, 0.08);
+  --tag-transport-color: #01295C;
+  --tag-special-bg: rgba(235, 34, 38, 0.08);
+  --tag-special-color: #C42026;
+
+  /* ── Gradients ── */
+  --gradient-hero: linear-gradient(150deg, #00183A 0%, #01295C 40%, #075AAA 100%);
+  --gradient-ba-red: linear-gradient(135deg, #EB2226, #C4002F);
+  --gradient-ba-navy: linear-gradient(135deg, #075AAA, #01295C);
+  --gradient-gold: linear-gradient(135deg, #C9A96E, #E2C992);
+
+  /* ── Shadows — Subtle, clean (BA.com style) ── */
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.08), 0 4px 16px rgba(0, 0, 0, 0.06);
+  --shadow-card-hover: 0 4px 20px rgba(1, 41, 92, 0.12), 0 1px 4px rgba(0, 0, 0, 0.08);
+  --shadow-nav: 0 2px 8px rgba(1, 41, 92, 0.25);
+  --shadow-btn: 0 4px 14px rgba(7, 90, 170, 0.30);
+  --shadow-btn-red: 0 4px 14px rgba(235, 34, 38, 0.30);
+
+  /* ── Radii ── */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 20px;
+  --radius-pill: 100px;
+
+  /* ── Typography & Motion ── */
+  --font-primary: 'Inter', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  --transition-fast: 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ═══════════════════════════════════════════════════
+   DARK MODE PALETTE OVERRIDES
+   ═══════════════════════════════════════════════════ */
+[data-theme="dark"] {
+  /* ── Backgrounds ── */
+  --bg-primary: #0D1117;
+  --bg-secondary: #161B22;
+  --bg-card: #1C2128;
+  --bg-card-hover: #242A34;
+
+  /* ── Text ── */
+  --text-primary: #E6EDF3;
+  --text-secondary: #8B949E;
+  --text-muted: #6E7681;
+
+  /* ── Borders ── */
+  --border-light: #30363D;
+  --border-mid: #3D444D;
+
+  /* ── Shadows ── */
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.4), 0 4px 16px rgba(0, 0, 0, 0.3);
+  --shadow-card-hover: 0 4px 24px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3);
+  --shadow-nav: 0 2px 8px rgba(0, 0, 0, 0.5);
+
+  /* ── Brand blues & Accents ── */
+  --ba-blue: #5DAAFF;
+  --accent-navy: #5DAAFF;
+  --accent-sky: #7ECFFF;
+
+  /* ── Map Route Line Colours — Dark Mode ── */
+  --route-drive: #60BBFF;
+  --route-shinkansen: #FF7070;
+  --route-local: #F5D070;
+
+  /* ── Tag & Badge Palette — Dark Mode ── */
+  --tag-city-bg: rgba(235, 34, 38, 0.18);
+  --tag-city-color: #FF8E8E;
+  --tag-nature-bg: rgba(42, 175, 175, 0.18);
+  --tag-nature-color: #5FE5D7;
+  --tag-culture-bg: rgba(201, 169, 110, 0.18);
+  --tag-culture-color: #D9B870;
+  --tag-pace-bg: rgba(7, 90, 170, 0.18);
+  --tag-pace-color: #7DBEF7;
+  --tag-transport-bg: rgba(90, 160, 240, 0.15);
+  --tag-transport-color: #7DBEF7;
+  --tag-special-bg: rgba(235, 34, 38, 0.18);
+  --tag-special-color: #FF8E8E;
+}

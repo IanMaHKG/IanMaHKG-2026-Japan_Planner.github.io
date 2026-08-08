@@ -1,0 +1,136 @@
+/* ═══════════════════════════════════════════════════
+   JAPAN WINTER JOURNEY 2026 — Base Styles & Resets
+   ═══════════════════════════════════════════════════ */
+
+/* ── Reset & Box Sizing ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-primary);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: var(--accent-navy);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--ba-midnight);
+  text-decoration: underline;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ── Layout Containers ── */
+.container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.section {
+  padding: 64px 0;
+  position: relative;
+  background: var(--bg-primary);
+}
+
+.section-dark {
+  background: var(--bg-secondary);
+}
+
+/* ── Section Titles & Subtitles ── */
+.section-title {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin-bottom: 8px;
+  text-align: center;
+  color: var(--ba-midnight);
+  -webkit-text-fill-color: unset;
+  background: none;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: var(--ba-red);
+  margin: 10px auto 0;
+  border-radius: 2px;
+}
+
+.section-title.light {
+  color: var(--ba-midnight);
+  background: none;
+  -webkit-text-fill-color: unset;
+}
+
+.section-subtitle {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  max-width: 620px;
+  margin: 0 auto 48px;
+  line-height: 1.7;
+}
+
+.section-subtitle.light {
+  color: var(--text-muted);
+}
+
+/* ── Theme Switch Transition ── */
+.theme-transitioning,
+.theme-transitioning * {
+  transition:
+    background-color 0.35s ease,
+    color 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease !important;
+}
+
+/* ── Visibility Rules — Language & Currency ── */
+body.lang-en .lang-zh     { display: none !important; }
+body.lang-zh-hk .lang-en { display: none !important; }
+
+body.lang-en span.lang-en       { display: inline !important; }
+body.lang-zh-hk span.lang-zh   { display: inline !important; }
+
+body.curr-hkd .curr-gbp { display: none !important; }
+body.curr-gbp .curr-hkd { display: none !important; }
+
+body.curr-hkd span.curr-hkd { display: inline !important; }
+body.curr-gbp span.curr-gbp { display: inline !important; }
+
+/* ── Custom Scrollbar & Selection ── */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-secondary); }
+::-webkit-scrollbar-thumb {
+  background: var(--border-mid);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--ba-blue); }
+
+::selection {
+  background: rgba(7, 90, 170, 0.18);
+  color: var(--ba-midnight);
+}

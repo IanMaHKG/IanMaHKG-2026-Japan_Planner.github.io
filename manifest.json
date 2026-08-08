@@ -1,0 +1,18 @@
+{
+  "name": "Japan Winter Journey 2026 | 日本冬日之旅",
+  "short_name": "Japan 2026",
+  "description": "12-Day Japan Winter Itinerary Planner — Tokyo, Mount Fuji, Hakone, Nagoya, Kyoto, Nara, Osaka.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#01295C",
+  "theme_color": "#01295C",
+  "icons": [
+    {
+      "src": "assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

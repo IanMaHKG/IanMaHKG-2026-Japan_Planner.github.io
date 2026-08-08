@@ -4,12 +4,20 @@
 # Read and follow them before writing or editing any content.
 # ──────────────────────────────────────────────────────────────────────
 
+## Documentation Integrity & Anti-Drift Rule (CRITICAL)
+
+- **Mandatory Review on Every Change:** Whenever ANY code, architecture, directory structure, data schema, styling token, or feature change is made, the agent **MUST** immediately review and update all relevant markdown files (`README.md`, `.agents/AGENTS.md`, and active artifacts/walkthroughs).
+- **Zero Documentation Drift:** Documentation must always strictly match the living code. Never allow file paths, architectural diagrams, feature descriptions, or design token references to become outdated.
+- **British English in Documentation:** All markdown files, code comments, and documentation must adhere to British English conventions (see Language Style Rules below).
+
+---
+
 ## Language Style Rules
 
 ### English — Use British English (NOT American English)
 
-All English-language content in `site-data.js`, `itinerary-data.js`,
-`index.html`, `render.js`, `README.md`, and any other human-readable
+All English-language content in `data/site-data.js`, `data/itinerary-data.js`,
+`index.html`, `js/render.js`, `README.md`, and any other human-readable
 file **must use British English spelling and conventions**.
 
 #### Key spelling differences to enforce
@@ -45,8 +53,8 @@ file **must use British English spelling and conventions**.
 
 ### Chinese — Use Hong Kong Chinese (Traditional, 繁體中文)
 
-All Chinese-language content in `zh:` fields throughout `site-data.js`,
-`itinerary-data.js`, and any other data file **must use Hong Kong
+All Chinese-language content in `zh:` fields throughout `data/site-data.js`,
+`data/itinerary-data.js`, and any other data file **must use Hong Kong
 Traditional Chinese** — not Simplified Chinese (簡體) and not
 Taiwan-specific vocabulary.
 
@@ -85,11 +93,41 @@ Taiwan-specific vocabulary.
 
 ## Architecture & Content Rules
 
+### Modular File Structure
+
+```
+├── index.html              # Semantic shell & PWA metadata
+├── manifest.json           # Web App Manifest for mobile installation
+├── sw.js                   # Service Worker (offline caching)
+│
+├── assets/                 # Static media and icons
+│   └── favicon.svg         # SVG favicon & PWA icon
+│
+├── css/                    # Modular Design System
+│   ├── palette.css         # Central tokens, brand colours, dark mode overrides
+│   ├── base.css            # CSS reset, typography, container, section headers
+│   ├── components.css      # UI components (buttons, tags, JR dots, markers)
+│   ├── sections.css        # Layouts for Hero, Map, Timeline, Hotels, Budget
+│   ├── responsive.css      # Responsive media queries
+│   └── style.css           # Master orchestrator (@import manager)
+│
+├── data/                   # Data Modules (Universal format)
+│   ├── site-data.js        # Overview, tips, packing, budget, hotels, car rental
+│   └── itinerary-data.js   # 12-day schedule, blocks, location coordinates
+│
+└── js/                     # Application Logic
+    ├── currency.js         # Exchange rate fetch & JPY conversion
+    ├── map.js              # MapLibre GL JS — overview & lazy day maps
+    ├── render.js           # Semantic DOM injection & accordion handling
+    ├── ui.js               # Navigation, language/theme selectors, observers
+    └── script.js           # Application bootstrapper & SW registration
+```
+
 ### Data-Driven Pattern
 
-- All text content lives in **`site-data.js`** (overview, tips, packing,
-  budget, car return, car rental) or **`itinerary-data.js`** (day-by-day).
-- `render.js` reads data and injects HTML into placeholder IDs in
+- All text content lives in **`data/site-data.js`** (overview, tips, packing,
+  budget, car return, car rental) or **`data/itinerary-data.js`** (day-by-day).
+- `js/render.js` reads data and injects HTML into placeholder IDs in
   `index.html`. Do **not** hardcode displayed text in `index.html`
   unless it is a structural label that does not need i18n.
 - Every user-facing string must have both `en:` (British English) and
@@ -97,7 +135,7 @@ Taiwan-specific vocabulary.
 
 ### Trip Context (do not alter without user approval)
 
-- **Privacy & PII Protection:** Do NOT display personal names (e.g. "Ian"), specific family member mappings ("Mother", "Father"), or home cities ("Edinburgh", "Bracknell") in website text. State passport rules strictly by passport type (BC, BN(O), HKSAR, Portuguese).
+- **Privacy & PII Protection:** Do NOT display personal names, specific family member mappings ("Mother", "Father"), or home cities in website text. State passport rules strictly by passport type (BC, BN(O), HKSAR, Portuguese).
 - **Passports:** BN(O), Portuguese, BC & HKSAR passports. **All 4 passports enjoy 90-day visa-free entry to Japan.**
 - **Driving Licences:** All 3 travellers hold **UK Driving Licences**. Japan requires a **1949 Geneva Convention IDP** obtained from a UK Post Office (£5.50) before departure.
 - **Dates:** 20 Dec – 31 Dec 2026 (12 nights).
@@ -108,9 +146,7 @@ Taiwan-specific vocabulary.
 - **Recommended car:** Minivan / MPV (Toyota Alphard / Voxy / Noah,
   Nissan Serena) — fits 3 adults + 9 bags (3 large + 3 cabin + 3 backpack).
 - **Language switch:** Always visible top of page next to the theme toggle and hamburger menu.
-- **Dark mode toggle:** Moon/sun button in the nav bar (between the language switcher and hamburger);
-  persists in `localStorage` as `user-theme`; dispatches a `'themechange'` CustomEvent that
-  switches MapLibre map styles (Positron ↔ Fiord) and re-applies all CSS variable overrides.
+- **Dark mode toggle:** Moon/sun button in the nav bar; persists in `localStorage` as `user-theme`; dispatches a `'themechange'` CustomEvent that switches MapLibre map styles (Positron ↔ Fiord) and re-applies all CSS variable overrides.
 
 ### Column / Grid Layout Rule (CRITICAL)
 

@@ -59,6 +59,12 @@
   <meta name="twitter:title"      content="Japan Winter Journey 2026" />
   <meta name="twitter:description" content="Day-by-day family itinerary: Tokyo → Mt Fuji → Hakone → Kyoto → Nara → Osaka, Dec 20–31." />
 
+  <!-- PWA & Mobile Settings -->
+  <meta name="theme-color" content="#01295C" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="manifest" href="manifest.json" />
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -70,8 +76,12 @@
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4/dist/maplibre-gl.css" crossorigin="" />
   <script src="https://unpkg.com/maplibre-gl@4/dist/maplibre-gl.js" crossorigin=""></script>
 
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="css/palette.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/sections.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
 
   <!-- Theme flash prevention: apply saved theme before first CSS paint -->
   <script>(function(){var t=localStorage.getItem('user-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}());</script>
@@ -596,24 +606,18 @@
   </footer>
 
 
-  <!-- ─── Script Load Order ────────────────────────────────────────────
-       Data layer must load before render.js; render.js before script.js.
-       All scripts are plain globals — no ES modules, no bundler needed.
-       This means GitHub Pages can serve them directly with zero build step.
-  ──────────────────────────────────────────────────────────────────── -->
+  <!-- Data layer -->
+  <script src="data/site-data.js"></script>
+  <script src="data/itinerary-data.js"></script>
 
-  <!-- Data layer: populates window.SITE_DATA and window.ITINERARY_DATA -->
-  <script src="site-data.js"></script>
-  <script src="itinerary-data.js"></script>
+  <!-- Feature modules -->
+  <script src="js/currency.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/ui.js"></script>
 
-  <!-- Feature modules: define init functions (called by script.js) -->
-  <script src="render.js"></script>
-  <script src="currency.js"></script>
-  <script src="ui.js"></script>
-  <script src="map.js"></script>
-
-  <!-- Entry point: DOMContentLoaded bootstrap — calls all init functions -->
-  <script src="script.js"></script>
+  <!-- Application Bootstrap -->
+  <script src="js/script.js"></script>
 </body>
 
 </html>

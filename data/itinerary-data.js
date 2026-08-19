@@ -420,7 +420,7 @@ const ITINERARY_DATA = [
             zh: "東京市區取車與出發"
           },
           desc: {
-            en: "Pick up your rental car at <strong>Shinjuku (新宿)</strong> (Toyota / Nissan Rent-a-Car). Confirm <strong>studless winter tires</strong> and English GPS. Drive west on the <strong>Chuo Expressway (中央自動車道)</strong> towards Kawaguchiko (~2 hours). Depart by 8:00 AM to avoid traffic.",
+            en: "Pick up your rental car at <strong>Shinjuku (新宿)</strong> (Toyota / Nissan Rent-a-Car). Confirm <strong>studless winter tyres</strong> and English GPS. Drive west on the <strong>Chuo Expressway (中央自動車道)</strong> towards Kawaguchiko (~2 hours). Depart by 8:00 AM to avoid traffic.",
             zh: "在<strong>新宿</strong>的豐田或日產租車點取車。<strong>當場確認配備雪地無釘胎</strong>並將導航設定為英文/中文。隨後經由中央自動車道向西往河口湖前進（車程約2小時）。建議早上 8:00 前出發以避開東京早高峰出城車潮。"
           },
           meal: {

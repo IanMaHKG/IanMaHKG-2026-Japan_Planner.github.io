@@ -169,7 +169,7 @@ function initFilters() {
       tabs.forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
 
-      const filter = tab.dataset.filter;
+      const filter = tab.dataset.region || tab.dataset.filter;
       cards.forEach(card => {
         if (filter === 'all' || card.dataset.region === filter) {
           card.style.display = '';
@@ -184,7 +184,7 @@ function initFilters() {
 /* ─── Booking.com Hotel Search Form ─── */
 function initHotelSearch() {
   const form          = document.getElementById('hotel-search-form');
-  const destInput     = document.getElementById('hotel-dest');
+  const destInput     = document.getElementById('hotel-destination') || document.getElementById('hotel-dest');
   const checkinInput  = document.getElementById('hotel-checkin');
   const checkoutInput = document.getElementById('hotel-checkout');
   const adultsSelect  = document.getElementById('hotel-adults');

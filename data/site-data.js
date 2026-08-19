@@ -591,8 +591,8 @@ const SITE_DATA = {
           zh: "<strong>JR 關西地區鐵路周遊券 (4日)</strong> — 覆蓋京都、大阪、奈良、神戶的 JR 火車。出發前網上購買享優惠。"
         },
         {
-          en: "<strong>Rental car</strong> — Book via Nissan or Toyota Rent-a-Car. Request <strong>studless winter tires + GPS with English</strong>. One-way drop-off fee applies (Tokyo → Nagoya ≈ ¥15,000–20,000).",
-          zh: "<strong>自駕租車</strong> — 建議選擇日產 (Nissan) 或豐田 (Toyota) 租車。<strong>必須指定配備雪地無釘輪胎 (Studless Winter Tires)</strong> 及英文 GPS。異地還車（東京借、名古屋還）需收約 ¥15,000–20,000 附加費。"
+          en: "<strong>Rental car</strong> — Book via Nissan or Toyota Rent-a-Car. Request <strong>studless winter tyres + GPS with English</strong>. One-way drop-off fee applies (Tokyo → Nagoya ≈ ¥15,000–20,000).",
+          zh: "<strong>自駕租車</strong> — 建議選擇日產 (Nissan) 或豐田 (Toyota) 租車。<strong>必須指定配備雪地無釘輪胎 (Studless Winter Tyres)</strong> 及英文 GPS。異地還車（東京借、名古屋還）需收約 ¥15,000–20,000 附加費。"
         },
         {
           en: "<strong>1949 International Driving Permit (IDP 1949)</strong> — As UK licence holders, all drivers must obtain the <strong>1949 Geneva Convention IDP</strong> at a UK Post Office (£5.50) before travelling.",
@@ -841,7 +841,7 @@ const SITE_DATA = {
         max: 70000,
         initial: "$2,600–3,600",
         notes: {
-          en: "Incl. winter tires & one-way fee",
+          en: "Incl. winter tyres & one-way fee",
           zh: "包含雪胎配置、保險及異地還車費"
         }
       },

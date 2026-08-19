@@ -37,7 +37,7 @@
 
 /* ── Mid-range (900px) ── */
 @media (max-width: 900px) {
-  .rental-companies-grid { grid-template-columns: repeat(2, 1fr); }
+  .rental-companies-grid { grid-template-columns: 1fr; }
   .vr-grid { grid-template-columns: repeat(2, 1fr); }
   .vr-recommended { order: -1; }
 }

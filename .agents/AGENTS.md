@@ -12,6 +12,22 @@
 
 ---
 
+## Pre-Response Checklist (MANDATORY)
+
+Before making **any** code change, data edit, or documentation update, the agent **MUST** silently verify all of the following:
+
+- [ ] **British English** — All English prose uses British spellings: `tyres` (not tires), `colour` (not color), `licence` (not license), `travelling` (not traveling), `organise` (not organize), etc.
+- [ ] **HK Traditional Chinese** — All `zh:` fields use Hong Kong Traditional Chinese (繁體中文, natural HK register). No Simplified characters, no Mainland/Taiwan-specific vocabulary.
+- [ ] **Bilingual completeness** — Every user-facing string has **both** an `en:` and a `zh:` field updated. Never update one without the other.
+- [ ] **No orphan grid rows** — No card grid may end with a single item alone on the last row (2+1, 4+1, 5+1 layouts are forbidden). Use the explicit grid rules in the *Column / Grid Layout Rule* section below.
+- [ ] **Data-driven pattern** — Displayed text lives in `data/site-data.js` or `data/itinerary-data.js`, never hard-coded into `index.html` or `js/render.js` unless it is a structural shell label.
+- [ ] **Documentation updated** — If architecture, file structure, features, or design tokens changed, `README.md` and this `AGENTS.md` have been updated to match **before** the response is finalised.
+- [ ] **Privacy / PII** — No personal names, specific family member labels, or home city details exposed in any user-visible text.
+
+> **Tip for the agent:** If any box cannot be ticked, fix the issue before proceeding. Do not respond with a partially compliant change.
+
+---
+
 ## Language Style Rules
 
 ### English — Use British English (NOT American English)

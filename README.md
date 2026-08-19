@@ -60,6 +60,14 @@
 │   └── style.css           # Master orchestrator (@import manager)
 │
 ├── data/                   # Data Modules (Universal format)
+│   ├── flights/            # Flight schedule CSVs & JS data module
+│   │   ├── flights-data.js             # FLIGHTS_DATA — 6 routes, 5 options each
+│   │   ├── edi_to_tokyo_20261219.csv
+│   │   ├── lhr_to_tokyo_20261219.csv
+│   │   ├── osaka_to_edi_20261231.csv
+│   │   ├── osaka_to_lhr_20261231.csv
+│   │   ├── kix_to_hkg_20261231.csv
+│   │   └── hkg_to_edi_20270114.csv
 │   ├── site-data.js        # Overview, tips, packing, budget, hotels, car rental
 │   └── itinerary-data.js   # 12-day schedule, blocks, location coordinates
 │

@@ -2265,3 +2265,245 @@
 }
 [data-theme="dark"] .hotel-leg-btn            { color: var(--text-primary) !important; }
 [data-theme="dark"] .maplibregl-popup-close-button { color: var(--text-secondary) !important; }
+
+/* ═══════════════════════════════════════════════════
+   FLIGHT OPTIONS SECTION
+   ═══════════════════════════════════════════════════ */
+
+/* Section container */
+.flights-section { background: var(--bg-secondary); }
+
+/* Route tabs */
+.flights-route-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+  border-bottom: 2px solid var(--border-light);
+  padding-bottom: 0;
+}
+
+.flights-route-tab {
+  padding: 10px 18px;
+  border: none;
+  background: transparent;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: color 0.2s, border-color 0.2s;
+  font-family: inherit;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.flights-route-tab:hover { color: var(--ba-blue); }
+.flights-route-tab.active {
+  color: var(--ba-blue);
+  border-bottom-color: var(--ba-red);
+}
+
+/* Route panel */
+.flights-route-panel { display: none; }
+.flights-route-panel.active { display: block; }
+
+/* Route heading */
+.flights-route-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.flights-route-heading h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ba-midnight);
+  margin: 0;
+}
+
+.flights-route-date {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  padding: 4px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.02em;
+}
+
+/* Options grid — 1 column, stacked cards */
+.flights-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Single option card */
+.flight-option-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.flight-option-card:hover {
+  box-shadow: var(--shadow-card-hover);
+  border-color: var(--ba-blue);
+}
+
+/* Option card header */
+.flight-option-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.flight-option-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.flight-option-num {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-on-dark);
+  background: var(--ba-midnight);
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.flight-option-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.flight-airline-tag {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 20px;
+  background: rgba(7, 90, 170, 0.08);
+  color: var(--ba-blue);
+  letter-spacing: 0.02em;
+}
+
+.flight-option-summary {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* Legs table inside card */
+.flight-legs-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.flight-legs-table thead th {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 8px 18px 6px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-light);
+  background: var(--bg-secondary);
+}
+
+.flight-legs-table tbody tr {
+  border-bottom: 1px solid var(--border-light);
+}
+.flight-legs-table tbody tr:last-child { border-bottom: none; }
+
+.flight-legs-table tbody td {
+  padding: 12px 18px;
+  font-size: 0.82rem;
+  color: var(--text-primary);
+  vertical-align: middle;
+}
+
+.flight-legs-table tbody tr:hover { background: var(--bg-card-hover); }
+
+/* Flight number cell */
+.flt-num {
+  font-weight: 700;
+  color: var(--ba-blue);
+  font-family: 'Courier New', monospace;
+  font-size: 0.88rem;
+  white-space: nowrap;
+}
+
+/* Route IATA codes */
+.flt-route {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.flt-iata {
+  font-weight: 800;
+  font-size: 0.92rem;
+  letter-spacing: 0.04em;
+}
+.flt-arrow {
+  color: var(--ba-red);
+  font-size: 0.75rem;
+}
+
+/* Departure / arrival times */
+.flt-time {
+  font-weight: 600;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+.flt-date-small {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  display: block;
+}
+
+/* Layover row between legs */
+.flight-layover-row td {
+  padding: 4px 18px;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  background: rgba(201, 169, 110, 0.06);
+  border-bottom: 1px dashed var(--border-light) !important;
+  font-style: italic;
+}
+
+/* Dark mode overrides */
+[data-theme="dark"] .flight-option-card { background: var(--bg-card); border-color: var(--border-light); }
+[data-theme="dark"] .flight-option-header { background: var(--bg-secondary); border-color: var(--border-light); }
+[data-theme="dark"] .flight-option-label { color: var(--text-primary); }
+[data-theme="dark"] .flight-route-heading h3 { color: var(--text-primary); }
+[data-theme="dark"] .flight-legs-table thead th { background: var(--bg-secondary); color: var(--text-muted); }
+[data-theme="dark"] .flight-legs-table tbody td { color: var(--text-primary); border-color: var(--border-light); }
+[data-theme="dark"] .flight-legs-table tbody tr:hover { background: var(--bg-card-hover); }
+[data-theme="dark"] .flights-route-tab { color: var(--text-muted); }
+[data-theme="dark"] .flights-route-tab.active { color: var(--ba-gold); border-bottom-color: var(--ba-gold); }
+[data-theme="dark"] .flights-route-heading h3 { color: var(--text-primary); }
+[data-theme="dark"] .flights-route-date { background: var(--bg-secondary); color: var(--text-muted); border-color: var(--border-mid); }
+[data-theme="dark"] .flight-layover-row td { background: rgba(201, 169, 110, 0.04); }

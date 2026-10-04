@@ -8,6 +8,7 @@ if ('serviceWorker' in navigator && (location.protocol === 'http:' || location.p
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./sw.js')
       .then(reg => {
+        reg.update();
         console.log('ServiceWorker registered with scope:', reg.scope);
       })
       .catch(err => {
@@ -28,6 +29,7 @@ function bootstrap() {
   /* Step 2: UI & interaction wiring */
   if (typeof initLanguageSelector === 'function') initLanguageSelector();
   if (typeof initCurrencySelector === 'function') initCurrencySelector();
+  if (typeof initBudgetNotes === 'function') initBudgetNotes();
   if (typeof initParticles === 'function') initParticles();
   if (typeof initNav === 'function') initNav();
   if (typeof initDayCards === 'function') initDayCards();

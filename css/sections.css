@@ -2507,3 +2507,96 @@
 [data-theme="dark"] .flights-route-heading h3 { color: var(--text-primary); }
 [data-theme="dark"] .flights-route-date { background: var(--bg-secondary); color: var(--text-muted); border-color: var(--border-mid); }
 [data-theme="dark"] .flight-layover-row td { background: rgba(201, 169, 110, 0.04); }
+
+/* ═══════════════════════════════════════════════════
+   BUDGET TABLE — MOBILE NOTES COLUMN COLLAPSE
+   On ≤700px the table is too cramped.
+   The Notes column header is hidden and each row's
+   notes cell is initially hidden. A ▶ Notes pill
+   reveals notes per row.
+   Ported from Hamburg_2026_Planner sections-budget.css.
+   ═══════════════════════════════════════════════════ */
+@media (max-width: 700px) {
+  /* Prevent overflow:auto from intercepting touch events on Android */
+  .budget-table-wrap {
+    overflow-x: hidden;
+  }
+
+  .budget-table {
+    min-width: 0;
+  }
+
+  .budget-table th,
+  .budget-table td {
+    padding: 12px 10px;
+    font-size: 0.84rem;
+  }
+
+  /* Hide the Notes column header */
+  .budget-table thead th.budget-notes-th {
+    display: none;
+  }
+
+  /* Hide notes cell by default */
+  .budget-table td.budget-notes-cell {
+    display: none;
+    padding: 0 10px 12px 10px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border-light);
+    border-top: none;
+    background: var(--bg-secondary);
+  }
+
+  /* When parent row has .notes-open, show the notes cell */
+  .budget-table tr.budget-notes-row.notes-open .budget-notes-cell {
+    display: table-cell;
+  }
+
+  /* ── Notes Toggle Pill Badge ── */
+  .budget-note-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 7px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    background: var(--accent-primary, #0D9488);
+    border: none;
+    border-radius: var(--radius-pill, 9999px);
+    padding: 6px 12px 6px 9px;
+    min-height: 32px;
+    cursor: pointer;
+    font-family: inherit;
+    letter-spacing: 0.02em;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    transition: background var(--transition-fast), transform var(--transition-fast);
+    pointer-events: auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .budget-note-toggle:hover,
+  .budget-note-toggle:active {
+    background: var(--brand-secondary, #0F766E);
+    transform: scale(1.04);
+  }
+
+  .budget-note-toggle .toggle-arrow {
+    display: inline-block;
+    font-size: 0.65rem;
+    transition: transform 0.2s ease;
+    line-height: 1;
+  }
+
+  .budget-notes-row.notes-open .budget-note-toggle .toggle-arrow {
+    transform: rotate(90deg);
+  }
+
+  [data-theme="light"] .budget-note-toggle {
+    color: #FFFFFF;
+    background: var(--accent-primary, #0D9488);
+  }
+}

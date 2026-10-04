@@ -334,3 +334,48 @@
   .container { max-width: 1600px; }
   .section { padding: 80px 0; }
 }
+
+/* ── Safe-Area Insets: notch / Dynamic Island & gesture bar ── */
+/* viewport-fit=cover must be set in index.html; these rules ensure
+   UI elements clear system chrome on notched/Dynamic Island phones. */
+.nav-bar {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+@media (max-width: 768px) {
+  .mobile-bottom-nav {
+    height: calc(64px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* ── CJK Typography: prevent orphaned characters in subtitles ── */
+body.lang-zh .section-subtitle,
+body.lang-secondary .section-subtitle,
+body.lang-zh-cn .section-subtitle,
+body.lang-tertiary .section-subtitle {
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+/* ── Food Filter Pills: right-edge fade to hint horizontal scroll ── */
+@media (max-width: 768px) {
+  .food-filter-container {
+    position: relative;
+  }
+
+  .food-filter-container::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 36px;
+    background: linear-gradient(to left, var(--bg-primary, #0F172A), transparent);
+    pointer-events: none;
+    border-radius: 0 var(--radius-pill, 9999px) var(--radius-pill, 9999px) 0;
+  }
+
+  [data-theme="light"] .food-filter-container::after {
+    background: linear-gradient(to left, var(--bg-primary, #FFFFFF), transparent);
+  }
+}

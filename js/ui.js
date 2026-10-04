@@ -249,3 +249,48 @@ if (typeof window !== 'undefined') {
   window.initFilters           = initFilters;
   window.initHotelSearch       = initHotelSearch;
 }
+
+/* ═══════════════════════════════════════════════════
+   BUDGET NOTES TOGGLE — Mobile tap-to-expand
+   ═══════════════════════════════════════════════════
+ * Two-layer approach for reliable Android Chrome support:
+ *
+ *  Layer 1 (document delegation, self-executes immediately):
+ *    Catches clicks on any [data-budget-toggle] button regardless of
+ *    script init order or SW cache state.
+ *
+ *  Layer 2 (direct per-button listeners, called from script.js):
+ *    initBudgetNotes() attaches a direct click handler to every rendered
+ *    button for belt-and-suspenders reliability on Android Chrome where
+ *    event bubbling through scrollable table wrappers can stall.
+ *
+ * AGENTS: Do NOT revert to inline onclick strings — this delegation
+ * pattern is the canonical approach.
+ */
+
+// Layer 1: document-level delegation — self-executes when ui.js loads.
+(function () {
+  function _budgetToggleHandler(e) {
+    const btn = e.target.closest ? e.target.closest('[data-budget-toggle]') : null;
+    if (!btn) return;
+    const row = btn.closest ? btn.closest('tr') : btn.parentNode && btn.parentNode.parentNode;
+    if (row) row.classList.toggle('notes-open');
+  }
+  document.addEventListener('click', _budgetToggleHandler);
+  window._budgetToggleHandler = _budgetToggleHandler;
+}());
+
+/**
+ * Layer 2: called by script.js after renderAll() to attach direct
+ * listeners on every rendered button.
+ */
+function initBudgetNotes() {
+  const buttons = document.querySelectorAll('#budget-tbody [data-budget-toggle]');
+  buttons.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      const row = this.closest ? this.closest('tr') : this.parentNode && this.parentNode.parentNode;
+      if (row) row.classList.toggle('notes-open');
+    });
+  });
+}
+window.initBudgetNotes = initBudgetNotes;

@@ -2,15 +2,25 @@
  * @file sw.js
  * @description SERVICE WORKER — provides offline capability and asset caching
  * for Japan Winter Journey 2026.
+ *
+ * Caching strategy: Network-First for local app shell assets (instant updates
+ * on every deployment); Cache fallback for offline. Network-First for external
+ * APIs and CDN tiles.
+ *
+ * AGENTS — IMPORTANT: Bump CACHE_NAME after ANY change to JS, CSS, HTML, or
+ * data files so returning users receive the updated assets.
+ *
+ * @see AGENTS.md — Service Worker & PWA Rules section.
  */
 
-const CACHE_NAME = 'japan-planner-v1';
+const CACHE_NAME = 'japan-planner-v2';
 
 const STATIC_ASSETS = [
   './',
   './index.html',
   './manifest.json',
   './assets/favicon.svg',
+  './assets/apple-touch-icon.png',
   './css/palette.css',
   './css/base.css',
   './css/components.css',
@@ -19,6 +29,7 @@ const STATIC_ASSETS = [
   './css/style.css',
   './data/site-data.js',
   './data/itinerary-data.js',
+  './data/flights/flights-data.js',
   './js/currency.js',
   './js/map.js',
   './js/render.js',
@@ -48,48 +59,30 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-/* Fetch: Stale-while-revalidate for local assets, Network-first for external APIs */
+/* Fetch: Network-First for local assets (instant updates), cache fallback for offline */
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
 
   // Skip non-GET requests
   if (event.request.method !== 'GET') return;
 
-  // External live exchange rate API: Network-first
-  if (url.hostname.includes('open.er-api.com')) {
+  // External live exchange rate API, CDN tiles: Network-first with cache fallback
+  if (url.origin !== location.origin) {
     event.respondWith(
       fetch(event.request).catch(() => caches.match(event.request))
     );
     return;
   }
 
-  // Core assets & local files: Cache-first with network fallback
+  // Local assets: Network-First ensures fresh code on every visit, fallback to cache when offline
   event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      if (cachedResponse) {
-        // Fetch in background to update cache
-        fetch(event.request).then((networkResponse) => {
-          if (networkResponse && networkResponse.status === 200) {
-            caches.open(CACHE_NAME).then((cache) => {
-              cache.put(event.request, networkResponse);
-            });
-          }
-        }).catch(() => {});
-        return cachedResponse;
+    fetch(event.request).then((networkResponse) => {
+      if (networkResponse && networkResponse.status === 200 && event.request.method === 'GET') {
+        const responseClone = networkResponse.clone();
+        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseClone));
       }
-
-      return fetch(event.request).then((networkResponse) => {
-        if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
-          return networkResponse;
-        }
-
-        const responseToCache = networkResponse.clone();
-        caches.open(CACHE_NAME).then((cache) => {
-          cache.put(event.request, responseToCache);
-        });
-
-        return networkResponse;
-      });
-    })
+      return networkResponse;
+    }).catch(() => caches.match(event.request))
   );
 });
+

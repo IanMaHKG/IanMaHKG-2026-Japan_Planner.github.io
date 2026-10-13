@@ -3,17 +3,22 @@
  * @description SERVICE WORKER — provides offline capability and asset caching
  * for Japan Winter Journey 2026.
  *
- * Caching strategy: Network-First for local app shell assets (instant updates
- * on every deployment); Cache fallback for offline. Network-First for external
- * APIs and CDN tiles.
+ * Caching strategy:
+ *  - HTML (navigations): Network-First, cache fallback when offline.
+ *  - Local CSS/JS/data/images: Stale-While-Revalidate (instant load, refreshed in background).
+ *  - External (exchange rates, map tiles, fonts): Network-First with a capped runtime cache.
  *
- * AGENTS — IMPORTANT: Bump CACHE_NAME after ANY change to JS, CSS, HTML, or
- * data files so returning users receive the updated assets.
+ * Versioning: __BUILD__ below is replaced with the short commit SHA by the GitHub Actions
+ * deploy job, so every deployment gets a fresh cache automatically. Locally it stays
+ * '__BUILD__' (no manual bump needed). If you add/remove a file, update STATIC_ASSETS
+ * (scripts/validate.mjs checks this list against index.html and the disk).
  *
  * @see AGENTS.md — Service Worker & PWA Rules section.
  */
 
-const CACHE_NAME = 'japan-planner-v5';
+const CACHE_NAME = 'japan-planner-__BUILD__';
+const RUNTIME_CACHE = 'japan-planner-runtime';
+const RUNTIME_MAX_ENTRIES = 120;
 
 const STATIC_ASSETS = [
   './',
@@ -61,7 +66,8 @@ const STATIC_ASSETS = [
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(STATIC_ASSETS);
+      // cache:'reload' bypasses the browser HTTP cache so a new build never precaches stale files
+      return cache.addAll(STATIC_ASSETS.map((u) => new Request(u, { cache: 'reload' })));
     }).then(() => self.skipWaiting())
   );
 });
@@ -72,37 +78,65 @@ self.addEventListener('activate', (event) => {
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames
-          .filter((name) => name !== CACHE_NAME)
+          .filter((name) => name !== CACHE_NAME && name !== RUNTIME_CACHE)
           .map((name) => caches.delete(name))
       );
     }).then(() => self.clients.claim())
   );
 });
 
-/* Fetch: Network-First for local assets (instant updates), cache fallback for offline */
+/* Keep the runtime cache from growing without bound (oldest entries first) */
+async function trimRuntimeCache() {
+  const cache = await caches.open(RUNTIME_CACHE);
+  const keys = await cache.keys();
+  for (let i = 0; i < keys.length - RUNTIME_MAX_ENTRIES; i++) await cache.delete(keys[i]);
+}
+
+/* Fetch strategies */
 self.addEventListener('fetch', (event) => {
-  const url = new URL(event.request.url);
+  const req = event.request;
+  if (req.method !== 'GET') return;
+  const url = new URL(req.url);
 
-  // Skip non-GET requests
-  if (event.request.method !== 'GET') return;
-
-  // External live exchange rate API, CDN tiles: Network-first with cache fallback
+  // External (exchange-rate API, map tiles, fonts): network-first, capped runtime cache fallback
   if (url.origin !== location.origin) {
     event.respondWith(
-      fetch(event.request).catch(() => caches.match(event.request))
+      fetch(req).then((res) => {
+        if (res && (res.status === 200 || res.type === 'opaque')) {
+          const copy = res.clone();
+          caches.open(RUNTIME_CACHE).then((c) => c.put(req, copy)).then(trimRuntimeCache);
+        }
+        return res;
+      }).catch(() => caches.match(req))
     );
     return;
   }
 
-  // Local assets: Network-First ensures fresh code on every visit, fallback to cache when offline
+  // HTML navigations: network-first so a new deployment is seen immediately
+  if (req.mode === 'navigate' || (req.headers.get('accept') || '').includes('text/html')) {
+    event.respondWith(
+      fetch(req).then((res) => {
+        if (res && res.status === 200) {
+          const copy = res.clone();
+          caches.open(CACHE_NAME).then((c) => c.put(req, copy));
+        }
+        return res;
+      }).catch(() => caches.match(req).then((hit) => hit || caches.match('./index.html')))
+    );
+    return;
+  }
+
+  // Local static assets: stale-while-revalidate
   event.respondWith(
-    fetch(event.request).then((networkResponse) => {
-      if (networkResponse && networkResponse.status === 200 && event.request.method === 'GET') {
-        const responseClone = networkResponse.clone();
-        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseClone));
-      }
-      return networkResponse;
-    }).catch(() => caches.match(event.request))
+    caches.open(CACHE_NAME).then((cache) =>
+      cache.match(req).then((cached) => {
+        const network = fetch(req).then((res) => {
+          if (res && res.status === 200) cache.put(req, res.clone());
+          return res;
+        }).catch(() => cached);
+        return cached || network;
+      })
+    )
   );
 });
 

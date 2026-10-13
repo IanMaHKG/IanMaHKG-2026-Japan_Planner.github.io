@@ -22,7 +22,7 @@ Before making **any** code change, data edit, or documentation update, the agent
 - [ ] **No orphan grid rows** — No card grid may end with a single item alone on the last row (2+1, 4+1, 5+1 layouts are forbidden). Use the explicit grid rules in the *Column / Grid Layout Rule* section below.
 - [ ] **Data-driven pattern** — Displayed text lives in `data/site-data.js` or `data/itinerary-data.js`, never hard-coded into `index.html` or `js/render.js` unless it is a structural shell label.
 - [ ] **Documentation updated** — If architecture, file structure, features, or design tokens changed, `README.md` and this `AGENTS.md` have been updated to match **before** the response is finalised.
-- [ ] **Flight Selection & Long-Haul Airline Preference** — If editing or adding flight routes: (1) All legs must be live-verified via Google Flights; (2) Long-haul (intercontinental) legs MUST strictly adhere to the priority hierarchy: 1st: BA / Iberia (oneworld), 2nd: Finnair (oneworld), 3rd: Lufthansa / SWISS / Austrian (Star Alliance), 4th: Etihad Airways; (3) Options ordered by total journey time (shortest first); (4) CSV created first in `data/flights/` before updating `flights-data.js`; (5) Both depart and arrive dates recorded; (6) Max 5 best options per route.
+- [ ] **Flight Selection & Long-Haul Airline Preference** — If editing or adding flight routes: (1) All legs must be live-verified via Google Flights; (2) Long-haul (intercontinental) legs MUST strictly adhere to the priority hierarchy: 1st: BA / Iberia (oneworld), 2nd: Finnair (oneworld), 3rd: Lufthansa / SWISS / Austrian (Star Alliance), 4th: Etihad Airways; (3) Options ordered by total journey time (shortest first); (4) CSV created first in `data-src/flights/` before updating `flights-data.js`; (5) Both depart and arrive dates recorded; (6) Max 5 best options per route.
 - [ ] **Privacy / PII** — No personal names, specific family member labels, or home city details exposed in any user-visible text.
 
 > **Tip for the agent:** If any box cannot be ticked, fix the issue before proceeding. Do not respond with a partially compliant change.
@@ -122,29 +122,38 @@ Taiwan-specific vocabulary.
 │
 ├── css/                    # Modular Design System
 │   ├── palette.css         # Central tokens, brand colours, dark mode overrides
-│   ├── base.css            # CSS reset, typography, container, section headers
+│   ├── base.css            # CSS reset, typography, container, a11y (focus, reduced motion), back-to-top
 │   ├── components.css      # UI components (buttons, tags, JR dots, markers)
-│   ├── sections.css        # Layouts for Hero, Map, Timeline, Hotels, Budget
-│   ├── responsive.css      # Responsive media queries
-│   └── style.css           # Master orchestrator (@import manager)
+│   ├── sections/           # One stylesheet per page section (link order = cascade order!)
+│   │   ├── nav, hero, overview, map, tips, car-return, car-rental, itinerary,
+│   │   │   packing, budget, hotels, footer, dark-overrides, flights, budget-mobile (.css)
+│   └── responsive.css      # Responsive media queries (must stay last)
 │
 ├── data/                   # Data Modules (Universal format)
-│   ├── flights/            # Flight schedule CSVs & JS data module
-│   │   ├── flights-data.js             # FLIGHTS_DATA — 6 routes, 5 options each
-│   │   ├── edi_to_tokyo_20261219.csv
-│   │   ├── lhr_to_tokyo_20261219.csv
-│   │   ├── osaka_to_edi_20261231.csv
-│   │   ├── osaka_to_lhr_20261231.csv
-│   │   ├── kix_to_hkg_20261231.csv
-│   │   └── hkg_to_edi_20270114.csv
+│   ├── flights/flights-data.js   # FLIGHTS_DATA — 6 routes, 5 options each
 │   ├── site-data.js        # Overview, tips, packing, budget, hotels, car rental
 │   └── itinerary-data.js   # 12-day schedule, blocks, location coordinates
 │
-└── js/                     # Application Logic
+├── data-src/flights/       # Source-of-truth CSVs (NOT deployed to GitHub Pages)
+│   ├── edi_to_tokyo_20261219.csv
+│   ├── lhr_to_tokyo_20261219.csv
+│   ├── osaka_to_edi_20261231.csv
+│   ├── osaka_to_lhr_20261231.csv
+│   ├── kix_to_hkg_20261231.csv
+│   └── hkg_to_edi_20270114.csv
+│
+└── js/                     # Application Logic (classic scripts, window.* globals)
     ├── currency.js         # Exchange rate fetch & JPY conversion
     ├── map.js              # MapLibre GL JS — overview & lazy day maps
-    ├── render.js           # Semantic DOM injection & accordion handling
-    │                         renderFlights() reads FLIGHTS_DATA → #flights-section-content
+    ├── features/           # Section renderers (load BEFORE render.js)
+    │   ├── car.js          # renderCarRental / renderCarReturn / toggleCarTips
+    │   ├── overview.js     # renderOverview
+    │   ├── tips-packing.js # renderTips / renderPacking
+    │   ├── budget.js       # renderBudget
+    │   ├── hotels.js       # renderHotels
+    │   ├── itinerary.js    # renderItinerary / toggleDay / initDayCards
+    │   └── flights.js      # renderFlights (reads FLIGHTS_DATA → #flights-section-content)
+    ├── render.js           # Orchestrator: renderSiteContent, planchange re-render, window exports
     ├── ui.js               # Navigation, language/theme selectors, observers
     └── script.js           # Application bootstrapper & SW registration
 ```
@@ -200,7 +209,7 @@ Taiwan-specific vocabulary.
 The flight options system has a two-layer architecture:
 
 1. **CSV layer** — `data/flights/<route_key>_<date>.csv` — human-readable, source-of-truth archive.
-2. **JS layer** — `data/flights/flights-data.js` — `window.FLIGHTS_DATA`, consumed directly by `renderFlights()` in `js/render.js`.
+2. **JS layer** — `data/flights/flights-data.js` — `window.FLIGHTS_DATA`, consumed directly by `renderFlights()` in `js/features/flights.js`.
 
 > **Rule:** Always create/update the CSV first, then convert it into `flights-data.js`. Never skip the CSV step.
 
@@ -279,7 +288,7 @@ When asked to add a new route, an agent **MUST** follow these steps in order:
    - Screenshot or extract the top results.
    - **Do not save any flight data that has not been verified live.**
 
-2. **Create the CSV file** at `data/flights/<route_key>_<date>.csv`.
+2. **Create the CSV file** at `data-src/flights/<route_key>_<date>.csv`.
    - Follow the CSV column schema exactly.
    - Include all candidate legs, even ones that may not make the final top 5.
 
@@ -293,7 +302,7 @@ When asked to add a new route, an agent **MUST** follow these steps in order:
 5. **The `#flights` section tab is automatically rendered** — no `index.html` changes are required. The `renderFlights()` function reads `FLIGHTS_DATA.routes` at runtime and creates one tab per route dynamically.
 
 6. **Update documentation:**
-   - Add the new CSV filename to the `data/flights/` tree in both `AGENTS.md` and `README.md`.
+   - Add the new CSV filename to the `data-src/flights/` tree in both `AGENTS.md` and `README.md`.
    - Update the route count description (e.g. "4 routes, 5 options each" → "5 routes, …").
    - Record the change in the active `walkthrough.md` artifact.
 
@@ -325,6 +334,17 @@ Within each route, order options **by total journey time, shortest first** (calc
 
 ### Rendering — Do Not Modify Without Cause
 
-- `renderFlights()` in `js/render.js` is the single source of rendering logic. Do not duplicate flight rendering in `index.html` or other JS files.
+- `renderFlights()` in `js/features/flights.js` is the single source of rendering logic. Do not duplicate flight rendering in `index.html` or other JS files.
 - The tab-switcher (`flightsSelectTab()`) is globally scoped and handles all routes dynamically — no per-route JS is needed.
 - Layover rows are automatically inserted between consecutive legs using the existing template literal in `renderFlights()`. No extra markup is needed in the data.
+
+---
+
+## Service Worker, Build & Validation Rules
+
+- **Do NOT manually bump `CACHE_NAME` in `sw.js`.** It contains the `__BUILD__` placeholder; the deploy workflow replaces it with the short commit SHA.
+- When you add/remove a CSS, JS, data or image file that `index.html` loads, add/remove it in `STATIC_ASSETS` in `sw.js` too.
+- **CSS cascade:** stylesheets in `css/sections/*.css` are linked individually in `index.html`; the link order equals the old single-file order (`dark-overrides`, `flights`, `budget-mobile` come late on purpose) and `responsive.css` must stay last. Do not reorder them.
+- **JS load order:** `data/*` -> `currency.js` -> `map.js` -> `js/features/*.js` -> `render.js` -> `ui.js` -> `script.js`. New section renderers go in `js/features/` and must be exported in `render.js` and listed in `index.html` and `sw.js`.
+- Flight CSV sources live in `data-src/flights/` (not deployed). `flights-data.js` is what the site reads.
+- Before committing run `node scripts/validate.mjs` (also runs in CI and blocks deploys).

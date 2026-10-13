@@ -6,6 +6,10 @@ on:
   push:
     branches: ["main"]
 
+  # Validate (no deploy) on pull requests
+  pull_request:
+    branches: ["main"]
+
   # Allow manual re-deploy from the Actions tab
   workflow_dispatch:
 
@@ -23,7 +27,20 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate site (syntax, assets, data, service worker list)
+        run: node scripts/validate.mjs
+
   deploy:
+    needs: validate
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 10         # Prevent zombie runs blocking the concurrency group
     environment:
@@ -45,9 +62,20 @@ jobs:
             --exclude='.git/' \
             --exclude='.github/' \
             --exclude='.agents/' \
+            --exclude='data-src/' \
+            --exclude='docs/' \
+            --exclude='scripts/' \
+            --exclude='package.json' \
             --exclude='*.md' \
             --exclude='_site/' \
             . _site/
+
+      - name: Stamp service worker cache version
+        run: |
+          # Every deployment gets a unique cache name so returning users always
+          # receive fresh assets (no manual CACHE_NAME bump needed).
+          sed -i "s/__BUILD__/${GITHUB_SHA::7}/g" _site/sw.js
+          grep -n "CACHE_NAME =" _site/sw.js
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

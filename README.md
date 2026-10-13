@@ -40,7 +40,7 @@
 - ♿ **Accessibility (a11y)** — Full keyboard navigation (`Tab`, `Enter`, `Space`), ARIA expanded states, semantic HTML
 - 📱 **Strict Anti-Orphan Layout** — 4 vehicle cards (4 columns desktop, 2x2 tablet) and 4 hotel cards on Plan B / 5 on Plan A with zero orphan cards
 - 🚗 **Car Return & Car Rental sections** — one-way drop-off comparison per plan and rental company search shortcuts
-- ✈️ **Flight Options** — 6 routes with 5 options each, rendered from `data/flights/flights-data.js`
+- ✈️ **Flight Options** — 6 routes with 5 options each, rendered from `data/flights/flights-data.js` (CSV sources live in `data-src/flights/`)
 - ⌨️ **Keyboard & motion friendly** — visible focus rings, skip link, `aria-pressed` switchers, `prefers-reduced-motion` support, back-to-top button
 
 ---
@@ -61,29 +61,40 @@
 ├── assets/                 # Static media and icons
 │   └── favicon.svg         # SVG browser icon & PWA icon
 │
-├── css/                    # Modular Design System & Styles
-│   ├── palette.css         # Colour tokens, typography, dark mode overrides
-│   ├── base.css            # CSS reset, typography, containers, section headers
-│   ├── components.css      # UI components (buttons, badges, JR signs, markers)
-│   ├── sections.css        # Layouts for Hero, Map, Timeline, Hotels, Budget
-│   └── responsive.css      # Mobile, tablet, and orientation media queries
+├── css/                    # Modular Design System
+│   ├── palette.css         # Central tokens, brand colours, dark mode overrides
+│   ├── base.css            # CSS reset, typography, container, a11y (focus, reduced motion), back-to-top
+│   ├── components.css      # UI components (buttons, tags, JR dots, markers)
+│   ├── sections/           # One stylesheet per page section (link order = cascade order!)
+│   │   ├── nav, hero, overview, map, tips, car-return, car-rental, itinerary,
+│   │   │   packing, budget, hotels, footer, dark-overrides, flights, budget-mobile (.css)
+│   └── responsive.css      # Responsive media queries (must stay last)
 │
 ├── data/                   # Data Modules (Universal format)
-│   ├── flights/            # Flight schedule CSVs & JS data module
-│   │   ├── flights-data.js             # FLIGHTS_DATA — 6 routes, 5 options each
-│   │   ├── edi_to_tokyo_20261219.csv
-│   │   ├── lhr_to_tokyo_20261219.csv
-│   │   ├── osaka_to_edi_20261231.csv
-│   │   ├── osaka_to_lhr_20261231.csv
-│   │   ├── kix_to_hkg_20261231.csv
-│   │   └── hkg_to_edi_20270114.csv
+│   ├── flights/flights-data.js   # FLIGHTS_DATA — 6 routes, 5 options each
 │   ├── site-data.js        # Overview, tips, packing, budget, hotels, car rental
 │   └── itinerary-data.js   # 12-day schedule, blocks, location coordinates
 │
-└── js/                     # Application Logic (Modular scripts)
-    ├── currency.js         # Exchange rate fetch, HKD/GBP conversion
+├── data-src/flights/       # Source-of-truth CSVs (NOT deployed to GitHub Pages)
+│   ├── edi_to_tokyo_20261219.csv
+│   ├── lhr_to_tokyo_20261219.csv
+│   ├── osaka_to_edi_20261231.csv
+│   ├── osaka_to_lhr_20261231.csv
+│   ├── kix_to_hkg_20261231.csv
+│   └── hkg_to_edi_20270114.csv
+│
+└── js/                     # Application Logic (classic scripts, window.* globals)
+    ├── currency.js         # Exchange rate fetch & JPY conversion
     ├── map.js              # MapLibre GL JS — overview & lazy day maps
-    ├── render.js           # Semantic DOM injection & accordion handling
+    ├── features/           # Section renderers (load BEFORE render.js)
+    │   ├── car.js          # renderCarRental / renderCarReturn / toggleCarTips
+    │   ├── overview.js     # renderOverview
+    │   ├── tips-packing.js # renderTips / renderPacking
+    │   ├── budget.js       # renderBudget
+    │   ├── hotels.js       # renderHotels
+    │   ├── itinerary.js    # renderItinerary / toggleDay / initDayCards
+    │   └── flights.js      # renderFlights (reads FLIGHTS_DATA → #flights-section-content)
+    ├── render.js           # Orchestrator: renderSiteContent, planchange re-render, window exports
     ├── ui.js               # Navigation, language/theme selectors, observers
     └── script.js           # Application bootstrapper & SW registration
 ```

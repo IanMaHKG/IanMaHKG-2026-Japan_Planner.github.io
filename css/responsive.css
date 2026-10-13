@@ -64,6 +64,17 @@
   .nav-links.open { display: flex; }
   .nav-toggle { display: flex; }
 
+  .nav-inner { gap: 8px; }
+  .nav-logo { min-width: 0; flex-shrink: 1; overflow: hidden; white-space: nowrap; }
+  .nav-actions { gap: 6px; }
+  .plan-nav-switcher { width: 100px; height: 30px; }
+  .plan-nav-btn { font-size: 0.72rem; }
+  .lang-switcher { width: 98px; height: 30px; }
+  .lang-btn { font-size: 0.74rem; }
+  .theme-toggle { width: 32px; height: 32px; }
+  .plan-hero-toggle { flex-direction: column; border-radius: 22px; width: 100%; max-width: 340px; }
+  .plan-hero-btn { justify-content: center; min-height: 44px; }
+
   .overview-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 14px;

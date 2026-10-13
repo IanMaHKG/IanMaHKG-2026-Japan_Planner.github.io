@@ -194,6 +194,8 @@
   letter-spacing: 0.3px;
 }
 
+.plan-nav-btn, .plan-hero-btn { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+
 .plan-nav-btn:hover:not(.active) { color: #ffffff; }
 
 .plan-nav-btn.active {

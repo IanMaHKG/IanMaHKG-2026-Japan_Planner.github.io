@@ -258,7 +258,8 @@ function initHotelSearch() {
     });
   });
 
-  if (form) {
+  if (form && !form.dataset.bound) {
+    form.dataset.bound = 'true';
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       const dest     = destInput     ? destInput.value.trim() : 'Tokyo, Japan';

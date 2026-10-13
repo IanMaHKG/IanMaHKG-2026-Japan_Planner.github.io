@@ -1,0 +1,307 @@
+/* ═══════════════════════════════════════════════════
+   3. OVERVIEW & JR STATION SIGN ROUTE BOARD
+   ═══════════════════════════════════════════════════ */
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 44px;
+}
+
+.overview-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 28px 22px;
+  text-align: center;
+  transition: all var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.overview-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-ba-red);
+  transform: scaleX(0);
+  transition: transform var(--transition-smooth);
+}
+
+.overview-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: rgba(7, 90, 170, 0.15);
+}
+
+.overview-card:hover::before {
+  transform: scaleX(1);
+}
+
+.ov-icon {
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+}
+
+.overview-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--ba-midnight);
+}
+
+.overview-card p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ─── JR Station Sign Style Route Board ─── */
+.route-visual.jr-board-container {
+  position: relative;
+  background: #ffffff;
+  border: 1.5px solid #d8e2ea;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 20px rgba(1, 41, 92, 0.07);
+  padding: 24px 28px 26px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.jr-board-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 18px;
+  margin-bottom: 16px;
+  border-bottom: 1px dashed #e2e8f0;
+}
+
+.jr-line-branding {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.jr-badge {
+  background: #008000;
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 900;
+  padding: 2px 7px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+  font-family: var(--font-primary);
+  display: inline-block;
+  line-height: 1.2;
+}
+
+.jr-line-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--ba-midnight);
+  letter-spacing: 0.2px;
+}
+
+.jr-direction {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.jr-arrow {
+  color: var(--ba-red);
+  font-size: 0.75rem;
+  display: inline-block;
+}
+
+.route-track-wrap {
+  position: relative;
+  min-width: 800px;
+  padding: 0;
+  margin: 0;
+}
+
+/* Horizontal Track Line: Placed at y = 90px (center of Row 2) */
+.route-line {
+  position: absolute;
+  top: 90px;
+  transform: translateY(-50%);
+  left: calc(100% / 14);
+  right: calc(100% / 14);
+  height: 6px;
+  background: linear-gradient(90deg,
+    var(--marker-tokyo) 0%,
+    var(--marker-fuji) 17%,
+    var(--marker-hakone) 34%,
+    var(--marker-nagoya) 51%,
+    var(--marker-kyoto) 68%,
+    var(--marker-nara) 84%,
+    var(--marker-osaka) 100%
+  );
+  border-radius: 4px;
+  z-index: 1;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+}
+
+.route-stops {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  position: relative;
+  z-index: 2;
+  padding: 0;
+  margin: 0;
+}
+
+.jr-station-node {
+  display: grid;
+  grid-template-rows: 78px 24px 54px;
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+  transition: transform var(--transition-bounce);
+  min-width: 0;
+}
+
+.jr-station-node:hover {
+  transform: translateY(-3px);
+}
+
+.jr-station-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 3px;
+  height: 78px;
+  padding-bottom: 10px;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.jr-station-code {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  border: 1.5px solid var(--code-color, var(--ba-midnight));
+  border-radius: 4px;
+  padding: 1px 5px;
+  background: var(--bg-card);
+  font-size: 0.62rem;
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--code-color, var(--ba-midnight));
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.jr-code-prefix {
+  font-weight: 800;
+  letter-spacing: 0.3px;
+}
+
+.jr-code-num {
+  font-weight: 700;
+}
+
+.jr-station-kanji {
+  font-size: 1.18rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.15;
+  letter-spacing: 0.5px;
+}
+
+.jr-station-kana {
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  line-height: 1.1;
+}
+
+.jr-station-dot-wrapper {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  width: 100%;
+  margin: 0;
+}
+
+.stop-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 3.5px solid var(--dot-color, var(--ba-midnight));
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+  transition: all var(--transition-smooth);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.dot-inner-core {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--dot-color, var(--ba-midnight));
+  display: block;
+  margin: 0;
+}
+
+.stop-dot.tokyo   { --dot-color: var(--marker-tokyo); }
+.stop-dot.fuji    { --dot-color: var(--marker-fuji); }
+.stop-dot.hakone  { --dot-color: var(--marker-hakone); }
+.stop-dot.nagoya  { --dot-color: var(--marker-nagoya); }
+.stop-dot.kyoto   { --dot-color: var(--marker-kyoto); }
+.stop-dot.nara    { --dot-color: var(--marker-nara); }
+.stop-dot.osaka   { --dot-color: var(--marker-osaka); }
+
+.jr-station-node:hover .stop-dot {
+  transform: scale(1.3);
+  box-shadow: 0 0 0 4px rgba(7, 90, 170, 0.2);
+}
+
+.jr-station-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 4px;
+  height: 54px;
+  padding-top: 10px;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.jr-station-romaji {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #1e293b;
+  letter-spacing: 0.2px;
+  line-height: 1.2;
+}
+
+.jr-station-days {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--ba-blue);
+  background: rgba(7, 90, 170, 0.08);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+  line-height: 1.2;
+}
+

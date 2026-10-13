@@ -1,0 +1,68 @@
+/* ═══════════════════════════════════════════════════
+   10. BUDGET TABLE
+   ═══════════════════════════════════════════════════ */
+.budget-table-wrap {
+  overflow-x: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-card);
+}
+
+.budget-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.budget-table th {
+  background: var(--ba-midnight);
+  padding: 14px 20px;
+  text-align: left;
+  font-weight: 700;
+  color: #FFFFFF;
+  border-bottom: none;
+  white-space: nowrap;
+  font-size: 0.82rem;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.budget-table td {
+  padding: 13px 20px;
+  border-bottom: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  background: var(--bg-card);
+}
+
+.budget-table tr:nth-child(even) td {
+  background: var(--bg-secondary);
+}
+
+.budget-table tr:hover td {
+  background: rgba(7, 90, 170, 0.04);
+  color: var(--text-primary);
+}
+
+.budget-total td {
+  background: #EBF4FF !important;
+  color: var(--ba-midnight) !important;
+  font-weight: 700;
+  border-top: 2px solid var(--ba-blue);
+  border-bottom: none;
+}
+
+.budget-attribution {
+  display: block;
+  text-align: right;
+  margin-top: 14px;
+  font-size: 0.73rem;
+  color: var(--text-muted);
+}
+
+.budget-attribution a {
+  color: var(--ba-blue);
+  text-decoration: underline;
+}
+
+.budget-attribution a:hover { color: var(--ba-midnight); }
+

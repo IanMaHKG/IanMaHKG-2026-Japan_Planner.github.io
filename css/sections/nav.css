@@ -1,0 +1,119 @@
+/* ═══════════════════════════════════════════════════
+   JAPAN WINTER JOURNEY 2026 — Section Layouts
+   Nav, Hero, JR Route Board, Map, Tips, Itinerary,
+   Car Rental, Packing, Budget, Hotels, Footer
+   ═══════════════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════════════════
+   1. NAVIGATION BAR
+   ═══════════════════════════════════════════════════ */
+.nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: var(--bg-nav);
+  box-shadow: var(--shadow-nav);
+  padding: 0;
+  transform: none;
+  opacity: 1;
+}
+
+/* BA-style red speedmarque stripe under nav */
+.nav-bar::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-ba-red);
+}
+
+.nav-bar.visible {
+  transform: none;
+  opacity: 1;
+}
+
+.nav-bar.scrolled {
+  background: var(--bg-nav);
+  backdrop-filter: none;
+  padding: 0;
+}
+
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+}
+
+.nav-logo {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-on-dark) !important;
+  letter-spacing: -0.3px;
+  text-decoration: none !important;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-logo::before {
+  content: '✈';
+  font-size: 1.1rem;
+  color: var(--ba-red);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.nav-links a {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-on-dark-2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+  text-decoration: none !important;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--text-on-dark);
+  background: rgba(255, 255, 255, 0.10);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text-on-dark);
+  transition: all var(--transition-fast);
+  border-radius: 2px;
+}
+

@@ -1,0 +1,332 @@
+/* ═══════════════════════════════════════════════════
+   7. CAR RENTAL SECTION
+   ═══════════════════════════════════════════════════ */
+#car-rental {
+  background: var(--ba-midnight) !important;
+}
+
+#car-rental .section-title {
+  color: #fff;
+}
+#car-rental .section-title::after {
+  background: var(--ba-blue);
+}
+#car-rental .section-subtitle {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.rental-search-card {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-lg);
+  padding: 24px 28px;
+  margin-bottom: 28px;
+}
+
+.rental-search-header { display: flex; flex-direction: column; gap: 18px; }
+
+.rental-search-brand {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.rental-brand-icon {
+  font-size: 2.4rem;
+  flex-shrink: 0;
+  line-height: 1;
+  margin-top: 2px;
+}
+
+.rental-search-brand h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 4px;
+}
+
+.rental-intro {
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.rental-intro strong { color: #fff; }
+
+.rental-pickup-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.rental-pickup-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.70);
+  white-space: nowrap;
+}
+
+.rental-pickup-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.rental-pickup-pill {
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid rgba(255, 255, 255, 0.30);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.80);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font-primary);
+  transition: all var(--transition-fast);
+}
+
+.rental-pickup-pill:hover {
+  border-color: rgba(255, 255, 255, 0.65);
+  color: #fff;
+}
+
+.rental-pickup-pill.active {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: #fff;
+  color: #fff;
+}
+
+.rental-companies-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.rental-card {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
+}
+
+.rental-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.25);
+}
+
+.rental-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid var(--border-light);
+  flex-wrap: wrap;
+}
+
+.rental-logo {
+  font-size: 2.2rem;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.rental-name-wrap { flex: 1; min-width: 0; }
+
+.rental-name {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--ba-midnight);
+  margin: 0 0 2px;
+  line-height: 1.2;
+}
+
+.rental-name-jp {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.rental-badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+  align-self: flex-start;
+  flex-shrink: 0;
+}
+
+.rental-tagline {
+  font-size: 0.83rem;
+  color: var(--text-secondary);
+  padding: 12px 20px 0;
+  margin: 0;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.rental-features {
+  list-style: none;
+  padding: 12px 20px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  flex: 1;
+}
+
+.rental-features li {
+  font-size: 0.81rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.rental-features li strong { color: var(--ba-midnight); }
+
+.rental-note {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-light);
+  padding: 10px 20px;
+  line-height: 1.55;
+}
+
+.rental-note strong { color: var(--ba-midnight); font-weight: 600; }
+
+.rental-book-btn {
+  display: block;
+  text-align: center;
+  margin: 0;
+  padding: 14px 20px;
+  background: var(--ba-midnight);
+  color: #fff;
+  font-size: 0.88rem;
+  font-weight: 700;
+  font-family: var(--font-primary);
+  text-decoration: none;
+  border-top: 1px solid var(--border-light);
+  transition: background var(--transition-fast);
+}
+
+.rental-book-btn:hover { background: var(--ba-blue); }
+
+.rental-vehicle-rec {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-lg);
+  padding: 24px 28px;
+  margin-bottom: 28px;
+}
+
+.vr-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.vr-heading-icon {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+  line-height: 1;
+  margin-top: 3px;
+}
+
+.vr-heading-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 5px;
+}
+
+.vr-luggage-context {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.vr-luggage-context strong { color: #fff; }
+
+.vr-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.vr-card {
+  background: #fff;
+  border-radius: var(--radius-md);
+  border-top: 4px solid var(--border-light);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  transition: transform var(--transition-smooth);
+}
+
+.vr-card:hover { transform: translateY(-3px); }
+
+.vr-recommended { border-top-color: #22c55e; }
+.vr-alternative  { border-top-color: #f59e0b; }
+.vr-avoid        { border-top-color: #ef4444; }
+
+.vr-card-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.vr-icon { font-size: 1.8rem; flex-shrink: 0; line-height: 1; }
+.vr-info { flex: 1; min-width: 0; }
+
+.vr-category {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--ba-midnight);
+  margin: 0 0 2px;
+}
+
+.vr-models {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.vr-badge {
+  font-size: 0.66rem;
+  font-weight: 700;
+  padding: 4px 9px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+  align-self: flex-start;
+  flex-shrink: 0;
+}
+
+.vr-boot {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.vr-boot strong { color: var(--ba-midnight); }
+
+.vr-why {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.vr-why strong { color: var(--ba-midnight); font-weight: 600; }
+

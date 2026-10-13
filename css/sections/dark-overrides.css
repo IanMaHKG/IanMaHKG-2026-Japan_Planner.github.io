@@ -1,0 +1,108 @@
+/* ═══════════════════════════════════════════════════
+   13. DARK MODE ELEMENT-LEVEL OVERRIDES
+   ═══════════════════════════════════════════════════ */
+[data-theme="dark"] strong                { color: var(--text-primary); }
+[data-theme="dark"] h2                    { color: var(--text-primary); }
+[data-theme="dark"] h3:not(.nav-links *)  { color: var(--text-primary); }
+[data-theme="dark"] h4                    { color: var(--text-primary); }
+
+[data-theme="dark"] .section-title,
+[data-theme="dark"] .section-title.light  { color: var(--text-primary); }
+
+[data-theme="dark"] .overview-card h3     { color: var(--text-primary); }
+
+[data-theme="dark"] .route-visual.jr-board-container {
+  background: var(--bg-card);
+  border-color: var(--border-light);
+  box-shadow: var(--shadow-card);
+}
+[data-theme="dark"] .jr-board-header  { border-bottom-color: var(--border-light); }
+[data-theme="dark"] .jr-line-title    { color: var(--text-primary); }
+[data-theme="dark"] .jr-station-kanji { color: var(--text-primary); }
+[data-theme="dark"] .jr-station-kana  { color: var(--text-secondary); }
+[data-theme="dark"] .jr-station-romaji,
+[data-theme="dark"] .jr-station-days  { color: var(--text-secondary); }
+[data-theme="dark"] .jr-station-code {
+  background: var(--bg-secondary) !important;
+  border-color: var(--border-light) !important;
+  color: var(--text-secondary) !important;
+}
+[data-theme="dark"] .stop-dot { background: var(--bg-card); }
+[data-theme="dark"] .dot-inner-core { background: var(--dot-color, var(--ba-midnight)); }
+
+[data-theme="dark"] .tip-card h3,
+[data-theme="dark"] .tip-card li strong { color: var(--text-primary); }
+
+[data-theme="dark"] .cr-city-name             { color: var(--text-primary); }
+[data-theme="dark"] .cr-tips-toggle-label     { color: var(--text-primary); }
+[data-theme="dark"] .cr-tip-label             { color: var(--text-primary); }
+[data-theme="dark"] .cr-pros-heading          { color: #4ADE80; }
+[data-theme="dark"] .cr-cons-heading          { color: #F87171; }
+[data-theme="dark"] .cr-con strong            { color: var(--text-primary); }
+[data-theme="dark"] .cr-recommendation strong { color: var(--text-primary); }
+[data-theme="dark"] .cr-option-card h3        { color: var(--text-primary); }
+[data-theme="dark"] .cr-tip-detail strong     { color: var(--text-primary); }
+
+[data-theme="dark"] .rental-name              { color: var(--text-primary); }
+[data-theme="dark"] .rental-card,
+[data-theme="dark"] .packing-card             { background: var(--bg-card); border-color: var(--border-light); }
+[data-theme="dark"] .rental-features li strong,
+[data-theme="dark"] .rental-note strong       { color: var(--text-primary); }
+
+[data-theme="dark"] .vr-card {
+  background: var(--bg-card);
+  box-shadow: var(--shadow-card);
+}
+[data-theme="dark"] .vr-card h3       { color: var(--text-primary); }
+[data-theme="dark"] .vr-category      { color: var(--text-primary); }
+[data-theme="dark"] .vr-boot strong   { color: var(--text-primary); }
+[data-theme="dark"] .vr-why strong    { color: var(--text-primary); }
+
+[data-theme="dark"] .day-num          { color: var(--text-primary); }
+[data-theme="dark"] .day-info h3      { color: var(--text-primary); }
+[data-theme="dark"] .activity h4      { color: var(--text-primary); }
+[data-theme="dark"] .activity strong  { color: var(--text-primary); }
+[data-theme="dark"] .timeline-block h4 { color: var(--text-primary); }
+
+[data-theme="dark"] .meal-rec {
+  background: rgba(201, 169, 110, 0.12);
+  border-left-color: var(--ba-gold);
+  color: var(--text-secondary);
+}
+[data-theme="dark"] .meal-rec strong { color: var(--ba-gold); }
+
+[data-theme="dark"] .day-tip {
+  background: rgba(7, 90, 170, 0.12);
+  border-top-color: rgba(7, 90, 170, 0.3);
+  color: var(--text-secondary);
+}
+[data-theme="dark"] .day-tip strong { color: var(--accent-sky); }
+
+[data-theme="dark"] .packing-card h3  { color: var(--text-primary); }
+
+[data-theme="dark"] .budget-table th { background: var(--bg-secondary); color: var(--text-primary); }
+[data-theme="dark"] .budget-table td { color: var(--text-primary); border-color: var(--border-light); }
+[data-theme="dark"] .budget-total td {
+  background: rgba(7, 90, 170, 0.18) !important;
+  color: var(--text-primary) !important;
+  border-top-color: var(--ba-blue);
+}
+
+[data-theme="dark"] .quick-legs-label         { color: var(--text-secondary); }
+[data-theme="dark"] .form-group label         { color: var(--text-secondary); }
+[data-theme="dark"] .input-with-icon input,
+[data-theme="dark"] .input-with-icon select {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border-color: var(--border-mid);
+}
+[data-theme="dark"] .input-with-icon input::placeholder { color: var(--text-muted); }
+
+[data-theme="dark"] .hotel-leg-body h4    { color: var(--text-primary); }
+[data-theme="dark"] .hotel-leg-card.highlight-card {
+  background: var(--bg-card);
+  border-color: rgba(235, 34, 38, 0.3);
+}
+[data-theme="dark"] .hotel-leg-btn            { color: var(--text-primary) !important; }
+[data-theme="dark"] .maplibregl-popup-close-button { color: var(--text-secondary) !important; }
+

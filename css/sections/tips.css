@@ -1,0 +1,70 @@
+/* ═══════════════════════════════════════════════════
+   5. PRACTICAL TIPS
+   ═══════════════════════════════════════════════════ */
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.tip-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 26px;
+  transition: all var(--transition-smooth);
+  box-shadow: var(--shadow-card);
+}
+
+.tip-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: rgba(7, 90, 170, 0.20);
+}
+
+.tip-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.tip-icon { font-size: 1.4rem; }
+
+.tip-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ba-midnight);
+}
+
+.tip-card ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.tip-card li {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  padding-left: 18px;
+  position: relative;
+}
+
+.tip-card li::before {
+  content: '›';
+  position: absolute;
+  left: 0;
+  color: var(--ba-blue);
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.tip-card li strong {
+  color: var(--ba-midnight);
+  font-weight: 600;
+}
+

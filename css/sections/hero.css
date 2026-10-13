@@ -1,0 +1,196 @@
+/* ═══════════════════════════════════════════════════
+   2. HERO SECTION
+   ═══════════════════════════════════════════════════ */
+#hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: var(--gradient-hero);
+  overflow: hidden;
+  padding-top: 60px;
+}
+
+/* JAL Crane Red ribbon stripe at very top */
+#hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg,
+    var(--jal-red) 0%,
+    var(--jal-red) 33%,
+    var(--ba-blue)  33%,
+    var(--ba-blue)  66%,
+    var(--jal-red) 66%,
+    var(--jal-red) 100%
+  );
+  z-index: 10;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 600px 400px at 25% 25%, rgba(235, 34, 38, 0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 500px 500px at 75% 75%, rgba(7, 90, 170, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 800px 400px at 50% 100%, rgba(1, 41, 92, 0.6) 0%, transparent 80%);
+  pointer-events: none;
+}
+
+.hero-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  animation: float-particle linear infinite;
+  opacity: 0;
+}
+
+@keyframes float-particle {
+  0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { transform: translateY(-20vh) scale(1); opacity: 0; }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 40px 20px;
+  animation: hero-fade-in 1.2s ease-out;
+}
+
+@keyframes hero-fade-in {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-eyebrow {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--ba-red);
+  margin-bottom: 20px;
+  animation: hero-fade-in 1.2s ease-out 0.2s backwards;
+}
+
+.hero-title {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 20px;
+}
+
+.title-line {
+  display: block;
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
+  font-weight: 900;
+  letter-spacing: -2px;
+  line-height: 1.05;
+  color: #FFFFFF;
+  animation: hero-fade-in 1.2s ease-out 0.3s backwards;
+}
+
+.title-line.accent {
+  background: var(--gradient-ba-red);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation-delay: 0.4s;
+}
+
+.title-line.year {
+  font-size: clamp(2rem, 6vw, 4rem);
+  font-weight: 300;
+  letter-spacing: 8px;
+  color: rgba(255, 255, 255, 0.55);
+  animation-delay: 0.5s;
+}
+
+.hero-subtitle {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  color: rgba(255, 255, 255, 0.68);
+  font-weight: 300;
+  margin-bottom: 28px;
+  animation: hero-fade-in 1.2s ease-out 0.6s backwards;
+}
+
+.hero-badges {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+  animation: hero-fade-in 1.2s ease-out 0.7s backwards;
+}
+
+.hero-cta {
+  display: inline-block;
+  padding: 15px 38px;
+  background: #FFFFFF;
+  color: var(--ba-midnight);
+  font-size: 0.95rem;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.2px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  transition: all var(--transition-smooth);
+  animation: hero-fade-in 1.2s ease-out 0.8s backwards;
+  text-decoration: none !important;
+}
+
+.hero-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4);
+  color: var(--ba-midnight);
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: scroll-bounce 2s ease-in-out infinite;
+}
+
+.scroll-mouse {
+  width: 24px;
+  height: 40px;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-radius: 14px;
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+}
+
+.scroll-dot {
+  width: 3px;
+  height: 8px;
+  background: var(--ba-red);
+  border-radius: 4px;
+  animation: scroll-dot-move 2s ease-in-out infinite;
+}
+
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(10px); }
+}
+
+@keyframes scroll-dot-move {
+  0%, 100% { opacity: 1; transform: translateY(0); }
+  50%       { opacity: 0.3; transform: translateY(8px); }
+}
+

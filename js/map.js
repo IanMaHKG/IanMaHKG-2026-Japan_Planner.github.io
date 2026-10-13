@@ -63,7 +63,21 @@ function initRouteMap() {
   const data = (typeof window !== 'undefined' && window.SITE_DATA) ? window.SITE_DATA : null;
   if (!data || !data.overview) return;
 
-  const stops = data.overview.routeStops;
+  const getActiveStops = (plan) => {
+    const p = plan || localStorage.getItem('user-plan') || 'plan-a';
+    return (p === 'plan-b' && data.overview.routeStopsB)
+      ? data.overview.routeStopsB
+      : (data.overview.routeStopsA || data.overview.routeStops);
+  };
+
+  const initialPlan = localStorage.getItem('user-plan') || 'plan-a';
+  const initialStops = getActiveStops(initialPlan);
+
+  const coords = initialStops.map(s => [s.lng, s.lat]);
+  const bounds = coords.reduce(
+    (b, c) => b.extend(c),
+    new maplibregl.LngLatBounds(coords[0], coords[0])
+  );
 
   const map = new maplibregl.Map({
     container: 'route-map',
@@ -77,16 +91,11 @@ function initRouteMap() {
   _routeMap = map;
 
   const getLang = () => document.body.classList.contains('lang-zh-hk') ? 'zh' : 'en';
-  let markersAdded = false;
-  const markerRefs = [];
-
-  const coords = stops.map(s => [s.lng, s.lat]);
-  const bounds = coords.reduce(
-    (b, c) => b.extend(c),
-    new maplibregl.LngLatBounds(coords[0], coords[0])
-  );
+  let markerRefs = [];
 
   const addLine = (id, lineCoords, color, width, opacity, dashArray) => {
+    if (map.getLayer(id)) map.removeLayer(id);
+    if (map.getSource(id)) map.removeSource(id);
     map.addSource(id, {
       type: 'geojson',
       data: { type: 'Feature', geometry: { type: 'LineString', coordinates: lineCoords } }
@@ -100,39 +109,76 @@ function initRouteMap() {
     });
   };
 
-  const addRouteLayers = () => {
-    const dark = isDarkMode();
-
-    // Tokyo → Kawaguchiko → Hakone → Nagoya (self-drive, navy/sky dashed)
-    addLine('route-drive',
-      stops.slice(0, 4).map(s => [s.lng, s.lat]),
-      getPaletteColor('--route-drive', dark ? '#60BBFF' : '#075AAA'), 3, 0.85, [3, 2]);
-
-    // Nagoya → Kyoto (Shinkansen, red solid)
-    addLine('route-shinkansen',
-      [[stops[3].lng, stops[3].lat], [stops[4].lng, stops[4].lat]],
-      getPaletteColor('--route-shinkansen', dark ? '#FF7070' : '#BA0C2F'), 3, 0.85);
-
-    // Kyoto → Nara → Osaka (local train, gold solid)
-    addLine('route-local',
-      stops.slice(4).map(s => [s.lng, s.lat]),
-      getPaletteColor('--route-local', dark ? '#F5D070' : '#C9A96E'), 3, 0.85);
-
-    map.fitBounds(bounds, { padding: 50, duration: 0 });
+  const clearRouteLayers = () => {
+    ['route-drive', 'route-shinkansen', 'route-local', 'route-loop', 'route-return'].forEach(id => {
+      if (map.getLayer(id)) map.removeLayer(id);
+      if (map.getSource(id)) map.removeSource(id);
+    });
   };
 
-  let mapReady = false;
-  map.on('load', () => {
-    mapReady = true;
-    addRouteLayers();
+  const addRouteLayers = (plan) => {
+    clearRouteLayers();
+    const dark = isDarkMode();
+    const currentPlan = plan || localStorage.getItem('user-plan') || 'plan-a';
+    const stops = getActiveStops(currentPlan);
+    if (!stops || !stops.length) return;
 
-    markersAdded = true;
+    if (currentPlan === 'plan-b') {
+      // Plan B: Tokyo -> Kawaguchiko -> Hakone -> Atami -> Kamakura -> Yokohama (Self-drive loop)
+      if (stops.length >= 6) {
+        addLine('route-loop',
+          stops.slice(0, 6).map(s => [s.lng, s.lat]),
+          getPaletteColor('--route-drive', dark ? '#60BBFF' : '#075AAA'), 3.2, 0.85, [3, 2]);
+      }
+      // Yokohama -> Tokyo Finale (rail return)
+      if (stops.length >= 7) {
+        addLine('route-return',
+          [[stops[5].lng, stops[5].lat], [stops[6].lng, stops[6].lat]],
+          getPaletteColor('--route-local', dark ? '#F5D070' : '#C9A96E'), 3, 0.85);
+      }
+    } else {
+      // Plan A:
+      // Tokyo -> Kawaguchiko -> Hakone -> Nagoya (self-drive, navy/sky dashed)
+      if (stops.length >= 4) {
+        addLine('route-drive',
+          stops.slice(0, 4).map(s => [s.lng, s.lat]),
+          getPaletteColor('--route-drive', dark ? '#60BBFF' : '#075AAA'), 3, 0.85, [3, 2]);
+      }
+      // Nagoya -> Kyoto (Shinkansen, red solid)
+      if (stops.length >= 5) {
+        addLine('route-shinkansen',
+          [[stops[3].lng, stops[3].lat], [stops[4].lng, stops[4].lat]],
+          getPaletteColor('--route-shinkansen', dark ? '#FF7070' : '#BA0C2F'), 3, 0.85);
+      }
+      // Kyoto -> Nara -> Osaka (local train, gold solid)
+      if (stops.length >= 7) {
+        addLine('route-local',
+          stops.slice(4).map(s => [s.lng, s.lat]),
+          getPaletteColor('--route-local', dark ? '#F5D070' : '#C9A96E'), 3, 0.85);
+      }
+    }
+
+    const curCoords = stops.map(s => [s.lng, s.lat]);
+    const curBounds = curCoords.reduce(
+      (b, c) => b.extend(c),
+      new maplibregl.LngLatBounds(curCoords[0], curCoords[0])
+    );
+    map.fitBounds(curBounds, { padding: 50, duration: 600 });
+  };
+
+  const updateMarkers = (plan) => {
+    markerRefs.forEach(ref => ref.marker.remove());
+    markerRefs = [];
+
+    const currentPlan = plan || localStorage.getItem('user-plan') || 'plan-a';
+    const stops = getActiveStops(currentPlan);
+    const lang = getLang();
+
     stops.forEach((stop, i) => {
       const el = document.createElement('div');
       el.className = `custom-marker ${stop.markerClass}`;
       el.textContent = stop.label;
 
-      const lang = getLang();
       const popup = new maplibregl.Popup({ maxWidth: '240px', offset: 20 })
         .setHTML(`
           <h4>${stop.name[lang]}</h4>
@@ -149,11 +195,27 @@ function initRouteMap() {
 
       if (i === 0) setTimeout(() => marker.togglePopup(), 1000);
     });
+  };
+
+  let mapReady = false;
+  map.on('load', () => {
+    mapReady = true;
+    const plan = localStorage.getItem('user-plan') || 'plan-a';
+    addRouteLayers(plan);
+    updateMarkers(plan);
   });
 
   map.on('style.load', () => {
     if (!mapReady) return;
-    addRouteLayers();
+    const plan = localStorage.getItem('user-plan') || 'plan-a';
+    addRouteLayers(plan);
+  });
+
+  window.addEventListener('planchange', (e) => {
+    if (!mapReady) return;
+    const plan = (e.detail && e.detail.plan) ? e.detail.plan : (localStorage.getItem('user-plan') || 'plan-a');
+    addRouteLayers(plan);
+    updateMarkers(plan);
   });
 
   window.addEventListener('langchange', (e) => {

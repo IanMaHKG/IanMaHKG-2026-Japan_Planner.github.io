@@ -1,37 +1,44 @@
 # 🗾 Japan Winter Journey 2026
 
-**A modern, modular, interactive day-by-day family travel itinerary for Japan.**
+**A modern, modular, interactive day-by-day travel itinerary for Japan with dual-route planning.**
 
-📅 **Dec 20 – Dec 31, 2026** · 👨‍👩‍👦 **Family of 3** · 🚗 **Self-drive + Shinkansen**
+📅 **Dec 20 – Dec 31, 2026** · 👥 **2 Adults** · 🚗 **Self-drive + Rail** · 🔀 **Dual-Route Architecture (Plan A / Plan B)**
 
 ---
 
-## Route
+## Routes
 
-**Tokyo** (Days 1–4) → **Kawaguchiko / Mt Fuji** (Day 5) → **Hakone** (Days 6–7) → **Nagoya** (Day 7, transit) → **Kyoto** (Days 7–9) → **Nara** (Day 10) → **Osaka** (Days 10–12)
+### Plan A: Kansai Golden Route (11 Days)
+**Tokyo** (Days 1–4) → **Kawaguchiko / Mt Fuji** (Day 5) → **Hakone** (Days 6–7) → **Nagoya** (Day 7, transit) → **Kyoto** (Days 7–9) → **Nara** (Day 10) → **Osaka** (Days 10–11)
+
+### Plan B: Kanto & Shizuoka Scenic Loop (12 Days)
+**Tokyo** (Days 1–4) → **Kawaguchiko / Mt Fuji** (Day 5) → **Hakone** (Days 6–7) → **Atami Onsen** (Day 7) → **Kamakura & Yokohama** (Days 8–9) → **Tokyo Finale** (Days 10–12)
 
 ---
 
 ## Features
 
+- 🔀 **Dual-Route Architecture** — Instant live switching between **Plan A (Kansai Golden Route)** and **Plan B (Kanto & Shizuoka Scenic Loop)** via hero pills or navbar toggle, updating itinerary timeline, route maps, hotels, budget, and car return logistics without page reload
+- 👥 **Tailored for 2 Adults** — Senior-friendly accessible pacing (max 2–3 key activities per day, step-free access, 1 Twin Room throughout)
 - ✈️ **BA-inspired design** — Midnight Navy, BA Red & Gold palette with glassmorphism cards
 - 🎨 **Modular Design System** — Centralised design tokens in `palette.css`, componentised CSS for maintainability
 - ⚡ **Universal Modular Architecture** — Clean JavaScript modules supporting static hosting and local browser preview with zero build requirements
 - 📱 **Progressive Web App (PWA)** — Offline support via Service Worker (`sw.js`) and installable web app manifest (`manifest.json`)
 - 🌙 **Dark / Light mode toggle** — persistent across sessions via `localStorage`; maps switch styles automatically (Positron ↔ Fiord)
-- 🚉 **JR Station Sign Route Board** — Authentic Japanese station sign (駅名標) timeline with Kanji, Furigana, Romaji, Station Codes & day badges
-- 📅 **12 expandable day cards** with morning / afternoon / evening schedules and meal picks
-- 🗺️ **Interactive route map** (MapLibre GL JS) — colour-coded route with driving, Shinkansen & rail segments
+- 🚉 **JR Station Sign Route Board** — Authentic Japanese station sign (駅名標) timeline with Kanji, Furigana, Romaji, Station Codes & day badges (dynamically switches between Tokaido Main Line and Shizuoka Loop)
+- 📅 **11–12 expandable day cards** with morning / afternoon / evening schedules and meal picks
+- 🗺️ **Interactive route map** (MapLibre GL JS) — colour-coded route with self-drive, bullet train & local rail segments dynamically synced with active plan
 - 🗾 **Per-day mini-maps** — lazy-initialised MapLibre map inside each accordion day card
 - 🎌 **Senior-friendly Bilingual Switcher** — Always-visible English & Traditional Chinese (`EN | 繁中`) toggle in top navigation bar with high-contrast tactile active pills
 - 💴 **Live currency conversion** — JPY → HKD or GBP via open.er-api.com
-- 🏨 **Booking.com hotel search** — pre-filled for each leg (destination, dates, 3 adults)
-- 🏷️ **Region filter tabs** — Tokyo / Mt Fuji Drive / Kansai
-- 📋 **Practical tips** — Transport passes, advance bookings, etiquette, winter driving
+- 🚙 **Vehicle size recommendation** — 4-card grid tailored for 2 adults + 6 luggage items (Mid-size SUV 4WD, Prius/Corolla Touring Wagon, Minivan/MPV, Kei Car avoid)
+- 🏨 **Booking.com hotel search** — pre-filled for each leg (destination, dates, 2 adults in 1 Twin Room)
+- 🏷️ **Dynamic region filter tabs** — Tokyo / Mt Fuji Drive / Kansai (Plan A) or Coastal Loop (Plan B)
+- 📋 **Practical tips** — Transport passes, advance bookings, etiquette, winter driving, UK licence + 1949 IDP guidelines
 - 🧳 **Packing checklist** — winter-specific, self-drive aware
-- 💰 **Budget estimate table** — per-category with live converted values
+- 💰 **Budget estimate table** — per-category with live converted values for 2 adults (1 Twin Room)
 - ♿ **Accessibility (a11y)** — Full keyboard navigation (`Tab`, `Enter`, `Space`), ARIA expanded states, semantic HTML
-- 📱 **Fully responsive** — pixel-aligned desktop, tablet, and mobile layouts
+- 📱 **Strict Anti-Orphan Layout** — 4 vehicle cards (4 columns desktop, 2x2 tablet) and 4 hotel cards on Plan B / 5 on Plan A with zero orphan cards
 
 ---
 
@@ -90,20 +97,20 @@ flowchart LR
     %% ── Data layer ───────────────────────────────────────────────
     subgraph DATA["📦 Data Layer (data/)"]
         direction TB
-        SD["data/site-data.js\nSITE_DATA\n\nOverview · Tips · Packing\nBudget · Hotels · Car Rental"]
-        ID["data/itinerary-data.js\nITINERARY_DATA\n\n12-day schedule\nblocks · tags · tips"]
+        SD["data/site-data.js\nSITE_DATA\n\nOverview (Stops A & B) · Tips · Packing\nBudget (Plan A & B) · Hotels (Plan A & B)\nCar Return (Plan A & B) · Vehicle Rec (4 picks)"]
+        ID["data/itinerary-data.js\nITINERARY_DATA_A (11 Days)\nITINERARY_DATA_B (12 Days)\nblocks · tags · tips"]
     end
 
     %% ── js/render.js ─────────────────────────────────────────────
     subgraph RENDER["🖨️ js/render.js"]
         direction TB
-        rOV["renderOverview()"]
-        rCAR["renderCarRental()\nrenderCarReturn()"]
+        rOV["renderOverview(plan)"]
+        rCAR["renderCarRental()\nrenderCarReturn(plan)"]
         rTIP["renderTips()"]
         rPACK["renderPacking()"]
-        rBUD["renderBudget()"]
-        rHOT["renderHotels()"]
-        rIT["renderItinerary()\ninitDayCards()"]
+        rBUD["renderBudget(plan)"]
+        rHOT["renderHotels(plan)"]
+        rIT["renderItinerary(plan)\ninitDayCards()"]
     end
 
     %% ── js/currency.js ───────────────────────────────────────────
@@ -118,6 +125,7 @@ flowchart LR
     %% ── js/ui.js ─────────────────────────────────────────────────
     subgraph UI["🎛️ js/ui.js"]
         direction TB
+        uPLAN["initPlanSwitcher()\nsetPlan()\n'planchange' event"]
         uTHEME["initTheme()\nsetTheme()\n'themechange' event"]
         uLANG["initLanguageSelector()\nsetLanguage()"]
         uNAV["initNav()\nupdateActiveNav()"]
@@ -130,15 +138,15 @@ flowchart LR
 
     %% ── js/map.js ────────────────────────────────────────────────
     subgraph MAP["🗺️ js/map.js"]
-        mROUTE["initRouteMap()\nMapLibre GL JS\n+ OpenFreeMap"]
+        mROUTE["initRouteMap()\nMapLibre GL JS + OpenFreeMap\nSyncs with 'planchange'"]
         mDAY["initDayMap(dayId)\nlazy per-day mini-map"]
     end
 
     %% ── HTML sections ────────────────────────────────────────────
     subgraph HTML["📄 index.html — Target Sections"]
         direction TB
-        H_HERO["✨ Hero\n#hero · #particles"]
-        H_NAV["🧭 Nav\n#main-nav · #nav-links\n#theme-toggle"]
+        H_HERO["✨ Hero\n#hero · #particles\n#route-switcher-hero"]
+        H_NAV["🧭 Nav\n#main-nav · #nav-links\n.plan-nav-switcher · #theme-toggle"]
         H_OV["🗺️ Overview\n#overview-grid · #route-stops"]
         H_RMAP["🗾 Route Map\n#route-map"]
         H_TIP["💡 Tips\n#tips-grid"]

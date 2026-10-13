@@ -1992,6 +1992,20 @@
 .itinerary-hotels-grid > .hotel-leg-card:nth-child(4) { grid-column: 2 / span 2; }
 .itinerary-hotels-grid > .hotel-leg-card:nth-child(5) { grid-column: 4 / span 2; }
 
+/* 4-card layout for Plan B (Eliminates orphan cards completely) */
+.itinerary-hotels-grid[data-count="4"] {
+  grid-template-columns: repeat(4, 1fr);
+}
+.itinerary-hotels-grid[data-count="4"] > .hotel-leg-card {
+  grid-column: span 1;
+}
+.itinerary-hotels-grid[data-count="4"] > .hotel-leg-card:nth-child(4) {
+  grid-column: span 1;
+}
+.itinerary-hotels-grid[data-count="4"] > .hotel-leg-card:nth-child(5) {
+  display: none;
+}
+
 .hotel-leg-card.highlight-card {
   border-color: rgba(235, 34, 38, 0.25);
   background: #FFFDFC;

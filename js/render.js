@@ -6,13 +6,14 @@
 
 /* ─── Orchestrator ─── */
 function renderSiteContent() {
-  renderOverview();
-  renderCarReturn();
+  const plan = localStorage.getItem('user-plan') || 'plan-a';
+  renderOverview(plan);
+  renderCarReturn(plan);
   renderCarRental();
   renderTips();
   renderPacking();
-  renderBudget();
-  renderHotels();
+  renderBudget(plan);
+  renderHotels(plan);
   renderFlights();
 }
 
@@ -159,12 +160,16 @@ function selectRentalPickup(btn) {
 }
 
 /* ─── Car Return Decision Helper Section ─── */
-function renderCarReturn() {
-  const data = (typeof window !== 'undefined' && window.SITE_DATA) ? window.SITE_DATA.carReturn : null;
+function renderCarReturn(plan) {
+  const currentPlan = plan || localStorage.getItem('user-plan') || 'plan-a';
+  const rootData = (typeof window !== 'undefined' && window.SITE_DATA) ? window.SITE_DATA.carReturn : null;
+  if (!rootData) return;
+
+  const data = (currentPlan === 'plan-b' && rootData.planB) ? rootData.planB : (rootData.planA || rootData);
   if (!data) return;
 
   const ctxEl = document.getElementById('car-return-context');
-  if (ctxEl) {
+  if (ctxEl && data.context) {
     ctxEl.innerHTML = `
       <span class="lang-en">${data.context.en}</span>
       <span class="lang-zh">${data.context.zh}</span>
@@ -172,7 +177,7 @@ function renderCarReturn() {
   }
 
   const gridEl = document.getElementById('car-return-grid');
-  if (gridEl) {
+  if (gridEl && data.options) {
     gridEl.innerHTML = data.options.map(opt => {
       const prosHtml = opt.pros.map(p => `
         <li class="cr-pro">
@@ -257,7 +262,7 @@ function renderCarReturn() {
   }
 
   const recEl = document.getElementById('car-return-rec');
-  if (recEl) {
+  if (recEl && data.recommendation) {
     recEl.innerHTML = `
       <span class="lang-en">${data.recommendation.en}</span>
       <span class="lang-zh">${data.recommendation.zh}</span>
@@ -274,7 +279,8 @@ function toggleCarTips(btn) {
 }
 
 /* ─── Overview Section ─── */
-function renderOverview() {
+function renderOverview(plan) {
+  const currentPlan = plan || localStorage.getItem('user-plan') || 'plan-a';
   const data = (typeof window !== 'undefined' && window.SITE_DATA) ? window.SITE_DATA.overview : null;
   if (!data) return;
 
@@ -293,9 +299,41 @@ function renderOverview() {
     `).join('');
   }
 
+  // Update JR Board line branding & direction based on plan
+  const lineTitleEl = document.querySelector('.jr-line-title');
+  if (lineTitleEl) {
+    if (currentPlan === 'plan-b') {
+      lineTitleEl.innerHTML = `
+        <span class="lang-en">Tokaido &amp; Shizuoka Scenic Loop · Winter 2026</span>
+        <span class="lang-zh">東海道・靜岡悠閒環線 · 2026 冬</span>
+      `;
+    } else {
+      lineTitleEl.innerHTML = `
+        <span class="lang-en">Tokaido &amp; Kansai Main Line · Winter 2026</span>
+        <span class="lang-zh">東海道・關西橫斷本線 · 2026 冬</span>
+      `;
+    }
+  }
+
+  const directionEl = document.querySelector('.jr-direction');
+  if (directionEl) {
+    if (currentPlan === 'plan-b') {
+      directionEl.innerHTML = `
+        <span class="lang-en">Loop via Fuji, Hakone &amp; Atami 方面 <span class="jr-arrow">▶</span></span>
+        <span class="lang-zh">經 富士山、箱根、熱海 環線方面 <span class="jr-arrow">▶</span></span>
+      `;
+    } else {
+      directionEl.innerHTML = `
+        <span class="lang-en">Bound for Osaka 方面 <span class="jr-arrow">▶</span></span>
+        <span class="lang-zh">往 大阪 方面 <span class="jr-arrow">▶</span></span>
+      `;
+    }
+  }
+
+  const stops = (currentPlan === 'plan-b' && data.routeStopsB) ? data.routeStopsB : (data.routeStopsA || data.routeStops);
   const stopsEl = document.getElementById('route-stops');
-  if (stopsEl && data.routeStops) {
-    stopsEl.innerHTML = data.routeStops.map(stop => `
+  if (stopsEl && stops) {
+    stopsEl.innerHTML = stops.map(stop => `
       <div class="route-stop jr-station-node" data-stop="${stop.label}">
         <div class="jr-station-top">
           <div class="jr-station-code" style="--code-color: ${stop.color};">
@@ -384,10 +422,14 @@ function renderPacking() {
 }
 
 /* ─── Budget Table Section ─── */
-function renderBudget() {
-  const data = (typeof window !== 'undefined' && window.SITE_DATA) ? window.SITE_DATA.budget : null;
+function renderBudget(plan) {
+  const currentPlan = plan || localStorage.getItem('user-plan') || 'plan-a';
+  const rootData = (typeof window !== 'undefined' && window.SITE_DATA) ? window.SITE_DATA.budget : null;
   const tbodyEl = document.getElementById('budget-tbody');
-  if (!tbodyEl || !data) return;
+  if (!tbodyEl || !rootData) return;
+
+  const data = (currentPlan === 'plan-b' && rootData.planB) ? rootData.planB : (rootData.planA || rootData);
+  if (!data || !data.items) return;
 
   const rowsHtml = data.items.map(item => `
     <tr>
@@ -424,17 +466,23 @@ function renderBudget() {
   `;
 
   tbodyEl.innerHTML = rowsHtml + totalHtml;
+  if (typeof updateConvertedBudgets === 'function') updateConvertedBudgets();
+  if (typeof initBudgetNotes === 'function') initBudgetNotes();
 }
 
 /* ─── Hotels & Ryokan Section ─── */
-function renderHotels() {
-  const data = (typeof window !== 'undefined' && window.SITE_DATA) ? window.SITE_DATA.hotels : null;
+function renderHotels(plan) {
+  const currentPlan = plan || localStorage.getItem('user-plan') || 'plan-a';
+  const rootData = (typeof window !== 'undefined' && window.SITE_DATA) ? window.SITE_DATA.hotels : null;
+  if (!rootData) return;
+
+  const data = (currentPlan === 'plan-b' && rootData.planB) ? rootData.planB : (rootData.planA || rootData);
   if (!data) return;
 
   const quickLegsEl = document.getElementById('quick-leg-pills');
   if (quickLegsEl && data.quickLegs) {
-    quickLegsEl.innerHTML = data.quickLegs.map(leg => `
-      <button class="leg-pill ${leg.active ? 'active' : ''}" data-dest="${leg.dest}" data-checkin="${leg.checkin}" data-checkout="${leg.checkout}">
+    quickLegsEl.innerHTML = data.quickLegs.map((leg, idx) => `
+      <button class="leg-pill ${idx === 0 ? 'active' : ''}" data-dest="${leg.dest}" data-checkin="${leg.checkin}" data-checkout="${leg.checkout}">
         <span class="lang-en">${leg.label.en}</span>
         <span class="lang-zh">${leg.label.zh}</span>
       </button>
@@ -443,11 +491,12 @@ function renderHotels() {
 
   const gridEl = document.getElementById('itinerary-hotels-grid');
   if (gridEl && data.legs) {
+    gridEl.setAttribute('data-count', data.legs.length);
     gridEl.innerHTML = data.legs.map(leg => {
       const tagsHtml = leg.tags.map(tag => `<span>${tag}</span>`).join('');
       const badgeCls = leg.badgeClass ? ` ${leg.badgeClass}` : '';
       const cardCls = leg.highlight ? 'hotel-leg-card highlight-card' : 'hotel-leg-card';
-      const bookingUrl = `https://www.booking.com/searchresults.html?ss=${encodeURIComponent(leg.dest)}&checkin=${leg.checkin}&checkout=${leg.checkout}&group_adults=3&no_rooms=1`;
+      const bookingUrl = `https://www.booking.com/searchresults.html?ss=${encodeURIComponent(leg.dest)}&checkin=${leg.checkin}&checkout=${leg.checkout}&group_adults=2&no_rooms=1`;
 
       return `
         <div class="${cardCls}">
@@ -477,13 +526,30 @@ function renderHotels() {
       `;
     }).join('');
   }
+
+  if (typeof initHotelSearch === 'function') initHotelSearch();
 }
 
 /* ─── Itinerary Timeline ─── */
-function renderItinerary() {
+function renderItinerary(plan) {
+  const currentPlan = plan || localStorage.getItem('user-plan') || 'plan-a';
   const container = document.getElementById('timeline');
-  const itin = (typeof window !== 'undefined' && window.ITINERARY_DATA) ? window.ITINERARY_DATA : null;
+  const itin = (currentPlan === 'plan-b' ? window.ITINERARY_DATA_B : window.ITINERARY_DATA_A) || window.ITINERARY_DATA;
   if (!container || !itin) return;
+
+  // Sync window.ITINERARY_DATA so day mini-maps and lookup handlers receive active data
+  window.ITINERARY_DATA = itin;
+
+  // Update day filter tab visibility
+  const planATab = document.querySelector('.plan-a-tab');
+  const planBTab = document.querySelector('.plan-b-tab');
+  if (planATab) planATab.style.display = currentPlan === 'plan-b' ? 'none' : '';
+  if (planBTab) planBTab.style.display = currentPlan === 'plan-b' ? '' : 'none';
+
+  // Reset active filter button to "all" and ensure day cards are shown
+  document.querySelectorAll('.day-tab').forEach(t => t.classList.remove('active'));
+  const allTab = document.querySelector('.day-tab[data-region="all"]');
+  if (allTab) allTab.classList.add('active');
 
   const html = itin.map(day => {
     const tagsHtml = day.tags.map(tag => {
@@ -777,6 +843,15 @@ function flightsSelectTab(index) {
 }
 
 if (typeof window !== 'undefined') {
+  window.addEventListener('planchange', (e) => {
+    const plan = (e.detail && e.detail.plan) ? e.detail.plan : (localStorage.getItem('user-plan') || 'plan-a');
+    renderOverview(plan);
+    renderCarReturn(plan);
+    renderBudget(plan);
+    renderHotels(plan);
+    renderItinerary(plan);
+  });
+
   window.renderSiteContent  = renderSiteContent;
   window.renderOverview     = renderOverview;
   window.renderCarReturn    = renderCarReturn;

@@ -161,28 +161,34 @@ Taiwan-specific vocabulary.
 
 ### Trip Context (do not alter without user approval)
 
-- **Privacy & PII Protection:** Do NOT display personal names, specific family member mappings ("Mother", "Father"), or home cities in website text. State passport rules strictly by passport type (BC, BN(O), HKSAR, Portuguese).
-- **Passports:** BN(O), Portuguese, BC & HKSAR passports. **All 4 passports enjoy 90-day visa-free entry to Japan.**
-- **Driving Licences:** All 3 travellers hold **UK Driving Licences**. Japan requires a **1949 Geneva Convention IDP** obtained from a UK Post Office (£5.50) before departure.
-- **Dates:** 20 Dec – 31 Dec 2026 (12 nights).
-- **Route:** Tokyo → Mt Fuji / Kawaguchiko → Hakone → Nagoya (car return)
-  → Kyoto / Nara → Osaka (fly home from KIX).
-- **Car rental:** Pick up Day 5 (24 Dec) leaving Tokyo; return Day 7
-  (26 Dec) immediately after hotel check-in at drop-off city.
-- **Recommended car:** Minivan / MPV (Toyota Alphard / Voxy / Noah,
-  Nissan Serena) — fits 3 adults + 9 bags (3 large + 3 cabin + 3 backpack).
+- **Party Size & Rooms:** **2 Adults** (Ian + Mum), 1 Twin Room throughout. Senior-friendly accessible pacing (2–3 activities/day, step-free access).
+- **Privacy & PII Protection:** Do NOT display personal names, specific family member mappings ("Mother", "Father"), or home cities in website text. State passport rules strictly by passport type (BC, BN(O), HKSAR, Portuguese). Refer in public UI only to "2 Adults / 2 位成人".
+- **Passports:** BC, BN(O), Portuguese, & HKSAR passports. **All 4 passports enjoy 90-day visa-free entry to Japan.**
+- **Driving Licences:** 1 designated driver holds a **UK Photocard Driving Licence**. Japan strictly requires a **1949 Geneva Convention IDP** obtained from a UK Post Office (£5.50) before departure.
+- **Dates:** 20 Dec – 31 Dec 2026.
+- **Dual-Route Architecture:**
+  - **Plan A (Kansai Golden Route, 11 Days):** Tokyo → Kawaguchiko / Mt Fuji → Hakone → Nagoya (car return Day 7) → Kyoto / Nara → Osaka (KIX departure).
+  - **Plan B (Kanto & Shizuoka Scenic Loop, 12 Days):** Tokyo → Kawaguchiko / Mt Fuji → Hakone → Atami Onsen (Boxing Day) → Kamakura & Yokohama (car return Day 9, zero drop-off fee) → Tokyo Finale (Dec 28–31) → Haneda/Narita departure.
+- **Car rental:** Pick up Day 5 (24 Dec) leaving Tokyo; return Day 7 (Plan A in Nagoya/Kyoto) or Day 9 (Plan B in Yokohama/Tokyo with ¥0 drop-off fee).
+- **Vehicle Picks (4-Card Grid for 2 Adults + 6 Luggage Pieces):**
+  1. Mid-size SUV (RAV4, X-Trail, Forester 4WD/AWD) — **Recommended**
+  2. Liftback / Wagon (Prius 5th Gen E-Four, Corolla Touring) — **Agility & Economy Alternative**
+  3. Minivan / MPV (Voxy/Noah, Serena, Alphard) — **Senior Comfort**
+  4. Kei Car (660cc) — **Avoid**
+  - Note: Enthusiast hatchbacks (GR Yaris / GR Corolla) ruled out due to tiny boot capacity and harsh ride for senior comfort.
 - **Language switch:** Always visible top of page next to the theme toggle and hamburger menu.
+- **Route Plan switch:** Available via Hero segment toggle and navbar switcher (`Plan A | Plan B`). Stored in `localStorage` under `'user-plan'`; dispatches `'planchange'` event that updates itinerary data, route board, route map, budget, hotels, and car return.
 - **Dark mode toggle:** Moon/sun button in the nav bar; persists in `localStorage` as `user-theme`; dispatches a `'themechange'` CustomEvent that switches MapLibre map styles (Positron ↔ Fiord) and re-applies all CSS variable overrides.
 
 ### Column / Grid Layout Rule (CRITICAL)
 
-- **Strict Requirement:** **NEVER leave a single item alone in the last row** of any card grid.
+- **Strict Requirement:** **NEVER leave a single item alone in the last row** of any card grid on desktop, tablet, or mobile.
 - **Each row MUST contain 2–4 items.** Single-item orphan rows (e.g. 5+1 or 4+1) are strictly unacceptable.
 - **Do NOT use `repeat(auto-fit, minmax(...))` for card grids.** On wide desktop monitors (1320px–1600px container), `auto-fit` dynamically calculates 5+ columns and spills a single item onto the last row.
 - **Explicit Grid Rules by Item Count:**
   - **6 items** (e.g. `.tips-grid`): Use `repeat(3, 1fr)` on desktop (2 rows of 3: 3+3), `repeat(2, 1fr)` on tablet (3 rows of 2: 2+2+2), `1fr` on mobile.
-  - **5 items** (e.g. `.itinerary-hotels-grid`): Use a 6-column backbone (`grid-template-columns: repeat(6, 1fr)`) with `grid-column: span 2` and `nth-child(4)` / `nth-child(5)` offsets so the last 2 items sit centered (3+2 layout).
-  - **4 items** (e.g. `.overview-grid`, `.vr-grid`): Use `repeat(4, 1fr)` on desktop (1 row of 4), `repeat(2, 1fr)` on tablet (2 rows of 2).
+  - **5 items** (e.g. `.itinerary-hotels-grid` in Plan A): Use a 6-column backbone (`grid-template-columns: repeat(6, 1fr)`) with `grid-column: span 2` and `nth-child(4)` / `nth-child(5)` offsets so the last 2 items sit centered (3+2 layout).
+  - **4 items** (e.g. `.overview-grid`, `.vr-grid`, `.itinerary-hotels-grid[data-count="4"]` in Plan B): Use `repeat(4, 1fr)` on desktop (1 row of 4), `repeat(2, 1fr)` on tablet (2 rows of 2), `1fr` on mobile.
   - **3 items** (e.g. `.packing-grid`, `.cr-grid`, `.rental-companies-grid`): Use `repeat(3, 1fr)` on desktop (1 row of 3), `repeat(2, 1fr)` or `1fr` on tablet/mobile.
 
 ---

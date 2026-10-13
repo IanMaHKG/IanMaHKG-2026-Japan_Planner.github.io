@@ -46,18 +46,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Japan Winter Journey 2026 — Dec 20–31 Family Itinerary</title>
+  <title>Japan Winter Journey 2026 — Dec 20–31 Dual-Route Winter Itinerary</title>
   <meta name="description"
-    content="A detailed day-by-day Japan travel itinerary from Tokyo to Kansai, December 20–31, 2026. Includes Mount Fuji road trip, Kyoto temples, Osaka street food, and practical tips." />
+    content="A detailed day-by-day Japan travel itinerary for 2 adults, December 20–31, 2026. Features dual routes: Plan A (Tokyo → Mt Fuji → Kansai Golden Route) and Plan B (Tokyo → Mt Fuji &amp; Shizuoka Scenic Loop)." />
 
   <!-- Open Graph / social sharing (WhatsApp, iMessage, Slack previews) -->
   <meta property="og:title"       content="Japan Winter Journey 2026" />
-  <meta property="og:description" content="Day-by-day family itinerary: Tokyo → Mt Fuji → Hakone → Kyoto → Nara → Osaka, Dec 20–31." />
+  <meta property="og:description" content="Day-by-day dual-route winter itinerary for 2 adults: Plan A (Tokyo → Mt Fuji → Kansai) or Plan B (Tokyo → Mt Fuji &amp; Shizuoka Scenic Loop), Dec 20–31, 2026." />
   <meta property="og:type"        content="website" />
   <meta property="og:url"         content="https://ianmahkg.github.io/IanMaHKG-2026-Japan_Planner.github.io/" />
   <meta name="twitter:card"       content="summary" />
   <meta name="twitter:title"      content="Japan Winter Journey 2026" />
-  <meta name="twitter:description" content="Day-by-day family itinerary: Tokyo → Mt Fuji → Hakone → Kyoto → Nara → Osaka, Dec 20–31." />
+  <meta name="twitter:description" content="Day-by-day dual-route winter itinerary for 2 adults: Plan A (Tokyo → Mt Fuji → Kansai) or Plan B (Tokyo → Mt Fuji &amp; Shizuoka Scenic Loop), Dec 20–31, 2026." />
 
   <!-- PWA & Mobile Settings -->
   <meta name="theme-color" content="#01295C" />
@@ -95,8 +95,8 @@
     <div class="hero-particles" id="particles"></div>
     <div class="hero-content">
       <p class="hero-eyebrow">
-        <span class="lang-en">🇯🇵 Family Adventure</span>
-        <span class="lang-zh">🇯🇵 家族冬日自駕之旅</span>
+        <span class="lang-en">🇯🇵 Winter Adventure · Dual-Route Planner</span>
+        <span class="lang-zh">🇯🇵 冬日探險 · 雙路線規劃</span>
       </p>
       <h1 class="hero-title">
         <span class="title-line">Japan</span>
@@ -104,23 +104,40 @@
         <span class="title-line year">2026</span>
       </h1>
       <p class="hero-subtitle">
-        <span class="lang-en">Dec 20 — Dec 31 &nbsp;·&nbsp; Tokyo (東京) → Mt Fuji (富士山) → Kansai (關西)</span>
-        <span class="lang-zh">12月20日 — 12月31日 &nbsp;·&nbsp; 東京 → 富士山 → 關西</span>
+        <span class="lang-en">Dec 20 — Dec 31 &nbsp;·&nbsp; Plan A: Tokyo → Mt Fuji → Kansai &nbsp;|&nbsp; Plan B: Kanto &amp; Shizuoka Loop</span>
+        <span class="lang-zh">12月20日 — 12月31日 &nbsp;·&nbsp; 方案 A：東京 → 富士山 → 關西 &nbsp;|&nbsp; 方案 B：關東靜岡悠閒環線</span>
       </p>
       <div class="hero-badges">
         <span class="badge">
-          <span class="lang-en">🏔️ 12 Days</span>
-          <span class="lang-zh">🏔️ 12天行程</span>
+          <span class="lang-en">🏔️ 11–12 Days</span>
+          <span class="lang-zh">🏔️ 11–12天行程</span>
         </span>
         <span class="badge">
-          <span class="lang-en">👨‍👩‍👦 Family Trip</span>
-          <span class="lang-zh">👨‍👩‍👦 家族同行</span>
+          <span class="lang-en">👥 2 Adults</span>
+          <span class="lang-zh">👥 2 位成人</span>
         </span>
         <span class="badge">
           <span class="lang-en">🚗 Road Trip + Rail</span>
           <span class="lang-zh">🚗 自駕遊 + 鐵路</span>
         </span>
       </div>
+
+      <!-- Hero Route Plan Switcher -->
+      <div class="route-switcher-hero" id="route-switcher-hero" role="group" aria-label="Route Plan Selection">
+        <div class="plan-hero-toggle">
+          <button class="plan-hero-btn active" data-plan="plan-a" id="hero-plan-a-btn" type="button">
+            <span class="plan-btn-tag">Plan A</span>
+            <span class="lang-en">Kansai Golden Route (11 Days)</span>
+            <span class="lang-zh">關西名勝經典 (11天)</span>
+          </button>
+          <button class="plan-hero-btn" data-plan="plan-b" id="hero-plan-b-btn" type="button">
+            <span class="plan-btn-tag">Plan B</span>
+            <span class="lang-en">Kanto &amp; Shizuoka Loop (12 Days)</span>
+            <span class="lang-zh">關東靜岡環線 (12天)</span>
+          </button>
+        </div>
+      </div>
+
       <a href="#overview" class="hero-cta" id="hero-cta">
         <span class="lang-en">Explore Itinerary</span>
         <span class="lang-zh">開啟行程</span>
@@ -171,6 +188,12 @@
         </a>
       </div>
       <div class="nav-actions">
+        <!-- Route Plan Switcher -->
+        <div class="plan-nav-switcher" aria-label="Route selector" title="Switch Route Plan">
+          <div class="switcher-slider"></div>
+          <button class="plan-nav-btn active" data-plan="plan-a" aria-label="Plan A">Plan A</button>
+          <button class="plan-nav-btn" data-plan="plan-b" aria-label="Plan B">Plan B</button>
+        </div>
         <!-- Always-Visible Language Switcher -->
         <div class="lang-switcher" aria-label="Language selector">
           <div class="switcher-slider"></div>
@@ -195,9 +218,8 @@
         <span class="lang-zh">行程概覽</span>
       </h2>
       <p class="section-subtitle">
-        <span class="lang-en">A balanced, relaxed journey through Japan's most iconic winter landscapes — designed for a
-          family of three.</span>
-        <span class="lang-zh">專為三人家庭設計，在東京、富士山及關西之間，享受平衡且悠閒的日本冬日旅程。</span>
+        <span class="lang-en">A balanced, relaxed journey through Japan's most iconic winter landscapes — tailored for 2 adults with accessible, senior-friendly pacing.</span>
+        <span class="lang-zh">專為兩位成人度身設計的平衡悠閒冬日旅程 —— 步調輕鬆適中、景點無障礙友善。</span>
       </p>
 
       <div class="overview-grid" id="overview-grid"></div>
@@ -232,17 +254,16 @@
         <span class="lang-en">Route Map</span>
         <span class="lang-zh">路線地圖</span>
       </h2>
-      <p class="section-subtitle">
-        <span class="lang-en">Your journey across Japan — from Tokyo's skyline to Osaka's neon streets, via Mt Fuji's
-          snowy peaks.</span>
-        <span class="lang-zh">在日本展開跨地區之旅 —— 從繁華的東京地平線到大阪的霓虹街頭，途中穿越白雪皚皚的富士山。</span>
+      <p class="section-subtitle" id="map-subtitle">
+        <span class="lang-en">Your journey across Japan — interactive route lines, mountain drives, and scenic stops.</span>
+        <span class="lang-zh">在日本展開跨地區之旅 —— 互動路線圖、壯麗富士山自駕與沿途名勝。</span>
       </p>
 
       <div class="map-container">
         <div id="route-map"></div>
       </div>
 
-      <div class="map-legend">
+      <div class="map-legend" id="map-legend">
         <div class="legend-item">
           <div class="legend-dot leg-tokyo"></div>
           <span>
@@ -257,11 +278,11 @@
             <span class="lang-zh">富士山自駕路段 (第 5–7 天)</span>
           </span>
         </div>
-        <div class="legend-item">
+        <div class="legend-item" id="legend-leg-three">
           <div class="legend-dot leg-kansai"></div>
           <span>
-            <span class="lang-en">Kansai (關西) (Days 8–12)</span>
-            <span class="lang-zh">關西地區 (第 8–12 天)</span>
+            <span class="lang-en">Kansai / Loop Segment (Days 8+)</span>
+            <span class="lang-zh">關西 / 環線路段 (第 8 天起)</span>
           </span>
         </div>
       </div>
@@ -293,9 +314,9 @@
         <span class="lang-en">🚗 Car Return Decision</span>
         <span class="lang-zh">🚗 租車歸還地點比較</span>
       </h2>
-      <p class="section-subtitle">
-        <span class="lang-en">Compare returning your rental car in Nagoya, Kyoto, or Osaka — and the luggage impact of each choice.</span>
-        <span class="lang-zh">比較在名古屋、京都或大阪歸還租車的利與弊，以及對行李攜帶的實際影響。</span>
+      <p class="section-subtitle" id="car-return-subtitle">
+        <span class="lang-en">Compare returning your rental car — evaluate one-way fees, luggage transfer, and onward transit for your chosen route.</span>
+        <span class="lang-zh">比較各還車地點之安排與費用，評估對行李轉移與後續交通之實際影響。</span>
       </p>
 
       <!-- Context paragraph (injected by renderCarReturn) -->
@@ -357,11 +378,15 @@
         </button>
         <button class="day-tab" data-region="fuji">
           <span class="lang-en">Mt Fuji Drive (富士自駕)</span>
-          <span class="lang-zh">自駕段</span>
+          <span class="lang-zh">富士自駕段</span>
         </button>
-        <button class="day-tab" data-region="kansai">
+        <button class="day-tab plan-a-tab" data-region="kansai">
           <span class="lang-en">Kansai (關西)</span>
           <span class="lang-zh">關西段</span>
+        </button>
+        <button class="day-tab plan-b-tab" data-region="coastal" style="display: none;">
+          <span class="lang-en">Izu &amp; Coast (伊豆沿海)</span>
+          <span class="lang-zh">伊豆沿海段</span>
         </button>
       </div>
 
@@ -393,9 +418,9 @@
         <span class="lang-en">Budget Estimate</span>
         <span class="lang-zh">預算估算</span>
       </h2>
-      <p class="section-subtitle">
-        <span class="lang-en">Approximate costs for 3 people, 12 days (moderate comfort level).</span>
-        <span class="lang-zh">三人同行，12天日本之旅大約費用估算（以中等舒適標準計算，未含機票）。</span>
+      <p class="section-subtitle" id="budget-subtitle">
+        <span class="lang-en">Approximate costs for 2 adults, 12 days (1 Twin Room throughout, moderate comfort level).</span>
+        <span class="lang-zh">兩位成人同行，12天日本之旅大約費用估算（全程 1 間雙床房，以中等舒適標準計算，未含機票）。</span>
       </p>
 
       <!-- Currency Switcher in Budget -->
@@ -460,9 +485,8 @@
         <span class="lang-zh">酒店與溫泉旅館搜尋</span>
       </h2>
       <p class="section-subtitle">
-        <span class="lang-en">Find and book accommodations directly on Booking.com for all 12 days across Tokyo, Mt
-          Fuji, Hakone, Kyoto & Osaka.</span>
-        <span class="lang-zh">透過 Booking.com 即時搜尋及預訂本次 12 天旅程各站之優質市區酒店及一泊二食溫泉旅館。</span>
+        <span class="lang-en">Find and book accommodations directly on Booking.com for 2 adults (1 Twin Room) throughout all journey legs.</span>
+        <span class="lang-zh">透過 Booking.com 即時搜尋及預訂本次旅程 2 位成人（1 間雙床房）各站之優質市區酒店及一泊二食溫泉旅館。</span>
       </p>
 
       <!-- Hotel Search Widget Box -->
@@ -476,8 +500,8 @@
                 <span class="lang-zh">Booking.com 日本酒店與溫泉旅館搜尋器</span>
               </h3>
               <p>
-                <span class="lang-en">Configured for 3 Adults (Family of 3) • Real-time rates</span>
-                <span class="lang-zh">已預設 3 位成人（三人家庭）• 即時房價</span>
+                <span class="lang-en">Configured for 2 Adults (1 Twin Room) • Real-time rates</span>
+                <span class="lang-zh">已預設 2 位成人（1 間雙床房）• 即時房價</span>
               </p>
             </div>
           </div>
@@ -534,9 +558,9 @@
               <div class="input-with-icon">
                 <span class="input-icon">👥</span>
                 <select id="hotel-adults" name="group_adults">
-                  <option value="3" selected>3 Adults (三人家庭)</option>
-                  <option value="2">2 Adults (兩位成人)</option>
+                  <option value="2" selected>2 Adults (兩位成人 · 1 間房)</option>
                   <option value="1">1 Adult (一位成人)</option>
+                  <option value="3">3 Adults (三位成人)</option>
                   <option value="4">4 Adults (四位成人)</option>
                 </select>
               </div>
@@ -580,9 +604,9 @@
         <div class="footer-brand">
           <h3>
             <span class="lang-en">🗾 Japan Winter Journey 2026</span>
-            <span class="lang-zh">🗾 日本冬日家族之旅 2026</span>
+            <span class="lang-zh">🗾 日本冬日雙路線之旅 2026</span>
           </h3>
-          <p>Dec 20 — Dec 31 &nbsp;|&nbsp; A Family Adventure 🇯🇵</p>
+          <p>Dec 20 — Dec 31 &nbsp;|&nbsp; 2 Adults Scenic Journey 🇯🇵</p>
         </div>
         <div class="footer-links">
           <a href="#overview">
@@ -618,7 +642,7 @@
       <div class="footer-bottom">
         <p>
           <span class="lang-en">よい旅を！(Yoi tabi wo!) — Have a wonderful journey! 🇯🇵</span>
-          <span class="lang-zh">祝您與家人旅途愉快！よい旅を！ 🇯🇵</span>
+          <span class="lang-zh">祝您旅途愉快！よい旅を！ 🇯🇵</span>
         </p>
       </div>
     </div>

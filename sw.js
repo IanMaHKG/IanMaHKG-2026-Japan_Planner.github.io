@@ -13,7 +13,7 @@
  * @see AGENTS.md — Service Worker & PWA Rules section.
  */
 
-const CACHE_NAME = 'japan-planner-v2';
+const CACHE_NAME = 'japan-planner-v3';
 
 const STATIC_ASSETS = [
   './',

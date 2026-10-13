@@ -34,7 +34,11 @@ function setPlan(plan, isInitial = false) {
 
   // Update nav buttons
   const navBtns = document.querySelectorAll('.plan-nav-btn');
-  navBtns.forEach(b => b.classList.toggle('active', b.dataset.plan === safePlan));
+  navBtns.forEach(b => {
+    const on = b.dataset.plan === safePlan;
+    b.classList.toggle('active', on);
+    b.setAttribute('aria-pressed', String(on));
+  });
 
   const navSwitcher = document.querySelector('.plan-nav-switcher');
   if (navSwitcher) {
@@ -57,10 +61,14 @@ function initLanguageSelector() {
   const btns = document.querySelectorAll('.lang-btn');
   btns.forEach(btn => {
     btn.classList.toggle('active', btn.dataset.lang === currentLang);
+    btn.setAttribute('aria-pressed', String(btn.dataset.lang === currentLang));
     btn.addEventListener('click', (e) => {
       const selected = e.target.dataset.lang;
       setLanguage(selected);
-      btns.forEach(b => b.classList.toggle('active', b.dataset.lang === selected));
+      btns.forEach(b => {
+        b.classList.toggle('active', b.dataset.lang === selected);
+        b.setAttribute('aria-pressed', String(b.dataset.lang === selected));
+      });
     });
   });
 }
@@ -94,6 +102,8 @@ function initTheme() {
 function setTheme(theme, isInitial = false) {
   document.documentElement.setAttribute('data-theme', theme);
   localStorage.setItem('user-theme', theme);
+  const themeBtn = document.getElementById('theme-toggle');
+  if (themeBtn) themeBtn.setAttribute('aria-pressed', String(theme === 'dark'));
 
   if (!isInitial) {
     document.documentElement.classList.add('theme-transitioning');
@@ -111,17 +121,34 @@ function initNav() {
 
   if (toggle && links) {
     toggle.addEventListener('click', () => {
-      links.classList.toggle('open');
+      const open = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(open));
     });
     links.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => links.classList.remove('open'));
+      a.addEventListener('click', () => {
+        links.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
     });
   }
+
+  /* Back-to-top button */
+  const topBtn = document.createElement('button');
+  topBtn.type = 'button';
+  topBtn.className = 'back-to-top';
+  topBtn.setAttribute('aria-label', 'Back to top');
+  topBtn.textContent = '\u2191';
+  topBtn.addEventListener('click', () => {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+  });
+  document.body.appendChild(topBtn);
 
   window.addEventListener('scroll', () => {
     if (nav) {
       nav.classList.toggle('scrolled', window.scrollY > 80);
     }
+    topBtn.classList.toggle('visible', window.scrollY > 600);
     updateActiveNav();
   }, { passive: true });
 }
@@ -149,6 +176,7 @@ function updateActiveNav() {
 function initParticles() {
   const container = document.getElementById('particles');
   if (!container) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   const count = 35;
   for (let i = 0; i < count; i++) {
@@ -198,7 +226,8 @@ function initSmoothScroll() {
         const bodyRect = document.body.getBoundingClientRect().top;
         const targetRect = target.getBoundingClientRect().top;
         const targetPos = targetRect - bodyRect - offset;
-        window.scrollTo({ top: targetPos, behavior: 'smooth' });
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.scrollTo({ top: targetPos, behavior: reduce ? 'auto' : 'smooth' });
       }
     });
   });

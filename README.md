@@ -39,6 +39,9 @@
 - 💰 **Budget estimate table** — per-category with live converted values for 2 adults (1 Twin Room)
 - ♿ **Accessibility (a11y)** — Full keyboard navigation (`Tab`, `Enter`, `Space`), ARIA expanded states, semantic HTML
 - 📱 **Strict Anti-Orphan Layout** — 4 vehicle cards (4 columns desktop, 2x2 tablet) and 4 hotel cards on Plan B / 5 on Plan A with zero orphan cards
+- 🚗 **Car Return & Car Rental sections** — one-way drop-off comparison per plan and rental company search shortcuts
+- ✈️ **Flight Options** — 6 routes with 5 options each, rendered from `data/flights/flights-data.js`
+- ⌨️ **Keyboard & motion friendly** — visible focus rings, skip link, `aria-pressed` switchers, `prefers-reduced-motion` support, back-to-top button
 
 ---
 
@@ -63,8 +66,7 @@
 │   ├── base.css            # CSS reset, typography, containers, section headers
 │   ├── components.css      # UI components (buttons, badges, JR signs, markers)
 │   ├── sections.css        # Layouts for Hero, Map, Timeline, Hotels, Budget
-│   ├── responsive.css      # Mobile, tablet, and orientation media queries
-│   └── style.css           # Master orchestrator (@import manager)
+│   └── responsive.css      # Mobile, tablet, and orientation media queries
 │
 ├── data/                   # Data Modules (Universal format)
 │   ├── flights/            # Flight schedule CSVs & JS data module

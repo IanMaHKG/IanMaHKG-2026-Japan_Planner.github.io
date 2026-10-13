@@ -87,7 +87,8 @@ function setLanguage(lang) {
 
 /* ─── Theme (Dark / Light Mode) ─── */
 function initTheme() {
-  const saved = localStorage.getItem('user-theme') || 'light';
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const saved = localStorage.getItem('user-theme') || (prefersDark ? 'dark' : 'light');
   setTheme(saved, true);
 
   const btn = document.getElementById('theme-toggle');
@@ -101,7 +102,7 @@ function initTheme() {
 
 function setTheme(theme, isInitial = false) {
   document.documentElement.setAttribute('data-theme', theme);
-  localStorage.setItem('user-theme', theme);
+  if (!isInitial) localStorage.setItem('user-theme', theme);
   const themeBtn = document.getElementById('theme-toggle');
   if (themeBtn) themeBtn.setAttribute('aria-pressed', String(theme === 'dark'));
 

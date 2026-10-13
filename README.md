@@ -59,7 +59,12 @@
 ├── sw.js                   # Service Worker (offline cache & network strategies)
 │
 ├── assets/                 # Static media and icons
-│   └── favicon.svg         # SVG browser icon & PWA icon
+│   ├── favicon.svg         # SVG browser icon & PWA icon
+│   ├── apple-touch-icon.png
+│   ├── icons/              # PWA icons (192, 512, maskable 512)
+│   └── images/             # hero-fuji-winter.webp, og-1200x630.jpg (social preview)
+│
+├── scripts/validate.mjs    # Dev/CI checks: `node scripts/validate.mjs` (syntax, assets, SW list, data)
 │
 ├── css/                    # Modular Design System
 │   ├── palette.css         # Central tokens, brand colours, dark mode overrides

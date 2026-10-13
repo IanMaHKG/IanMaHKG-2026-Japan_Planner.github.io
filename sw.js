@@ -45,6 +45,13 @@ const STATIC_ASSETS = [
   './data/flights/flights-data.js',
   './js/currency.js',
   './js/map.js',
+  './js/features/car.js',
+  './js/features/overview.js',
+  './js/features/tips-packing.js',
+  './js/features/budget.js',
+  './js/features/hotels.js',
+  './js/features/itinerary.js',
+  './js/features/flights.js',
   './js/render.js',
   './js/ui.js',
   './js/script.js'

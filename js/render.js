@@ -21,6 +21,9 @@ function renderSiteContent() {
 
 if (typeof window !== 'undefined') {
   window.addEventListener('planchange', (e) => {
+    // The initial planchange fires right after bootstrap already rendered with the saved plan;
+    // re-rendering would just duplicate ~0.5 MB of DOM work.
+    if (e.detail && e.detail.isInitial) return;
     const plan = (e.detail && e.detail.plan) ? e.detail.plan : (localStorage.getItem('user-plan') || 'plan-a');
     renderOverview(plan);
     renderCarReturn(plan);

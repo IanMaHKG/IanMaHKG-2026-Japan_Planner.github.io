@@ -37,7 +37,7 @@ function renderFlights() {
   // Build tabs HTML
   const tabsHtml = data.routes.map((route, i) => `
     <button class="flights-route-tab${i === 0 ? ' active' : ''}"
-            onclick="flightsSelectTab(${i})"
+            onclick="flightsSelectTab(${i})" role="tab"
             id="flights-tab-${i}">
       <span class="lang-en">${route.label.en}</span>
       <span class="lang-zh">${route.label.zh}</span>

@@ -75,7 +75,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
-    rel="stylesheet" />
+    rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" /></noscript>
 
   <!-- MapLibre GL JS — open source, WebGL rendering, no API key required -->
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4/dist/maplibre-gl.css" crossorigin="" />
@@ -238,6 +239,7 @@
     </div>
   </nav>
 
+  <main id="main">
   <!-- ═══════════════════ OVERVIEW ═══════════════════ -->
   <section id="overview" class="section">
     <div class="container">
@@ -625,6 +627,8 @@
     </div>
   </section>
 
+  </main>
+
   <!-- ═══════════════════ FOOTER ═══════════════════ -->
   <footer id="footer" class="footer">
     <div class="container">
@@ -681,26 +685,26 @@
   </footer>
 
 
-  <!-- Data layer -->
-  <script src="data/site-data.js"></script>
-  <script src="data/itinerary-data.js"></script>
-  <script src="data/flights/flights-data.js"></script>
+  <!-- Data layer (defer: downloaded in parallel, executed in order after parsing) -->
+  <script src="data/site-data.js" defer></script>
+  <script src="data/itinerary-data.js" defer></script>
+  <script src="data/flights/flights-data.js" defer></script>
 
   <!-- Feature modules -->
-  <script src="js/currency.js"></script>
-  <script src="js/map.js"></script>
-  <script src="js/features/car.js"></script>
-  <script src="js/features/overview.js"></script>
-  <script src="js/features/tips-packing.js"></script>
-  <script src="js/features/budget.js"></script>
-  <script src="js/features/hotels.js"></script>
-  <script src="js/features/itinerary.js"></script>
-  <script src="js/features/flights.js"></script>
-  <script src="js/render.js"></script>
-  <script src="js/ui.js"></script>
+  <script src="js/currency.js" defer></script>
+  <script src="js/map.js" defer></script>
+  <script src="js/features/car.js" defer></script>
+  <script src="js/features/overview.js" defer></script>
+  <script src="js/features/tips-packing.js" defer></script>
+  <script src="js/features/budget.js" defer></script>
+  <script src="js/features/hotels.js" defer></script>
+  <script src="js/features/itinerary.js" defer></script>
+  <script src="js/features/flights.js" defer></script>
+  <script src="js/render.js" defer></script>
+  <script src="js/ui.js" defer></script>
 
   <!-- Application Bootstrap -->
-  <script src="js/script.js"></script>
+  <script src="js/script.js" defer></script>
 </body>
 
 </html>

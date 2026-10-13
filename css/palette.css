@@ -46,7 +46,7 @@
   --marker-hakone: #C9A96E;
   --marker-nagoya: #2AAFAF;
   --marker-kyoto: #BA0C2F;
-  --marker-nara: #4A9FD9;
+  --marker-nara: #2874AD;
   --marker-osaka: #D4163C;
 
   /* ── Map Route Line Colours — Light Mode ── */
@@ -108,7 +108,7 @@
   /* ── Text ── */
   --text-primary: #E6EDF3;
   --text-secondary: #8B949E;
-  --text-muted: #6E7681;
+  --text-muted: #9AA4AF;
 
   /* ── Borders ── */
   --border-light: #30363D;

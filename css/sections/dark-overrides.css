@@ -106,3 +106,7 @@
 [data-theme="dark"] .hotel-leg-btn            { color: var(--text-primary) !important; }
 [data-theme="dark"] .maplibregl-popup-close-button { color: var(--text-secondary) !important; }
 
+
+
+/* Contrast fix (WCAG AA): active day filter tab — white text on the bright dark-mode blue was 2.4:1 */
+[data-theme="dark"] .day-tab.active { background: #2A6BB8; border-color: #2A6BB8; }

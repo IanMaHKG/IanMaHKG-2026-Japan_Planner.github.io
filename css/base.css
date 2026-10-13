@@ -193,3 +193,11 @@ body.curr-gbp span.curr-gbp { display: inline !important; }
   transition: opacity 0.25s, transform 0.25s;
 }
 .back-to-top.visible { opacity: 1; pointer-events: auto; transform: none; }
+
+
+/* ── Performance: skip layout/paint for below-the-fold sections until near the viewport ──
+   (#overview and #itinerary are excluded so anchor scrolling and the active-nav spy stay exact) */
+#tips, #car-return, #car-rental, #packing, #budget, #hotels, #flights {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}

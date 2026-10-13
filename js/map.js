@@ -181,7 +181,7 @@ function initRouteMap() {
 
       const popup = new maplibregl.Popup({ maxWidth: '240px', offset: 20 })
         .setHTML(`
-          <h4>${stop.name[lang]}</h4>
+          <h3>${stop.name[lang]}</h3>
           <p>${stop.desc[lang]}</p>
           <span class="popup-days">${stop.days[lang]}</span>
         `);
@@ -222,7 +222,7 @@ function initRouteMap() {
     const l = e.detail.lang === 'zh-hk' ? 'zh' : 'en';
     markerRefs.forEach(({ popup, stop }) => {
       popup.setHTML(`
-        <h4>${stop.name[l]}</h4>
+        <h3>${stop.name[l]}</h3>
         <p>${stop.desc[l]}</p>
         <span class="popup-days">${stop.days[l]}</span>
       `);

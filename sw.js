@@ -47,7 +47,6 @@ const STATIC_ASSETS = [
   './css/sections/footer.css',
   './css/sections/dark-overrides.css',
   './css/sections/flights.css',
-  './css/sections/budget-mobile.css',
   './css/responsive.css',
   './data/site-data.js',
   './data/itinerary-data.js',
@@ -63,7 +62,11 @@ const STATIC_ASSETS = [
   './js/features/flights.js',
   './js/render.js',
   './js/ui.js',
-  './js/script.js'
+  './js/script.js',
+  // Pinned MapLibre (must match index.html): precached so map tiles filling the capped
+  // runtime cache can never evict the map library and blank every map offline.
+  'https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js',
+  'https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css'
 ];
 
 /* Install: cache all essential core assets */

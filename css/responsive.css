@@ -285,6 +285,9 @@
   .itinerary-hotels-grid > .hotel-leg-card:nth-child(5) {
     grid-column: 1 / -1 !important;
   }
+  .itinerary-hotels-grid[data-count="6"] > .hotel-leg-card:nth-child(5) {
+    grid-column: span 1 !important;
+  }
   .day-card.open .day-map { height: 220px; }
 }
 

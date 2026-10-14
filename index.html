@@ -38,8 +38,8 @@
     #main-nav         — Static HTML (wired by ui.js initNav)
     #overview         → render.js renderOverview()
       #overview-grid  → 3 summary cards from SITE_DATA.overview.cards
-      #route-stops    → JR Station Sign route board from SITE_DATA.overview.routeStops
-    #map-section      → map.js initRouteMap() (MapLibre GL JS, reads SITE_DATA.overview.routeStops)
+      #route-stops    → JR Station Sign route board from SITE_DATA.overview.routeStopsA / routeStopsB
+    #map-section      → map.js initRouteMap() (MapLibre GL JS, reads the same routeStopsA / routeStopsB)
     #tips             → render.js renderTips()
     #itinerary        → render.js renderItinerary() + ui.js initFilters()
     #packing          → render.js renderPacking()
@@ -86,9 +86,9 @@
     rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" />
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" /></noscript>
 
-  <!-- MapLibre GL JS — open source, WebGL rendering, no API key required -->
-  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4/dist/maplibre-gl.css" crossorigin="" />
-  <script src="https://unpkg.com/maplibre-gl@4/dist/maplibre-gl.js" crossorigin="" defer></script>
+  <!-- MapLibre GL JS 4.7.1 — pinned + SRI; also precached in sw.js so maps work offline -->
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" integrity="sha384-MinO0mNliZ3vwppuPOUnGa+iq619pfMhLVUXfC4LHwSCvF9H+6P/KO4Q7qBOYV5V" crossorigin="anonymous" />
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js" integrity="sha384-SYKAG6cglRMN0RVvhNeBY0r3FYKNOJtznwA0v7B5Vp9tr31xAHsZC0DqkQ/pZDmj" crossorigin="anonymous" defer></script>
 
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="stylesheet" href="css/palette.css" />
@@ -108,7 +108,6 @@
   <link rel="stylesheet" href="css/sections/footer.css" />
   <link rel="stylesheet" href="css/sections/dark-overrides.css" />
   <link rel="stylesheet" href="css/sections/flights.css" />
-  <link rel="stylesheet" href="css/sections/budget-mobile.css" />
   <link rel="stylesheet" href="css/responsive.css" />
 
   <!-- Theme flash prevention: apply saved theme before first CSS paint -->

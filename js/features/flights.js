@@ -3,11 +3,16 @@
  * Renders the Flight Options section from window.FLIGHTS_DATA.
  * Displays up to 5 route options per tab, each with a legs table.
  */
-function renderFlights() {
+function renderFlights(plan) {
   const el = document.getElementById('flights-section-content');
   if (!el) return;
   const data = (typeof window !== 'undefined' && window.FLIGHTS_DATA) ? window.FLIGHTS_DATA : null;
   if (!data || !data.routes || !data.routes.length) return;
+
+  // Routes without `plans` show on both plans; others only on the plans they list.
+  const currentPlan = plan || localStorage.getItem('user-plan') || 'plan-a';
+  const routes = data.routes.filter(r => !r.plans || r.plans.includes(currentPlan));
+  const hasPlanRoutes = data.routes.some(r => r.plans && r.plans.includes(currentPlan));
 
   // Detect language
   const isZh = document.body.classList.contains('lang-zh-hk');
@@ -27,21 +32,25 @@ function renderFlights() {
 
   // Airline icon mapping
   const airlineIcon = {
-    'British Airways': '✈',
-    'Finnair':         '🇫🇮',
-    'Lufthansa':       '🇩🇪',
-    'SWISS':           '🇨🇭',
-    'Etihad Airways':  '🇦🇪',
+    'British Airways':    '✈',
+    'Finnair':            '🇫🇮',
+    'Lufthansa':          '🇩🇪',
+    'SWISS':              '🇨🇭',
+    'Etihad Airways':     '🇦🇪',
+    'Cathay Pacific':     '🇭🇰',
+    'Hong Kong Express':  '🇭🇰',
+    'All Nippon Airways': '🇯🇵',
+    'Japan Airlines':     '🇯🇵',
+    'Peach Aviation':     '🍑',
   };
 
-  // Winter UTC offsets (Dec/Jan) for all route airports
-  const AIRPORT_TZ_OFFSETS = {
-    EDI: 0, LHR: 0, HEL: 2, FRA: 1, MUC: 1, ZRH: 1, AUH: 4, HKG: 8, HND: 9, NRT: 9, KIX: 9
-  };
+  // Winter UTC offsets live once in FLIGHTS_DATA.tz (also read by scripts/validate.mjs)
+  const AIRPORT_TZ_OFFSETS = data.tz || {};
 
   function parseUtcMs(dtStr, iata) {
     if (!dtStr) return NaN;
-    const offsetHours = AIRPORT_TZ_OFFSETS[iata] ?? 0;
+    const offsetHours = AIRPORT_TZ_OFFSETS[iata];
+    if (offsetHours === undefined) return NaN;   // unknown airport: show no duration rather than a wrong one
     const [datePart, timePart] = dtStr.split(' ');
     const [y, m, d] = datePart.split('-').map(Number);
     const [hh, mm] = timePart.split(':').map(Number);
@@ -49,7 +58,7 @@ function renderFlights() {
   }
 
   // Build tabs HTML
-  const tabsHtml = data.routes.map((route, i) => `
+  const tabsHtml = routes.map((route, i) => `
     <button class="flights-route-tab${i === 0 ? ' active' : ''}"
             onclick="flightsSelectTab(${i})" role="tab"
             id="flights-tab-${i}">
@@ -59,7 +68,7 @@ function renderFlights() {
   `).join('');
 
   // Build panels HTML
-  const panelsHtml = data.routes.map((route, ri) => {
+  const panelsHtml = routes.map((route, ri) => {
     const optionsHtml = route.options.map((opt, oi) => {
       // Build leg rows
       const legRows = opt.legs.map((leg, li) => {
@@ -148,9 +157,17 @@ function renderFlights() {
       </div>`;
   }).join('');
 
+  // Interim note: shown while the active plan has no route of its own (e.g. Tokyo returns for Plan B)
+  const planNoteHtml = hasPlanRoutes ? '' : `
+    <p class="section-subtitle">
+      <span class="lang-en">Return flights for this plan depart from Tokyo (HND/NRT); verified options will be added here.</span>
+      <span class="lang-zh">此方案回程由東京（羽田/成田）出發，經核實的航班選擇將會在此補充。</span>
+    </p>`;
+
   el.innerHTML = `
     <div class="flights-route-tabs" role="tablist">${tabsHtml}</div>
     ${panelsHtml}
+    ${planNoteHtml}
   `;
 }
 

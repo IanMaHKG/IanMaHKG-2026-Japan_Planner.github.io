@@ -5,7 +5,7 @@ function renderBudget(plan) {
   const tbodyEl = document.getElementById('budget-tbody');
   if (!tbodyEl || !rootData) return;
 
-  const data = (currentPlan === 'plan-b' && rootData.planB) ? rootData.planB : (rootData.planA || rootData);
+  const data = (currentPlan === 'plan-b') ? rootData.planB : rootData.planA;
   if (!data || !data.items) return;
 
   const rowsHtml = data.items.map(item => `
@@ -44,6 +44,5 @@ function renderBudget(plan) {
 
   tbodyEl.innerHTML = rowsHtml + totalHtml;
   if (typeof updateConvertedBudgets === 'function') updateConvertedBudgets();
-  if (typeof initBudgetNotes === 'function') initBudgetNotes();
 }
 

@@ -146,7 +146,7 @@ function renderCarReturn(plan) {
   const rootData = (typeof window !== 'undefined' && window.SITE_DATA) ? window.SITE_DATA.carReturn : null;
   if (!rootData) return;
 
-  const data = (currentPlan === 'plan-b' && rootData.planB) ? rootData.planB : (rootData.planA || rootData);
+  const data = (currentPlan === 'plan-b') ? rootData.planB : rootData.planA;
   if (!data) return;
 
   const ctxEl = document.getElementById('car-return-context');

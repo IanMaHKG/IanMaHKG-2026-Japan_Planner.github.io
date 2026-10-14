@@ -65,9 +65,7 @@ function initRouteMap() {
 
   const getActiveStops = (plan) => {
     const p = plan || localStorage.getItem('user-plan') || 'plan-a';
-    return (p === 'plan-b' && data.overview.routeStopsB)
-      ? data.overview.routeStopsB
-      : (data.overview.routeStopsA || data.overview.routeStops);
+    return p === 'plan-b' ? data.overview.routeStopsB : data.overview.routeStopsA;
   };
 
   const initialPlan = localStorage.getItem('user-plan') || 'plan-a';
@@ -193,7 +191,7 @@ function initRouteMap() {
 
       markerRefs.push({ marker, popup, stop });
 
-      if (i === 0) setTimeout(() => marker.togglePopup(), 1000);
+      if (i === 0) setTimeout(() => { if (marker._map) marker.togglePopup(); }, 1000);
     });
   };
 

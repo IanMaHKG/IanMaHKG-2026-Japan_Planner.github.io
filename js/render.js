@@ -16,7 +16,7 @@ function renderSiteContent() {
   renderPacking();
   renderBudget(plan);
   renderHotels(plan);
-  renderFlights();
+  renderFlights(plan);
 }
 
 if (typeof window !== 'undefined') {
@@ -30,6 +30,7 @@ if (typeof window !== 'undefined') {
     renderBudget(plan);
     renderHotels(plan);
     renderItinerary(plan);
+    renderFlights(plan);
   });
 
   window.renderSiteContent  = renderSiteContent;

@@ -38,9 +38,9 @@
 - 🧳 **Packing checklist** — winter-specific, self-drive aware
 - 💰 **Budget estimate table** — per-category with live converted values for 2 adults (1 Twin Room)
 - ♿ **Accessibility (a11y)** — Full keyboard navigation (`Tab`, `Enter`, `Space`), ARIA expanded states, semantic HTML
-- 📱 **Strict Anti-Orphan Layout** — 4 vehicle cards (4 columns desktop, 2x2 tablet) and 4 hotel cards on Plan B / 5 on Plan A with zero orphan cards
+- 📱 **Strict Anti-Orphan Layout** — 4 vehicle cards (4 columns desktop, 2x2 tablet) and 5 hotel cards on Plan A (3+2) / 6 on Plan B (3+3 desktop, 2+2+2 tablet) with zero orphan cards
 - 🚗 **Car Return & Car Rental sections** — one-way drop-off comparison per plan and rental company search shortcuts
-- ✈️ **Flight Options** — 6 routes with 5 options each, rendered from `data/flights/flights-data.js` (CSV sources live in `data-src/flights/`)
+- ✈️ **Flight Options** — plan-aware tabs (routes tagged `plans: ['plan-a']` / `['plan-b']` only show on that plan; untagged routes show on both), up to 5 options per route, rendered from `data/flights/flights-data.js`. Each curated leg is first recorded in a CSV under `data-src/flights/` (CSV-first rule; the CSV may hold more candidates than the 5 curated options, and `scripts/validate.mjs` fails if a curated leg is missing from its CSV)
 - ⌨️ **Keyboard & motion friendly** — visible focus rings, skip link, `aria-pressed` switchers, `prefers-reduced-motion` support, back-to-top button
 
 ---
@@ -72,20 +72,23 @@
 │   ├── components.css      # UI components (buttons, tags, JR dots, markers)
 │   ├── sections/           # One stylesheet per page section (link order = cascade order!)
 │   │   ├── nav, hero, overview, map, tips, car-return, car-rental, itinerary,
-│   │   │   packing, budget, hotels, footer, dark-overrides, flights, budget-mobile (.css)
+│   │   │   packing, budget, hotels, footer, dark-overrides, flights (.css)
 │   └── responsive.css      # Responsive media queries (must stay last)
 │
 ├── data/                   # Data Modules (Universal format)
-│   ├── flights/flights-data.js   # FLIGHTS_DATA — 6 routes, 5 options each
+│   ├── flights/flights-data.js   # FLIGHTS_DATA — airport `tz` table + routes (plan-tagged), up to 5 options each
 │   ├── site-data.js        # Overview, tips, packing, budget, hotels, car rental
 │   └── itinerary-data.js   # 12-day schedule, blocks, location coordinates
 │
-├── data-src/flights/       # Source-of-truth CSVs (NOT deployed to GitHub Pages)
+├── data-src/flights/       # CSV archive of live-verified candidate legs (CSV first, then curated into flights-data.js; NOT deployed)
 │   ├── edi_to_tokyo_20261219.csv
 │   ├── lhr_to_tokyo_20261219.csv
 │   ├── osaka_to_edi_20261231.csv
 │   ├── osaka_to_lhr_20261231.csv
 │   ├── kix_to_hkg_20261231.csv
+│   ├── tokyo_to_edi_20261231.csv
+│   ├── tokyo_to_lhr_20261231.csv
+│   ├── tokyo_to_hkg_20261231.csv
 │   └── hkg_to_edi_20270114.csv
 │
 └── js/                     # Application Logic (classic scripts, window.* globals)
@@ -232,7 +235,7 @@ flowchart LR
 
 ## Tech Stack
 
-- **MapLibre GL JS** — interactive WebGL maps (open source, no API key)
+- **MapLibre GL JS 4.7.1** — interactive WebGL maps (open source, no API key); version-pinned with SRI and precached for offline use
 - **OpenFreeMap** — free map tiles (Positron light / Fiord dark)
 - **open.er-api.com** — live JPY exchange rates
 - **Vanilla CSS (Modular Design System)** — custom properties, dark mode tokens, responsive layout

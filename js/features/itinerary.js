@@ -106,6 +106,12 @@ function renderItinerary(plan) {
       </div>`;
   }).join('\n');
 
+  // Tear down open day maps first: both plans share ids (day-1..day-12), so
+  // replacing the HTML would otherwise orphan live MapLibre instances (WebGL contexts).
+  document.querySelectorAll('.day-card.open').forEach(c => {
+    if (typeof window.destroyDayMap === 'function') window.destroyDayMap(c.id);
+  });
+
   container.innerHTML = html;
 }
 

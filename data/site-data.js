@@ -9,9 +9,9 @@
  *     .cards[]          3 summary cards (pace, transport, weather).
  *                       Each: { id, icon, title:{en,zh}, desc:{en,zh} }
  *
- *     .routeStops[]     7 journey stops used by BOTH:
+ *     .routeStopsA[] / .routeStopsB[]   7 journey stops per plan, used by BOTH:
  *                         (a) the JR Station Sign route board visual in render.js
- *                         (b) the Leaflet interactive map markers in map.js
+ *                         (b) the MapLibre interactive map markers in map.js
  *
  *                       Each stop must have ALL of these fields:
  *                       {
@@ -37,21 +37,25 @@
  *                       Each: { id, icon, title:{en,zh}, items:[{en,zh}] }
  *
  *   budget
- *     .items[]          5 budget line items. Each: { category:{en,zh}, jpy, min, max,
+ *     .planA / .planB   one block per plan, each with:
+ *       .items[]        5 budget line items. Each: { category:{en,zh}, jpy, min, max,
  *                       initial (display string), notes:{en,zh} }
  *                       `min` and `max` are plain JPY numbers used by currency.js for conversion.
- *     .total            Same shape as an item; rendered as a <tr class="budget-total"> row.
+ *       .total          Same shape as an item; rendered as a <tr class="budget-total"> row.
+ *                       scripts/validate.mjs checks that total equals the sum of items.
  *
  *   hotels
- *     .quickLegs[]      5 destination presets for the hotel search form pills.
+ *     .planA / .planB   one block per plan, each with:
+ *       .quickLegs[]    destination presets for the hotel search form pills (one per night-block).
  *                       Each: { active, dest, checkin, checkout, label:{en,zh} }
- *     .legs[]           5 curated accommodation cards (one per journey leg).
+ *       .legs[]         curated accommodation cards (one per journey leg; Plan A 5, Plan B 6).
  *                       Each: { legNum, nights:{en,zh}, badgeClass, highlight, title:{en,zh},
  *                               dates, desc:{en,zh}, tags[], btnText:{en,zh}, dest, checkin, checkout }
+ *                       The nights covered by quickLegs and legs must be identical (validate.mjs).
  *
  * TO ADD A NEW TIP:     Push a new object into the tips[] array following the existing pattern.
- * TO ADD A BUDGET ROW:  Push into budget.items[] and update budget.total manually.
- * TO CHANGE MAP STOPS:  Edit routeStops[] — changes apply to BOTH the JR route board AND the map.
+ * TO ADD A BUDGET ROW:  Push into budget.planA.items[] AND budget.planB.items[] and update that plan's total.
+ * TO CHANGE MAP STOPS:  Edit overview.routeStopsA[] / routeStopsB[] — changes apply to BOTH the JR route board AND the map.
  * TO ADD AN OVERVIEW CARD: Push into overview.cards[]. style.css uses repeat(3, 1fr) grid.
  */
 
@@ -295,106 +299,6 @@ const SITE_DATA = {
         lat: 35.6812, lng: 139.7671,
         color: "var(--marker-tokyo)", markerClass: "marker-tokyo"
       }
-    ],
-    routeStops: [
-      {
-        code: "01",
-        label: "TYO",
-        kanji: "東京",
-        hiragana: "とうきょう",
-        romaji: "Tokyo",
-        dotClass: "tokyo",
-        name:  { en: "Tokyo (東京)",       zh: "東京"   },
-        days:  { en: "Days 1–4",           zh: "第 1–4 天" },
-        desc:  { en: "Asakusa, Shibuya, teamLab, Ginza, winter illuminations",
-                 zh: "參訪淺草寺、澀谷、teamLab、銀座，賞冬季燈飾" },
-        lat: 35.6762, lng: 139.6503,
-        color: "var(--marker-tokyo)", markerClass: "marker-tokyo"
-      },
-      {
-        code: "02",
-        label: "FUJ",
-        kanji: "河口湖",
-        hiragana: "かわぐちこ",
-        romaji: "Kawaguchiko",
-        dotClass: "fuji",
-        name:  { en: "Kawaguchiko (河口湖)", zh: "河口湖" },
-        days:  { en: "Day 5",               zh: "第 5 天" },
-        desc:  { en: "Mt Fuji views, Chureito Pagoda, ryokan & onsen",
-                 zh: "賞富士山美景，登新倉山淺間公園忠靈塔，住溫泉旅館" },
-        lat: 35.5104, lng: 138.7564,
-        color: "var(--marker-fuji)", markerClass: "marker-fuji"
-      },
-      {
-        code: "03",
-        label: "HKN",
-        kanji: "箱根",
-        hiragana: "はこね",
-        romaji: "Hakone",
-        dotClass: "hakone",
-        name:  { en: "Hakone (箱根)",       zh: "箱根"   },
-        days:  { en: "Days 6–7",            zh: "第 6–7 天" },
-        desc:  { en: "Explore Owakudani volcanic valley, pirate ship on Lake Ashi, stay at a top luxury hot spring ryokan",
-                 zh: "走訪大涌谷地熱景點、搭蘆之湖海盜船、享頂級溫泉" },
-        lat: 35.2329, lng: 139.1069,
-        color: "var(--marker-hakone)", markerClass: "marker-hakone"
-      },
-      {
-        code: "04",
-        label: "NGO",
-        kanji: "名古屋",
-        hiragana: "なごや",
-        romaji: "Nagoya",
-        dotClass: "nagoya",
-        name:  { en: "Nagoya (名古屋)",     zh: "名古屋" },
-        days:  { en: "Day 7",              zh: "第 7 天" },
-        desc:  { en: "Miso katsu dinner, drop off rental car",
-                 zh: "享用味噌炸豬排晚餐，名古屋還車，轉搭新幹線" },
-        lat: 35.1815, lng: 136.9066,
-        color: "var(--marker-nagoya)", markerClass: "marker-nagoya"
-      },
-      {
-        code: "05",
-        label: "KYO",
-        kanji: "京都",
-        hiragana: "きょうと",
-        romaji: "Kyoto",
-        dotClass: "kyoto",
-        name:  { en: "Kyoto (京都)",        zh: "京都"   },
-        days:  { en: "Days 7–9",            zh: "第 7–9 天" },
-        desc:  { en: "Fushimi Inari, Kinkaku-ji, Arashiyama, tea ceremony",
-                 zh: "千本鳥居、金閣寺、嵐山竹林、體驗京都傳統茶道" },
-        lat: 35.0116, lng: 135.7681,
-        color: "var(--marker-kyoto)", markerClass: "marker-kyoto"
-      },
-      {
-        code: "06",
-        label: "NAR",
-        kanji: "奈良",
-        hiragana: "なら",
-        romaji: "Nara",
-        dotClass: "nara",
-        name:  { en: "Nara (奈良)",         zh: "奈良"   },
-        days:  { en: "Day 10",             zh: "第 10 天" },
-        desc:  { en: "Deer Park, Todai-ji, Kasuga Taisha",
-                 zh: "造訪奈良公園親近小鹿、東大寺大佛殿、春日大社" },
-        lat: 34.6851, lng: 135.8048,
-        color: "var(--marker-nara)", markerClass: "marker-nara"
-      },
-      {
-        code: "07",
-        label: "OSA",
-        kanji: "大阪",
-        hiragana: "おおさか",
-        romaji: "Osaka",
-        dotClass: "osaka",
-        name:  { en: "Osaka (大阪)",        zh: "大阪"   },
-        days:  { en: "Days 10–12",         zh: "第 10–12 天" },
-        desc:  { en: "Osaka Castle, Dotonbori, street food, New Year's Eve",
-                 zh: "大阪城天守閣、道頓堀夜景與街頭美食、敲鐘跨年" },
-        lat: 34.6937, lng: 135.5023,
-        color: "var(--marker-osaka)", markerClass: "marker-osaka"
-      }
     ]
   },
 
@@ -605,201 +509,7 @@ const SITE_DATA = {
           ]
         }
       ]
-    },
-    question: {
-      en: "Where should you return the rental car?",
-      zh: "租車應在哪裡歸還？"
-    },
-    context: {
-      en: "The plan: <strong>pick up the car on Day 5 (Dec 24, Christmas Eve) when leaving Tokyo</strong>, use it for the Mt Fuji / Kawaguchiko / Hakone self-drive segment (Days 5–7), then <strong>return it on Day 7 (Dec 26) as soon as you have checked in at your destination city</strong>. After drop-off, you're free — Kyoto, Nara, and Osaka are all best explored by train.",
-      zh: "計劃安排：<strong>第 5 天（12 月 24 日平安夜）離開東京時取車</strong>，用於富士山/河口湖/箱根自駕路段（第 5 至 7 天），然後在<strong>第 7 天（12 月 26 日）辦妥目的地酒店入住後即行歸還</strong>。還車後全程以公共交通出行 — 京都、奈良及大阪均最適合以火車遊覽。"
-    },
-    recommendation: {
-      en: "🏆 Our pick: <strong>Nagoya</strong> — lowest cost, keeps luggage light through Kyoto, and a quick Shinkansen hop gets you there.",
-      zh: "🏆 建議選擇：<strong>名古屋</strong> — 費用最低，令你輕裝遊覽京都，且搭新幹線往返方便快捷。"
-    },
-    options: [
-      {
-        id: "car-return-nagoya",
-        icon: "🚗",
-        title: { en: "Nagoya", zh: "名古屋" },
-        subtitle: { en: "Current Plan · Day 7 transit stop", zh: "現有計劃 · 第 7 天中途站" },
-        verdict: "current",
-        verdictLabel: { en: "Current Plan", zh: "現有計劃" },
-        pros: [
-          { en: "<strong>Cheapest one-way fee</strong> — Tokyo→Nagoya drop-off costs approx ¥15,000–¥20,000 (vs ¥25,000–¥35,000 to Kyoto/Osaka)", zh: "<strong>異地還車費用最低</strong> — 東京→名古屋約 ¥15,000–¥20,000（京都/大阪則需 ¥25,000–¥35,000）" },
-          { en: "<strong>No driving stress in Kansai</strong> — Kyoto city centre and Osaka are notoriously car-unfriendly (narrow streets, expensive parking)", zh: "<strong>無需在關西開車</strong> — 京都市區巷道窄小、停車費高昂；大阪市區行車亦複雜" },
-          { en: "<strong>Shinkansen to Kyoto in 35 min</strong> — Fast, comfortable, luggage goes in overhead rack or coin locker at Nagoya station", zh: "<strong>35 分鐘新幹線直達京都</strong> — 快捷舒適，行李可放行李架或名古屋站儲物櫃" },
-          { en: "<strong>Miso katsu dinner</strong> — Makes for a natural, enjoyable transit stop with a local specialty meal", zh: "<strong>順道品嚐味噌炸豬排</strong> — 名古屋特色晚餐，讓中途換車成為享受" },
-          { en: "<strong>Lighter in Kyoto</strong> — Arriving by train means you walk off with only day bags; full luggage can go to your Kyoto hotel by takkyubin delivery", zh: "<strong>京都輕裝遊覽</strong> — 以火車抵達，只需帶隨身小包，大件行李可由名古屋酒店宅配到京都酒店" }
-        ],
-        cons: [
-          { en: "<strong>Nagoya is a transit-only stop</strong> — You won't have time to explore it as a tourist destination", zh: "<strong>名古屋只作中途換乘</strong> — 沒有額外時間深度遊覽名古屋景點" },
-          { en: "<strong>One-way drop-off surcharge still applies</strong> — ¥15,000–¥20,000 fee on top of rental cost", zh: "<strong>仍需支付異地還車附加費</strong> — 約 ¥15,000–¥20,000 額外收費" },
-          { en: "<strong>Need to plan luggage logistics</strong> — Consider takkyubin (宅配便) from Nagoya hotel to Kyoto hotel (¥2,000–¥3,000 per bag)", zh: "<strong>需安排行李物流</strong> — 建議使用宅配便（¥2,000–¥3,000/件）從名古屋酒店寄往京都酒店" }
-        ],
-        tips: [
-          {
-            icon: "🏨",
-            label: { en: "Where to Stay", zh: "住宿建議" },
-            detail: {
-              en: "Stay <strong>near Nagoya Station</strong> — all rental offices are within a 5-min taxi. Good options: <strong>JR Gate Tower Hotel</strong> (right above the station, stunning city views), <strong>Marriott Associa Nagoya</strong> (connected to the station), or the more affordable <strong>Mitsui Garden Hotel Nagoya Premier</strong>. Book 1 night.",
-              zh: "建議住在<strong>名古屋車站附近</strong> — 所有租車公司均在車站 5 分鐘的士範圍內。推薦酒店：<strong>JR Gate Tower Hotel</strong>（直接連接車站，城市景觀一流）、<strong>Marriott Associa 名古屋</strong>（車站連接）或性價比更高的 <strong>Mitsui Garden Hotel 名古屋 Premier</strong>。建議預訂 1 晚。"
-            }
-          },
-          {
-            icon: "🍽️",
-            label: { en: "What to Eat", zh: "美食推介" },
-            detail: {
-              en: "Don't miss Nagoya's signature dishes: <strong>Miso Katsu</strong> (味噌豬排 — Yabaton is the classic chain; Misokatsu Matsunoya for sit-down), <strong>Hitsumabushi</strong> (ひつまぶし — grilled eel rice eaten three ways; try Atsuta Horaiken near the station), and <strong>Tebasaki</strong> (手羽先 — spicy chicken wings at Yamachan).",
-              zh: "必嚐名古屋特色美食：<strong>味噌炸豬排</strong>（矢場とん是經典連鎖；松乃家為舒適坐食選擇）、<strong>鰻魚飯三吃（Hitsumabushi）</strong>（推薦車站附近的熱田蓬萊軒）及<strong>手羽先（Tebasaki）</strong>（炸辣雞翼，推薦山ちゃん）。"
-            }
-          },
-          {
-            icon: "🧳",
-            label: { en: "Luggage Strategy", zh: "行李安排策略" },
-            detail: {
-              en: "<strong>Ship bags ahead to Kyoto before departure day.</strong> Ask your Nagoya hotel's front desk to arrange <strong>takkyubin (宅配便)</strong> pickup — Yamato Transport or Sagawa. Bags sent by 12:00 noon typically arrive at your Kyoto hotel the next morning. Travel the Shinkansen Nagoya→Kyoto with only a small day bag. This transforms Kyoto into a completely stress-free experience.",
-              zh: "<strong>出發前一天，在名古屋酒店安排宅配便（Yamato 黑貓宅急便 / 佐川急便）寄送行李。</strong>中午前交給前台，行李通常翌日早上送達京都酒店。持小型隨身包搭新幹線前往京都，令京都旅程輕鬆無負擔。"
-            }
-          },
-          {
-            icon: "🚗",
-            label: { en: "Car Rental Return", zh: "還車安排" },
-            detail: {
-              en: "Major rental offices near Nagoya Station: <strong>Toyota Rent-a-Car Nagoya Ekimae</strong>, <strong>Nissan Rent-a-Car Nagoya Station</strong>, <strong>Times Car Rental Nagoya Station</strong>. Return the car first (takes ~30 min including inspection), then check in to your hotel. Tip: pre-take photos of the car at Hakone before driving to document pre-existing marks.",
-              zh: "名古屋車站附近主要租車公司：<strong>Toyota 租車名古屋駅前店</strong>、<strong>Nissan 租車名古屋站</strong>、<strong>Times Car Rental 名古屋站</strong>。建議先還車（含驗車約 30 分鐘），再辦理酒店入住。還車前記得在箱根出發時先拍攝車身照片，記錄原有損傷。"
-            }
-          },
-          {
-            icon: "🚅",
-            label: { en: "Nagoya → Kyoto Transfer", zh: "名古屋→京都交通" },
-            detail: {
-              en: "Take the <strong>JR Tokaido Shinkansen (Nozomi or Hikari)</strong> from Nagoya Station to Kyoto Station — journey is <strong>35 min (Nozomi)</strong> or 40 min (Hikari). Trains run every 10–15 min. Buy tickets at the Shinkansen ticket counter or use reserved seat booking on the JR app. Non-reserved seats are fine for a short hop.",
-              zh: "在名古屋站乘搭 <strong>JR 東海道新幹線（希望號 Nozomi 或光號 Hikari）</strong>前往京都站，車程 <strong>35 分鐘（希望號）</strong>或 40 分鐘（光號）。班次頻密，每 10–15 分鐘一班。可在新幹線售票窗口或 JR App 預訂指定座席，短途亦可購自由席。"
-            }
-          }
-        ]
-      },
-      {
-        id: "car-return-kyoto",
-        icon: "⛩️",
-        title: { en: "Kyoto", zh: "京都" },
-        subtitle: { en: "Drive straight to Kyoto · Day 7", zh: "直接駕車至京都 · 第 7 天" },
-        verdict: "caution",
-        verdictLabel: { en: "Possible — But Tricky", zh: "可行，但需注意" },
-        pros: [
-          { en: "<strong>No Nagoya detour needed</strong> — Drive Hakone → Kyoto directly (approx 3.5–4 hrs via Route 1 / Tomei-Meishin expressway)", zh: "<strong>無需繞道名古屋</strong> — 從箱根直接駕車往京都（約 3.5–4 小時，走名神高速）" },
-          { en: "<strong>Can carry all luggage directly</strong> — No need to pre-ship bags; everything arrives with you in Kyoto", zh: "<strong>行李可直接帶到京都</strong> — 毋須預先宅配行李，隨車抵達" },
-          { en: "<strong>Flexible timing</strong> — You're not tied to a Shinkansen schedule on the drive day", zh: "<strong>時間彈性較大</strong> — 無需配合新幹線班次，可按自身節奏出發" },
-          { en: "<strong>One-way fee may be similar</strong> — Tokyo→Kyoto drop-off fee can be negotiated with some rental companies", zh: "<strong>異地費用或可議價</strong> — 部分租車公司東京→京都異地費可協商" }
-        ],
-        cons: [
-          { en: "<strong>Parking in Kyoto is expensive and scarce</strong> — City centre parking costs ¥500–¥1,000/hour; many temples have no parking at all", zh: "<strong>京都市區停車費高且難找</strong> — 市中心停車約 ¥500–¥1,000/小時，許多神社寺院更無停車場" },
-          { en: "<strong>Driving in Kyoto is stressful</strong> — Narrow lanes, tourist crowds on roads, and unfamiliar one-way streets near Gion / Fushimi", zh: "<strong>在京都駕車壓力大</strong> — 祗園、伏見等地巷道狹窄、遊客多、單行道複雜" },
-          { en: "<strong>Higher one-way drop fee</strong> — Tokyo→Kyoto typically ¥25,000–¥35,000", zh: "<strong>異地還車費用較高</strong> — 東京→京都通常 ¥25,000–¥35,000" },
-          { en: "<strong>Car drop-off location may not be central</strong> — Rental offices are often near Kyoto Station, away from hotel clusters in Gion / Arashiyama", zh: "<strong>還車地點未必方便</strong> — 租車公司多在京都車站附近，而非住宿較集中的祗園 / 嵐山一帶" },
-          { en: "<strong>Luggage then becomes a problem in Kyoto</strong> — Lugging suitcases on narrow Kyoto streets and temple steps defeats the purpose", zh: "<strong>京都行李管理仍是難題</strong> — 大件行李在京都狹窄街道及寺院石階間移動非常不便" }
-        ],
-        tips: [
-          {
-            icon: "🏨",
-            label: { en: "Where to Stay", zh: "住宿建議" },
-            detail: {
-              en: "Stay <strong>near Kyoto Station</strong> — this is where rental offices are clustered and convenient for both arrival and onward trips to Osaka/Nara. Good options: <strong>Daiwa Roynet Hotel Kyoto-Ekimae</strong> (budget-mid, 2-min walk to station), <strong>Hotel Granvia Kyoto</strong> (directly connected to JR Kyoto station), or <strong>Kyoto Tower Sando Hotel</strong> for mid-range. If your heart is set on Gion area, use <strong>The Screen Kyoto</strong> or <strong>Kyoto Granbell Hotel</strong> — but note you'll need a taxi or bus from the rental drop-off.",
-              zh: "建議住在<strong>京都車站附近</strong> — 此區租車公司集中，且方便前往大阪/奈良。推薦酒店：<strong>Daiwa Roynet Hotel 京都駅前</strong>（性價比高，步行 2 分鐘至車站）、<strong>Hotel Granvia Kyoto</strong>（JR 京都站直接連接）或中價位的<strong>京都 Tower Sando Hotel</strong>。若想住祗園區，可選 <strong>The Screen Kyoto</strong> 或 <strong>Kyoto Granbell Hotel</strong>，但需留意從還車地點需乘的士或巴士。"
-            }
-          },
-          {
-            icon: "🚗",
-            label: { en: "Car Rental Return", zh: "還車安排" },
-            detail: {
-              en: "Rental offices in Kyoto: <strong>Toyota Rent-a-Car Kyoto Station</strong> (closest to JR Kyoto), <strong>Nissan Rent-a-Car Kyoto Eki-Mae</strong>. <strong>Important:</strong> avoid arriving in Kyoto during rush hour (17:00–19:00) or on weekends — parking is almost impossible. Plan to arrive by 15:00 at the latest to return the car without stress. Do NOT drive into Gion / Higashiyama with the car — park at Kyoto Station and walk or taxi from there.",
-              zh: "京都還車地點：<strong>Toyota 租車京都站</strong>（最近 JR 京都站）、<strong>Nissan 租車京都駅前</strong>。<strong>重要提示：</strong>避免在繁忙時段（17:00–19:00）或週末駕車進京都 — 停車幾乎不可能。建議最遲 15:00 前抵達，確保還車順暢。切勿開車進入祗園 / 東山 — 建議把車停在京都站還掉，再步行或乘的士前往。"
-            }
-          },
-          {
-            icon: "🧳",
-            label: { en: "Luggage Strategy", zh: "行李安排策略" },
-            detail: {
-              en: "Even though you drove here with all your bags, <strong>do not drag suitcases around Kyoto</strong>. On your first morning, use your hotel's concierge to <strong>ship bags forward to your Osaka hotel via takkyubin</strong> before heading out for the day. This way you travel Kyoto light (small backpack only) and your bags magically appear in Osaka when you arrive. Alternatively, Kyoto Station has large-capacity coin lockers (reserve in advance at www.ecbo.io).",
-              zh: "即使你駕車帶齊行李到達，<strong>切勿帶著行李箱遊覽京都。</strong>入住首日早上，請酒店協助安排<strong>宅配便，將大件行李寄往大阪酒店</strong>，再輕裝出發遊覽。如此一來，你在大阪入住時行李已準時送達。另一選擇是利用京都站的大容量儲物櫃（可在 www.ecbo.io 提前預訂）。"
-            }
-          },
-          {
-            icon: "🚌",
-            label: { en: "Getting Around Kyoto", zh: "京都市內交通" },
-            detail: {
-              en: "Once the car is returned, use the <strong>Kyoto City Bus Day Pass (¥700/day)</strong> for unlimited rides to Kinkaku-ji, Arashiyama, Fushimi Inari, and Gion. Buy from the bus driver or at the tourist info counter inside Kyoto Station. <strong>IC card (Suica / ICOCA)</strong> also works on all buses. Taxis are available outside Kyoto Station for direct door-to-door service to Gion ryokans.",
-              zh: "還車後，建議購買<strong>京都市巴士一日乘車券（¥700/日）</strong>，可無限次搭乘前往金閣寺、嵐山、伏見稻荷、祗園等地。可在巴士司機處或京都站內旅遊訊息中心購買。<strong>Suica / ICOCA 交通卡</strong>亦可在所有巴士上使用。祗園旅館住客可直接在京都站外乘的士。"
-            }
-          },
-          {
-            icon: "🍽️",
-            label: { en: "Day 7 Dinner in Kyoto", zh: "第 7 天京都晚餐" },
-            detail: {
-              en: "After returning the car and settling in, walk to <strong>Nishiki Market (錦市場)</strong> for street food tastings (closes ~18:00), then head to Gion for dinner. Try <strong>Gion Nanba</strong> for kaiseki, or the more casual <strong>Ippudo Ramen (一風堂)</strong> near the station if you're exhausted from driving. Pontocho Alley (先斗町) is a 5-min walk from Gion and has dozens of atmospheric restaurants.",
-              zh: "還車安頓後，可步行前往<strong>錦市場</strong>品嚐街頭小吃（約 18:00 收攤），再到祗園吃晚飯。推薦<strong>祗園南羽</strong>（懷石料理）或若長途駕駛後疲累，可選車站附近輕便的<strong>一風堂拉麵</strong>。先斗町（Pontocho Alley）離祗園步行 5 分鐘，有數十間氣氛一流的餐廳。"
-            }
-          }
-        ]
-      },
-      {
-        id: "car-return-osaka",
-        icon: "🏙️",
-        title: { en: "Osaka", zh: "大阪" },
-        subtitle: { en: "Keep car through Kyoto · Return Day 10–12", zh: "繼續開車遊關西 · 第 10–12 天歸還" },
-        verdict: "notrecommended",
-        verdictLabel: { en: "Not Recommended", zh: "不建議" },
-        pros: [
-          { en: "<strong>Maximum flexibility for Kansai segment</strong> — Could theoretically drive Kyoto → Nara → Osaka at your own pace", zh: "<strong>關西段行程最靈活</strong> — 理論上可自駕 京都→奈良→大阪，按自訂節奏遊覽" },
-          { en: "<strong>Useful if visiting rural Nara or off-route spots</strong> — Some outer Nara temples (e.g. Hōryū-ji) are easier with a car", zh: "<strong>若遊覽奈良郊區景點較方便</strong> — 部分奈良郊外寺院（如法隆寺）有車更易到達" },
-          { en: "<strong>No mid-trip vehicle switch needed</strong> — Everything in one booking for the full duration", zh: "<strong>全程一張合約</strong> — 無需中途更換預訂或安排換車" }
-        ],
-        cons: [
-          { en: "<strong>Highest one-way drop fee</strong> — Tokyo→Osaka can cost ¥35,000–¥50,000+", zh: "<strong>異地還車費用最高</strong> — 東京→大阪可達 ¥35,000–¥50,000 甚至以上" },
-          { en: "<strong>Parking in Kyoto AND Osaka is very costly</strong> — You'll pay ¥500–¥1,500/hour across multiple days in the city", zh: "<strong>京都及大阪泊車費用高昂</strong> — 多天市區停車每小時 ¥500–¥1,500，費用可觀" },
-          { en: "<strong>Osaka city driving is complex</strong> — Heavy traffic, taxi/bus lanes, and aggressive drivers near Dotonbori / Namba", zh: "<strong>大阪市區行車複雜</strong> — 道頓堀 / 難波一帶交通繁忙、的士巴士專線多，駕車壓力大" },
-          { en: "<strong>Negates the benefit of JR Kansai Pass</strong> — You'd be driving instead of using the pass you likely already purchased", zh: "<strong>浪費 JR 關西周遊券</strong> — 若已購入關西鐵路券卻選擇自駕，變相重複花費" },
-          { en: "<strong>Luggage in Kyoto problem remains</strong> — Having a car parked somewhere doesn't help carrying bags between Kyoto temples", zh: "<strong>京都行李問題依然存在</strong> — 即使有車停在某處，在京都各寺院間搬運行李仍非常不便" },
-          { en: "<strong>New Year period parking</strong> — Dec 30–31 in Osaka is extremely congested; parking around Dotonbori / Tsutenkaku can be near-impossible", zh: "<strong>跨年期間泊車幾乎不可能</strong> — 12 月 30–31 日大阪道頓堀 / 通天閣一帶人山人海，泊車位極為罕有" }
-        ],
-        tips: [
-          {
-            icon: "🏨",
-            label: { en: "Where to Stay", zh: "住宿建議" },
-            detail: {
-              en: "If returning in Osaka, stay near <strong>Osaka Station / Umeda</strong> or <strong>Namba</strong>. Rental offices are typically near Osaka Station. Recommended: <strong>Hotel Monterey Grasmere Osaka</strong> (Osaka Station area, mid-range), <strong>Cross Hotel Osaka</strong> (Shinsaibashi, great location), or the modern <strong>Daiwa Roynet Hotel Osaka-Kitahama</strong>. Avoid hotels near Dotonbori if you have a car — parking in that area on New Year's Eve is effectively impossible.",
-              zh: "若選擇在大阪還車，建議住在<strong>大阪站 / 梅田</strong>或<strong>難波</strong>附近。租車公司通常在大阪站一帶。推薦酒店：<strong>Monterey Grasmere Osaka</strong>（大阪站周邊，中價）、<strong>Cross Hotel 大阪</strong>（心齋橋，地點優越）或新潮的 <strong>Daiwa Roynet Hotel 大阪北濱</strong>。如在跨年夜（12/31）仍持有租車，切勿選擇道頓堀附近酒店 — 泊車幾乎不可能。"
-            }
-          },
-          {
-            icon: "🚗",
-            label: { en: "Car Rental Return", zh: "還車安排" },
-            detail: {
-              en: "Rental offices near Osaka Station: <strong>Toyota Rent-a-Car Osaka Umeda</strong>, <strong>Nissan Rent-a-Car Osaka Ekimae</strong>, <strong>OTS Rent-a-Car Osaka</strong>. <strong>Return as early as possible on your chosen day</strong> — do not wait until the last day of your Osaka stay. Returning on Day 10 (the day you arrive from Nara) is recommended. After return, immediately switch to Osaka Metro or JR for the rest of your stay.",
-              zh: "大阪站附近還車地點：<strong>Toyota 租車大阪梅田</strong>、<strong>Nissan 租車大阪駅前</strong>、<strong>OTS 租車大阪</strong>。<strong>建議盡早還車</strong>，不要等到大阪住宿最後一天才還。推薦在第 10 天（從奈良抵達大阪當日）立即還車，之後改乘大阪地鐵或 JR。"
-            }
-          },
-          {
-            icon: "⚠️",
-            label: { en: "New Year's Warning", zh: "跨年特別提示" },
-            detail: {
-              en: "If you keep the car into Osaka, <strong>return it on Day 10 (Dec 29) at the absolute latest</strong>. Dec 30–31 in Osaka sees massive crowds — Dotonbori, Shinsaibashi, and Namba are pedestrian-priority during countdown events. Even parking garages near Osaka Castle fill up before noon. Do not risk being stranded in a car on New Year's Eve.",
-              zh: "若持車到大阪，<strong>務必最遲在第 10 天（12 月 29 日）還車。</strong>12 月 30–31 日大阪人潮洶湧 — 道頓堀、心齋橋及難波在跨年倒數期間封路管制。即使是大阪城附近的停車場也在中午前爆滿。切勿在跨年夜持有租車，以免陷入交通困境。"
-            }
-          },
-          {
-            icon: "🧳",
-            label: { en: "Luggage Through Kyoto", zh: "京都段行李安排" },
-            detail: {
-              en: "Even if keeping the car, <strong>do not drive it around Kyoto sightseeing</strong>. Park at a hotel near Kyoto Station for the duration of your Kyoto stay, and take daily transit. Ship suitcases to your Osaka hotel by takkyubin on your last Kyoto morning so the car is lighter and you travel unencumbered. Parking at a hotel for 2–3 days typically costs ¥2,500–¥4,000/night extra.",
-              zh: "即使持車前往關西，<strong>切勿開車在京都市內觀光。</strong>建議把車停在京都站附近酒店停車場，整段京都行程改乘公共交通。最後一個京都早上，用宅配便把行李箱送往大阪酒店，讓行程更輕鬆。酒店停車費通常每晚額外收費 ¥2,500–¥4,000。"
-            }
-          }
-        ]
-      }
-    ]
+    }
   },
 
   /* ─── Car Rental Search Section ─────────────────────────────────────
@@ -1392,92 +1102,6 @@ const SITE_DATA = {
           zh: "2 位成人 12 天的行程預算（較方案 A 節省約 ¥24,000–62,000）"
         }
       }
-    },
-    items: [
-      {
-        category: {
-          en: "🏨 Accommodation (11 nights)",
-          zh: "🏨 酒店與溫泉旅館 (11晚)"
-        },
-        jpy: "¥300,000–490,000",
-        min: 300000,
-        max: 490000,
-        initial: "$15,500–25,200",
-        notes: {
-          en: "1 Twin Room (9 hotel nights + 2 ryokan nights)",
-          zh: "全程 1 間雙床房（9 晚市區酒店 + 2 晚一泊二食溫泉旅館）"
-        }
-      },
-      {
-        category: {
-          en: "🚗 Car Rental (3 days + gas/tolls)",
-          zh: "🚗 租車自駕 (3天，含路費油費)"
-        },
-        jpy: "¥45,000–65,000",
-        min: 45000,
-        max: 65000,
-        initial: "$2,300–3,350",
-        notes: {
-          en: "SUV / Prius + winter tyres + Tokyo→Nagoya one-way fee",
-          zh: "SUV / Prius + 雪胎 + 東京至名古屋異地還車費"
-        }
-      },
-      {
-        category: {
-          en: "🚆 Trains & Metro",
-          zh: "🚆 城市鐵路及新幹線"
-        },
-        jpy: "¥35,000–45,000",
-        min: 35000,
-        max: 45000,
-        initial: "$1,800–2,300",
-        notes: {
-          en: "Nagoya→Kyoto Shinkansen (2 reserved seats) + Suica & Haruka",
-          zh: "名古屋至京都新幹線指定席（2位）+ Suica 及 Haruka 機場特急"
-        }
-      },
-      {
-        category: {
-          en: "🍽️ Food & Drinks",
-          zh: "🍽️ 餐飲美食 (12天)"
-        },
-        jpy: "¥130,000–200,000",
-        min: 130000,
-        max: 200000,
-        initial: "$6,700–10,300",
-        notes: {
-          en: "2 adults, 12 days. Mix of fine dining & local favourites",
-          zh: "2 位成人 12 天餐飲，包含和牛料理、精緻懷石及地道美食"
-        }
-      },
-      {
-        category: {
-          en: "🎫 Activities & Entrance Fees",
-          zh: "🎫 景點門票及體驗活動"
-        },
-        jpy: "¥20,000–30,000",
-        min: 20000,
-        max: 30000,
-        initial: "$1,000–1,550",
-        notes: {
-          en: "Skytree, teamLab, ropeways, temple entries",
-          zh: "晴空塔、teamLab、箱根纜車、各名剎門票"
-        }
-      }
-    ],
-    total: {
-      category: {
-        en: "<strong>Total (excl. flights)</strong>",
-        zh: "<strong>總預算估算 (不含機票)</strong>"
-      },
-      jpy: "<strong>¥530,000–830,000</strong>",
-      min: 530000,
-      max: 830000,
-      initial: "<strong>$27,300–42,700</strong>",
-      notes: {
-        en: "For 2 adults, 12 days (1 Twin Room throughout)",
-        zh: "2 位成人 12 天的行程預算（全程 1 間雙床房）"
-      }
     }
   },
 
@@ -1641,6 +1265,13 @@ const SITE_DATA = {
         },
         {
           active: false,
+          dest: "Yokohama, Kanagawa, Japan",
+          checkin: "2026-12-27",
+          checkout: "2026-12-28",
+          label: { en: "Yokohama (Dec 27–28)", zh: "橫濱 (12/27–28)" }
+        },
+        {
+          active: false,
           dest: "Tokyo, Japan",
           checkin: "2026-12-28",
           checkout: "2026-12-31",
@@ -1684,164 +1315,74 @@ const SITE_DATA = {
         },
         {
           legNum: 3,
-          nights: { en: "Leg 3 • 2 Nights (Onsen Stays)", zh: "第 3 站 • 2 晚 (山海雙溫泉)" },
+          nights: { en: "Leg 3 • 1 Night (Onsen Resort)", zh: "第 3 站 • 1 晚 (箱根溫泉)" },
           badgeClass: "",
           highlight: false,
-          title: { en: "Hakone & Atami Coastal Onsen (箱根與熱海)", zh: "箱根山泉與熱海海景溫泉" },
-          dates: "🗓️ Dec 25 – Dec 27, 2026 (Christmas & Boxing Day)",
+          title: { en: "Hakone Hot Spring Resort (箱根)", zh: "箱根溫泉度假酒店 / 旅館" },
+          dates: "🗓️ Dec 25 – Dec 26, 2026 (Christmas Night)",
           desc: {
-            en: "Two consecutive luxury onsen nights: Christmas in Hakone's forested volcanic springs, followed by Boxing Day overlooking Sagami Bay in Atami with Pacific seafood.",
-            zh: "連續兩晚極致溫泉享受：聖誕節在箱根森林泉水放鬆，翌日沿伊豆天際線駛往熱海，入住俯瞰相模灣的海景溫泉旅館享用鮮活海鮮。"
+            en: "Christmas night in Hakone's forested volcanic springs, after the Volcanic Valley and Lake Ashi.",
+            zh: "聖誕節當晚入住箱根森林溫泉區，遊覽大涌谷及蘆之湖後享受天然礦物溫泉。"
           },
-          tags: ["♨️ Mountain & Sea Onsen", "🌊 Sagami Bay", "🍱 Seafood Kaiseki"],
-          btnText: { en: "Search Onsen Stays ↗", zh: "搜尋箱根及熱海溫泉 ↗" },
-          dest: "Atami, Shizuoka, Japan",
+          tags: ["♨️ Mountain Onsen", "🌲 Forest View", "🚗 Free Parking"],
+          btnText: { en: "Search Hakone Stays ↗", zh: "搜尋箱根住宿 ↗" },
+          dest: "Hakone, Kanagawa, Japan",
           checkin: "2026-12-25",
-          checkout: "2026-12-27"
+          checkout: "2026-12-26"
         },
         {
           legNum: 4,
-          nights: { en: "Leg 4 • 4 Nights (Finale)", zh: "第 4 站 • 4 晚 (年終盛會)" },
+          nights: { en: "Leg 4 • 1 Night (Coastal Onsen)", zh: "第 4 站 • 1 晚 (海景溫泉)" },
           badgeClass: "",
           highlight: false,
-          title: { en: "Yokohama Bay & Tokyo Finale (橫濱與東京終站)", zh: "橫濱海灣與東京歲末酒店" },
-          dates: "🗓️ Dec 27 – Dec 31, 2026",
+          title: { en: "Atami Coastal Onsen (熱海)", zh: "熱海海景溫泉旅館" },
+          dates: "🗓️ Dec 26 – Dec 27, 2026 (Boxing Day)",
           desc: {
-            en: "Night 8 in Yokohama Minato Mirai bay-view hotel, followed by central Tokyo for year-end shopping, illuminations, and seamless Haneda/Narita airport departures.",
-            zh: "第 8 晚入住橫濱港未來海景酒店（零附加費還車），隨後返回東京市區迎接新年，漫步彩燈與百貨美食街，前往機場極為快捷。"
+            en: "Boxing Day overlooking Sagami Bay in Atami, with fresh Pacific seafood kaiseki.",
+            zh: "節禮日入住俯瞰相模灣的熱海海景溫泉旅館，享用鮮活海鮮會席料理。"
           },
-          tags: ["🎡 Bay View", "🛍️ Year-End Shopping", "✈️ Direct Airport Link"],
-          btnText: { en: "Search Tokyo / Yokohama ↗", zh: "搜尋東京及橫濱酒店 ↗" },
-          dest: "Tokyo, Japan",
+          tags: ["♨️ Sea View Onsen", "🌊 Sagami Bay", "🍱 Seafood Kaiseki"],
+          btnText: { en: "Search Atami Stays ↗", zh: "搜尋熱海住宿 ↗" },
+          dest: "Atami, Shizuoka, Japan",
+          checkin: "2026-12-26",
+          checkout: "2026-12-27"
+        },
+        {
+          legNum: 5,
+          nights: { en: "Leg 5 • 1 Night (Bay View)", zh: "第 5 站 • 1 晚 (海景)" },
+          badgeClass: "",
+          highlight: false,
+          title: { en: "Yokohama Bay Hotels (橫濱)", zh: "橫濱港未來海景酒店" },
+          dates: "🗓️ Dec 27 – Dec 28, 2026",
+          desc: {
+            en: "Night 8 in a Minato Mirai bay-view hotel, with the car returned at zero drop-off fee the next day before the train to Tokyo.",
+            zh: "第 8 晚入住橫濱港未來海景酒店，翌日零附加費還車後乘鐵路返回東京。"
+          },
+          tags: ["🎡 Bay View", "🚗 Car Return Next Day", "🚆 Rail to Tokyo"],
+          btnText: { en: "Search Yokohama Hotels ↗", zh: "搜尋橫濱酒店 ↗" },
+          dest: "Yokohama, Kanagawa, Japan",
           checkin: "2026-12-27",
+          checkout: "2026-12-28"
+        },
+        {
+          legNum: 6,
+          nights: { en: "Leg 6 • 3 Nights (Finale)", zh: "第 6 站 • 3 晚 (年終盛會)" },
+          badgeClass: "",
+          highlight: false,
+          title: { en: "Tokyo Finale Hotels (東京終站)", zh: "東京歲末酒店" },
+          dates: "🗓️ Dec 28 – Dec 31, 2026",
+          desc: {
+            en: "Central Tokyo for year-end shopping and illuminations, with seamless Haneda/Narita airport departures.",
+            zh: "返回東京市區迎接新年，漫步彩燈與百貨美食街，前往機場極為快捷。"
+          },
+          tags: ["🛍️ Year-End Shopping", "🎆 Illuminations", "✈️ Direct Airport Link"],
+          btnText: { en: "Search Tokyo Hotels ↗", zh: "搜尋東京酒店 ↗" },
+          dest: "Tokyo, Japan",
+          checkin: "2026-12-28",
           checkout: "2026-12-31"
         }
       ]
-    },
-    quickLegs: [
-      {
-        active: true,
-        dest: "Tokyo, Japan",
-        checkin: "2026-12-20",
-        checkout: "2026-12-24",
-        label: { en: "Tokyo (Dec 20–24)", zh: "東京 (12/20–24)" }
-      },
-      {
-        active: false,
-        dest: "Fujikawaguchiko, Yamanashi, Japan",
-        checkin: "2026-12-24",
-        checkout: "2026-12-25",
-        label: { en: "Mt Fuji / Kawaguchiko (Dec 24–25)", zh: "河口湖富士山 (12/24–25)" }
-      },
-      {
-        active: false,
-        dest: "Hakone, Kanagawa, Japan",
-        checkin: "2026-12-25",
-        checkout: "2026-12-26",
-        label: { en: "Hakone (Dec 25–26)", zh: "箱根 (12/25–26)" }
-      },
-      {
-        active: false,
-        dest: "Kyoto, Japan",
-        checkin: "2026-12-26",
-        checkout: "2026-12-29",
-        label: { en: "Kyoto (Dec 26–29)", zh: "京都 (12/26–29)" }
-      },
-      {
-        active: false,
-        dest: "Osaka, Japan",
-        checkin: "2026-12-29",
-        checkout: "2026-12-31",
-        label: { en: "Osaka (Dec 29–31)", zh: "大阪 (12/29–31)" }
-      }
-    ],
-    legs: [
-      {
-        legNum: 1,
-        nights: { en: "Leg 1 • 4 Nights", zh: "第 1 站 • 4 晚" },
-        badgeClass: "",
-        highlight: false,
-        title: { en: "Tokyo City Hotels (東京)", zh: "東京市區精選酒店" },
-        dates: "🗓️ Dec 20 – Dec 24, 2026",
-        desc: {
-          en: "Convenient base near Asakusa, Ginza, or Shibuya. Look for comfortable twin rooms with step-free elevator access near major transit hubs.",
-          zh: "推薦入住淺草、銀座或澀谷一帶，交通極為方便，挑選具升降機無障礙設施的雙床房，便於長輩出入地鐵。"
-        },
-        tags: ["🚇 Near Metro", "🛍️ Shopping", "🛏️ Twin Room"],
-        btnText: { en: "Search Tokyo Hotels ↗", zh: "搜尋東京酒店 ↗" },
-        dest: "Tokyo, Japan",
-        checkin: "2026-12-20",
-        checkout: "2026-12-24"
-      },
-      {
-        legNum: 2,
-        nights: { en: "Leg 2 • 1 Night (Ryokan)", zh: "第 2 站 • 1 晚 (溫泉旅館)" },
-        badgeClass: "",
-        highlight: false,
-        title: { en: "Lake Kawaguchiko Onsen Ryokan (河口湖)", zh: "河口湖富士山景溫泉旅館" },
-        dates: "🗓️ Dec 24 – Dec 25, 2026 (Christmas Eve)",
-        desc: {
-          en: "Traditional Japanese ryokan with private open-air hot spring bath (rotenburo), Mt Fuji views, and multi-course Kaiseki dinner.",
-          zh: "平安夜入住正宗日式溫泉旅館，享有一泊二食會席料理及房間/露天風呂眺望富士山絕景。"
-        },
-        tags: ["🗻 Mt Fuji View", "♨️ Hot Spring", "🍱 Kaiseki Dinner"],
-        btnText: { en: "Search Fuji Ryokan ↗", zh: "搜尋河口湖溫泉 ↗" },
-        dest: "Fujikawaguchiko, Yamanashi, Japan",
-        checkin: "2026-12-24",
-        checkout: "2026-12-25"
-      },
-      {
-        legNum: 3,
-        nights: { en: "Leg 3 • 1 Night (Onsen Resort)", zh: "第 3 站 • 1 晚 (箱根溫泉)" },
-        badgeClass: "",
-        highlight: false,
-        title: { en: "Hakone Hot Spring Resort (箱根)", zh: "箱根溫泉度假酒店 / 旅館" },
-        dates: "🗓️ Dec 25 – Dec 26, 2026 (Christmas Night)",
-        desc: {
-          en: "Relaxing stay in Hakone Yumoto or Gora on Christmas night. Soak in natural hot springs after exploring Owakudani, before heading west via Lake Ashi & Nagoya.",
-          zh: "聖誕節當晚入住箱根湯本或強羅溫泉區，造訪大涌谷後享受優質天然礦物溫泉，隔日遊覽蘆之湖後啟程經名古屋前往關西。"
-        },
-        tags: ["♨️ Natural Onsen", "🌲 Forest View", "🚗 Free Parking"],
-        btnText: { en: "Search Hakone Stays ↗", zh: "搜尋箱根住宿 ↗" },
-        dest: "Hakone, Kanagawa, Japan",
-        checkin: "2026-12-25",
-        checkout: "2026-12-26"
-      },
-      {
-        legNum: 4,
-        nights: { en: "Leg 4 • 3 Nights", zh: "第 4 站 • 3 晚" },
-        badgeClass: "",
-        highlight: false,
-        title: { en: "Kyoto Historic Hotels & Machiya (京都)", zh: "京都古風酒店與傳統町屋" },
-        dates: "🗓️ Dec 26 – Dec 29, 2026",
-        desc: {
-          en: "Stay 3 nights near Gion, Shijo-Kawaramachi, or Kyoto Station. Arrive smoothly on Dec 26 evening via Shinkansen, and wake up ready for Fushimi Inari and Arashiyama.",
-          zh: "12月26日傍晚搭乘新幹線抵達後入住京都（共3晚）。建議選擇祇園、四條河原町或京都車站周邊，翌日精神飽滿地展開千本鳥居與嵐山之旅。"
-        },
-        tags: ["⛩️ Heritage Area", "🍵 Cultural Vibe", "🚶 Walkable"],
-        btnText: { en: "Search Kyoto Hotels ↗", zh: "搜尋京都酒店 ↗" },
-        dest: "Kyoto, Japan",
-        checkin: "2026-12-26",
-        checkout: "2026-12-29"
-      },
-      {
-        legNum: 5,
-        nights: { en: "Leg 5 • 2 Nights (New Year's Eve)", zh: "第 5 站 • 2 晚 (跨年夜)" },
-        badgeClass: "",
-        highlight: false,
-        title: { en: "Osaka City & Dotonbori Hotels (大阪)", zh: "大阪心齋橋 / 難波市區酒店" },
-        dates: "🗓️ Dec 29 – Dec 31, 2026",
-        desc: {
-          en: "Stay near Namba or Umeda to celebrate New Year's Eve, enjoy vibrant street food, and access Kansai Airport (KIX) effortlessly.",
-          zh: "入住難波或梅田商圈，近距離體驗道頓堀跨年熱鬧氛圍，並可直達關西國際機場 (KIX)。"
-        },
-        tags: ["🎆 New Year's Eve", "🍜 Food Capital", "✈️ Direct Airport Link"],
-        btnText: { en: "Search Osaka Hotels ↗", zh: "搜尋大阪酒店 ↗" },
-        dest: "Osaka, Japan",
-        checkin: "2026-12-29",
-        checkout: "2026-12-31"
-      }
-    ]
+    }
   }
 };
 

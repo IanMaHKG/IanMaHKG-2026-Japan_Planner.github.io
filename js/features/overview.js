@@ -50,7 +50,7 @@ function renderOverview(plan) {
     }
   }
 
-  const stops = (currentPlan === 'plan-b' && data.routeStopsB) ? data.routeStopsB : (data.routeStopsA || data.routeStops);
+  const stops = currentPlan === 'plan-b' ? data.routeStopsB : data.routeStopsA;
   const stopsEl = document.getElementById('route-stops');
   if (stopsEl && stops) {
     stopsEl.innerHTML = stops.map(stop => `

@@ -22,7 +22,7 @@ Before making **any** code change, data edit, or documentation update, the agent
 - [ ] **No orphan grid rows** — No card grid may end with a single item alone on the last row (2+1, 4+1, 5+1 layouts are forbidden). Use the explicit grid rules in the *Column / Grid Layout Rule* section below.
 - [ ] **Data-driven pattern** — Displayed text lives in `data/site-data.js` or `data/itinerary-data.js`, never hard-coded into `index.html` or `js/render.js` unless it is a structural shell label.
 - [ ] **Documentation updated** — If architecture, file structure, features, or design tokens changed, `README.md` and this `AGENTS.md` have been updated to match **before** the response is finalised.
-- [ ] **Flight Selection & Long-Haul Airline Preference** — If editing or adding flight routes: (1) All legs must be live-verified via Google Flights; (2) Long-haul (intercontinental) legs MUST strictly adhere to the priority hierarchy: 1st: BA / Iberia (oneworld), 2nd: Finnair (oneworld), 3rd: Lufthansa / SWISS / Austrian (Star Alliance), 4th: Etihad Airways; (3) Options ordered by total journey time (shortest first); (4) CSV created first in `data-src/flights/` before updating `flights-data.js`; (5) Both depart and arrive dates recorded; (6) Max 5 best options per route.
+- [ ] **Flight Selection & Long-Haul Airline Preference** — If editing or adding flight routes: (1) All legs must be live-verified via Google Flights, or Kayak (`kayak.co.uk`) when Google Flights is unavailable, by opening each result's details panel; (2) Only flights **operated by the selling airline itself** — exclude codeshares/wet-leases (e.g. JAL-operated flights sold as BA, Finnair-operated flights sold as BA); record the **operating carrier's flight number**; (3) Long-haul (intercontinental) legs MUST strictly adhere to the priority hierarchy: 1st: BA / Iberia (oneworld), 2nd: Finnair (oneworld), 3rd: Lufthansa / SWISS / Austrian (Star Alliance), 4th: Etihad Airways; (4) Options ordered by total journey time (shortest first); (5) CSV created first in `data-src/flights/` before updating `flights-data.js`; (6) Both depart and arrive dates recorded; (7) Max 5 best options per route.
 - [ ] **Privacy / PII** — No personal names, specific family member labels, or home city details exposed in any user-visible text.
 
 > **Tip for the agent:** If any box cannot be ticked, fix the issue before proceeding. Do not respond with a partially compliant change.
@@ -126,11 +126,11 @@ Taiwan-specific vocabulary.
 │   ├── components.css      # UI components (buttons, tags, JR dots, markers)
 │   ├── sections/           # One stylesheet per page section (link order = cascade order!)
 │   │   ├── nav, hero, overview, map, tips, car-return, car-rental, itinerary,
-│   │   │   packing, budget, hotels, footer, dark-overrides, flights, budget-mobile (.css)
+│   │   │   packing, budget, hotels, footer, dark-overrides, flights (.css)
 │   └── responsive.css      # Responsive media queries (must stay last)
 │
 ├── data/                   # Data Modules (Universal format)
-│   ├── flights/flights-data.js   # FLIGHTS_DATA — 6 routes, 5 options each
+│   ├── flights/flights-data.js   # FLIGHTS_DATA — routes (each tagged with `plans`), `tz` table, ≤5 options each
 │   ├── site-data.js        # Overview, tips, packing, budget, hotels, car rental
 │   └── itinerary-data.js   # 12-day schedule, blocks, location coordinates
 │
@@ -140,6 +140,9 @@ Taiwan-specific vocabulary.
 │   ├── osaka_to_edi_20261231.csv
 │   ├── osaka_to_lhr_20261231.csv
 │   ├── kix_to_hkg_20261231.csv
+│   ├── tokyo_to_edi_20261231.csv
+│   ├── tokyo_to_lhr_20261231.csv
+│   ├── tokyo_to_hkg_20261231.csv
 │   └── hkg_to_edi_20270114.csv
 │
 └── js/                     # Application Logic (classic scripts, window.* globals)
@@ -177,7 +180,7 @@ Taiwan-specific vocabulary.
 - **Dates:** 20 Dec – 31 Dec 2026.
 - **Dual-Route Architecture:**
   - **Plan A (Kansai Golden Route, 11 Days):** Tokyo → Kawaguchiko / Mt Fuji → Hakone → Nagoya (car return Day 7) → Kyoto / Nara → Osaka (KIX departure).
-  - **Plan B (Kanto & Shizuoka Scenic Loop, 12 Days):** Tokyo → Kawaguchiko / Mt Fuji → Hakone → Atami Onsen (Boxing Day) → Kamakura & Yokohama (car return Day 9, zero drop-off fee) → Tokyo Finale (Dec 28–31) → Haneda/Narita departure.
+  - **Plan B (Kanto & Shizuoka Scenic Loop, 12 Days):** Tokyo → Kawaguchiko / Mt Fuji → Hakone → Atami Onsen (Boxing Day) → Kamakura & Yokohama (night of 27 Dec in Yokohama; car return Day 9, zero drop-off fee) → Tokyo Finale (Dec 28–31) → Haneda/Narita departure. Hotel cards: Hakone 25–26, Atami 26–27, Yokohama 27–28, Tokyo 28–31 (6 cards in total).
 - **Car rental:** Pick up Day 5 (24 Dec) leaving Tokyo; return Day 7 (Plan A in Nagoya/Kyoto) or Day 9 (Plan B in Yokohama/Tokyo with ¥0 drop-off fee).
 - **Vehicle Picks (4-Card Grid for 2 Adults + 6 Luggage Pieces):**
   1. Mid-size SUV (RAV4, X-Trail, Forester 4WD/AWD) — **Recommended**
@@ -197,7 +200,8 @@ Taiwan-specific vocabulary.
 - **Explicit Grid Rules by Item Count:**
   - **6 items** (e.g. `.tips-grid`): Use `repeat(3, 1fr)` on desktop (2 rows of 3: 3+3), `repeat(2, 1fr)` on tablet (3 rows of 2: 2+2+2), `1fr` on mobile.
   - **5 items** (e.g. `.itinerary-hotels-grid` in Plan A): Use a 6-column backbone (`grid-template-columns: repeat(6, 1fr)`) with `grid-column: span 2` and `nth-child(4)` / `nth-child(5)` offsets so the last 2 items sit centered (3+2 layout).
-  - **4 items** (e.g. `.overview-grid`, `.vr-grid`, `.itinerary-hotels-grid[data-count="4"]` in Plan B): Use `repeat(4, 1fr)` on desktop (1 row of 4), `repeat(2, 1fr)` on tablet (2 rows of 2), `1fr` on mobile.
+  - **6 hotel cards** (`.itinerary-hotels-grid[data-count="6"]` in Plan B): 6-column backbone with `span 2` (3+3) on desktop; 2+2+2 on tablet (the `nth-child(5)` offset is reset in `responsive.css`); `1fr` on mobile.
+  - **4 items** (e.g. `.overview-grid`, `.vr-grid`): Use `repeat(4, 1fr)` on desktop (1 row of 4), `repeat(2, 1fr)` on tablet (2 rows of 2), `1fr` on mobile.
   - **3 items** (e.g. `.packing-grid`, `.cr-grid`, `.rental-companies-grid`): Use `repeat(3, 1fr)` on desktop (1 row of 3), `repeat(2, 1fr)` or `1fr` on tablet/mobile.
 
 ---
@@ -208,7 +212,7 @@ Taiwan-specific vocabulary.
 
 The flight options system has a two-layer architecture:
 
-1. **CSV layer** — `data/flights/<route_key>_<date>.csv` — human-readable, source-of-truth archive.
+1. **CSV layer** — `data-src/flights/<route_key>_<date>.csv` — human-readable raw/archive export. `flights-data.js` is curated from it: every leg in the JS must exist in the CSV (enforced by `validate.mjs`), but the CSV may hold extra candidate legs.
 2. **JS layer** — `data/flights/flights-data.js` — `window.FLIGHTS_DATA`, consumed directly by `renderFlights()` in `js/features/flights.js`.
 
 > **Rule:** Always create/update the CSV first, then convert it into `flights-data.js`. Never skip the CSV step.
@@ -253,6 +257,7 @@ Each entry in `window.FLIGHTS_DATA.routes` must conform to this structure:
   },
   depart: 'YYYY-MM-DD',  // Earliest possible departure date for this route
   arrive: 'YYYY-MM-DD',  // Required arrival date (FIXED — do not alter without user approval)
+  plans: ['plan-a'],     // Optional. Which plan(s) show this route (omit = all plans). Osaka/KIX returns are Plan A only; Plan B departs Tokyo (HND/NRT).
   options: [ /* see below */ ]
 }
 ```
@@ -278,14 +283,17 @@ Each option object:
 }
 ```
 
+Every airport used in a leg must exist in the top-level `FLIGHTS_DATA.tz` table (airport → UTC offset in hours, winter) — `renderFlights()` uses it for durations and `validate.mjs` checks it. Add new hubs there.
+
 ### Adding a New Route — Step-by-Step
 
 When asked to add a new route, an agent **MUST** follow these steps in order:
 
-1. **Verify live on Google Flights** using the Playwright browser subagent.
-   - Navigate to `https://www.google.com/travel/flights`
+1. **Verify live on Google Flights, or Kayak if Google Flights is blocked** using the browser subagent.
+   - Google Flights: `https://www.google.com/travel/flights`. Kayak: `https://www.kayak.co.uk/flights/<ORIGIN>-<DEST>/<yyyy-mm-dd>?sort=duration_a`.
    - Search for the exact departure and arrival airports and date.
-   - Screenshot or extract the top results.
+   - Expand each candidate and read the details panel (flight number, "Operated by" line, airports, local times). Keep only flights **operated by the selling airline itself**; skip codeshares and record the operating carrier's flight number.
+   - Never bypass a CAPTCHA, bot check or "denied" block; fall back to the other source or ask the user.
    - **Do not save any flight data that has not been verified live.**
 
 2. **Create the CSV file** at `data-src/flights/<route_key>_<date>.csv`.
@@ -344,7 +352,9 @@ Within each route, order options **by total journey time, shortest first** (calc
 
 - **Do NOT manually bump `CACHE_NAME` in `sw.js`.** It contains the `__BUILD__` placeholder; the deploy workflow replaces it with the short commit SHA.
 - When you add/remove a CSS, JS, data or image file that `index.html` loads, add/remove it in `STATIC_ASSETS` in `sw.js` too.
-- **CSS cascade:** stylesheets in `css/sections/*.css` are linked individually in `index.html`; the link order equals the old single-file order (`dark-overrides`, `flights`, `budget-mobile` come late on purpose) and `responsive.css` must stay last. Do not reorder them.
+- **CSS cascade:** stylesheets in `css/sections/*.css` are linked individually in `index.html`; the link order equals the old single-file order (`dark-overrides`, `flights` come late on purpose) and `responsive.css` must stay last. Do not reorder them.
 - **JS load order:** `data/*` -> `currency.js` -> `map.js` -> `js/features/*.js` -> `render.js` -> `ui.js` -> `script.js`. New section renderers go in `js/features/` and must be exported in `render.js` and listed in `index.html` and `sw.js`.
 - Flight CSV sources live in `data-src/flights/` (not deployed). `flights-data.js` is what the site reads.
+- **MapLibre** is pinned to an exact version with an SRI `integrity` hash in `index.html` and precached in `sw.js` (offline maps). When bumping it, update both places plus the hash; `validate.mjs` checks all three.
+- `validate.mjs` also checks: budget totals per plan, hotel nights (legs and quick-pills each cover 20–30 Dec exactly once), flight route sanity (every plan shows ≥1 route) and the CSV-superset rule.
 - Before committing run `node scripts/validate.mjs` (also runs in CI and blocks deploys).

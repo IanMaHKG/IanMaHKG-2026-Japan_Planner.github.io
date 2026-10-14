@@ -233,6 +233,13 @@
   display: none;
 }
 
+/* 6-card layout for Plan B (3 + 3 on desktop; 2 + 2 + 2 on tablet via responsive.css) */
+.itinerary-hotels-grid[data-count="6"] > .hotel-leg-card,
+.itinerary-hotels-grid[data-count="6"] > .hotel-leg-card:nth-child(4),
+.itinerary-hotels-grid[data-count="6"] > .hotel-leg-card:nth-child(5) {
+  grid-column: span 2;
+}
+
 .hotel-leg-card.highlight-card {
   border-color: rgba(235, 34, 38, 0.25);
   background: #FFFDFC;

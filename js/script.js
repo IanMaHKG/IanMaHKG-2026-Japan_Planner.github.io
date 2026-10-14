@@ -30,7 +30,6 @@ function bootstrap() {
   if (typeof initPlanSwitcher === 'function') initPlanSwitcher();
   if (typeof initLanguageSelector === 'function') initLanguageSelector();
   if (typeof initCurrencySelector === 'function') initCurrencySelector();
-  if (typeof initBudgetNotes === 'function') initBudgetNotes();
   if (typeof initParticles === 'function') initParticles();
   if (typeof initNav === 'function') initNav();
   if (typeof initDayCards === 'function') initDayCards();

@@ -117,7 +117,8 @@ Taiwan-specific vocabulary.
 ├── manifest.json           # Web App Manifest for mobile installation
 ├── sw.js                   # Service Worker (offline caching)
 │
-├── assets/                 # Static media and icons
+├── assets/                 # Static media, icons and vector assets
+│   ├── airlines/           # Airline SVG logos for flight option cards
 │   └── favicon.svg         # SVG favicon & PWA icon
 │
 ├── css/                    # Modular Design System

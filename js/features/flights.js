@@ -30,18 +30,22 @@ function renderFlights(plan) {
     return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
   }
 
-  // Airline icon mapping
-  const airlineIcon = {
-    'British Airways':    '✈',
-    'Finnair':            '🇫🇮',
-    'Lufthansa':          '🇩🇪',
-    'SWISS':              '🇨🇭',
-    'Etihad Airways':     '🇦🇪',
-    'Cathay Pacific':     '🇭🇰',
-    'Hong Kong Express':  '🇭🇰',
-    'All Nippon Airways': '🇯🇵',
-    'Japan Airlines':     '🇯🇵',
-    'Peach Aviation':     '🍑',
+  // Airline logo mapping
+  const airlineLogos = {
+    'British Airways':                  'assets/airlines/ba.svg',
+    'Finnair':                          'assets/airlines/ay.svg',
+    'Finnair (opr. Nordic Reg)':        'assets/airlines/ay.svg',
+    'Finnair (operated by Nordic Reg)': 'assets/airlines/ay.svg',
+    'Lufthansa':                        'assets/airlines/lh.svg',
+    'SWISS':                            'assets/airlines/lx.svg',
+    'Edelweiss Air (for SWISS)':        'assets/airlines/wk.svg',
+    'Etihad Airways':                   'assets/airlines/ey.svg',
+    'Cathay Pacific':                   'assets/airlines/cx.svg',
+    'Hong Kong Express':                'assets/airlines/uo.svg',
+    'Peach Aviation':                   'assets/airlines/mm.svg',
+    'All Nippon Airways':               'assets/airlines/nh.svg',
+    'Japan Airlines':                   'assets/airlines/jl.svg',
+    'Jetstar Japan':                    'assets/airlines/gk.svg',
   };
 
   // Winter UTC offsets live once in FLIGHTS_DATA.tz (also read by scripts/validate.mjs)
@@ -72,7 +76,10 @@ function renderFlights(plan) {
     const optionsHtml = route.options.map((opt, oi) => {
       // Build leg rows
       const legRows = opt.legs.map((leg, li) => {
-        const icon = airlineIcon[leg.airline] || '✈';
+        const logoSrc = airlineLogos[leg.airline];
+        const logoBadge = logoSrc
+          ? `<img class="flt-airline-logo" src="${logoSrc}" alt="" width="20" height="20" loading="lazy">`
+          : `<span class="flt-airline-fallback">✈</span>`;
         const layover = li < opt.legs.length - 1
           ? `<tr class="flight-layover-row">
                <td colspan="5">⏱ <span class="lang-en">Layover at ${opt.legs[li + 1].from}</span><span class="lang-zh">轉機：${opt.legs[li + 1].from}</span></td>
@@ -81,7 +88,10 @@ function renderFlights(plan) {
         return `
           <tr>
             <td><span class="flt-num">${leg.flight}</span></td>
-            <td><span class="lang-en" style="font-size:0.78rem">${icon} ${leg.airline}</span><span class="lang-zh" style="font-size:0.78rem">${icon} ${leg.airline}</span></td>
+            <td>
+              <span class="flt-airline lang-en">${logoBadge}<span class="flt-airline-name">${leg.airline}</span></span>
+              <span class="flt-airline lang-zh">${logoBadge}<span class="flt-airline-name">${leg.airline}</span></span>
+            </td>
             <td>
               <div class="flt-route">
                 <span class="flt-iata">${leg.from}</span>

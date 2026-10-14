@@ -59,6 +59,7 @@
 ├── sw.js                   # Service Worker (offline cache & network strategies)
 │
 ├── assets/                 # Static media and icons
+│   ├── airlines/           # Vector SVG airline logos for flight option cards
 │   ├── favicon.svg         # SVG browser icon & PWA icon
 │   ├── apple-touch-icon.png
 │   ├── icons/              # PWA icons (192, 512, maskable 512)

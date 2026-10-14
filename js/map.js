@@ -122,16 +122,16 @@ function initRouteMap() {
     if (!stops || !stops.length) return;
 
     if (currentPlan === 'plan-b') {
-      // Plan B: Tokyo -> Kawaguchiko -> Hakone -> Atami -> Kamakura -> Yokohama (Self-drive loop)
-      if (stops.length >= 6) {
+      // Plan B: Tokyo -> Kawaguchiko -> Hakone -> Kamakura -> Yokohama (Self-drive loop)
+      if (stops.length >= 5) {
         addLine('route-loop',
-          stops.slice(0, 6).map(s => [s.lng, s.lat]),
+          stops.slice(0, stops.length - 1).map(s => [s.lng, s.lat]),
           getPaletteColor('--route-drive', dark ? '#60BBFF' : '#075AAA'), 3.2, 0.85, [3, 2]);
       }
       // Yokohama -> Tokyo Finale (rail return)
-      if (stops.length >= 7) {
+      if (stops.length >= 6) {
         addLine('route-return',
-          [[stops[5].lng, stops[5].lat], [stops[6].lng, stops[6].lat]],
+          [[stops[stops.length - 2].lng, stops[stops.length - 2].lat], [stops[stops.length - 1].lng, stops[stops.length - 1].lat]],
           getPaletteColor('--route-local', dark ? '#F5D070' : '#C9A96E'), 3, 0.85);
       }
     } else {

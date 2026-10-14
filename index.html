@@ -56,11 +56,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Japan Winter Journey 2026 — Dec 20–31 Dual-Route Winter Itinerary</title>
   <meta name="description"
-    content="A detailed day-by-day Japan travel itinerary for 2 adults, December 20–31, 2026. Features dual routes: Plan A (Tokyo → Mt Fuji → Kansai Golden Route) and Plan B (Tokyo → Mt Fuji &amp; Shizuoka Scenic Loop)." />
+    content="A detailed day-by-day Japan travel itinerary for 2 adults. Features dual routes: Plan A (Tokyo → Mt Fuji → Kansai, Dec 20–31, 12 Days) and Plan B (Tokyo → Mt Fuji &amp; Hakone Scenic Loop, Dec 26–Jan 1, 7 Days)." />
 
   <!-- Open Graph / social sharing (WhatsApp, iMessage, Slack previews) -->
   <meta property="og:title"       content="Japan Winter Journey 2026" />
-  <meta property="og:description" content="Day-by-day dual-route winter itinerary for 2 adults: Plan A (Tokyo → Mt Fuji → Kansai) or Plan B (Tokyo → Mt Fuji &amp; Shizuoka Scenic Loop), Dec 20–31, 2026." />
+  <meta property="og:description" content="Day-by-day dual-route winter itinerary for 2 adults: Plan A (Dec 20–31, Kansai) or Plan B (Dec 26–Jan 1, Kanto &amp; Fuji Loop)." />
   <meta property="og:type"        content="website" />
   <meta property="og:image"       content="https://ianmahkg.github.io/IanMaHKG-2026-Japan_Planner.github.io/assets/images/og-1200x630.jpg" />
   <meta property="og:image:width"  content="1200" />
@@ -69,13 +69,15 @@
   <meta name="twitter:card"       content="summary_large_image" />
   <meta name="twitter:image"      content="https://ianmahkg.github.io/IanMaHKG-2026-Japan_Planner.github.io/assets/images/og-1200x630.jpg" />
   <meta name="twitter:title"      content="Japan Winter Journey 2026" />
-  <meta name="twitter:description" content="Day-by-day dual-route winter itinerary for 2 adults: Plan A (Tokyo → Mt Fuji → Kansai) or Plan B (Tokyo → Mt Fuji &amp; Shizuoka Scenic Loop), Dec 20–31, 2026." />
+  <meta name="twitter:description" content="Day-by-day dual-route winter itinerary for 2 adults: Plan A (Dec 20–31, Kansai) or Plan B (Dec 26–Jan 1, Kanto &amp; Fuji Loop)." />
 
   <!-- PWA & Mobile Settings -->
   <meta name="theme-color" content="#01295C" />
   <meta name="color-scheme" content="light dark" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
   <link rel="manifest" href="manifest.json" />
 
   <!-- Google Fonts -->
@@ -132,13 +134,13 @@
         <span class="title-line year">2026</span>
       </h1>
       <p class="hero-subtitle">
-        <span class="lang-en">Dec 20 — Dec 31 &nbsp;·&nbsp; Plan A: Tokyo → Mt Fuji → Kansai &nbsp;|&nbsp; Plan B: Kanto &amp; Shizuoka Loop</span>
-        <span class="lang-zh">12月20日 — 12月31日 &nbsp;·&nbsp; 方案 A：東京 → 富士山 → 關西 &nbsp;|&nbsp; 方案 B：關東靜岡悠閒環線</span>
+        <span class="lang-en">Plan A: Dec 20–31 (12 Days) &nbsp;|&nbsp; Plan B: Dec 26–Jan 1 (7 Days)</span>
+        <span class="lang-zh">方案 A：12月20日–31日 (12天) &nbsp;|&nbsp; 方案 B：12月26日–1月1日 (7天)</span>
       </p>
       <div class="hero-badges">
         <span class="badge">
-          <span class="lang-en">🏔️ 11–12 Days</span>
-          <span class="lang-zh">🏔️ 11–12天行程</span>
+          <span class="lang-en">🏔️ 7–12 Days</span>
+          <span class="lang-zh">🏔️ 7–12天行程</span>
         </span>
         <span class="badge">
           <span class="lang-en">👥 2 Adults</span>
@@ -160,8 +162,8 @@
           </button>
           <button class="plan-hero-btn" data-plan="plan-b" id="hero-plan-b-btn" type="button">
             <span class="plan-btn-tag">Plan B</span>
-            <span class="lang-en">Kanto &amp; Shizuoka Loop (12 Days)</span>
-            <span class="lang-zh">關東靜岡環線 (12天)</span>
+            <span class="lang-en">Kanto &amp; Shizuoka Loop (7 Days)</span>
+            <span class="lang-zh">關東靜岡環線 (7天)</span>
           </button>
         </div>
       </div>
@@ -421,7 +423,7 @@
           <span class="lang-en">Kansai (關西)</span>
           <span class="lang-zh">關西段</span>
         </button>
-        <button class="day-tab plan-b-tab" data-region="coastal" style="display: none;">
+        <button class="day-tab plan-b-tab" data-region="coastal">
           <span class="lang-en">Izu &amp; Coast (伊豆沿海)</span>
           <span class="lang-zh">伊豆沿海段</span>
         </button>
@@ -707,6 +709,7 @@
   <script src="js/features/hotels.js" defer></script>
   <script src="js/features/itinerary.js" defer></script>
   <script src="js/features/flights.js" defer></script>
+  <script src="js/features/weather.js" defer></script>
   <script src="js/render.js" defer></script>
   <script src="js/ui.js" defer></script>
 

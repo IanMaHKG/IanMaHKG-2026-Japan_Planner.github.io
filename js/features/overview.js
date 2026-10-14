@@ -39,8 +39,8 @@ function renderOverview(plan) {
   if (directionEl) {
     if (currentPlan === 'plan-b') {
       directionEl.innerHTML = `
-        <span class="lang-en">Loop via Fuji, Hakone &amp; Atami 方面 <span class="jr-arrow">▶</span></span>
-        <span class="lang-zh">經 富士山、箱根、熱海 環線方面 <span class="jr-arrow">▶</span></span>
+        <span class="lang-en">Loop via Fuji, Hakone &amp; Kamakura 方面 <span class="jr-arrow">▶</span></span>
+        <span class="lang-zh">經 富士山、箱根、鎌倉 環線方面 <span class="jr-arrow">▶</span></span>
       `;
     } else {
       directionEl.innerHTML = `
@@ -51,6 +51,11 @@ function renderOverview(plan) {
   }
 
   const stops = currentPlan === 'plan-b' ? data.routeStopsB : data.routeStopsA;
+  const trackWrapEl = document.querySelector('.route-track-wrap');
+  if (trackWrapEl) {
+    trackWrapEl.setAttribute('data-plan', currentPlan);
+    trackWrapEl.style.setProperty('--stops-count', stops ? stops.length : 7);
+  }
   const stopsEl = document.getElementById('route-stops');
   if (stopsEl && stops) {
     stopsEl.innerHTML = stops.map(stop => `

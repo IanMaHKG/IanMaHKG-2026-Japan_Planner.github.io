@@ -82,7 +82,7 @@ for (const f of ['data/site-data.js', 'data/itinerary-data.js', 'data/flights/fl
 const A = ctx.ITINERARY_DATA_A || ctx.window.ITINERARY_DATA_A;
 const B = ctx.ITINERARY_DATA_B || ctx.window.ITINERARY_DATA_B;
 ok(Array.isArray(A) && A.length === 12, `Plan A should have 12 days, Dec 20-31 (got ${A && A.length})`);
-ok(Array.isArray(B) && B.length === 12, `Plan B should have 12 days (got ${B && B.length})`);
+ok(Array.isArray(B) && B.length === 7, `Plan B should have 7 days (got ${B && B.length})`);
 ok(!!ctx.SITE_DATA, 'SITE_DATA not defined');
 const FL = ctx.FLIGHTS_DATA;
 ok(FL && Array.isArray(FL.routes) && FL.routes.length > 0, 'FLIGHTS_DATA.routes missing');
@@ -105,16 +105,20 @@ for (const p of ['planA', 'planB']) {
 }
 
 /* 7a2. hotels: nights covered by the search pills must equal nights covered by the cards,
-        with no gap or overlap from Dec 20 to Dec 30 (11 nights) */
+        with no gap or overlap (Plan A: Dec 20-30, 11 nights; Plan B: Dec 26-31, 6 nights) */
 const dayNum = (s) => { const [y, m, d] = s.split('-').map(Number); return Date.UTC(y, m - 1, d) / 864e5; };
 const nightsOf = (list) => list.flatMap((l) => { const out = []; for (let n = dayNum(l.checkin); n < dayNum(l.checkout); n++) out.push(n); return out; }).sort((a, b) => a - b);
-const tripNights = Array.from({ length: 11 }, (_, i) => dayNum('2026-12-20') + i);
+const tripNightsMap = {
+  planA: Array.from({ length: 11 }, (_, i) => dayNum('2026-12-20') + i),
+  planB: Array.from({ length: 6 }, (_, i) => dayNum('2026-12-26') + i),
+};
 for (const p of ['planA', 'planB']) {
   const h = ctx.SITE_DATA && ctx.SITE_DATA.hotels && ctx.SITE_DATA.hotels[p];
   ok(h && h.quickLegs && h.legs, `hotels.${p} missing quickLegs/legs`);
   if (!h || !h.quickLegs || !h.legs) continue;
-  ok(JSON.stringify(nightsOf(h.legs)) === JSON.stringify(tripNights), `hotels.${p}.legs must cover each night Dec 20-30 exactly once`);
-  ok(JSON.stringify(nightsOf(h.quickLegs)) === JSON.stringify(tripNights), `hotels.${p}.quickLegs must cover each night Dec 20-30 exactly once`);
+  const expectedNights = tripNightsMap[p];
+  ok(JSON.stringify(nightsOf(h.legs)) === JSON.stringify(expectedNights), `hotels.${p}.legs must cover each night of trip exactly once`);
+  ok(JSON.stringify(nightsOf(h.quickLegs)) === JSON.stringify(expectedNights), `hotels.${p}.quickLegs must cover each night of trip exactly once`);
 }
 
 /* 7b. flight options: valid duration calculations across airport time zones (offsets: FLIGHTS_DATA.tz) */

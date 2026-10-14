@@ -77,8 +77,8 @@ const SITE_DATA = {
         icon: "🚗",
         title: { en: "Transport", zh: "交通方式" },
         desc: {
-          en: "Flexible hybrid model: rental car for Mt Fuji drive (Days 5–7 for Plan A; Days 5–9 loop for Plan B), plus bullet train / local rail.",
-          zh: "靈活出行：第 5 至 7 天（方案 A）或第 5 至 9 天（方案 B）自駕租車，市區搭配新幹線及鐵路。"
+          en: "Flexible hybrid model: rental car for Mt Fuji drive (Days 5–7 for Plan A; Days 3–5 loop for Plan B), plus bullet train / local rail.",
+          zh: "靈活出行：第 5 至 7 天（方案 A）或第 3 至 5 天（方案 B）自駕租車，市區搭配新幹線及鐵路。"
         }
       },
       {
@@ -209,9 +209,9 @@ const SITE_DATA = {
         romaji: "Tokyo",
         dotClass: "tokyo",
         name:  { en: "Tokyo (東京)",       zh: "東京"   },
-        days:  { en: "Days 1–4",           zh: "第 1–4 天" },
-        desc:  { en: "Asakusa, Skytree, teamLab Planets, Ginza, Meiji Jingu",
-                 zh: "淺草寺、晴空塔、teamLab、銀座購物、明治神宮" },
+        days:  { en: "Days 1–2",           zh: "第 1–2 天" },
+        desc:  { en: "Asakusa, Skytree, Meiji Jingu, Shibuya Sky",
+                 zh: "淺草寺、晴空塔、明治神宮、澀谷 SKY" },
         lat: 35.6762, lng: 139.6503,
         color: "var(--marker-tokyo)", markerClass: "marker-tokyo"
       },
@@ -223,9 +223,9 @@ const SITE_DATA = {
         romaji: "Kawaguchiko",
         dotClass: "fuji",
         name:  { en: "Kawaguchiko (河口湖)", zh: "河口湖" },
-        days:  { en: "Day 5",               zh: "第 5 天" },
-        desc:  { en: "Mt Fuji panoramic views, Chureito Pagoda, Christmas Eve kaiseki ryokan",
-                 zh: "富士山全景、新倉山忠靈塔、平安夜會席料理溫泉旅館" },
+        days:  { en: "Day 3",               zh: "第 3 天" },
+        desc:  { en: "Mt Fuji panoramic views, Chureito Pagoda, Lake Saiko, onsen ryokan",
+                 zh: "富士山全景、新倉山忠靈塔、西湖療癒之里、會席料理溫泉旅館" },
         lat: 35.5104, lng: 138.7564,
         color: "var(--marker-fuji)", markerClass: "marker-fuji"
       },
@@ -237,65 +237,51 @@ const SITE_DATA = {
         romaji: "Hakone",
         dotClass: "hakone",
         name:  { en: "Hakone (箱根)",       zh: "箱根"   },
-        days:  { en: "Day 6",               zh: "第 6 天" },
-        desc:  { en: "Lake Ashi pirate ship, Owakudani volcanic valley, Christmas luxury onsen",
-                 zh: "蘆之湖海盜船、大涌谷火山谷地熱黑玉子、聖誕奢華溫泉" },
+        days:  { en: "Day 4",               zh: "第 4 天" },
+        desc:  { en: "Oshino Hakkai, Owakudani geothermal valley, Lake Ashi pirate ship, onsen",
+                 zh: "忍野八海、大涌谷火山谷地熱黑玉子、蘆之湖海盜船、溫泉度假" },
         lat: 35.2329, lng: 139.1069,
         color: "var(--marker-hakone)", markerClass: "marker-hakone"
       },
       {
         code: "04",
-        label: "ATM",
-        kanji: "熱海",
-        hiragana: "あたみ",
-        romaji: "Atami",
-        dotClass: "fuji",
-        name:  { en: "Atami (熱海)",        zh: "熱海"   },
-        days:  { en: "Day 7",               zh: "第 7 天" },
-        desc:  { en: "Sagami Bay ocean-view onsen, Kinomiya Shrine sacred tree with elevator, MOA Museum",
-                 zh: "相模灣海景溫泉、來宮神社無障礙升降機參拜、MOA 美術館" },
-        lat: 35.0963, lng: 139.0716,
-        color: "var(--marker-kyoto)", markerClass: "marker-kyoto"
-      },
-      {
-        code: "05",
         label: "KMR",
         kanji: "鎌倉",
         hiragana: "かまくら",
         romaji: "Kamakura",
         dotClass: "nara",
         name:  { en: "Kamakura (鎌倉)",     zh: "鎌倉"   },
-        days:  { en: "Day 8",               zh: "第 8 天" },
-        desc:  { en: "Kotoku-in Great Buddha outdoor flat walk, Enoshima coastal drive, Hasedera",
-                 zh: "高德院大佛平路參觀、江之島海岸公路自駕、長谷寺" },
+        days:  { en: "Day 5",               zh: "第 5 天" },
+        desc:  { en: "Kotoku-in Great Buddha flat walk, scenic coastal Route 134 drive",
+                 zh: "高德院大佛平路參觀、湘南海岸公路觀海自駕" },
         lat: 35.3197, lng: 139.5467,
         color: "var(--marker-nara)", markerClass: "marker-nara"
       },
       {
-        code: "06",
+        code: "05",
         label: "YKH",
         kanji: "橫濱",
         hiragana: "よこはま",
         romaji: "Yokohama",
         dotClass: "nagoya",
         name:  { en: "Yokohama (橫濱)",     zh: "橫濱"   },
-        days:  { en: "Day 9",               zh: "第 9 天" },
-        desc:  { en: "Minato Mirai bay, Red Brick Warehouse, Chinatown, zero drop-off fee car return",
-                 zh: "港未來港灣夜景、紅磚倉庫、中華街美食、零附加費還車" },
+        days:  { en: "Day 5",               zh: "第 5 天" },
+        desc:  { en: "Chinatown dim sum lunch, zero drop-off fee car return, 30-min JR to Tokyo",
+                 zh: "中華街午餐點心、零附加費交還租車、30 分鐘 JR 直達東京" },
         lat: 35.4437, lng: 139.6380,
         color: "var(--marker-nagoya)", markerClass: "marker-nagoya"
       },
       {
-        code: "07",
+        code: "06",
         label: "TYO",
         kanji: "東京",
         hiragana: "とうきょう",
         romaji: "Tokyo Finale",
-        dotClass: "osaka",
+        dotClass: "tokyo",
         name:  { en: "Tokyo Finale (東京終站)", zh: "東京終站" },
-        days:  { en: "Days 10–12",         zh: "第 10–12 天" },
-        desc:  { en: "Nihombashi food halls, winter illuminations, New Year shopping & departure",
-                 zh: "日本橋百貨美食街、市區冬季燈飾、年宵市場、出發返程" },
+        days:  { en: "Days 5–7",            zh: "第 5–7 天" },
+        desc:  { en: "Sukiyaki dinner, Tsukiji, Ginza, NYE Toshikoshi soba, temple bells & departure",
+                 zh: "壽喜燒、築地市場、銀座、除夕跨年蕎麥麵、除夜之鐘與出發返程" },
         lat: 35.6812, lng: 139.7671,
         color: "var(--marker-tokyo)", markerClass: "marker-tokyo"
       }
@@ -425,18 +411,18 @@ const SITE_DATA = {
         zh: "關東靜岡自駕環線應在哪裡歸還租車？（方案 B）"
       },
       context: {
-        en: "The Plan B setup: <strong>pick up the car on Day 5 (Dec 24, Christmas Eve) leaving Tokyo</strong>, enjoy the 4-day loop across Mt Fuji, Hakone, Atami coastal onsen and Kamakura, then <strong>return it on Day 9 (Dec 28) with ZERO drop-off fee</strong> before taking an easy 30-min train back to your central Tokyo base.",
-        zh: "方案 B 安排：<strong>第 5 天（12 月 24 日平安夜）離開東京時取車</strong>，展開富士山、箱根、熱海海景溫泉及鎌倉 4 天自駕環線，在<strong>第 9 天（12 月 28 日）以零異地還車費歸還</strong>，隨後搭乘舒適短程火車直達東京市區酒店。"
+        en: "The Plan B setup: <strong>pick up the car on Day 3 (Dec 28) leaving Tokyo</strong>, enjoy the 3-day loop across Mt Fuji, Hakone, and Kamakura, then <strong>return it on Day 5 (Dec 30) with ZERO drop-off fee</strong> before taking an easy 30-min train back to your central Tokyo base.",
+        zh: "方案 B 安排：<strong>第 3 天（12 月 28 日）離開東京時取車</strong>，展開富士山、箱根及鎌倉 3 天自駕環線，在<strong>第 5 天（12 月 30 日）以零異地還車費歸還</strong>，隨後搭乘舒適短程火車直達東京市區酒店。"
       },
       recommendation: {
-        en: "🏆 Our pick: <strong>Yokohama Depot (Day 9)</strong> — Zero drop-off fee, drop off after Chinatown lunch, and take a quick 30-min JR train straight back to Tokyo.",
-        zh: "🏆 建議選擇：<strong>橫濱分店（第 9 天）</strong> — 零異地還車費，遊覽紅磚倉庫及中華街後交車，搭乘 30 分鐘 JR 直達東京市區酒店。"
+        en: "🏆 Our pick: <strong>Yokohama Depot (Day 5)</strong> — Zero drop-off fee, drop off after Chinatown lunch, and take a quick 30-min JR train straight back to Tokyo.",
+        zh: "🏆 建議選擇：<strong>橫濱分店（第 5 天）</strong> — 零異地還車費，遊覽紅磚倉庫及中華街後交車，搭乘 30 分鐘 JR 直達東京市區酒店。"
       },
       options: [
         {
           id: "car-return-yokohama",
           icon: "🎡",
-          title: { en: "Yokohama Depot (Day 9)", zh: "橫濱分店（第 9 天）" },
+          title: { en: "Yokohama Depot (Day 5)", zh: "橫濱分店（第 5 天）" },
           subtitle: { en: "Plan B Recommended · Post-Chinatown drop-off", zh: "方案 B 推薦 · 中華街午餐後還車" },
           verdict: "current",
           verdictLabel: { en: "Best Choice", zh: "最佳首選" },
@@ -462,7 +448,7 @@ const SITE_DATA = {
         {
           id: "car-return-tokyo",
           icon: "🏙️",
-          title: { en: "Central Tokyo Depot (Day 9)", zh: "東京市區分店（第 9 天）" },
+          title: { en: "Central Tokyo Depot (Day 5)", zh: "東京市區分店（第 5 天）" },
           subtitle: { en: "Drive all the way to Tokyo hotel", zh: "直接開至東京酒店門口" },
           verdict: "caution",
           verdictLabel: { en: "Alternative", zh: "可行替代" },
@@ -1019,30 +1005,30 @@ const SITE_DATA = {
       items: [
         {
           category: {
-            en: "🏨 Accommodation (11 nights)",
-            zh: "🏨 酒店與溫泉旅館 (11晚)"
+            en: "🏨 Accommodation (6 nights)",
+            zh: "🏨 酒店與溫泉旅館 (6晚)"
           },
-          jpy: "¥290,000–460,000",
-          min: 290000,
-          max: 460000,
-          initial: "$14,900–23,700",
+          jpy: "¥160,000–250,000",
+          min: 160000,
+          max: 250000,
+          initial: "$8,200–12,900",
           notes: {
-            en: "1 Twin Room (8 hotel nights + 3 onsen ryokan nights)",
-            zh: "全程 1 間雙床房（8 晚酒店 + 3 晚頂級溫泉旅館一泊二食）"
+            en: "1 Twin Room (4 hotel nights + 2 onsen ryokan nights)",
+            zh: "全程 1 間雙床房（4 晚酒店 + 2 晚頂級溫泉旅館一泊二食）"
           }
         },
         {
           category: {
-            en: "🚗 Car Rental (4 days loop)",
-            zh: "🚗 租車自駕 (4天環線)"
+            en: "🚗 Car Rental (3 days loop)",
+            zh: "🚗 租車自駕 (3天環線)"
           },
-          jpy: "¥48,000–65,000",
-          min: 48000,
-          max: 65000,
-          initial: "$2,500–3,350",
+          jpy: "¥36,000–48,000",
+          min: 36000,
+          max: 48000,
+          initial: "$1,850–2,470",
           notes: {
-            en: "4-day SUV / Prius loop. Zero one-way fee! Gas & tolls",
-            zh: "4 天自駕環線，零異地還車費！包含油費、ETC 過路費及雪胎"
+            en: "3-day MPV/SUV loop. Zero one-way fee! Gas, tolls & winter tires",
+            zh: "3 天自駕環線，零異地還車費！包含油費、ETC 過路費及雪胎"
           }
         },
         {
@@ -1050,27 +1036,27 @@ const SITE_DATA = {
             en: "🚆 Trains & Metro",
             zh: "🚆 城市鐵路及地鐵"
           },
-          jpy: "¥20,000–28,000",
-          min: 20000,
-          max: 28000,
-          initial: "$1,000–1,450",
+          jpy: "¥14,000–20,000",
+          min: 14000,
+          max: 20000,
+          initial: "$720–1,030",
           notes: {
-            en: "Tokyo metro, Keikyu / N'EX airport trains. No Shinkansen needed",
-            zh: "東京地鐵、京急/成田快線機場鐵路。無需昂貴新幹線！"
+            en: "Tokyo metro, Keikyu / N'EX airport trains, Yokohama-Tokyo JR. No Shinkansen needed",
+            zh: "東京地鐵、京急/成田快線機場鐵路、橫濱回東京 JR。無需新幹線！"
           }
         },
         {
           category: {
             en: "🍽️ Food & Drinks",
-            zh: "🍽️ 餐飲美食 (12天)"
+            zh: "🍽️ 餐飲美食 (7天)"
           },
-          jpy: "¥130,000–190,000",
-          min: 130000,
-          max: 190000,
-          initial: "$6,700–9,800",
+          jpy: "¥75,000–115,000",
+          min: 75000,
+          max: 115000,
+          initial: "$3,850–5,900",
           notes: {
-            en: "2 adults (covers remaining 8 days; 3 ryokan dinners included in room rate)",
-            zh: "2 位成人（覆蓋其餘 8 天；3 晚一泊二食早晚餐已含在房費中）"
+            en: "2 adults (covers 5 days; 2 ryokan dinners & breakfasts included in room rate)",
+            zh: "2 位成人（覆蓋其餘 5 天；2 晚一泊二食早晚餐已含在房費中）"
           }
         },
         {
@@ -1078,13 +1064,13 @@ const SITE_DATA = {
             en: "🎫 Activities & Entrance Fees",
             zh: "🎫 景點門票及體驗活動"
           },
-          jpy: "¥18,000–25,000",
-          min: 18000,
-          max: 25000,
-          initial: "$900–1,300",
+          jpy: "¥12,000–18,000",
+          min: 12000,
+          max: 18000,
+          initial: "$620–930",
           notes: {
-            en: "Skytree, teamLab, MOA Museum, Kamakura Buddha, ropeways",
-            zh: "晴空塔、teamLab、MOA 美術館、鎌倉大佛、箱根纜車"
+            en: "Skytree, Shibuya Sky, Kamakura Buddha, Hakone ropeway & Lake Ashi cruise",
+            zh: "晴空塔、澀谷 SKY、鎌倉大佛、箱根纜車與蘆之湖海盜船"
           }
         }
       ],
@@ -1093,13 +1079,13 @@ const SITE_DATA = {
           en: "<strong>Total (excl. flights)</strong>",
           zh: "<strong>總預算估算 (不含機票)</strong>"
         },
-        jpy: "<strong>¥506,000–768,000</strong>",
-        min: 506000,
-        max: 768000,
-        initial: "<strong>$26,000–39,600</strong>",
+        jpy: "<strong>¥297,000–451,000</strong>",
+        min: 297000,
+        max: 451000,
+        initial: "<strong>$15,250–23,200</strong>",
         notes: {
-          en: "For 2 adults, 12 days (saves ~¥24,000–62,000 vs Plan A)",
-          zh: "2 位成人 12 天的行程預算（較方案 A 節省約 ¥24,000–62,000）"
+          en: "For 2 adults, 7 days (saves ~¥230,000–380,000 vs 12-day Plan A)",
+          zh: "2 位成人 7 天的行程預算（較 12 天方案 A 節省約 ¥230,000–380,000）"
         }
       }
     }
@@ -1238,54 +1224,40 @@ const SITE_DATA = {
         {
           active: true,
           dest: "Tokyo, Japan",
-          checkin: "2026-12-20",
-          checkout: "2026-12-24",
-          label: { en: "Tokyo Base (Dec 20–24)", zh: "東京首站 (12/20–24)" }
+          checkin: "2026-12-26",
+          checkout: "2026-12-28",
+          label: { en: "Tokyo Base (Dec 26–28)", zh: "東京首站 (12/26–28)" }
         },
         {
           active: false,
           dest: "Fujikawaguchiko, Yamanashi, Japan",
-          checkin: "2026-12-24",
-          checkout: "2026-12-25",
-          label: { en: "Kawaguchiko (Dec 24–25)", zh: "河口湖 (12/24–25)" }
+          checkin: "2026-12-28",
+          checkout: "2026-12-29",
+          label: { en: "Kawaguchiko (Dec 28–29)", zh: "河口湖 (12/28–29)" }
         },
         {
           active: false,
           dest: "Hakone, Kanagawa, Japan",
-          checkin: "2026-12-25",
-          checkout: "2026-12-26",
-          label: { en: "Hakone (Dec 25–26)", zh: "箱根 (12/25–26)" }
-        },
-        {
-          active: false,
-          dest: "Atami, Shizuoka, Japan",
-          checkin: "2026-12-26",
-          checkout: "2026-12-27",
-          label: { en: "Atami Onsen (Dec 26–27)", zh: "熱海溫泉 (12/26–27)" }
-        },
-        {
-          active: false,
-          dest: "Yokohama, Kanagawa, Japan",
-          checkin: "2026-12-27",
-          checkout: "2026-12-28",
-          label: { en: "Yokohama (Dec 27–28)", zh: "橫濱 (12/27–28)" }
+          checkin: "2026-12-29",
+          checkout: "2026-12-30",
+          label: { en: "Hakone (Dec 29–30)", zh: "箱根 (12/29–30)" }
         },
         {
           active: false,
           dest: "Tokyo, Japan",
-          checkin: "2026-12-28",
-          checkout: "2026-12-31",
-          label: { en: "Tokyo Finale (Dec 28–31)", zh: "東京終站 (12/28–31)" }
+          checkin: "2026-12-30",
+          checkout: "2027-01-01",
+          label: { en: "Tokyo Finale (Dec 30–Jan 1)", zh: "東京終站 (12/30–1/1)" }
         }
       ],
       legs: [
         {
           legNum: 1,
-          nights: { en: "Leg 1 • 4 Nights", zh: "第 1 站 • 4 晚" },
+          nights: { en: "Leg 1 • 2 Nights", zh: "第 1 站 • 2 晚" },
           badgeClass: "",
           highlight: false,
           title: { en: "Tokyo City Hotels (東京首段)", zh: "東京市區精選酒店" },
-          dates: "🗓️ Dec 20 – Dec 24, 2026",
+          dates: "🗓️ Dec 26 – Dec 28, 2026",
           desc: {
             en: "Comfortable twin room near Asakusa or Ginza with step-free station access. Unhurried exploration before the scenic Fuji drive.",
             zh: "入住淺草或銀座一帶無障礙設施完善的雙床房，鄰近地鐵升降機出口，出發自駕前充分享受市區精華。"
@@ -1293,8 +1265,8 @@ const SITE_DATA = {
           tags: ["🚇 Near Metro", "🛍️ Shopping", "🛏️ Twin Room"],
           btnText: { en: "Search Tokyo Hotels ↗", zh: "搜尋東京酒店 ↗" },
           dest: "Tokyo, Japan",
-          checkin: "2026-12-20",
-          checkout: "2026-12-24"
+          checkin: "2026-12-26",
+          checkout: "2026-12-28"
         },
         {
           legNum: 2,
@@ -1302,16 +1274,16 @@ const SITE_DATA = {
           badgeClass: "",
           highlight: false,
           title: { en: "Lake Kawaguchiko Onsen Ryokan (河口湖)", zh: "河口湖富士山景溫泉旅館" },
-          dates: "🗓️ Dec 24 – Dec 25, 2026 (Christmas Eve)",
+          dates: "🗓️ Dec 28 – Dec 29, 2026",
           desc: {
-            en: "Festive Christmas Eve stay with private open-air hot spring bath, panoramic snow-capped Mt Fuji views, and seasonal kaiseki feast.",
-            zh: "平安夜入住正宗日式溫泉旅館，享有一泊二食會席料理及房間/露天風呂眺望富士山絕景。"
+            en: "Lakeside stay with private open-air hot spring bath, panoramic snow-capped Mt Fuji views, and seasonal kaiseki feast.",
+            zh: "入住正宗日式溫泉旅館，享有一泊二食會席料理及房間/露天風呂眺望富士山絕景。"
           },
           tags: ["🗻 Mt Fuji View", "♨️ Hot Spring", "🍱 Kaiseki Dinner"],
           btnText: { en: "Search Fuji Ryokan ↗", zh: "搜尋河口湖溫泉 ↗" },
           dest: "Fujikawaguchiko, Yamanashi, Japan",
-          checkin: "2026-12-24",
-          checkout: "2026-12-25"
+          checkin: "2026-12-28",
+          checkout: "2026-12-29"
         },
         {
           legNum: 3,
@@ -1319,67 +1291,33 @@ const SITE_DATA = {
           badgeClass: "",
           highlight: false,
           title: { en: "Hakone Hot Spring Resort (箱根)", zh: "箱根溫泉度假酒店 / 旅館" },
-          dates: "🗓️ Dec 25 – Dec 26, 2026 (Christmas Night)",
+          dates: "🗓️ Dec 29 – Dec 30, 2026",
           desc: {
-            en: "Christmas night in Hakone's forested volcanic springs, after the Volcanic Valley and Lake Ashi.",
-            zh: "聖誕節當晚入住箱根森林溫泉區，遊覽大涌谷及蘆之湖後享受天然礦物溫泉。"
+            en: "Tranquil night in Hakone's forested volcanic springs after Owakudani and Lake Ashi. (Option: can combine with Leg 2 into a single 2-night Fuji base).",
+            zh: "入住箱根森林溫泉區享受天然礦物溫泉。（亦可選擇在河口湖/箱根連住 2 晚同一溫泉旅館免搬行李）。"
           },
           tags: ["♨️ Mountain Onsen", "🌲 Forest View", "🚗 Free Parking"],
           btnText: { en: "Search Hakone Stays ↗", zh: "搜尋箱根住宿 ↗" },
           dest: "Hakone, Kanagawa, Japan",
-          checkin: "2026-12-25",
-          checkout: "2026-12-26"
+          checkin: "2026-12-29",
+          checkout: "2026-12-30"
         },
         {
           legNum: 4,
-          nights: { en: "Leg 4 • 1 Night (Coastal Onsen)", zh: "第 4 站 • 1 晚 (海景溫泉)" },
+          nights: { en: "Leg 4 • 2 Nights (NYE Finale)", zh: "第 4 站 • 2 晚 (除夕元旦終站)" },
           badgeClass: "",
           highlight: false,
-          title: { en: "Atami Coastal Onsen (熱海)", zh: "熱海海景溫泉旅館" },
-          dates: "🗓️ Dec 26 – Dec 27, 2026 (Boxing Day)",
+          title: { en: "Tokyo Finale & NYE Hotels (東京終站)", zh: "東京除夕跨年酒店" },
+          dates: "🗓️ Dec 30, 2026 – Jan 01, 2027",
           desc: {
-            en: "Boxing Day overlooking Sagami Bay in Atami, with fresh Pacific seafood kaiseki.",
-            zh: "節禮日入住俯瞰相模灣的熱海海景溫泉旅館，享用鮮活海鮮會席料理。"
-          },
-          tags: ["♨️ Sea View Onsen", "🌊 Sagami Bay", "🍱 Seafood Kaiseki"],
-          btnText: { en: "Search Atami Stays ↗", zh: "搜尋熱海住宿 ↗" },
-          dest: "Atami, Shizuoka, Japan",
-          checkin: "2026-12-26",
-          checkout: "2026-12-27"
-        },
-        {
-          legNum: 5,
-          nights: { en: "Leg 5 • 1 Night (Bay View)", zh: "第 5 站 • 1 晚 (海景)" },
-          badgeClass: "",
-          highlight: false,
-          title: { en: "Yokohama Bay Hotels (橫濱)", zh: "橫濱港未來海景酒店" },
-          dates: "🗓️ Dec 27 – Dec 28, 2026",
-          desc: {
-            en: "Night 8 in a Minato Mirai bay-view hotel, with the car returned at zero drop-off fee the next day before the train to Tokyo.",
-            zh: "第 8 晚入住橫濱港未來海景酒店，翌日零附加費還車後乘鐵路返回東京。"
-          },
-          tags: ["🎡 Bay View", "🚗 Car Return Next Day", "🚆 Rail to Tokyo"],
-          btnText: { en: "Search Yokohama Hotels ↗", zh: "搜尋橫濱酒店 ↗" },
-          dest: "Yokohama, Kanagawa, Japan",
-          checkin: "2026-12-27",
-          checkout: "2026-12-28"
-        },
-        {
-          legNum: 6,
-          nights: { en: "Leg 6 • 3 Nights (Finale)", zh: "第 6 站 • 3 晚 (年終盛會)" },
-          badgeClass: "",
-          highlight: false,
-          title: { en: "Tokyo Finale Hotels (東京終站)", zh: "東京歲末酒店" },
-          dates: "🗓️ Dec 28 – Dec 31, 2026",
-          desc: {
-            en: "Central Tokyo for year-end shopping and illuminations, with seamless Haneda/Narita airport departures.",
-            zh: "返回東京市區迎接新年，漫步彩燈與百貨美食街，前往機場極為快捷。"
+            en: "Central Tokyo for New Year's Eve festivities, Hatsumode temple countdown, and seamless Haneda/Narita airport departures.",
+            zh: "返回東京市區迎接新年，漫步築地、銀座與除夜之鐘祈福，前往機場極為快捷。"
           },
           tags: ["🛍️ Year-End Shopping", "🎆 Illuminations", "✈️ Direct Airport Link"],
           btnText: { en: "Search Tokyo Hotels ↗", zh: "搜尋東京酒店 ↗" },
           dest: "Tokyo, Japan",
-          checkin: "2026-12-28",
-          checkout: "2026-12-31"
+          checkin: "2026-12-30",
+          checkout: "2027-01-01"
         }
       ]
     }

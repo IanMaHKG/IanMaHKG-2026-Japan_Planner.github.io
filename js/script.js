@@ -39,6 +39,9 @@ function bootstrap() {
 
   /* Step 3: Map rendering */
   if (typeof initRouteMap === 'function') initRouteMap();
+
+  /* Step 4: Live weather (Open-Meteo) */
+  if (typeof fetchLiveWeather === 'function') setTimeout(fetchLiveWeather, 600);
 }
 
 if (document.readyState === 'loading') {

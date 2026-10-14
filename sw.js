@@ -72,6 +72,7 @@ const STATIC_ASSETS = [
   './js/features/hotels.js',
   './js/features/itinerary.js',
   './js/features/flights.js',
+  './js/features/weather.js',
   './js/render.js',
   './js/ui.js',
   './js/script.js',

@@ -72,6 +72,15 @@
   scrollbar-width: thin;
 }
 
+.route-visual.jr-board-container::-webkit-scrollbar {
+  height: 6px;
+}
+
+.route-visual.jr-board-container::-webkit-scrollbar-thumb {
+  background: var(--border-mid);
+  border-radius: var(--radius-pill);
+}
+
 .jr-board-header {
   display: flex;
   justify-content: space-between;
@@ -134,8 +143,8 @@
   position: absolute;
   top: 90px;
   transform: translateY(-50%);
-  left: calc(100% / 14);
-  right: calc(100% / 14);
+  left: calc(100% / (var(--stops-count, 7) * 2));
+  right: calc(100% / (var(--stops-count, 7) * 2));
   height: 6px;
   background: linear-gradient(90deg,
     var(--marker-tokyo) 0%,
@@ -151,9 +160,20 @@
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
 }
 
+.route-track-wrap[data-plan="plan-b"] .route-line {
+  background: linear-gradient(90deg,
+    var(--marker-tokyo) 0%,
+    var(--marker-fuji) 20%,
+    var(--marker-hakone) 40%,
+    var(--marker-nara) 60%,
+    var(--marker-nagoya) 80%,
+    var(--marker-tokyo) 100%
+  );
+}
+
 .route-stops {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(var(--stops-count, 7), 1fr);
   position: relative;
   z-index: 2;
   padding: 0;

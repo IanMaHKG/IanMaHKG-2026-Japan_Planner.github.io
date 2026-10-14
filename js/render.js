@@ -31,6 +31,7 @@ if (typeof window !== 'undefined') {
     renderHotels(plan);
     renderItinerary(plan);
     renderFlights(plan);
+    if (typeof fetchLiveWeather === 'function') fetchLiveWeather({ plan });
   });
 
   window.renderSiteContent  = renderSiteContent;
@@ -48,4 +49,5 @@ if (typeof window !== 'undefined') {
   window.initDayCards       = initDayCards;
   window.renderFlights      = renderFlights;
   window.flightsSelectTab   = flightsSelectTab;
+  if (typeof fetchLiveWeather === 'function') window.fetchLiveWeather = fetchLiveWeather;
 }

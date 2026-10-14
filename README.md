@@ -11,14 +11,14 @@
 ### Plan A: Kansai Golden Route (12 Days)
 **Tokyo** (Days 1–4) → **Kawaguchiko / Mt Fuji** (Day 5) → **Hakone** (Days 6–7) → **Nagoya** (Day 7, transit) → **Kyoto** (Days 7–9) → **Nara** (Day 10) → **Osaka** (Days 10–12)
 
-### Plan B: Kanto & Shizuoka Scenic Loop (12 Days)
-**Tokyo** (Days 1–4) → **Kawaguchiko / Mt Fuji** (Day 5) → **Hakone** (Days 6–7) → **Atami Onsen** (Day 7) → **Kamakura & Yokohama** (Days 8–9) → **Tokyo Finale** (Days 10–12)
+### Plan B: Kanto & Shizuoka Scenic Loop (7 Days)
+**Tokyo** (Days 1–2) → **Kawaguchiko / Mt Fuji** (Day 3) → **Hakone** (Day 4) → **Kamakura & Yokohama** (Day 5) → **Tokyo Finale & NYE** (Days 5–7)
 
 ---
 
 ## Features
 
-- 🔀 **Dual-Route Architecture** — Instant live switching between **Plan A (Kansai Golden Route)** and **Plan B (Kanto & Shizuoka Scenic Loop)** via hero pills or navbar toggle, updating itinerary timeline, route maps, hotels, budget, and car return logistics without page reload
+- 🔀 **Dual-Route Architecture** — Instant live switching between **Plan A (Kansai Golden Route, 12 Days)** and **Plan B (Kanto & Shizuoka Scenic Loop, 7 Days)** via hero pills or navbar toggle, updating itinerary timeline, route maps, hotels, budget, and car return logistics without page reload
 - 👥 **Tailored for 2 Adults** — Senior-friendly accessible pacing (max 2–3 key activities per day, step-free access, 1 Twin Room throughout)
 - ✈️ **BA-inspired design** — Midnight Navy, BA Red & Gold palette with glassmorphism cards
 - 🎨 **Modular Design System** — Centralised design tokens in `palette.css`, componentised CSS for maintainability
@@ -26,7 +26,7 @@
 - 📱 **Progressive Web App (PWA)** — Offline support via Service Worker (`sw.js`) and installable web app manifest (`manifest.json`)
 - 🌙 **Dark / Light mode toggle** — persistent across sessions via `localStorage`; maps switch styles automatically (Positron ↔ Fiord)
 - 🚉 **JR Station Sign Route Board** — Authentic Japanese station sign (駅名標) timeline with Kanji, Furigana, Romaji, Station Codes & day badges (dynamically switches between Tokaido Main Line and Shizuoka Loop)
-- 📅 **11–12 expandable day cards** with morning / afternoon / evening schedules and meal picks
+- 📅 **7–12 expandable day cards** with morning / afternoon / evening schedules and meal picks
 - 🗺️ **Interactive route map** (MapLibre GL JS) — colour-coded route with self-drive, bullet train & local rail segments dynamically synced with active plan
 - 🗾 **Per-day mini-maps** — lazy-initialised MapLibre map inside each accordion day card
 - 🎌 **Senior-friendly Bilingual Switcher** — Always-visible English & Traditional Chinese (`EN | 繁中`) toggle in top navigation bar with high-contrast tactile active pills
@@ -38,7 +38,7 @@
 - 🧳 **Packing checklist** — winter-specific, self-drive aware
 - 💰 **Budget estimate table** — per-category with live converted values for 2 adults (1 Twin Room)
 - ♿ **Accessibility (a11y)** — Full keyboard navigation (`Tab`, `Enter`, `Space`), ARIA expanded states, semantic HTML
-- 📱 **Strict Anti-Orphan Layout** — 4 vehicle cards (4 columns desktop, 2x2 tablet) and 5 hotel cards on Plan A (3+2) / 6 on Plan B (3+3 desktop, 2+2+2 tablet) with zero orphan cards
+- 📱 **Strict Anti-Orphan Layout** — 4 vehicle cards (4 columns desktop, 2x2 tablet) and 5 hotel cards on Plan A (3+2) / 4 on Plan B (4 columns desktop, 2x2 tablet) with zero orphan cards
 - 🚗 **Car Return & Car Rental sections** — one-way drop-off comparison per plan and rental company search shortcuts
 - ✈️ **Flight Options** — plan-aware tabs (routes tagged `plans: ['plan-a']` / `['plan-b']` only show on that plan; untagged routes show on both), up to 5 options per route, rendered from `data/flights/flights-data.js`. Each curated leg is first recorded in a CSV under `data-src/flights/` (CSV-first rule; the CSV may hold more candidates than the 5 curated options, and `scripts/validate.mjs` fails if a curated leg is missing from its CSV). Candidates are fetched with `python scripts/fetch-flights.py <FROM> <TO> <yyyy-mm-dd>` (Google Flights via `fast-flights`, no browser; browser is the fallback)
 - ⌨️ **Keyboard & motion friendly** — visible focus rings, skip link, `aria-pressed` switchers, `prefers-reduced-motion` support, back-to-top button

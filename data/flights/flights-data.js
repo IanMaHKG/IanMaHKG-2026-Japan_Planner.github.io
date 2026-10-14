@@ -12,7 +12,7 @@ window.FLIGHTS_DATA = {
   /* Winter (Dec/Jan) UTC offsets, in hours, for every airport used below.
      Single source for duration maths in js/features/flights.js and scripts/validate.mjs.
      Add a new airport here BEFORE using it in a leg. */
-  tz: { EDI: 0, LHR: 0, HEL: 2, FRA: 1, MUC: 1, ZRH: 1, AUH: 4, HKG: 8, HND: 9, NRT: 9, KIX: 9 },
+  tz: { EDI: 0, LHR: 0, HEL: 2, FRA: 1, MUC: 1, ZRH: 1, AUH: 4, HKG: 8, HND: 9, NRT: 9, KIX: 9, DOH: 3, DXB: 4, CDG: 1, ICN: 9, CPH: 1, IST: 3 },
 
   /* Optional route field `plans`: ['plan-a'] / ['plan-b'] limits a route to one plan.
      Routes without it show on both plans. */
@@ -24,6 +24,7 @@ window.FLIGHTS_DATA = {
     ───────────────────────────────────────────────────── */
     {
       id: 'edi-to-tokyo',
+      plans: ['plan-a'],
       label: { en: 'Edinburgh → Tokyo', zh: '愛丁堡 → 東京' },
       date:  { en: 'Sat 19 Dec 2026 (depart)', zh: '2026年12月19日（出發）' },
       arrive: '2026-12-20',
@@ -87,6 +88,7 @@ window.FLIGHTS_DATA = {
     ───────────────────────────────────────────────────── */
     {
       id: 'lhr-to-tokyo',
+      plans: ['plan-a'],
       label: { en: 'London Heathrow → Tokyo', zh: '倫敦希斯路 → 東京' },
       date:  { en: 'Sat 19 Dec 2026', zh: '2026年12月19日' },
       arrive: '2026-12-20',
@@ -209,7 +211,192 @@ window.FLIGHTS_DATA = {
       ]
     },
 
+        /* ─────────────────────────────────────────────────────
+       ROUTE 1B: Edinburgh (EDI) → Tokyo (HND) [Plan B]
+       Departing Friday, 25 December 2026 (arriving Dec 26)
+       Source: edi_to_tokyo_20261225.csv
+    ───────────────────────────────────────────────────── */
+    {
+      id: 'edi-to-tokyo-b',
+      plans: ['plan-b'],
+      label: { en: 'Edinburgh → Tokyo', zh: '愛丁堡 → 東京' },
+      date:  { en: 'Fri 25 Dec 2026 (depart)', zh: '2026年12月25日（出發）' },
+      arrive: '2026-12-26',
+      options: [
+        {
+          id: 'edi-tyo-b1',
+          label: { en: 'British Airways via London (early)', zh: '英國航空轉倫敦（早班）' },
+          airline: 'British Airways',
+          hub: 'LHR',
+          legs: [
+            { airline: 'British Airways', flight: 'BA1461', from: 'EDI', to: 'LHR', dep: '2026-12-25 06:20', arr: '2026-12-25 08:00' },
+            { airline: 'British Airways', flight: 'BA5',    from: 'LHR', to: 'HND', dep: '2026-12-25 11:40', arr: '2026-12-26 10:25' },
+          ]
+        },
+        {
+          id: 'edi-tyo-b2',
+          label: { en: 'Finnair via Helsinki', zh: '芬蘭航空轉赫爾辛基' },
+          airline: 'Finnair',
+          hub: 'HEL',
+          legs: [
+            { airline: 'Finnair', flight: 'AY1372', from: 'EDI', to: 'HEL', dep: '2026-12-25 09:55', arr: '2026-12-25 14:30' },
+            { airline: 'Finnair', flight: 'AY61',   from: 'HEL', to: 'HND', dep: '2026-12-25 18:00', arr: '2026-12-26 14:25' },
+          ]
+        },
+        {
+          id: 'edi-tyo-b3',
+          label: { en: 'British Airways via London (midday)', zh: '英國航空轉倫敦（中班）' },
+          airline: 'British Airways',
+          hub: 'LHR',
+          legs: [
+            { airline: 'British Airways', flight: 'BA1465', from: 'EDI', to: 'LHR', dep: '2026-12-25 07:25', arr: '2026-12-25 09:05' },
+            { airline: 'British Airways', flight: 'BA5',    from: 'LHR', to: 'HND', dep: '2026-12-25 11:40', arr: '2026-12-26 10:25' },
+          ]
+        },
+        {
+          id: 'edi-tyo-b4',
+          label: { en: 'BA + Japan Airlines via London', zh: '英國航空 + 日本航空轉倫敦' },
+          airline: 'Japan Airlines',
+          hub: 'LHR',
+          legs: [
+            { airline: 'British Airways', flight: 'BA1447', from: 'EDI', to: 'LHR', dep: '2026-12-25 13:35', arr: '2026-12-25 15:10' },
+            { airline: 'Japan Airlines',  flight: 'JL44',   from: 'LHR', to: 'HND', dep: '2026-12-25 18:30', arr: '2026-12-26 17:20' },
+          ]
+        },
+        {
+          id: 'edi-tyo-b5',
+          label: { en: 'Finnair + JAL via Helsinki', zh: '芬蘭航空 + 日本航空轉赫爾辛基' },
+          airline: 'Finnair',
+          hub: 'HEL',
+          legs: [
+            { airline: 'Finnair',        flight: 'AY1372', from: 'EDI', to: 'HEL', dep: '2026-12-25 09:55', arr: '2026-12-25 14:30' },
+            { airline: 'Japan Airlines', flight: 'JL48',   from: 'HEL', to: 'HND', dep: '2026-12-25 17:30', arr: '2026-12-26 14:25' },
+          ]
+        },
+      ]
+    },
+
     /* ─────────────────────────────────────────────────────
+       ROUTE 2B: London Heathrow (LHR) → Tokyo (HND) [Plan B]
+       Departing Friday, 25 December 2026 (arriving Dec 26)
+       Source: lhr_to_tokyo_20261225.csv
+    ───────────────────────────────────────────────────── */
+    {
+      id: 'lhr-to-tokyo-b',
+      plans: ['plan-b'],
+      label: { en: 'London Heathrow → Tokyo', zh: '倫敦希斯路 → 東京' },
+      date:  { en: 'Fri 25 Dec 2026 (depart)', zh: '2026年12月25日（出發）' },
+      arrive: '2026-12-26',
+      options: [
+        {
+          id: 'lhr-tyo-b1',
+          label: { en: 'British Airways (direct morning)', zh: '英國航空（直航上午班）' },
+          airline: 'British Airways',
+          hub: null,
+          legs: [
+            { airline: 'British Airways', flight: 'BA7', from: 'LHR', to: 'HND', dep: '2026-12-25 09:10', arr: '2026-12-26 07:35' },
+          ]
+        },
+        {
+          id: 'lhr-tyo-b2',
+          label: { en: 'British Airways (direct midday)', zh: '英國航空（直航中午班）' },
+          airline: 'British Airways',
+          hub: null,
+          legs: [
+            { airline: 'British Airways', flight: 'BA5', from: 'LHR', to: 'HND', dep: '2026-12-25 11:40', arr: '2026-12-26 10:25' },
+          ]
+        },
+        {
+          id: 'lhr-tyo-b3',
+          label: { en: 'All Nippon Airways (direct evening)', zh: '全日空（直航傍晚班）' },
+          airline: 'All Nippon Airways',
+          hub: null,
+          legs: [
+            { airline: 'All Nippon Airways', flight: 'NH212', from: 'LHR', to: 'HND', dep: '2026-12-25 19:00', arr: '2026-12-26 17:55' },
+          ]
+        },
+        {
+          id: 'lhr-tyo-b4',
+          label: { en: 'Japan Airlines (direct morning)', zh: '日本航空（直航上午班）' },
+          airline: 'Japan Airlines',
+          hub: null,
+          legs: [
+            { airline: 'Japan Airlines', flight: 'JL42', from: 'LHR', to: 'HND', dep: '2026-12-25 08:50', arr: '2026-12-26 07:40' },
+          ]
+        },
+        {
+          id: 'lhr-tyo-b5',
+          label: { en: 'Japan Airlines (direct evening)', zh: '日本航空（直航傍晚班）' },
+          airline: 'Japan Airlines',
+          hub: null,
+          legs: [
+            { airline: 'Japan Airlines', flight: 'JL44', from: 'LHR', to: 'HND', dep: '2026-12-25 18:30', arr: '2026-12-26 17:20' },
+          ]
+        },
+      ]
+    },
+
+    /* ─────────────────────────────────────────────────────
+       ROUTE 3B: Hong Kong (HKG) → Tokyo (HND) [Plan B]
+       Departing Saturday, 26 December 2026 (Boxing Day)
+       Source: hkg_to_tokyo_20261226.csv
+    ───────────────────────────────────────────────────── */
+    {
+      id: 'hkg-to-tokyo-b',
+      plans: ['plan-b'],
+      label: { en: 'Hong Kong → Tokyo', zh: '香港 → 東京' },
+      date:  { en: 'Sat 26 Dec 2026 (depart)', zh: '2026年12月26日（出發）' },
+      arrive: '2026-12-26',
+      options: [
+        {
+          id: 'hkg-tyo-b1',
+          label: { en: 'Cathay Pacific (morning departure)', zh: '國泰航空（上午班）' },
+          airline: 'Cathay Pacific',
+          hub: null,
+          legs: [
+            { airline: 'Cathay Pacific', flight: 'CX548', from: 'HKG', to: 'HND', dep: '2026-12-26 08:55', arr: '2026-12-26 13:45' },
+          ]
+        },
+        {
+          id: 'hkg-tyo-b2',
+          label: { en: 'Cathay Pacific (afternoon departure)', zh: '國泰航空（下午班）' },
+          airline: 'Cathay Pacific',
+          hub: null,
+          legs: [
+            { airline: 'Cathay Pacific', flight: 'CX542', from: 'HKG', to: 'HND', dep: '2026-12-26 16:30', arr: '2026-12-26 21:15' },
+          ]
+        },
+        {
+          id: 'hkg-tyo-b3',
+          label: { en: 'All Nippon Airways (early red-eye)', zh: '全日空（清晨班）' },
+          airline: 'All Nippon Airways',
+          hub: null,
+          legs: [
+            { airline: 'All Nippon Airways', flight: 'NH814', from: 'HKG', to: 'HND', dep: '2026-12-26 00:15', arr: '2026-12-26 05:00' },
+          ]
+        },
+        {
+          id: 'hkg-tyo-b4',
+          label: { en: 'All Nippon Airways (afternoon departure)', zh: '全日空（下午班）' },
+          airline: 'All Nippon Airways',
+          hub: null,
+          legs: [
+            { airline: 'All Nippon Airways', flight: 'NH860', from: 'HKG', to: 'HND', dep: '2026-12-26 14:20', arr: '2026-12-26 19:15' },
+          ]
+        },
+        {
+          id: 'hkg-tyo-b5',
+          label: { en: 'Japan Airlines (afternoon departure)', zh: '日本航空（下午班）' },
+          airline: 'Japan Airlines',
+          hub: null,
+          legs: [
+            { airline: 'Japan Airlines', flight: 'JL26', from: 'HKG', to: 'HND', dep: '2026-12-26 15:35', arr: '2026-12-26 20:25' },
+          ]
+        },
+      ]
+    },
+
+/* ─────────────────────────────────────────────────────
        ROUTE 4: Osaka Kansai (KIX) → London Heathrow (LHR)
        Thursday, 31 December 2026
     ───────────────────────────────────────────────────── */
@@ -401,113 +588,128 @@ window.FLIGHTS_DATA = {
       ]
     },
 
-    /* ─────────────────────────────────────────────────────
-       ROUTE 7: Tokyo (HND/NRT) → Edinburgh (EDI) [Plan B]
-       Thursday, 31 December 2026
-       Source: tokyo_to_edi_20261231.csv
-       Verified live on Kayak 14 Oct 2026
+        /* ─────────────────────────────────────────────────────
+       ROUTE 7: Tokyo (HND) → Edinburgh (EDI) [Plan B]
+       Friday, 01 January 2027 (New Year's Day)
+       Source: tokyo_to_edi_20270101.csv
     ───────────────────────────────────────────────────── */
     {
       id: 'tokyo-to-edi',
       plans: ['plan-b'],
       label: { en: 'Tokyo → Edinburgh', zh: '東京 → 愛丁堡' },
-      date:  { en: 'Thu 31 Dec 2026', zh: '2026年12月31日' },
-      depart: '2026-12-31',
+      date:  { en: 'Fri 01 Jan 2027', zh: '2027年1月1日' },
+      depart: '2027-01-01',
       arrive: '2027-01-01',
       options: [
         {
           id: 'tyo-edi-1',
-          label: { en: 'British Airways via London (afternoon)', zh: '英國航空轉倫敦（下午班）' },
+          label: { en: 'British Airways via London (quick connection)', zh: '英國航空轉倫敦（快速中轉）' },
           airline: 'British Airways',
           hub: 'LHR',
           legs: [
-            { airline: 'British Airways', flight: 'BA6',    from: 'HND', to: 'LHR', dep: '2026-12-31 13:15', arr: '2026-12-31 19:20' },
-            { airline: 'British Airways', flight: 'BA1464', from: 'LHR', to: 'EDI', dep: '2026-12-31 20:35', arr: '2026-12-31 22:00' },
+            { airline: 'British Airways', flight: 'BA8',    from: 'HND', to: 'LHR', dep: '2027-01-01 09:35', arr: '2027-01-01 15:35' },
+            { airline: 'British Airways', flight: 'BA1456', from: 'LHR', to: 'EDI', dep: '2027-01-01 17:15', arr: '2027-01-01 18:40' },
           ]
         },
         {
           id: 'tyo-edi-2',
-          label: { en: 'Finnair via Helsinki (from Narita)', zh: '芬蘭航空轉赫爾辛基（成田出發）' },
-          airline: 'Finnair',
+          label: { en: 'JAL + Finnair via Helsinki', zh: '日本航空 + 芬蘭航空轉赫爾辛基' },
+          airline: 'Japan Airlines',
           hub: 'HEL',
           legs: [
-            { airline: 'Finnair',                   flight: 'AY74',   from: 'NRT', to: 'HEL', dep: '2026-12-31 23:10', arr: '2027-01-01 05:00' },
-            { airline: 'Finnair (opr. Nordic Reg)', flight: 'AY1371', from: 'HEL', to: 'EDI', dep: '2027-01-01 08:15', arr: '2027-01-01 09:10' },
+            { airline: 'Japan Airlines', flight: 'JL47',   from: 'HND', to: 'HEL', dep: '2027-01-01 08:20', arr: '2027-01-01 14:40' },
+            { airline: 'Finnair',        flight: 'AY1373', from: 'HEL', to: 'EDI', dep: '2027-01-01 16:55', arr: '2027-01-01 17:50' },
           ]
         },
         {
           id: 'tyo-edi-3',
-          label: { en: 'British Airways via London (morning)', zh: '英國航空轉倫敦（上午班）' },
+          label: { en: 'British Airways via London (evening arrival)', zh: '英國航空轉倫敦（傍晚抵達）' },
           airline: 'British Airways',
           hub: 'LHR',
           legs: [
-            { airline: 'British Airways', flight: 'BA8',    from: 'HND', to: 'LHR', dep: '2026-12-31 09:35', arr: '2026-12-31 15:35' },
-            { airline: 'British Airways', flight: 'BA1460', from: 'LHR', to: 'EDI', dep: '2026-12-31 18:25', arr: '2026-12-31 19:50' },
+            { airline: 'British Airways', flight: 'BA8',    from: 'HND', to: 'LHR', dep: '2027-01-01 09:35', arr: '2027-01-01 15:35' },
+            { airline: 'British Airways', flight: 'BA1460', from: 'LHR', to: 'EDI', dep: '2027-01-01 18:50', arr: '2027-01-01 20:15' },
           ]
         },
         {
           id: 'tyo-edi-4',
-          label: { en: 'Finnair via Helsinki (from Haneda)', zh: '芬蘭航空轉赫爾辛基（羽田出發）' },
-          airline: 'Finnair',
-          hub: 'HEL',
+          label: { en: 'JAL + BA via London', zh: '日本航空 + 英國航空轉倫敦' },
+          airline: 'Japan Airlines',
+          hub: 'LHR',
           legs: [
-            { airline: 'Finnair',                   flight: 'AY62',   from: 'HND', to: 'HEL', dep: '2026-12-31 21:55', arr: '2027-01-01 04:00' },
-            { airline: 'Finnair (opr. Nordic Reg)', flight: 'AY1371', from: 'HEL', to: 'EDI', dep: '2027-01-01 08:15', arr: '2027-01-01 09:10' },
+            { airline: 'Japan Airlines',  flight: 'JL43',   from: 'HND', to: 'LHR', dep: '2027-01-01 09:50', arr: '2027-01-01 15:15' },
+            { airline: 'British Airways', flight: 'BA1460', from: 'LHR', to: 'EDI', dep: '2027-01-01 18:50', arr: '2027-01-01 20:15' },
+          ]
+        },
+        {
+          id: 'tyo-edi-5',
+          label: { en: 'Qatar Airways via Doha', zh: '卡塔爾航空轉多哈' },
+          airline: 'Qatar Airways',
+          hub: 'DOH',
+          legs: [
+            { airline: 'Qatar Airways', flight: 'QR813', from: 'HND', to: 'DOH', dep: '2027-01-01 00:25', arr: '2027-01-01 07:05' },
+            { airline: 'Qatar Airways', flight: 'QR29',  from: 'DOH', to: 'EDI', dep: '2027-01-01 07:55', arr: '2027-01-01 12:35' },
           ]
         },
       ]
     },
 
     /* ─────────────────────────────────────────────────────
-       ROUTE 8: Tokyo (HND/NRT) → London Heathrow (LHR) [Plan B]
-       Thursday, 31 December 2026
-       Source: tokyo_to_lhr_20261231.csv
-       Verified live on Kayak 14 Oct 2026
+       ROUTE 8: Tokyo (HND) → London Heathrow (LHR) [Plan B]
+       Friday, 01 January 2027 (New Year's Day)
+       Source: tokyo_to_lhr_20270101.csv
     ───────────────────────────────────────────────────── */
     {
       id: 'tokyo-to-lhr',
       plans: ['plan-b'],
       label: { en: 'Tokyo → London Heathrow', zh: '東京 → 倫敦希斯路' },
-      date:  { en: 'Thu 31 Dec 2026', zh: '2026年12月31日' },
-      depart: '2026-12-31',
+      date:  { en: 'Fri 01 Jan 2027', zh: '2027年1月1日' },
+      depart: '2027-01-01',
       arrive: '2027-01-01',
       options: [
         {
           id: 'tyo-lhr-1',
-          label: { en: 'British Airways (non-stop morning)', zh: '英國航空（直航上午班）' },
+          label: { en: 'British Airways (direct morning)', zh: '英國航空（直航上午班）' },
           airline: 'British Airways',
           hub: null,
           legs: [
-            { airline: 'British Airways', flight: 'BA8', from: 'HND', to: 'LHR', dep: '2026-12-31 09:35', arr: '2026-12-31 15:35' },
+            { airline: 'British Airways', flight: 'BA8', from: 'HND', to: 'LHR', dep: '2027-01-01 09:35', arr: '2027-01-01 15:35' },
           ]
         },
         {
           id: 'tyo-lhr-2',
-          label: { en: 'British Airways (non-stop afternoon)', zh: '英國航空（直航下午班）' },
+          label: { en: 'British Airways (direct afternoon)', zh: '英國航空（直航下午班）' },
           airline: 'British Airways',
           hub: null,
           legs: [
-            { airline: 'British Airways', flight: 'BA6', from: 'HND', to: 'LHR', dep: '2026-12-31 13:15', arr: '2026-12-31 19:20' },
+            { airline: 'British Airways', flight: 'BA6', from: 'HND', to: 'LHR', dep: '2027-01-01 13:15', arr: '2027-01-01 19:20' },
           ]
         },
         {
           id: 'tyo-lhr-3',
-          label: { en: 'Finnair via Helsinki (from Narita)', zh: '芬蘭航空轉赫爾辛基（成田出發）' },
-          airline: 'Finnair',
-          hub: 'HEL',
+          label: { en: 'All Nippon Airways (direct morning)', zh: '全日空（直航上午班）' },
+          airline: 'All Nippon Airways',
+          hub: null,
           legs: [
-            { airline: 'Finnair', flight: 'AY74',   from: 'NRT', to: 'HEL', dep: '2026-12-31 23:10', arr: '2027-01-01 05:00' },
-            { airline: 'Finnair', flight: 'AY1331', from: 'HEL', to: 'LHR', dep: '2027-01-01 07:50', arr: '2027-01-01 09:10' },
+            { airline: 'All Nippon Airways', flight: 'NH211', from: 'HND', to: 'LHR', dep: '2027-01-01 10:05', arr: '2027-01-01 15:45' },
           ]
         },
         {
           id: 'tyo-lhr-4',
-          label: { en: 'Finnair via Helsinki (from Haneda)', zh: '芬蘭航空轉赫爾辛基（羽田出發）' },
-          airline: 'Finnair',
-          hub: 'HEL',
+          label: { en: 'Japan Airlines (direct morning)', zh: '日本航空（直航上午班）' },
+          airline: 'Japan Airlines',
+          hub: null,
           legs: [
-            { airline: 'Finnair', flight: 'AY62',   from: 'HND', to: 'HEL', dep: '2026-12-31 21:55', arr: '2027-01-01 04:00' },
-            { airline: 'Finnair', flight: 'AY1331', from: 'HEL', to: 'LHR', dep: '2027-01-01 07:50', arr: '2027-01-01 09:10' },
+            { airline: 'Japan Airlines', flight: 'JL43', from: 'HND', to: 'LHR', dep: '2027-01-01 09:50', arr: '2027-01-01 15:15' },
+          ]
+        },
+        {
+          id: 'tyo-lhr-5',
+          label: { en: 'Japan Airlines (direct overnight)', zh: '日本航空（直航紅眼班）' },
+          airline: 'Japan Airlines',
+          hub: null,
+          legs: [
+            { airline: 'Japan Airlines', flight: 'JL41', from: 'HND', to: 'LHR', dep: '2027-01-01 01:00', arr: '2027-01-01 06:25' },
           ]
         },
       ]
@@ -515,61 +717,60 @@ window.FLIGHTS_DATA = {
 
     /* ─────────────────────────────────────────────────────
        ROUTE 9: Tokyo (HND) → Hong Kong (HKG) [Plan B]
-       Departing Thursday, 31 December 2026
-       Source: tokyo_to_hkg_20261231.csv
-       Verified live on Kayak 14 Oct 2026
+       Friday, 01 January 2027 (New Year's Day)
+       Source: tokyo_to_hkg_20270101.csv
     ───────────────────────────────────────────────────── */
     {
       id: 'tokyo-to-hkg',
       plans: ['plan-b'],
       label: { en: 'Tokyo → Hong Kong', zh: '東京 → 香港' },
-      date:  { en: 'Thu 31 Dec 2026 (depart)', zh: '2026年12月31日（出發）' },
-      depart: '2026-12-31',
-      arrive: '2026-12-31',
+      date:  { en: 'Fri 01 Jan 2027 (depart)', zh: '2027年1月1日（出發）' },
+      depart: '2027-01-01',
+      arrive: '2027-01-01',
       options: [
         {
           id: 'tyo-hkg-1',
-          label: { en: 'All Nippon Airways (midnight departure)', zh: '全日空（深夜羽田班）' },
-          airline: 'All Nippon Airways',
+          label: { en: 'Cathay Pacific (morning departure)', zh: '國泰航空（上午班）' },
+          airline: 'Cathay Pacific',
           hub: null,
           legs: [
-            { airline: 'All Nippon Airways', flight: 'NH 813', from: 'HND', to: 'HKG', dep: '2026-12-31 01:45', arr: '2026-12-31 05:45' },
+            { airline: 'Cathay Pacific', flight: 'CX543', from: 'HND', to: 'HKG', dep: '2027-01-01 10:10', arr: '2027-01-01 14:25' },
           ]
         },
         {
           id: 'tyo-hkg-2',
-          label: { en: 'All Nippon Airways (morning departure)', zh: '全日空（上午羽田班）' },
-          airline: 'All Nippon Airways',
+          label: { en: 'Cathay Pacific (afternoon departure)', zh: '國泰航空（下午班）' },
+          airline: 'Cathay Pacific',
           hub: null,
           legs: [
-            { airline: 'All Nippon Airways', flight: 'NH 859', from: 'HND', to: 'HKG', dep: '2026-12-31 08:50', arr: '2026-12-31 12:55' },
+            { airline: 'Cathay Pacific', flight: 'CX549', from: 'HND', to: 'HKG', dep: '2027-01-01 16:00', arr: '2027-01-01 20:15' },
           ]
         },
         {
           id: 'tyo-hkg-3',
-          label: { en: 'HK Express (morning departure)', zh: '香港快運（上午羽田班）' },
-          airline: 'Hong Kong Express',
+          label: { en: 'Japan Airlines (morning departure)', zh: '日本航空（上午班）' },
+          airline: 'Japan Airlines',
           hub: null,
           legs: [
-            { airline: 'Hong Kong Express', flight: 'UO 625', from: 'HND', to: 'HKG', dep: '2026-12-31 06:35', arr: '2026-12-31 10:50' },
+            { airline: 'Japan Airlines', flight: 'JL29', from: 'HND', to: 'HKG', dep: '2027-01-01 09:35', arr: '2027-01-01 13:50' },
           ]
         },
         {
           id: 'tyo-hkg-4',
-          label: { en: 'Japan Airlines (morning departure)', zh: '日本航空（上午羽田班）' },
-          airline: 'Japan Airlines',
+          label: { en: 'All Nippon Airways (morning departure)', zh: '全日空（上午班）' },
+          airline: 'All Nippon Airways',
           hub: null,
           legs: [
-            { airline: 'Japan Airlines', flight: 'JL 29', from: 'HND', to: 'HKG', dep: '2026-12-31 09:35', arr: '2026-12-31 13:50' },
+            { airline: 'All Nippon Airways', flight: 'NH859', from: 'HND', to: 'HKG', dep: '2027-01-01 08:50', arr: '2027-01-01 12:55' },
           ]
         },
         {
           id: 'tyo-hkg-5',
-          label: { en: 'Cathay Pacific (afternoon departure)', zh: '國泰航空（下午羽田班）' },
-          airline: 'Cathay Pacific',
+          label: { en: 'HK Express (early morning)', zh: '香港快運（清晨班）' },
+          airline: 'Hong Kong Express',
           hub: null,
           legs: [
-            { airline: 'Cathay Pacific', flight: 'CX 549', from: 'HND', to: 'HKG', dep: '2026-12-31 16:00', arr: '2026-12-31 20:15' },
+            { airline: 'Hong Kong Express', flight: 'UO625', from: 'HND', to: 'HKG', dep: '2027-01-01 06:35', arr: '2027-01-01 10:50' },
           ]
         },
       ]

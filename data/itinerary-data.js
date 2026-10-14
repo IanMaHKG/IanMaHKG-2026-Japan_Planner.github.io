@@ -13,6 +13,7 @@
  *     region:    string  — Filter category: "tokyo" | "fuji" | "kansai".
  *                          Must match a .day-tab[data-region] value in index.html.
  *     title:     { en, zh }   — Full day title shown in the accordion header.
+ *     weather?:  Weather      — Seasonal forecast chip { icon, high, low, condition: { en, zh } }
  *     tags:      Tag[]        — Chip badges shown in the header. See Tag types below.
  *     blocks:    Block[]      — Time slots (morning / afternoon / evening).
  *     tip?:      { en, zh }   — Optional pro-tip shown at the bottom of the day body.
@@ -53,6 +54,15 @@ const ITINERARY_DATA_A = [
     dayNum: "01",
     date: "Dec 20",
     region: "tokyo",
+    weather: {
+      "icon": "☀️",
+      "high": "12°C",
+      "low": "4°C",
+      "condition": {
+        "en": "Sunny & Crisp",
+        "zh": "晴朗乾燥"
+      }
+    },
     title: {
       en: "Arrival in Tokyo (東京) — Asakusa (淺草) & Skytree (晴空塔)",
       zh: "抵達東京 — 淺草寺參拜與登晴空塔賞夜景"
@@ -140,6 +150,15 @@ const ITINERARY_DATA_A = [
     dayNum: "02",
     date: "Dec 21",
     region: "tokyo",
+    weather: {
+      "icon": "🌤️",
+      "high": "11°C",
+      "low": "3°C",
+      "condition": {
+        "en": "Mostly Sunny",
+        "zh": "晴時多雲"
+      }
+    },
     title: {
       en: "Tokyo Highlights — Shibuya (澀谷), Harajuku (原宿) & Illuminations (冬季燈飾)",
       zh: "東京潮流與自然 — 明治神宮、澀谷 Sky 展望台與浪漫青之洞窟"
@@ -228,6 +247,15 @@ const ITINERARY_DATA_A = [
     dayNum: "03",
     date: "Dec 22",
     region: "tokyo",
+    weather: {
+      "icon": "☀️",
+      "high": "13°C",
+      "low": "4°C",
+      "condition": {
+        "en": "Clear & Crisp",
+        "zh": "天晴清爽"
+      }
+    },
     title: {
       en: "Tsukiji Market (築地), teamLab & Tokyo Tower (東京鐵塔)",
       zh: "東京海鮮與藝術 — 築地場外市場美食、teamLab 與東京鐵塔"
@@ -315,6 +343,15 @@ const ITINERARY_DATA_A = [
     dayNum: "04",
     date: "Dec 23",
     region: "tokyo",
+    weather: {
+      "icon": "⛅",
+      "high": "12°C",
+      "low": "3°C",
+      "condition": {
+        "en": "Partly Cloudy",
+        "zh": "多雲時晴"
+      }
+    },
     title: {
       en: "Imperial Palace (皇居), Akihabara (秋葉原) & Marunouchi Lights (丸之內燈飾)",
       zh: "皇室庭園與動漫天堂 — 皇居東御苑、秋葉原電器街與丸之內金黃燈飾"
@@ -402,6 +439,15 @@ const ITINERARY_DATA_A = [
     dayNum: "05",
     date: "Dec 24",
     region: "fuji",
+    weather: {
+      "icon": "☀️",
+      "high": "7°C",
+      "low": "-2°C",
+      "condition": {
+        "en": "Crisp & Cold",
+        "zh": "晴朗清冽"
+      }
+    },
     title: {
       en: "Drive to Kawaguchiko (河口湖) — Christmas Eve at Mt Fuji (富士山) 🎄",
       zh: "租車自駕至河口湖 — 聖誕平安夜與富士山溫泉旅館 🎄"
@@ -490,6 +536,15 @@ const ITINERARY_DATA_A = [
     dayNum: "06",
     date: "Dec 25",
     region: "fuji",
+    weather: {
+      "icon": "🌤️",
+      "high": "9°C",
+      "low": "1°C",
+      "condition": {
+        "en": "Cool & Clear",
+        "zh": "清涼微風"
+      }
+    },
     title: {
       en: "Kawaguchiko (河口湖) to Hakone (箱根) — Christmas Day 🎄",
       zh: "河口湖自駕前往箱根 — 聖誕節與大涌谷奇觀"
@@ -577,6 +632,15 @@ const ITINERARY_DATA_A = [
     dayNum: "07",
     date: "Dec 26",
     region: "fuji",
+    weather: {
+      "icon": "⛅",
+      "high": "11°C",
+      "low": "3°C",
+      "condition": {
+        "en": "Partly Sunny",
+        "zh": "短暫陽光"
+      }
+    },
     title: {
       en: "Hakone Loop (箱根環遊), Drive to Nagoya (名古屋) & Shinkansen (新幹線) to Kyoto (京都)",
       zh: "蘆之湖海盜船、長途自駕至名古屋與新幹線飛馳京都"
@@ -664,6 +728,15 @@ const ITINERARY_DATA_A = [
     dayNum: "08",
     date: "Dec 27",
     region: "kansai",
+    weather: {
+      "icon": "☀️",
+      "high": "10°C",
+      "low": "2°C",
+      "condition": {
+        "en": "Crisp & Clear",
+        "zh": "清爽晴朗"
+      }
+    },
     title: {
       en: "Kyoto (京都) — Fushimi Inari (伏見稻荷), Kiyomizu-dera (清水寺) & Gion (祇園)",
       zh: "京都經典巡禮 — 伏見稻荷千本鳥居、清水寺懸空舞台與夜遊祇園"
@@ -751,6 +824,15 @@ const ITINERARY_DATA_A = [
     dayNum: "09",
     date: "Dec 28",
     region: "kansai",
+    weather: {
+      "icon": "🌤️",
+      "high": "11°C",
+      "low": "3°C",
+      "condition": {
+        "en": "Mild & Sunny",
+        "zh": "溫和有陽光"
+      }
+    },
     title: {
       en: "Kyoto (京都) — Golden Pavilion (金閣寺), Arashiyama (嵐山) & Tea Ceremony (茶道)",
       zh: "京都自然與禪意 — 閃耀金閣寺、嵐山渡月橋與傳統日式茶道體驗"
@@ -839,6 +921,15 @@ const ITINERARY_DATA_A = [
     dayNum: "10",
     date: "Dec 29",
     region: "kansai",
+    weather: {
+      "icon": "☀️",
+      "high": "12°C",
+      "low": "4°C",
+      "condition": {
+        "en": "Bright & Fine",
+        "zh": "陽光充沛"
+      }
+    },
     title: {
       en: "Day Trip to Nara (奈良) — Deer Park (奈良公園) & Transfer to Osaka (大阪)",
       zh: "古都奈良小鹿同遊 — 奈良公園、東大寺大佛殿與下榻大阪"
@@ -926,6 +1017,15 @@ const ITINERARY_DATA_A = [
     dayNum: "11",
     date: "Dec 30",
     region: "kansai",
+    weather: {
+      "icon": "🌤️",
+      "high": "12°C",
+      "low": "4°C",
+      "condition": {
+        "en": "Clear & Cool",
+        "zh": "天晴乾燥"
+      }
+    },
     title: {
       en: "Osaka (大阪) — Castle (大阪城), Shinsekai (新世界) & Dotonbori (道頓堀)",
       zh: "大阪古今交融 — 宏偉大阪城天守閣、復古新世界與巨蟹懷石料理"
@@ -1013,6 +1113,15 @@ const ITINERARY_DATA_A = [
     dayNum: "12",
     date: "Dec 31",
     region: "kansai",
+    weather: {
+      "icon": "⛅",
+      "high": "11°C",
+      "low": "3°C",
+      "condition": {
+        "en": "Cool & Breezy",
+        "zh": "涼爽微風"
+      }
+    },
     title: {
       en: "Osaka (大阪) — Final Day & New Year's Eve (除夕 / 大晦日) 🎊",
       zh: "大阪除夕跨年夜 — 神木大社參拜、傳統蕎麥麵與深夜敲鐘倒數 🎊"
@@ -1096,16 +1205,25 @@ const ITINERARY_DATA_A = [
 ];
 
 /* ═════════════════════════════════════════════════════════════════════
-   PLAN B: Kanto & Shizuoka Scenic Loop (12 Days · No Kansai)
-   Route: Tokyo → Kawaguchiko → Hakone → Atami → Kamakura → Yokohama → Tokyo
+   PLAN B: Kanto & Shizuoka Scenic Loop (7 Days · Dec 26 – Jan 01)
+   Route: Tokyo → Kawaguchiko → Hakone → Kamakura → Yokohama → Tokyo
    ═════════════════════════════════════════════════════════════════════ */
 const ITINERARY_DATA_B = [
   /* ════ DAY 1 ════ */
   {
     id: "day-1",
     dayNum: "01",
-    date: "Dec 20",
+    date: "Dec 26",
     region: "tokyo",
+    weather: {
+      "icon": "☀️",
+      "high": "12°C",
+      "low": "4°C",
+      "condition": {
+        "en": "Sunny & Crisp",
+        "zh": "晴朗乾燥"
+      }
+    },
     title: {
       en: "Arrival in Tokyo (東京) — Asakusa (淺草) & Skytree (晴空塔)",
       zh: "抵達東京 — 淺草寺參拜與登晴空塔賞夜景"
@@ -1149,12 +1267,13 @@ const ITINERARY_DATA_B = [
             zh: "參訪東京最古老的寺廟。穿過寫有巨型紅燈籠的<strong>雷門</strong>，沿著<strong>仲見世通</strong>傳統商店街漫步，品嚐現烤人形燒，地面平整好走。"
           },
           meal: {
-            icon: "🍜",
-            en: "<strong>Lunch:</strong> <strong>Sometaro (染太郎)</strong> (Asakusa) — A charming, traditional okonomiyaki spot with tabletop griddles.",
-            zh: "<strong>午餐：</strong> <strong>染太郎 (Sometaro)</strong> — 淺草著名的傳統大阪燒名店，充滿昭和懷舊風情。"
+            icon: "🍡",
+            en: "<strong>Street Snack:</strong> Freshly baked Ningyo-yaki (doll cakes with red bean paste) and warm matcha tea along Nakamise-dori.",
+            zh: "<strong>街頭小食：</strong> 仲見世通現烤熱騰騰的人形燒（紅豆餡）配上一杯溫暖的綠茶。"
           },
           locations: [
-            { lat: 35.7148, lng: 139.7967, label: { en: "Senso-ji Temple", zh: "淺草寺" } }
+            { lat: 35.7147, lng: 139.7967, label: { en: "Senso-ji Temple", zh: "淺草寺" } },
+            { lat: 35.7118, lng: 139.7963, label: { en: "Kaminarimon Gate", zh: "雷門" } }
           ]
         }
       },
@@ -1162,27 +1281,28 @@ const ITINERARY_DATA_B = [
         time: { en: "🌆 Evening", zh: "🌆 晚上" },
         activity: {
           title: {
-            en: "Tokyo Skytree (東京晴空塔) & Sumida River Walk",
-            zh: "東京晴空塔觀景台與隅田川夜景"
+            en: "Tokyo Skytree (東京晴空塔) & Solamachi Dinner",
+            zh: "晴空塔俯瞰東京夜景與 Solamachi 晚餐"
           },
           desc: {
-            en: "Ride the high-speed elevator up to the <strong>Tembo Deck (350m)</strong> for a breathtaking 360° panorama of Tokyo's neon sea. Fully barrier-free with elevator access throughout.",
-            zh: "搭乘高速升降機直達 350 米高天望甲板，俯瞰東京浩瀚無垠的璀璨夜景。全程設有無障礙升降機與平地通道。"
+            en: "Ascend to the observation deck (350 m) for sweeping panoramic night views of the Tokyo metropolis. High-speed elevators are completely barrier-free. Browse Tokyo Solamachi at the base for crafts and dining.",
+            zh: "乘搭高速升降機直達 350 米展望台，俯瞰璀璨如銀河的東京無敵夜景。全館無障礙設施完善，基座的晴空街道商場美食眾多。"
           },
           meal: {
             icon: "🍱",
-            en: "<strong>Dinner:</strong> <strong>Kura Sushi (藏壽司 淺草 ROX 店)</strong> — Global flagship conveyer-belt sushi with interactive games, or traditional grilled unagi eel at <strong>Komagata Dozeu</strong>.",
-            zh: "<strong>晚餐：</strong> <strong>藏壽司 (Kura Sushi 淺草 ROX 旗艦店)</strong> — 日本最大迴轉壽司旗艦店，或在隅田川畔享用正宗蒲燒鰻魚飯。"
+            en: "<strong>Dinner:</strong> <strong>Toriton (トリトン)</strong> at Solamachi 6F — Renowned Hokkaido conveyor belt sushi, fresh and senior-friendly with booth seating.",
+            zh: "<strong>晚餐：</strong> 晴空街道 6 樓 <strong>迴轉壽司 根室花丸 / Toriton (トリトン)</strong> — 來自北海道的新鮮刺身壽司，座位寬敞舒適。"
           },
           locations: [
-            { lat: 35.7101, lng: 139.8107, label: { en: "Tokyo Skytree", zh: "東京晴空塔" } }
+            { lat: 35.7100, lng: 139.8107, label: { en: "Tokyo Skytree", zh: "東京晴空塔" } },
+            { lat: 35.7106, lng: 139.8125, label: { en: "Tokyo Solamachi", zh: "晴空街道購物中心" } }
           ]
         }
       }
     ],
     tip: {
-      en: "<strong>💡 Tip:</strong> Book Skytree tickets online in advance to skip ticket queues. Wheelchair and elevator access is available at every level.",
-      zh: "<strong>💡 實用貼士：</strong> 建議提前在網上預訂晴空塔指定時段門票以避開人龍。全館無障礙設施極為完善。"
+      en: "<strong>💡 Tip:</strong> Add a digital Welcome Suica to Apple Wallet before landing for tap-and-go metro transit without waiting at airport ticket machines.",
+      zh: "<strong>💡 實用貼士：</strong> 出發前可在 iPhone 錢包內直接新增數碼 Suica 卡，入境後即可直接拍卡乘車，免除在機場排隊購票的等候時間。"
     }
   },
 
@@ -1190,35 +1310,44 @@ const ITINERARY_DATA_B = [
   {
     id: "day-2",
     dayNum: "02",
-    date: "Dec 21",
+    date: "Dec 27",
     region: "tokyo",
+    weather: {
+      "icon": "🌤️",
+      "high": "11°C",
+      "low": "3°C",
+      "condition": {
+        "en": "Mostly Sunny",
+        "zh": "晴時多雲"
+      }
+    },
     title: {
-      en: "Sumida River (隅田川) & teamLab Planets (豐洲) — Digital Art & Ginza",
-      zh: "隅田川水岸、teamLab Planets 沉浸式光影與銀座漫步"
+      en: "Meiji Jingu (明治神宮) & Omotesando (表參道) — Shibuya Sky Sunset",
+      zh: "明治神宮古木參拜、表參道悠閒漫步與澀谷 SKY 絕美落日"
     },
     tags: [
       { type: "city", text: "🏙️ Tokyo (東京)" },
-      { type: "pace", en: "⚖️ Balanced", zh: "⚖️ 步調適中" }
+      { type: "pace", en: "🧘 Relaxed", zh: "🧘 輕鬆悠閒" }
     ],
     blocks: [
       {
         time: { en: "🌅 Morning", zh: "🌅 早上" },
         activity: {
           title: {
-            en: "Tsukiji Outer Market (築地場外市場) Breakfast",
-            zh: "築地場外市場海鮮朝食"
+            en: "Meiji Jingu Shrine (明治神宮) Peaceful Forest Walk",
+            zh: "明治神宮古林清晨散步與祈福"
           },
           desc: {
-            en: "Stroll through the bustling outer market. Taste sweet Japanese tamagoyaki (rolled omelette), fresh scallop skewers, and fresh winter strawberries.",
-            zh: "漫步築地場外市場，品嚐熱騰騰的現烤玉子燒、牛油煎帶子串以及當季新鮮大草莓。"
+            en: "Tokyo's grandest Shinto shrine, nestled in a 170-acre evergreen forest of 120,000 trees. The gravel approach path is wide, gentle, and peaceful.",
+            zh: "東京最莊嚴的神社，被 170 英畝、12 萬株長青古木環抱。寬闊平緩的碎石林蔭大道空氣清新，洗滌心靈。"
           },
           meal: {
-            icon: "🍣",
-            en: "<strong>Breakfast:</strong> <strong>Tsukiji Donburi Senmon (築地丼物專門)</strong> — Fresh kaisen-don (sashimi rice bowl) topped with salmon, tuna, and sea urchin.",
-            zh: "<strong>早餐：</strong> <strong>築地海鮮丼</strong> — 滿滿厚切三文魚、吞拿魚及海膽的刺身丼，鮮甜肥美。"
+            icon: "🍳",
+            en: "<strong>Breakfast:</strong> Café brunch at <strong>Café Mori no Terrace</strong> near the shrine entrance — fresh pastries and hot hojicha latte.",
+            zh: "<strong>早餐：</strong> 神社入口旁的 <strong>森之露台 (Café Mori no Terrace)</strong> — 享用牛角包與熱焙茶拿鐵。"
           },
           locations: [
-            { lat: 35.6655, lng: 139.7707, label: { en: "Tsukiji Outer Market", zh: "築地場外市場" } }
+            { lat: 35.6764, lng: 139.6993, label: { en: "Meiji Jingu Shrine", zh: "明治神宮" } }
           ]
         }
       },
@@ -1226,20 +1355,21 @@ const ITINERARY_DATA_B = [
         time: { en: "🌤️ Afternoon", zh: "🌤️ 下午" },
         activity: {
           title: {
-            en: "teamLab Planets TOKYO (豐洲) Digital Art",
-            zh: "teamLab Planets TOKYO 豐洲光影美術館"
+            en: "Omotesando Boulevard (表參道) & Architectural Stroll",
+            zh: "表參道林蔭大道與建築美學漫步"
           },
           desc: {
-            en: "Step barefoot into massive digital artworks. Walk through knee-deep digital water with projecting koi fish, and wander through infinite crystal mirror universes. Truly mesmerising and gentle on the feet.",
-            zh: "赤腳步入沉浸式光影美術館。涉水穿過由光影錦鯉游動的水池，走進懸浮花朵與無邊水晶鏡面宇宙。視覺震撼且步調節奏極為舒適。"
+            en: "Tokyo's premier tree-lined avenue, flanked by world-class architecture and designer boutiques. The wide sidewalks and gentle slopes make for an easy walk.",
+            zh: "被譽為東京香榭麗舍大道的表參道，兩旁林蔭夾道，匯聚世界頂尖大師設計的精品旗艦店，人行道寬闊好走。"
           },
           meal: {
             icon: "🍜",
-            en: "<strong>Lunch:</strong> <strong>Vegan Ramen UZU Tokyo</strong> (at teamLab Planets) — Michelin-recognised ramen eaten in a mirrored digital art chamber.",
-            zh: "<strong>午餐：</strong> <strong>Vegan Ramen UZU Tokyo</strong> — 位於館內的光影拉麵，在鏡面光影藝術環繞下品嚐濃郁湯頭。"
+            en: "<strong>Lunch:</strong> <strong>Maisen Tonkatsu (舞泉豬扒 青山本店)</strong> — Legendary melt-in-the-mouth Kurobuta pork cutlet in a converted historic public bathhouse.",
+            zh: "<strong>午餐：</strong> <strong>舞泉豬扒 (Maisen) 青山本店</strong> — 昭和時期錢湯澡堂改建而成的名店，黑豚炸豬扒肉質軟讕，入口即化。"
           },
           locations: [
-            { lat: 35.6491, lng: 139.7898, label: { en: "teamLab Planets", zh: "teamLab Planets" } }
+            { lat: 35.6652, lng: 139.7123, label: { en: "Omotesando Hills", zh: "表參道之丘" } },
+            { lat: 35.6698, lng: 139.7090, label: { en: "Maisen Aoyama", zh: "舞泉豬扒本店" } }
           ]
         }
       },
@@ -1247,27 +1377,28 @@ const ITINERARY_DATA_B = [
         time: { en: "🌆 Evening", zh: "🌆 晚上" },
         activity: {
           title: {
-            en: "Ginza (銀座) Window Shopping & Winter Illuminations",
-            zh: "銀座名店街漫步與冬日香檳金彩燈"
+            en: "Shibuya Sky (澀谷 SKY) Open-Air Rooftop & Scramble Crossing",
+            zh: "澀谷 SKY 360 度露天展望台與澀谷十字路口"
           },
           desc: {
-            en: "Explore Ginza's wide boulevards, Mitsukoshi department store food hall (depachika), and see the elegant street illuminations.",
-            zh: "漫步銀座寬闊林蔭大道，探訪三越百貨頂級地下美食街 (Depachika)，欣賞冬日璀璨的香檳金色街道彩燈。"
+            en: "Ascend 229 m to the 360-degree open-air rooftop observation deck. On clear winter evenings, see Mt Fuji silhouetted against the brilliant crimson sunset, followed by the dazzling Shibuya Scramble Crossing below.",
+            zh: "登上 229 米高的露天停機坪展望台。冬季晴朗傍晚可清晰望見夕陽餘暉中的富士山剪影，隨後俯瞰世界最繁忙的澀谷十字路口萬人穿梭。"
           },
           meal: {
-            icon: "🍱",
-            en: "<strong>Dinner:</strong> <strong>Ginza Kagari (銀座 篝)</strong> — Renowned rich chicken tori-paitan ramen, or traditional sukiyaki hotpot.",
-            zh: "<strong>晚餐：</strong> <strong>銀座 篝 (Ginza Kagari)</strong> — 濃郁滑順的頂級雞白湯拉麵，或在銀座名店享用熱騰騰的壽喜燒。"
+            icon: "🍣",
+            en: "<strong>Dinner:</strong> <strong>Midori Sushi (美登利壽司)</strong> at Shibuya Mark City 4F — Generous portions of pristine sashimi and signature unagi.",
+            zh: "<strong>晚餐：</strong> 澀谷 Mark City 4 樓 <strong>美登利壽司</strong> — 份量十足的高性價比名店，穴子壽司與特上刺身深受歡迎。"
           },
           locations: [
-            { lat: 35.6717, lng: 139.7650, label: { en: "Ginza", zh: "銀座" } }
+            { lat: 35.6585, lng: 139.7022, label: { en: "Shibuya Sky", zh: "澀谷 SKY" } },
+            { lat: 35.6595, lng: 139.7005, label: { en: "Shibuya Crossing", zh: "澀谷十字路口" } }
           ]
         }
       }
     ],
     tip: {
-      en: "<strong>💡 Tip:</strong> teamLab Planets requires walking barefoot in shallow warm water — wear trousers that can be easily rolled up to the knee. Lockers and towels are provided.",
-      zh: "<strong>💡 實用貼士：</strong> teamLab Planets 需要赤腳走進及膝溫水展區，建議穿著方便捲起褲腳的長褲。館方免費提供儲物櫃及毛巾。"
+      en: "<strong>💡 Tip:</strong> Shibuya Sky sunset tickets sell out 4 weeks in advance. Book the 16:20 slot for optimal golden hour transitioning into Tokyo night lights.",
+      zh: "<strong>💡 實用貼士：</strong> 澀谷 SKY 日落門票通常提早 4 週售罄。建議預訂下午 4:20 左右場次，即可同時欣賞金黃夕陽、富士山遠景與璀璨夜景。"
     }
   },
 
@@ -1275,14 +1406,24 @@ const ITINERARY_DATA_B = [
   {
     id: "day-3",
     dayNum: "03",
-    date: "Dec 22",
-    region: "tokyo",
+    date: "Dec 28",
+    region: "fuji",
+    weather: {
+      "icon": "☀️",
+      "high": "7°C",
+      "low": "-2°C",
+      "condition": {
+        "en": "Crisp & Cold",
+        "zh": "晴朗清冽"
+      }
+    },
     title: {
-      en: "Meiji Jingu (明治神宮) & Omotesando (表參道) — Shibuya Sky Sunset",
-      zh: "明治神宮森林步道、表參道悠閒漫步與澀谷展望台夕陽"
+      en: "Mt Fuji & Lake Kawaguchiko (河口湖) — Chureito Pagoda & Onsen Ryokan Stay",
+      zh: "富士山與河口湖 — 新倉山淺間公園忠靈塔、西湖療癒之里與溫泉旅館"
     },
     tags: [
-      { type: "city", text: "🏙️ Tokyo (東京)" },
+      { type: "city", text: "🗻 Mt Fuji (富士五湖)" },
+      { type: "transport", text: "🚗 Self-Drive (自駕)" },
       { type: "pace", en: "🧘 Relaxed", zh: "🧘 輕鬆悠閒" }
     ],
     blocks: [
@@ -1290,20 +1431,21 @@ const ITINERARY_DATA_B = [
         time: { en: "🌅 Morning", zh: "🌅 早上" },
         activity: {
           title: {
-            en: "Meiji Jingu Shrine (明治神宮)",
-            zh: "明治神宮清晨森呼吸"
+            en: "Pick Up Rental Car in Tokyo & Scenic Drive to Lake Kawaguchiko",
+            zh: "東京市區提取自駕租車，沿中央自動車道前往河口湖"
           },
           desc: {
-            en: "A tranquil walk through 170 acres of evergreen sacred forest in the heart of Tokyo. Broad, flat gravel avenues make walking gentle and peaceful.",
-            zh: "清晨漫步於佔地 70 公頃的莊嚴常綠森林，穿過巨型木造鳥居，享受城市核心難得的寧靜祥和。平坦路面適合長輩悠閒漫步。"
+            en: "Pick up your rental car (Nissan Serena e-Power / Toyota Noah, winter tires fitted). Drive west along the Chuo Expressway (~100 km, 1.5–2 hrs) with stunning views of Mt Fuji growing larger on the horizon.",
+            zh: "在市區租車店提取配備雪胎的舒適 7/8 人座休旅車。取車後沿中央自動車道西行（約 100 公里，1.5–2 小時），富士山雄偉雪頂漸次映入眼簾。"
           },
           meal: {
             icon: "🍳",
-            en: "<strong>Breakfast:</strong> <strong>Bills Omotesando</strong> — Famous ricotta hotcakes and scrambled eggs in a stylish sunlit setting.",
-            zh: "<strong>早餐：</strong> <strong>Bills 表參道</strong> — 品嚐被譽為「世界第一早餐」的蜂蜜香蕉熱班戟與滑蛋，環境優雅舒適。"
+            en: "<strong>Breakfast:</strong> Grab hot coffee and egg sandwiches from convenience store or service area (SA).",
+            zh: "<strong>早餐：</strong> 沿途高速公路服務區 (SA) 享用即煮咖啡與現烤麵包。"
           },
           locations: [
-            { lat: 35.6763, lng: 139.6993, label: { en: "Meiji Shrine", zh: "明治神宮" } }
+            { lat: 35.6895, lng: 139.6917, label: { en: "Tokyo Car Depot", zh: "東京租車點" } },
+            { lat: 35.5034, lng: 138.7689, label: { en: "Lake Kawaguchiko", zh: "河口湖" } }
           ]
         }
       },
@@ -1311,20 +1453,21 @@ const ITINERARY_DATA_B = [
         time: { en: "🌤️ Afternoon", zh: "🌤️ 下午" },
         activity: {
           title: {
-            en: "Omotesando Boulevard (表參道) Architecture & Cafés",
-            zh: "表參道林蔭大道與精品建築散策"
+            en: "Chureito Pagoda (新倉山淺間公園) & Lake Saiko Iyashi-no-Sato",
+            zh: "新倉山淺間公園忠靈塔遠眺與西湖療癒之里根場"
           },
           desc: {
-            en: "Known as Tokyo's Champs-Élysées. Wide pavements, designer architectural marvels, and relaxed upscale tea houses.",
-            zh: "有「東京香榭麗舍大道」之稱。寬闊的行人道兩旁種滿櫸樹，世界頂級建築師設計的大樓林立，可悠閒品茶享用甜點。"
+            en: "Take in the iconic view of the 5-story crimson pagoda framed against snow-capped Mt Fuji. Afterwards, drive 15 mins to Lake Saiko's traditional thatched-roof village.",
+            zh: "遠眺五重朱紅忠靈塔與雪白富士山相映的經典明信片絕景。隨後驅車 15 分鐘前往西湖療癒之里根場，漫步於茅葺古民家聚落。"
           },
           meal: {
-            icon: "🍰",
-            en: "<strong>Afternoon Tea:</strong> <strong>Aoyama Flower Market Tea House</strong> — Organic herbal teas and delicate pastries surrounded by fresh greenhouse blooms.",
-            zh: "<strong>下午茶：</strong> <strong>青山花茂花園茶室</strong> — 被綠植鮮花環繞的溫室茶座，享用時令花果茶與精緻法式甜品。"
+            icon: "🍲",
+            en: "<strong>Lunch:</strong> <strong>Hoto Fudo (ほうとう不動)</strong> — Steaming iron pot of flat noodles, kabocha pumpkin, and mountain vegetables in rich miso broth.",
+            zh: "<strong>午餐：</strong> <strong>餺飥不動 (Hoto Fudo)</strong> — 富士山腳下最具特色的鄉土料理，鐵鍋盛載自家手打寬麵與南瓜野菜味噌湯。"
           },
           locations: [
-            { lat: 35.6653, lng: 139.7123, label: { en: "Omotesando", zh: "表參道" } }
+            { lat: 35.5013, lng: 138.8014, label: { en: "Chureito Pagoda", zh: "新倉山淺間公園" } },
+            { lat: 35.4988, lng: 138.6653, label: { en: "Saiko Iyashi-no-Sato", zh: "西湖療癒之里根場" } }
           ]
         }
       },
@@ -1332,27 +1475,27 @@ const ITINERARY_DATA_B = [
         time: { en: "🌆 Evening", zh: "🌆 晚上" },
         activity: {
           title: {
-            en: "Shibuya Crossing (澀谷十字路口) & Shibuya Sky Sunset",
-            zh: "澀谷十字路口與 Shibuya Sky 屋頂落日"
+            en: "Onsen Ryokan Check-in, Private Hot Spring & Kaiseki Feast",
+            zh: "入住河口湖富士山景溫泉旅館、房內露天風呂與會席料理盛宴"
           },
           desc: {
-            en: "Ride the elevator to <strong>Shibuya Sky</strong> rooftop (229m). Watch the setting sun bathe Mt Fuji in amber light, then witness the famous scramble crossing illuminate below.",
-            zh: "搭乘景觀升降機登上 229 米高的 <strong>Shibuya Sky</strong> 露天展望台。夕陽西下時遠眺染上金黃的富士山剪影，俯瞰腳下熙來攘往的十字路口夜景。"
+            en: "Check into your premier lakeside onsen ryokan (e.g. Kozantei Ubuya or Kukuna). Soak in mineral hot springs facing Mt Fuji, followed by a multi-course winter kaiseki banquet.",
+            zh: "入住湖畔頂級溫泉旅館（如湖山亭產屋或秀峰閣湖月）。一邊浸泡私人露天溫泉一邊仰望富士山，晚上享用頂級季節會席料理。"
           },
           meal: {
             icon: "🍱",
-            en: "<strong>Dinner:</strong> <strong>Tonkatsu Maisen Aoyama (邁泉豬排)</strong> — Legendary melt-in-the-mouth Kurobuta pork cutlet in a converted historic bathhouse.",
-            zh: "<strong>晚餐：</strong> <strong>邁泉豬排 (Tonkatsu Maisen 青山本店)</strong> — 由歷史澡堂改建的招牌黑豚炸豬排，肉質酥嫩、入口即化。"
+            en: "<strong>Dinner:</strong> Multi-course Kaiseki dinner featuring Koshu beef, fresh sashimi, seasonal fish, and local Yamanashi wine.",
+            zh: "<strong>晚餐：</strong> 旅館精緻會席料理，品嚐甲州和牛、時令鮮魚刺身與山梨名產清酒。"
           },
           locations: [
-            { lat: 35.6595, lng: 139.7005, label: { en: "Shibuya Sky", zh: "Shibuya Sky" } }
+            { lat: 35.5104, lng: 138.7564, label: { en: "Kawaguchiko Onsen Ryokan", zh: "河口湖溫泉旅館" } }
           ]
         }
       }
     ],
     tip: {
-      en: "<strong>💡 Tip:</strong> Reserve sunset tickets for Shibuya Sky (approx. 16:00–16:30 in late December) 4 weeks in advance, as golden-hour slots sell out quickly.",
-      zh: "<strong>💡 實用貼士：</strong> 12 月底東京日落約在 16:30，建議提前 4 週預訂 16:00–16:30 的 Shibuya Sky 門票，才能同時飽覽日落與夜景。"
+      en: "<strong>💡 Tip:</strong> Mt Fuji visibility is highest in winter mornings. Wake early for the spectacular 'Aka-Fuji' (Red Fuji) at sunrise directly from your room.",
+      zh: "<strong>💡 實用貼士：</strong> 冬季清晨能能見度最高。破曉時分不妨在房間窗前欣賞日出映照下的壯麗「赤富士」絕景。"
     }
   },
 
@@ -1360,208 +1503,45 @@ const ITINERARY_DATA_B = [
   {
     id: "day-4",
     dayNum: "04",
-    date: "Dec 23",
-    region: "tokyo",
-    title: {
-      en: "Imperial Palace East Gardens (皇居東御苑) & Nihombashi — Road Trip Prep",
-      zh: "皇居東御苑散步、日本橋歷史美食街與自駕出發前夕"
-    },
-    tags: [
-      { type: "city", text: "🏙️ Tokyo (東京)" },
-      { type: "pace", en: "🧘 Relaxed", zh: "🧘 輕鬆悠閒" }
-    ],
-    blocks: [
-      {
-        time: { en: "🌅 Morning", zh: "🌅 早上" },
-        activity: {
-          title: {
-            en: "Imperial Palace East Gardens (皇居東御苑)",
-            zh: "皇居東御苑與二重橋"
-          },
-          desc: {
-            en: "Walk through the historic Edo Castle ruins and manicured palace gardens. Flat, wide stone avenues provide easy, barrier-free walking with classic views of Nijubashi Bridge.",
-            zh: "漫步於昔日江戶城遺址與皇居松柏庭園。平坦寬闊的石路極具無障礙便利，亦可前往外苑拍攝著名的地標<strong>二重橋</strong>。"
-          },
-          meal: {
-            icon: "🍳",
-            en: "<strong>Breakfast:</strong> Morning set at a classic <strong>kissaten (喫茶店)</strong> near Tokyo Station — hot coffee with thick toasted milk bread.",
-            zh: "<strong>早餐：</strong> 東京站周邊懷舊<strong>喫茶店</strong> — 香濃熱咖啡搭配厚切牛油多士與水煮蛋。"
-          },
-          locations: [
-            { lat: 35.6852, lng: 139.7528, label: { en: "Imperial Palace Gardens", zh: "皇居東御苑" } }
-          ]
-        }
-      },
-      {
-        time: { en: "🌤️ Afternoon", zh: "🌤️ 下午" },
-        activity: {
-          title: {
-            en: "Historic Nihombashi (日本橋) & Mitsukoshi Depachika",
-            zh: "日本橋歷史商圈與三越百貨地下街"
-          },
-          desc: {
-            en: "Browse Nihombashi Mitsukoshi, Japan's oldest department store. The gourmet basement food hall (depachika) offers seasonal winter pastries and traditional delicacies.",
-            zh: "造訪日本首間百貨公司三越日本橋本店。地下奢華美食街匯聚了全日本頂級和菓子、時令烤物與日式熟食便當。"
-          },
-          meal: {
-            icon: "🍜",
-            en: "<strong>Lunch:</strong> <strong>Kanda Matsuya (神田まつや)</strong> — 140-year-old traditional soba house serving delicate buckwheat noodles with crispy tempura.",
-            zh: "<strong>午餐：</strong> <strong>神田まつや (Kanda Matsuya)</strong> — 百年老牌蕎麥麵館，現炸天婦羅配搭爽滑冰涼沾麵或熱湯蕎麥麵。"
-          },
-          locations: [
-            { lat: 35.6865, lng: 139.7735, label: { en: "Nihombashi Mitsukoshi", zh: "日本橋三越" } }
-          ]
-        }
-      },
-      {
-        time: { en: "🌆 Evening", zh: "🌆 晚上" },
-        activity: {
-          title: {
-            en: "Marunouchi Winter Illuminations & Road Trip Packing",
-            zh: "丸之內林蔭香檳金燈飾與自駕行裝準備"
-          },
-          desc: {
-            en: "Stroll along Marunouchi Naka-dori boulevard lit by hundreds of thousands of champagne gold LEDs. Return to hotel to pack overnight bags for tomorrow's road trip.",
-            zh: "漫步於丸之內仲通，兩側數百棵櫸樹掛滿璀璨香檳金 LED 冬日彩燈。隨後返回酒店整理自駕行李，迎接明日啟程。"
-          },
-          meal: {
-            icon: "🍱",
-            en: "<strong>Dinner:</strong> <strong>Tokyo Shiba Tofuya Ukai (東京芝豆腐屋)</strong> or charcoal yakitori in Marunouchi — exquisite garden dining.",
-            zh: "<strong>晚餐：</strong> <strong>東京芝豆腐屋吉兆 / 鵜飼 (Ukai)</strong> — 位於鐵塔腳下日式庭園中的傳統豆腐與炭火燒烤料理。"
-          },
-          locations: [
-            { lat: 35.6805, lng: 139.7633, label: { en: "Marunouchi Naka-dori", zh: "丸之內仲通" } }
-          ]
-        }
-      }
-    ],
-    tip: {
-      en: "<strong>💡 Tip:</strong> Pack a smaller overnight duffle bag with clothing and toiletries for the onsen ryokan nights. Large 75L suitcases can stay neatly stowed flat in the car boot.",
-      zh: "<strong>💡 實用貼士：</strong> 今晚整理行李時，建議將 2 晚溫泉旅館所需的衣物和隨身用品分裝入隨身軟袋，兩件 75L 大行李箱可直接平放在車尾箱，上下車最為省力。"
-    }
-  },
-
-  /* ════ DAY 5 ════ */
-  {
-    id: "day-5",
-    dayNum: "05",
-    date: "Dec 24",
+    date: "Dec 29",
     region: "fuji",
-    title: {
-      en: "Christmas Eve: Mt Fuji & Lake Kawaguchiko (河口湖) — Onsen Ryokan Stay",
-      zh: "平安夜：自駕啟程前往富士山河口湖 — 湖畔溫泉旅館一泊二食"
-    },
-    tags: [
-      { type: "city", text: "🗻 Lake Kawaguchiko (河口湖)" },
-      { type: "transport", text: "🚗 Self-Drive (自駕)" },
-      { type: "special", text: "🎄 Christmas Eve (平安夜)" }
-    ],
-    blocks: [
-      {
-        time: { en: "🌅 Morning", zh: "🌅 早上" },
-        activity: {
-          title: {
-            en: "Collect Rental Car & Drive Chuo Expressway (中央自動車道)",
-            zh: "領取自駕車輛並經中央高速公路啟程"
-          },
-          desc: {
-            en: "Pick up your AWD Mid-size SUV or Prius E-Four (fitted with studless winter tyres and English GPS) in central Tokyo. Drive west along the Chuo Expressway towards Mt Fuji (~100 km, 2 hrs).",
-            zh: "在東京市中心辦理取車手續（確認配備雪地無釘輪胎及英文 GPS）。沿中央高速公路西行前往富士山河口湖（約 100 公里，2 小時車程）。"
-          },
-          meal: {
-            icon: "☕",
-            en: "<strong>Highway Rest Stop:</strong> <strong>Dangozaka SA (談合坂服務區)</strong> — Grab fresh baked melon pan, steamed pork buns, and hot green tea.",
-            zh: "<strong>休息站美食：</strong> <strong>談合坂 SA</strong> — 品嚐著名的現烤蜜瓜包、熱騰騰的甲州肉包及日本熱綠茶。"
-          },
-          locations: [
-            { lat: 35.6900, lng: 139.7000, label: { en: "Tokyo Car Pickup", zh: "東京租車點" } },
-            { lat: 35.6186, lng: 139.0433, label: { en: "Dangozaka SA", zh: "談合坂服務區" } }
-          ]
-        }
-      },
-      {
-        time: { en: "🌤️ Afternoon", zh: "🌤️ 下午" },
-        activity: {
-          title: {
-            en: "Lake Kawaguchiko North Shore & Oishi Park (大石公園)",
-            zh: "河口湖大石公園與富士山絕景步道"
-          },
-          desc: {
-            en: "Drive along the northern lakeshore to Oishi Park. Enjoy completely unobstructed, postcard-perfect views of snow-capped Mt Fuji reflecting across the calm winter waters.",
-            zh: "驅車前往河口湖北岸的大石公園。漫步於湖畔無障礙步道，欣賞壯麗巍峨的白雪富士山倒映在平靜湖面上的絕景。"
-          },
-          meal: {
-            icon: "🍲",
-            en: "<strong>Lunch:</strong> <strong>Hoto Fudo (ほうとう不動 河口湖北本店)</strong> — Iconic Yamanashi specialty: flat noodles simmered with pumpkin and mountain vegetables in a hot iron pot.",
-            zh: "<strong>午餐：</strong> <strong>餺飥不動 (Hoto Fudo 湖北本店)</strong> — 山梨縣傳奇名物！在鑄鐵鍋中以南瓜和山野蔬菜滾熱慢煮的扁烏冬麵，暖身可口。"
-          },
-          locations: [
-            { lat: 35.5230, lng: 138.7470, label: { en: "Oishi Park", zh: "大石公園" } },
-            { lat: 35.5280, lng: 138.7610, label: { en: "Hoto Fudo", zh: "餺飥不動" } }
-          ]
-        }
-      },
-      {
-        time: { en: "🌆 Evening", zh: "🌆 晚上" },
-        activity: {
-          title: {
-            en: "Check-in to Onsen Ryokan & Christmas Eve Kaiseki Banquet",
-            zh: "入住湖畔溫泉旅館與平安夜會席料理"
-          },
-          desc: {
-            en: "Check in by 16:00. Unwind in your private open-air hot spring bath (rotenburo) overlooking Mt Fuji, followed by a lavish multi-course Christmas Eve kaiseki dinner.",
-            zh: "下午 16:00 前辦妥入住手續。享受眺望富士山的露天風呂溫泉，洗滌身心疲勞，隨後享用精緻豐富的平安夜懷石料理晚餐。"
-          },
-          meal: {
-            icon: "🍱",
-            en: "<strong>Dinner:</strong> <strong>Christmas Eve Kaiseki Banquet</strong> — Multi-course banquet included with your ryokan stay featuring Koshu wagyu beef and seasonal delicacies.",
-            zh: "<strong>晚餐：</strong> <strong>平安夜溫泉會席晚宴</strong> — 旅館一泊二食包含的頂級套餐，品嚐甲州和牛壽喜燒及富士名水豆腐刺身。"
-          },
-          locations: [
-            { lat: 35.5100, lng: 138.7600, label: { en: "Kawaguchiko Ryokan", zh: "河口湖溫泉旅館" } }
-          ]
-        }
+    weather: {
+      "icon": "🌤️",
+      "high": "9°C",
+      "low": "1°C",
+      "condition": {
+        "en": "Cool & Clear",
+        "zh": "清涼微風"
       }
-    ],
-    tip: {
-      en: "<strong>💡 Tip:</strong> Expressways are well-cleared in winter, but mountain road temperatures drop below freezing by late afternoon. Arrive at your ryokan before dark.",
-      zh: "<strong>💡 實用貼士：</strong> 高速公路除雪良好，但山區午後氣溫會降至冰點以下。建議於天黑前（16:30 前）抵達溫泉旅館辦妥入住。"
-    }
-  },
-
-  /* ════ DAY 6 ════ */
-  {
-    id: "day-6",
-    dayNum: "06",
-    date: "Dec 25",
-    region: "fuji",
+    },
     title: {
-      en: "Christmas Day: Lake Kawaguchiko to Hakone (箱根) — Volcanic Valley & Pirate Cruise",
-      zh: "聖誕節：箱根溫泉探索 — 蘆之湖海盜船與大涌谷火山谷地"
+      en: "Lake Kawaguchiko to Hakone (箱根) — Volcanic Valley & Pirate Cruise",
+      zh: "河口湖至箱根溫泉勝地 — 忍野八海清泉、大涌谷地熱黑玉子與蘆之湖海盜船"
     },
     tags: [
       { type: "city", text: "♨️ Hakone (箱根)" },
       { type: "transport", text: "🚗 Self-Drive (自駕)" },
-      { type: "special", text: "🎄 Christmas Day (聖誕節)" }
+      { type: "pace", en: "⚖️ Balanced", zh: "⚖️ 步調適中" }
     ],
     blocks: [
       {
         time: { en: "🌅 Morning", zh: "🌅 早上" },
         activity: {
           title: {
-            en: "Sunrise Over Mt Fuji & Scenic Drive to Hakone via Gotemba",
-            zh: "湖畔富士晨曦與經御殿場前往箱根"
+            en: "Oshino Hakkai (忍野八海) Spring Ponds & Scenic Drive to Hakone",
+            zh: "忍野八海純淨清泉漫步與自駕前往箱根"
           },
           desc: {
-            en: "Wake up to clear morning air and stunning sunrise views of Mt Fuji. Drive south via Gotemba and the Hakone mountain pass (~45 km, 1 hr).",
-            zh: "清晨在房間或露天風呂欣賞晨曦中的富士山。隨後驅車南下，經御殿場前往箱根國立公園（約 45 公里，1 小時車程）。"
+            en: "Stroll around crystal-clear spring ponds fed by filtered snowmelt from Mt Fuji. Then drive across the Otome Pass into Hakone (~45 km, 1 hr) with panoramic vistas of the Hakone caldera.",
+            zh: "清晨漫步於由富士山融雪經數十年地層過濾而成的純淨湧泉池塘。隨後穿過乙女峠前往箱根國家公園（約 45 公里，1 小時）。"
           },
           meal: {
-            icon: "🍱",
-            en: "<strong>Breakfast:</strong> Traditional Japanese ryokan breakfast featuring grilled local fish, steaming miso soup, and seasonal pickled vegetables.",
-            zh: "<strong>早餐：</strong> 溫泉旅館傳統日式朝食 — 烤魚、溫泉玉子及熱騰騰的白米飯與味噌湯。"
+            icon: "🍳",
+            en: "<strong>Breakfast:</strong> Traditional Japanese ryokan breakfast featuring grilled salmon, onsen tamago, and miso soup.",
+            zh: "<strong>早餐：</strong> 溫泉旅館日式朝食，現烤三文魚、溫泉蛋與暖胃豆腐味噌湯。"
           },
           locations: [
+            { lat: 35.4594, lng: 138.8328, label: { en: "Oshino Hakkai", zh: "忍野八海" } },
             { lat: 35.2329, lng: 139.1069, label: { en: "Hakone", zh: "箱根" } }
           ]
         }
@@ -1571,20 +1551,20 @@ const ITINERARY_DATA_B = [
         activity: {
           title: {
             en: "Owakudani Volcanic Valley (大涌谷) & Lake Ashi Pirate Cruise",
-            zh: "大涌谷地熱谷火山黑玉子與蘆之湖海盜船"
+            zh: "大涌谷火山地熱谷、長壽黑玉子與蘆之湖海盜觀光船"
           },
           desc: {
-            en: "Ride the Hakone Ropeway over steaming volcanic vents to Owakudani. Taste famous black eggs (kuro-tamago) boiled in volcanic spring water (said to add 7 years to life). Board the Lake Ashi sightseeing pirate ship.",
-            zh: "搭乘箱根空中纜車飛越地熱蒸氣騰騰的大涌谷，品嚐地熱溫泉煮熟的長壽黑玉子。隨後在桃源台登上海盜觀光船巡遊蘆之湖，全程皆設有無障礙通道。"
+            en: "Ride the barrier-free Hakone Ropeway over steaming volcanic fumaroles. Sample famous Kuro-tamago (black eggs boiled in sulfur springs). Continue to Togendai to board the majestic Lake Ashi Pirate Cruise.",
+            zh: "乘搭無障礙箱根空中纜車俯瞰白煙繚繞的火山口地熱景觀，品嚐相傳延壽 7 年的黑玉子。隨後於桃源台登上海盜觀光船，巡遊秀麗的蘆之湖。"
           },
           meal: {
-            icon: "🥪",
-            en: "<strong>Lunch:</strong> <strong>Bakery & Table Hakone</strong> — Waterfront bakery café at Moto-Hakone with panoramic Lake Ashi views and outdoor foot baths.",
-            zh: "<strong>午餐：</strong> <strong>Bakery & Table 箱根</strong> — 蘆之湖畔著名烘焙餐廳，落地玻璃盡覽湖光山色，下層更設有邊吃麵包邊泡腳的足湯席。"
+            icon: "🥚",
+            en: "<strong>Lunch / Snack:</strong> Kuro-tamago black eggs & hot soba at Owakudani station restaurant overlooking the volcanic caldera.",
+            zh: "<strong>午餐 / 點心：</strong> 大涌谷餐廳享用現煮黑玉子與熱湯蕎麥麵，俯瞰地熱山谷壯麗風光。"
           },
           locations: [
-            { lat: 35.2428, lng: 139.0203, label: { en: "Owakudani", zh: "大涌谷" } },
-            { lat: 35.2045, lng: 139.0305, label: { en: "Lake Ashi", zh: "蘆之湖" } }
+            { lat: 35.2422, lng: 139.0197, label: { en: "Owakudani Valley", zh: "大涌谷" } },
+            { lat: 35.2045, lng: 139.0253, label: { en: "Lake Ashi Cruise", zh: "蘆之湖海盜船" } }
           ]
         }
       },
@@ -1592,130 +1572,52 @@ const ITINERARY_DATA_B = [
         time: { en: "🌆 Evening", zh: "🌆 晚上" },
         activity: {
           title: {
-            en: "Hakone Onsen Ryokan Christmas Dinner & Forest Hot Springs",
-            zh: "箱根頂級溫泉旅館聖誕盛宴與森林礦物風呂"
+            en: "Hakone Onsen Ryokan Check-in & Forest Hot Spring Bath",
+            zh: "入住箱根森林溫泉旅館與私人風呂放鬆"
           },
           desc: {
-            en: "Check into your luxury Hakone hot spring ryokan in Gora or Miyanoshita. Relax in mineral-rich thermal waters and celebrate Christmas night with an artisan kaiseki feast.",
-            zh: "入住箱根強羅或宮之下溫泉旅館。在富含礦物質的天然溫泉中放鬆身心，慶祝聖誕之夜，享用主廚特製的節日懷石料理。"
+            en: "Check into your tranquil hot spring resort in Hakone (e.g. Kowakien Ten-yu or Gora Kadan). Unwind in mineral-rich forested thermal baths.",
+            zh: "入住箱根林蔭環抱的頂級溫泉酒店（如箱根小涌園天悠或強羅花壇），沉浸於天然礦物溫泉中，舒緩旅途疲勞。"
           },
           meal: {
-            icon: "🍱",
-            en: "<strong>Dinner:</strong> <strong>Christmas Night Ryokan Banquet</strong> — Multi-course banquet featuring fresh Sagami Bay sashimi and local mountain delicacies.",
-            zh: "<strong>晚餐：</strong> <strong>聖誕夜溫泉盛宴</strong> — 享用相模灣直送海鮮刺身、特選和牛陶板燒及精緻節慶甜點。"
+            icon: "🍲",
+            en: "<strong>Dinner:</strong> Multi-course Kaiseki dinner or Wagyu sukiyaki prepared by the ryokan's head chef.",
+            zh: "<strong>晚餐：</strong> 旅館主廚精製會席料理或頂級黑毛和牛壽喜燒盛宴。"
           },
           locations: [
-            { lat: 35.2480, lng: 139.0480, label: { en: "Hakone Gora Ryokan", zh: "箱根強羅旅館" } }
+            { lat: 35.2394, lng: 139.0439, label: { en: "Hakone Onsen", zh: "箱根溫泉酒店" } }
           ]
         }
       }
     ],
     tip: {
-      en: "<strong>💡 Tip:</strong> The Hakone Ropeway and Lake Ashi sightseeing cruise are barrier-free with elevator access. Parking lots at Togendai and Owakudani offer step-free access to terminals.",
-      zh: "<strong>💡 實用貼士：</strong> 箱根纜車站與蘆之湖海盜船碼頭均設有無障礙升降機與平路斜道，非常適合長輩同行。"
+      en: "<strong>💡 Tip:</strong> Hakone Ropeway stations and Lake Ashi piers are fully wheelchair and senior accessible with step-free elevators.",
+      zh: "<strong>💡 實用貼士：</strong> 箱根空中纜車站及蘆之湖觀光船碼頭皆設有無障礙升降機與平坦通道，長輩上下車船十分穩健安心。"
     }
   },
 
-  /* ════ DAY 7 ════ */
+  /* ════ DAY 5 ════ */
   {
-    id: "day-7",
-    dayNum: "07",
-    date: "Dec 26",
-    region: "fuji",
-    title: {
-      en: "Boxing Day: Hakone to Atami (熱海) & Coastal Izu — Ocean View Onsen",
-      zh: "節禮日：沿海自駕前往熱海 — 來宮神社千年巨楠與相模灣海景溫泉"
-    },
-    tags: [
-      { type: "city", text: "🌊 Atami & Izu Coast (熱海與伊豆海岸)" },
-      { type: "transport", text: "🚗 Self-Drive (自駕)" },
-      { type: "special", text: "🎁 Boxing Day (節禮日)" }
-    ],
-    blocks: [
-      {
-        time: { en: "🌅 Morning", zh: "🌅 早上" },
-        activity: {
-          title: {
-            en: "Scenic Downhill Drive via Izu Skyline to Atami Bay",
-            zh: "沿伊豆景觀公路順坡下行俯瞰相模灣"
-          },
-          desc: {
-            en: "Leisurely breakfast in Hakone. Drive down the scenic ridge road to Atami on Sagami Bay (~35 km, 50 mins). The coastal climate is noticeably milder with blue ocean vistas.",
-            zh: "在箱根享用悠閒早餐後，驅車沿伊豆天際線下行，直達相模灣畔的熱海（約 35 公里，50 分鐘車程）。沿海氣候溫和舒適，沿途飽覽蔚藍海岸景色。"
-          },
-          meal: {
-            icon: "🍳",
-            en: "<strong>Breakfast:</strong> Ryokan breakfast in Hakone with local onsen eggs and hot tofu broth.",
-            zh: "<strong>早餐：</strong> 箱根旅館日式清晨料理配溫泉玉子與熱湯豆腐。"
-          },
-          locations: [
-            { lat: 35.0963, lng: 139.0716, label: { en: "Atami", zh: "熱海" } }
-          ]
-        }
-      },
-      {
-        time: { en: "🌤️ Afternoon", zh: "🌤️ 下午" },
-        activity: {
-          title: {
-            en: "Kinomiya Shrine (來宮神社) & MOA Museum of Art",
-            zh: "來宮神社 2,000 年大楠神木與 MOA 美術館"
-          },
-          desc: {
-            en: "Visit Kinomiya Shrine to see the sacred 2,000-year-old camphor tree (Okusu). The shrine has dedicated elevator access for seniors. Then visit MOA Museum of Art for its spectacular escalator tunnel and ocean-view tea gardens.",
-            zh: "參拜來宮神社，朝聖樹齡逾 2,000 年的日本第二大巨楠神木。神社貼心設有長輩專用升降機直達神木觀景台。隨後造訪 MOA 美術館，體驗著名的萬花筒光影長廊與俯瞰大海的日式庭園。"
-          },
-          meal: {
-            icon: "🍣",
-            en: "<strong>Lunch:</strong> <strong>Atami Fish Market Diner (熱海市海鮮定食)</strong> — Pristine Pacific sashimi bowl and crispy golden fried horse mackerel (aji fry).",
-            zh: "<strong>午餐：</strong> <strong>熱海海鮮定食</strong> — 品嚐當地漁港直送的鮮甜海鮮丼與酥脆現炸竹筴魚。"
-          },
-          locations: [
-            { lat: 35.1001, lng: 139.0667, label: { en: "Kinomiya Shrine", zh: "來宮神社" } },
-            { lat: 35.1090, lng: 139.0740, label: { en: "MOA Museum of Art", zh: "MOA 美術館" } }
-          ]
-        }
-      },
-      {
-        time: { en: "🌆 Evening", zh: "🌆 晚上" },
-        activity: {
-          title: {
-            en: "Atami Coastal Hot Spring Hotel & Pacific Seafood Feast",
-            zh: "入住熱海海景溫泉酒店與相模灣活海鮮晚宴"
-          },
-          desc: {
-            en: "Check into your coastal onsen hotel overlooking Sagami Bay. Soak in mineral hot spring waters with ocean breezes, and enjoy an authentic Pacific seafood kaiseki dinner.",
-            zh: "入住俯瞰相模灣的頂級海景溫泉酒店。一邊泡湯一邊聆聽海浪聲音，晚上享用包含伊勢龍蝦或鮑魚的豪華海鮮會席晚宴。"
-          },
-          meal: {
-            icon: "🍱",
-            en: "<strong>Dinner:</strong> <strong>Seaside Kaiseki Feast</strong> — Featuring freshly caught local seafood, simmered sea bream, and sashimi boat.",
-            zh: "<strong>晚餐：</strong> <strong>海景會席料理</strong> — 享用熱海漁港特產金目鯛姿煮、豪華刺身盛合及時令鮮魚天婦羅。"
-          },
-          locations: [
-            { lat: 35.0960, lng: 139.0750, label: { en: "Atami Onsen Hotel", zh: "熱海溫泉酒店" } }
-          ]
-        }
-      }
-    ],
-    tip: {
-      en: "<strong>💡 Tip:</strong> Kinomiya Shrine is one of Japan's most barrier-free historical shrines, equipped with elevators and flat wooden walkways for senior visitors.",
-      zh: "<strong>💡 實用貼士：</strong> 來宮神社為日本少數設有無障礙升降機的神社之一，全區設有木棧平道，長輩能無負擔近距離參觀 2,000 年神木。"
-    }
-  },
-
-  /* ════ DAY 8 ════ */
-  {
-    id: "day-8",
-    dayNum: "08",
-    date: "Dec 27",
+    id: "day-5",
+    dayNum: "05",
+    date: "Dec 30",
     region: "coastal",
+    weather: {
+      "icon": "☀️",
+      "high": "12°C",
+      "low": "3°C",
+      "condition": {
+        "en": "Coastal Sunny",
+        "zh": "沿海晴朗"
+      }
+    },
     title: {
-      en: "Atami to Kamakura (鎌倉), Enoshima & Yokohama — Coastal Drive & Great Buddha",
-      zh: "湘南沿海自駕 — 鎌倉大佛平路參觀、江之島海岸線與橫濱港灣"
+      en: "Hakone to Kamakura (鎌倉) & Yokohama — Car Return & Rail to Tokyo Base",
+      zh: "箱根出發至鎌倉大佛、橫濱中華街交還車輛與鐵路返回東京"
     },
     tags: [
       { type: "city", text: "⛩️ Kamakura & Yokohama (鎌倉與橫濱)" },
-      { type: "transport", text: "🚗 Self-Drive (自駕)" },
+      { type: "transport", text: "🚗 Return Car & JR Train (還車及鐵路)" },
       { type: "pace", en: "⚖️ Balanced", zh: "⚖️ 步調適中" }
     ],
     blocks: [
@@ -1723,38 +1625,17 @@ const ITINERARY_DATA_B = [
         time: { en: "🌅 Morning", zh: "🌅 早上" },
         activity: {
           title: {
-            en: "Scenic Coastal Drive along Route 134 past Enoshima (江之島)",
-            zh: "湘南海岸線國道 134 號觀海自駕"
+            en: "Scenic Coastal Drive along Route 134 to Kamakura Kotoku-in (鎌倉大佛)",
+            zh: "沿湘南海岸線國道 134 號前往鎌倉高德院參拜大佛"
           },
           desc: {
-            en: "Drive northeast from Atami along the Seisho Bypass and Route 134 (~60 km, 1.5 hrs). Enjoy glittering ocean views of Sagami Bay with Mt Fuji occasionally visible across the water.",
-            zh: "沿西湘繞道及著名的國道 134 號海岸公路北上（約 60 公里，1.5 小時）。右側是一望無際的蔚藍相模灣，途經著名景點江之島。"
+            en: "Drive east along the Seisho Bypass and coastal Route 134 past Enoshima (~55 km, 1.2 hrs). Visit the iconic 11-metre outdoor bronze Great Buddha at Kotoku-in with its completely flat, step-free gravel courtyard.",
+            zh: "沿西湘繞道及著名的國道 134 號海岸公路前進（約 55 公里，1.2 小時），欣賞蔚藍相模灣。抵達鎌倉高德院參拜莊嚴的國寶青銅大佛，全院地面完全平坦無台階。"
           },
           meal: {
             icon: "🍳",
-            en: "<strong>Breakfast:</strong> Coastal hotel breakfast overlooking Sagami Bay sunrise.",
-            zh: "<strong>早餐：</strong> 酒店海景餐廳享用日西合璧朝食。"
-          },
-          locations: [
-            { lat: 35.3013, lng: 139.4800, label: { en: "Enoshima Coast", zh: "江之島海岸" } }
-          ]
-        }
-      },
-      {
-        time: { en: "🌤️ Afternoon", zh: "🌤️ 下午" },
-        activity: {
-          title: {
-            en: "Kotoku-in Great Buddha (鎌倉大佛) & Hasedera (長谷寺)",
-            zh: "高德院鎌倉大佛與長谷寺"
-          },
-          desc: {
-            en: "Visit the iconic 11-metre bronze outdoor statue of Amida Buddha at Kotoku-in. The courtyard approach is completely flat and wheelchair-accessible. Stroll down charming Hase shopping lanes.",
-            zh: "參拜建於 1252 年的高德院國寶青銅鎌倉大佛。庭園完全平坦，無任何台階即可近距離仰望莊嚴大佛。隨後可逛長谷寺老街。"
-          },
-          meal: {
-            icon: "🍜",
-            en: "<strong>Lunch:</strong> <strong>Kamakura Matsubara-an (鎌倉 松原庵)</strong> — Renowned soba noodles and crisp vegetable tempura in a restored traditional wooden residence.",
-            zh: "<strong>午餐：</strong> <strong>鎌倉 松原庵</strong> — 古色古香的日式木造古民家蕎麥麵館，手打蕎麥麵與現炸時令天婦羅口碑極佳。"
+            en: "<strong>Breakfast:</strong> Hakone ryokan breakfast before hitting the scenic coastal road.",
+            zh: "<strong>早餐：</strong> 溫泉旅館享用豐盛朝食後出發。"
           },
           locations: [
             { lat: 35.3167, lng: 139.5361, label: { en: "Kamakura Great Buddha", zh: "鎌倉大佛" } }
@@ -1762,90 +1643,24 @@ const ITINERARY_DATA_B = [
         }
       },
       {
-        time: { en: "🌆 Evening", zh: "🌆 晚上" },
-        activity: {
-          title: {
-            en: "Drive to Yokohama Minato Mirai (橫濱港未來) & Red Brick Warehouse",
-            zh: "抵達橫濱港未來與紅磚倉庫聖誕市集夜景"
-          },
-          desc: {
-            en: "Drive 30 mins to Yokohama Minato Mirai and check into your bay-view hotel. Take a gentle evening stroll past the illuminated Yokohama Red Brick Warehouse waterfront.",
-            zh: "驅車 30 分鐘抵達橫濱港未來，入住海灣景觀酒店。傍晚散步至著名的紅磚倉庫，欣賞港灣浪漫摩天輪與冬日彩燈。"
-          },
-          meal: {
-            icon: "🥟",
-            en: "<strong>Dinner:</strong> <strong>Yokohama Chinatown (橫濱中華街)</strong> — Enjoy comforting dim sum, soup dumplings (xiao long bao), and Cantonese roast duck.",
-            zh: "<strong>晚餐：</strong> <strong>橫濱中華街著名老店</strong> — 享用暖胃點心、招牌小籠包及正宗粵式燒味料理。"
-          },
-          locations: [
-            { lat: 35.4533, lng: 139.6380, label: { en: "Yokohama Minato Mirai", zh: "橫濱港未來" } },
-            { lat: 35.4428, lng: 139.6450, label: { en: "Yokohama Chinatown", zh: "橫濱中華街" } }
-          ]
-        }
-      }
-    ],
-    tip: {
-      en: "<strong>💡 Tip:</strong> Kotoku-in (Great Buddha) has flat, paved gravel access with zero stairs required, making it one of the easiest cultural sites in Japan for seniors.",
-      zh: "<strong>💡 實用貼士：</strong> 鎌倉高德院大佛庭院地面極為平坦寬闊，完全無須攀爬台階，長輩參觀輕鬆愜意。"
-    }
-  },
-
-  /* ════ DAY 9 ════ */
-  {
-    id: "day-9",
-    dayNum: "09",
-    date: "Dec 28",
-    region: "coastal",
-    title: {
-      en: "Yokohama Exploration & Car Return — Train Return to Tokyo Base",
-      zh: "橫濱紅磚倉庫與中華街、零附加費交還車輛及鐵路返回東京"
-    },
-    tags: [
-      { type: "city", text: "🏙️ Yokohama → Tokyo (橫濱 → 東京)" },
-      { type: "transport", text: "🚗 Return Car & JR Train (還車及鐵路)" }
-    ],
-    blocks: [
-      {
-        time: { en: "🌅 Morning", zh: "🌅 早上" },
-        activity: {
-          title: {
-            en: "Cup Noodles Museum (合味道紀念館) & Yamashita Park",
-            zh: "合味道紀念館與山下公園海濱散步"
-          },
-          desc: {
-            en: "Visit the interactive Cup Noodles Museum to design custom noodle cups with your own ingredients. Then stroll through Yamashita Park looking out at cargo ships across Tokyo Bay.",
-            zh: "參觀合味道紀念館，親手繪製杯麵並挑選專屬湯頭配料。隨後在海傍的山下公園散步，遠眺停泊於東京灣的歷史郵輪。"
-          },
-          meal: {
-            icon: "🍳",
-            en: "<strong>Breakfast:</strong> Waterfront hotel breakfast in Yokohama overlooking the harbour.",
-            zh: "<strong>早餐：</strong> 橫濱酒店海灣景觀餐廳早餐。"
-          },
-          locations: [
-            { lat: 35.4554, lng: 139.6389, label: { en: "Cup Noodles Museum", zh: "合味道紀念館" } },
-            { lat: 35.4450, lng: 139.6500, label: { en: "Yamashita Park", zh: "山下公園" } }
-          ]
-        }
-      },
-      {
         time: { en: "🌤️ Afternoon", zh: "🌤️ 下午" },
         activity: {
           title: {
-            en: "Return Rental Car (Zero Drop-Off Fee!) & JR Train to Tokyo",
-            zh: "歸還自駕車輛（零異地還車費！）並乘 JR 返回東京"
+            en: "Yokohama Chinatown Dim Sum Lunch & Return Car (Zero Drop-Off Fee!)",
+            zh: "橫濱中華街午餐點心盛宴與歸還自駕車輛（零附加費還車！）"
           },
           desc: {
-            en: "Return the car at the Yokohama depot (or Tokyo depot) with <strong>¥0 one-way penalty fee</strong>! Board a comfortable 30-min JR Tokaido Line rapid train straight into central Tokyo and check in for your final 3 nights.",
-            zh: "在橫濱分店（或東京分店）交還車輛，<strong>免收任何異地還車附加費</strong>！隨後攜帶行李乘搭舒適的 JR 東海道線快速列車（30 分鐘直達）返回東京市區酒店，展開最後 3 晚深度遊。"
+            en: "Drive 30 mins to vibrant Yokohama Chinatown for comforting dim sum and xiao long bao. Drop off the rental car at the Yokohama depot with <strong>¥0 one-way drop-off fee</strong>, then board a comfortable 30-min JR Tokaido Line rapid train back to Tokyo.",
+            zh: "驅車 30 分鐘前往橫濱中華街品嚐暖胃點心小籠包。餐後在橫濱分店順利交還自駕車輛，<strong>免收任何異地還車附加費</strong>！隨後乘搭 30 分鐘舒適 JR 直達東京市區酒店。"
           },
           meal: {
-            icon: "🍜",
-            en: "<strong>Lunch:</strong> <strong>Dim Sum Banquet</strong> in Yokohama Chinatown before returning the car.",
-            zh: "<strong>午餐：</strong> 還車前於橫濱中華街享用點心午餐。"
+            icon: "🥟",
+            en: "<strong>Lunch:</strong> <strong>Dim Sum Banquet</strong> in Yokohama Chinatown — Steamed dumplings, roast meats, and soothing hot tea.",
+            zh: "<strong>午餐：</strong> <strong>橫濱中華街老字號名店</strong> — 享用精緻點心、暖胃小籠包與正宗廣東點心。"
           },
           locations: [
-            { lat: 35.4660, lng: 139.6226, label: { en: "Yokohama Station", zh: "橫濱車站" } },
-            { lat: 35.6812, lng: 139.7671, label: { en: "Tokyo Station", zh: "東京車站" } }
+            { lat: 35.4428, lng: 139.6450, label: { en: "Yokohama Chinatown", zh: "橫濱中華街" } },
+            { lat: 35.4660, lng: 139.6226, label: { en: "Yokohama Station Depot", zh: "橫濱還車點" } }
           ]
         }
       },
@@ -1857,38 +1672,48 @@ const ITINERARY_DATA_B = [
             zh: "入住東京市區核心酒店與暖心壽喜燒料理"
           },
           desc: {
-            en: "Check in and unpack at your central Tokyo hotel base. Celebrate the completed road loop with a warming sukiyaki beef hotpot dinner.",
-            zh: "在東京市區酒店安頓好行李。慶祝圓滿順利的富士山與伊豆半島自駕之旅，晚上享用熱氣騰騰的頂級和牛壽喜燒。"
+            en: "Check in and unpack at your central Tokyo hotel base for the final 2 nights. Celebrate completing the scenic road loop with a warming sukiyaki beef hotpot dinner.",
+            zh: "入住東京市中心優質酒店，舒心安頓最後 2 晚行李。以一頓暖心香濃的黑毛和牛壽喜燒火鍋，慶祝自駕景觀環線圓滿完成。"
           },
           meal: {
-            icon: "🍱",
-            en: "<strong>Dinner:</strong> <strong>Ningyocho Imahan (人形町今半)</strong> — Tokyo's premier historic sukiyaki institution featuring melt-in-the-mouth Kuroge Wagyu beef.",
-            zh: "<strong>晚餐：</strong> <strong>人形町今半 (Ningyocho Imahan)</strong> — 創立於明治 28 年的日本壽喜燒第一名店，油花如雪的特選黑毛和牛配特製甘甜醬汁。"
+            icon: "🍲",
+            en: "<strong>Dinner:</strong> <strong>Ningyocho Imahan (人形町今半)</strong> — Tokyo's premier historic Sukiyaki institution, melting Kuroge Wagyu cooked table-side by kimono-clad servers.",
+            zh: "<strong>晚餐：</strong> <strong>人形町今半 (Imahan)</strong> — 東京百年壽喜燒老字號，女將桌邊烹調入口即化之黑毛和牛。"
           },
           locations: [
-            { lat: 35.6858, lng: 139.7820, label: { en: "Ningyocho Imahan", zh: "人形町今半" } }
+            { lat: 35.6812, lng: 139.7671, label: { en: "Central Tokyo Hotel", zh: "東京市區酒店" } }
           ]
         }
       }
     ],
     tip: {
-      en: "<strong>💡 Tip:</strong> Returning the car in Yokohama/Tokyo saves ¥15,000–20,000 in one-way fees. All major JR stations between Yokohama and Tokyo have level elevators for luggage.",
-      zh: "<strong>💡 實用貼士：</strong> 在首都圈歸還車輛可節省高達 ¥15,000–20,000 異地還車手續費。橫濱至東京間之 JR 車站全程設有大型升降機，搬運行李輕鬆順暢。"
+      en: "<strong>💡 Tip:</strong> Dropping off the car in Yokohama avoids central Tokyo's dense stop-and-go city traffic, and the direct JR Tokaido Line gets you to Tokyo Station in just 30 minutes.",
+      zh: "<strong>💡 實用貼士：</strong> 在橫濱還車既能免除異地還車費，又可避開進入東京市中心的繁複塞車路段，搭乘 JR 僅需 30 分鐘直抵東京站。"
     }
   },
 
-  /* ════ DAY 10 ════ */
+  /* ════ DAY 6 ════ */
   {
-    id: "day-10",
-    dayNum: "10",
-    date: "Dec 29",
+    id: "day-6",
+    dayNum: "06",
+    date: "Dec 31",
     region: "tokyo",
+    weather: {
+      "icon": "🌤️",
+      "high": "10°C",
+      "low": "2°C",
+      "condition": {
+        "en": "Clear & Chilly",
+        "zh": "晴朗偏冷"
+      }
+    },
     title: {
-      en: "Tokyo Year-End Atmosphere — Nihombashi Mitsukoshi Depachika & Roppongi Illuminations",
-      zh: "東京歲末氣氛 — 日本橋三越百貨美食街與六本木冬日彩燈"
+      en: "New Year's Eve in Tokyo — Tsukiji Outer Market, Ginza & NYE Hatsumode",
+      zh: "東京除夕大晦日 — 築地場外市場、銀座漫步、跨年蕎麥麵與寺院除夜之鐘"
     },
     tags: [
       { type: "city", text: "🏙️ Tokyo (東京)" },
+      { type: "special", text: "🎆 NYE (除夕大晦日)" },
       { type: "pace", en: "🧘 Relaxed", zh: "🧘 輕鬆悠閒" }
     ],
     blocks: [
@@ -1896,41 +1721,42 @@ const ITINERARY_DATA_B = [
         time: { en: "🌅 Morning", zh: "🌅 早上" },
         activity: {
           title: {
-            en: "Tokyo Station Marunouchi Brick Facade & Front Plaza",
-            zh: "東京車站丸之內紅磚建築與外苑漫步"
+            en: "Tsukiji Outer Market (築地場外市場) Fresh Seafood Breakfast",
+            zh: "築地場外市場晨光漫步與極鮮刺身海鮮早餐"
           },
           desc: {
-            en: "Admire the magnificent 1914 red-brick Tokyo Station building. Stroll the pedestrianized Gyoko-dori avenue in crisp winter sunshine.",
-            zh: "欣賞 1914 年建成的宏偉文藝復興式紅磚東京站舍。在冬日晴空下漫步於開闊平坦的行宮大道，拍攝經典城市風光。"
+            en: "Experience the vibrant year-end culinary atmosphere. Browse hundreds of stalls selling freshly grilled scallops, tamagoyaki (sweet omelette), dried goods, and premium fruit.",
+            zh: "感受除夕大晦日東京最具活力的市場氛圍！穿梭於充滿節慶氣息的熱鬧攤檔，品嚐現烤鮮甜帆立貝、香甜玉子燒及高檔日本時令水果。"
+          },
+          meal: {
+            icon: "🍣",
+            en: "<strong>Breakfast:</strong> <strong>Tsukiji Donburi Senmon (海鮮丼專門店)</strong> — Steaming sushi rice topped with premium uni (sea urchin), salmon roe (ikura), and fatty tuna (otoro).",
+            zh: "<strong>早餐：</strong> <strong>築地海鮮丼專門店</strong> — 鋪滿極上海膽、三文魚籽與肥美大拖羅的豪華海鮮丼。"
+          },
+          locations: [
+            { lat: 35.6654, lng: 139.7707, label: { en: "Tsukiji Outer Market", zh: "築地場外市場" } }
+          ]
+        }
+      },
+      {
+        time: { en: "🌤️ Afternoon", zh: "🌤️ 下午" },
+        activity: {
+          title: {
+            en: "Ginza (銀座) Festive Stroll & Depachika Delicacies",
+            zh: "銀座名店街漫步與百貨地下街新年美饌搜羅"
+          },
+          desc: {
+            en: "Stroll along Tokyo's most elegant avenue. Visit Mitsukoshi or Ginza Six depachika (food basements) to admire elaborate traditional Osechi Ryori (New Year banquet boxes) and luxury confectionery.",
+            zh: "漫步於優雅壯麗的銀座大街，探索三越或 Ginza Six 地下美食街，欣賞日本家庭必備的精美御節料理 (Osechi) 與奢華和菓子包裝。"
           },
           meal: {
             icon: "☕",
-            en: "<strong>Breakfast:</strong> <strong>Sarabeth's Tokyo</strong> (Tokyo Station) — Fluffy French toast and eggs benedict, or traditional morning bakery.",
-            zh: "<strong>早餐：</strong> <strong>Sarabeth's 東京店</strong> — 享用鬆軟的法式吐司與班尼迪克蛋。"
+            en: "<strong>Afternoon Tea:</strong> <strong>Toraya Ginza (虎屋)</strong> — Historic confectionery house serving traditional seasonal wagashi with ceremonial matcha.",
+            zh: "<strong>下午茶：</strong> <strong>銀座 虎屋 (Toraya)</strong> — 享用數百年歷史的精緻季節和菓子與現沏手打抹茶。"
           },
           locations: [
-            { lat: 35.6812, lng: 139.7671, label: { en: "Tokyo Station", zh: "東京車站" } }
-          ]
-        }
-      },
-      {
-        time: { en: "🌤️ Afternoon", zh: "🌤️ 下午" },
-        activity: {
-          title: {
-            en: "Nihombashi Mitsukoshi (日本橋三越) & Takashimaya Holiday Food Halls",
-            zh: "日本橋百貨地下街品嚐歲末節慶點心"
-          },
-          desc: {
-            en: "Explore the legendary basement food halls (depachika) bustling with holiday preparations. Sample seasonal roasted chestnuts, strawberry daifuku, and gourmet tea.",
-            zh: "探訪全東京最負盛名的百貨地下街。欣賞新年傳統年節禮盒 (Osechi)，品嚐即烤栗子、士多啤梨大福及產地直送日式焙茶。"
-          },
-          meal: {
-            icon: "🍱",
-            en: "<strong>Lunch:</strong> <strong>Nodaiwa (野田岩)</strong> (Nihombashi / Ginza) — Historic Michelin-starred grilled eel over steamed rice in lacquered boxes.",
-            zh: "<strong>午餐：</strong> <strong>野田岩 (Nodaiwa)</strong> — 米芝蓮名店，傳承五代的炭火烤野生鰻魚飯，醬汁醇厚焦香。"
-          },
-          locations: [
-            { lat: 35.6865, lng: 139.7735, label: { en: "Nihombashi Mitsukoshi", zh: "日本橋三越" } }
+            { lat: 35.6713, lng: 139.7656, label: { en: "Ginza Mitsukoshi", zh: "銀座三越" } },
+            { lat: 35.6696, lng: 139.7640, label: { en: "Ginza Six", zh: "Ginza Six" } }
           ]
         }
       },
@@ -1938,150 +1764,74 @@ const ITINERARY_DATA_B = [
         time: { en: "🌆 Evening", zh: "🌆 晚上" },
         activity: {
           title: {
-            en: "Roppongi Hills & Tokyo Midtown Winter Illuminations",
-            zh: "六本木之丘與東京 Midtown 夢幻藍白雪景燈飾"
+            en: "Toshikoshi Soba (跨年蕎麥麵) & Joya no Kane (除夜之鐘) Countdown",
+            zh: "除夕跨年蕎麥麵、東京鐵塔夜景與寺院除夜之鐘祈福"
           },
           desc: {
-            en: "Wander Keyakizaka street in Roppongi, adorned with 800,000 sparkling blue and white LEDs framing Tokyo Tower in the distance. Stroll through Tokyo Midtown's outdoor ice rink and light installations.",
-            zh: "漫步於六本木櫸坂通，80 萬顆閃爍的冷白與冰藍色 LED 彩燈將整條林蔭道點綴如夢似幻，遠方橘紅色的東京鐵塔映襯其中，是東京最美冬季風景。"
-          },
-          meal: {
-            icon: "🍲",
-            en: "<strong>Dinner:</strong> <strong>Roppongi Inakaya (田舍家)</strong> — Authentic theatrical Robatayaki (food served across the grill on long wooden paddles).",
-            zh: "<strong>晚餐：</strong> <strong>六本木爐端燒 (Robatayaki)</strong> 或精緻天婦羅定食，師傅用長木槳將現烤海鮮送到席前。"
-          },
-          locations: [
-            { lat: 35.6605, lng: 139.7292, label: { en: "Roppongi Hills", zh: "六本木之丘" } },
-            { lat: 35.6660, lng: 139.7310, label: { en: "Tokyo Midtown", zh: "東京 Midtown" } }
-          ]
-        }
-      }
-    ],
-    tip: {
-      en: "<strong>💡 Tip:</strong> Department store depachikas in Nihombashi are fully wheelchair and senior accessible with wide aisles and spacious elevators.",
-      zh: "<strong>💡 實用貼士：</strong> 日本橋主要百貨公司無障礙設施極為齊備，地下美食街設有多部大型升降機直達，長輩逛街非常輕鬆舒服。"
-    }
-  },
-
-  /* ════ DAY 11 ════ */
-  {
-    id: "day-11",
-    dayNum: "11",
-    date: "Dec 30",
-    region: "tokyo",
-    title: {
-      en: "Traditional Year-End Culture — Ueno Park & Ameyoko Market New Year Bustle",
-      zh: "傳統歲末盛會 — 上野公園悠閒漫步與阿美橫丁年宵市集熱鬧體驗"
-    },
-    tags: [
-      { type: "city", text: "🏙️ Tokyo (東京)" },
-      { type: "pace", en: "⚖️ Balanced", zh: "⚖️ 步調適中" }
-    ],
-    blocks: [
-      {
-        time: { en: "🌅 Morning", zh: "🌅 早上" },
-        activity: {
-          title: {
-            en: "Ueno Park (上野恩賜公園) & Tokyo National Museum Gardens",
-            zh: "上野公園清晨散步與文化殿堂"
-          },
-          desc: {
-            en: "A relaxing stroll through spacious Ueno Park. Visit Shinobazu Pond with its scenic winter reed beds and pagoda views. Level paths ensure gentle walking.",
-            zh: "在寬敞平坦的上野恩賜公園漫步，欣賞不忍池冬日蓮塘風光與五重塔景致，吸收清新空氣。"
-          },
-          meal: {
-            icon: "🍳",
-            en: "<strong>Breakfast:</strong> Park café brunch at <strong>Ueno Seiyoken</strong>, a historic Western restaurant opened in 1872.",
-            zh: "<strong>早餐：</strong> <strong>上野精養軒</strong> — 創立於 1872 年的歷史西餐廳，俯瞰公園林蔭景致享用悠閒早餐。"
-          },
-          locations: [
-            { lat: 35.7140, lng: 139.7740, label: { en: "Ueno Park", zh: "上野公園" } }
-          ]
-        }
-      },
-      {
-        time: { en: "🌤️ Afternoon", zh: "🌤️ 下午" },
-        activity: {
-          title: {
-            en: "Ameyoko Market (アメ橫) Festive Year-End Market",
-            zh: "阿美橫丁體驗日本年宵市場熱鬧氛圍"
-          },
-          desc: {
-            en: "Experience the vibrant buzz of Ameyoko as Tokyo locals stock up on traditional New Year foods (crab, tuna, dried fruit, mochi). The energetic cries of vendors make for an authentic Japanese cultural experience.",
-            zh: "感受一年中最熱鬧的阿美橫丁年宵市集！當地居民紛紛採購新年食材（雪蟹腳、魚子、乾果年糕）。攤販充滿活力的叫賣聲洋溢著濃郁的節慶氣氛。"
+            en: "Join Tokyo locals in the sacred tradition of eating Toshikoshi Soba to bid farewell to hardships and welcome longevity. Visit Zojoji Temple beneath Tokyo Tower to hear the atmospheric resonant 108 bell strikes (Joya no Kane) ringing in 2027.",
+            zh: "融入日本地道傳統，品嚐寓意長壽切斷厄運的「跨年蕎麥麵」。漫步至東京鐵塔旁的增上寺，聆聽迴盪於夜空的 108 響「除夜之鐘」，迎接嶄新的 2027 年。"
           },
           meal: {
             icon: "🍜",
-            en: "<strong>Lunch:</strong> <strong>Kanda Matsuya (神田まつや)</strong> — Hot duck soba (kamo-nanban) or tendon tempura rice bowl.",
-            zh: "<strong>午餐：</strong> <strong>神田鴨南蠻蕎麥麵</strong> — 暖笠笠的熱湯配上鮮美鴨肉與大蔥，暖心又滋味。"
+            en: "<strong>Dinner:</strong> <strong>Kanda Yabu Soba (神田藪蕎麥)</strong> or <strong>Sarashina Horii (更科堀井)</strong> — Traditional New Year's Eve hot buck-wheat soba with crisp prawn tempura.",
+            zh: "<strong>晚餐：</strong> <strong>更科堀井 / 藪蕎麥老店</strong> — 傳統大晦日必吃熱騰騰的海老天婦羅跨年蕎麥麵。"
           },
           locations: [
-            { lat: 35.7100, lng: 139.7745, label: { en: "Ameyoko Market", zh: "阿美橫丁" } }
-          ]
-        }
-      },
-      {
-        time: { en: "🌆 Evening", zh: "🌆 晚上" },
-        activity: {
-          title: {
-            en: "Farewell Celebration Dinner — Premium Wagyu Beef Teppanyaki",
-            zh: "歲末圓滿慶祝盛宴 — 頂級黑毛和牛鐵板燒"
-          },
-          desc: {
-            en: "Celebrate your final evening in Tokyo with an unforgettable culinary feast. Master chefs prepare A5 Kuroge Wagyu, fresh seafood, and garlic rice right before your eyes.",
-            zh: "在東京度過旅程最後一個夜晚，以一頓豐盛頂級的 A5 黑毛和牛鐵板燒犒賞全家，主廚現場煎烤和牛與極品龍蝦，慶祝旅途圓滿。"
-          },
-          meal: {
-            icon: "🍱",
-            en: "<strong>Dinner:</strong> <strong>Teppanyaki Ukai-tei (銀座 うかい亭)</strong> or <strong>Mon Cher Ton Ton (赤坂)</strong> — Premier celebratory teppanyaki.",
-            zh: "<strong>晚餐：</strong> <strong>銀座 Ukai-tei (うかい亭)</strong> — 米芝蓮推薦鐵板燒殿堂，在優雅歐日古董氛圍中品嚐入口即化的極品和牛。"
-          },
-          locations: [
-            { lat: 35.6690, lng: 139.7670, label: { en: "Ginza Ukai-tei", zh: "銀座 Ukai-tei" } }
+            { lat: 35.6575, lng: 139.7483, label: { en: "Zojoji Temple", zh: "增上寺" } },
+            { lat: 35.6586, lng: 139.7454, label: { en: "Tokyo Tower", zh: "東京鐵塔" } }
           ]
         }
       }
     ],
     tip: {
-      en: "<strong>💡 Tip:</strong> Dec 30 is the peak day for New Year shopping. Keep personal belongings secure in the crowds at Ameyoko, or enjoy the atmosphere from the perimeter.",
-      zh: "<strong>💡 實用貼士：</strong> 12 月 30 日阿美橫丁人潮最為鼎盛，可悠閒漫步外圍感受氣氛，並注意保管好隨身隨身物品。"
+      en: "<strong>💡 Tip:</strong> Toshikoshi soba should be eaten before midnight to welcome good luck. Major Tokyo train lines operate special late-night services on New Year's Eve.",
+      zh: "<strong>💡 實用貼士：</strong> 跨年蕎麥麵需於午夜 12 點前吃完，象徵將過去一年的辛勞斬斷迎接新年。除夕夜東京主要鐵路亦有深夜通宵行駛安排。"
     }
   },
 
-  /* ════ DAY 12 ════ */
+  /* ════ DAY 7 ════ */
   {
-    id: "day-12",
-    dayNum: "12",
-    date: "Dec 31",
+    id: "day-7",
+    dayNum: "07",
+    date: "Jan 01",
     region: "tokyo",
+    weather: {
+      "icon": "☀️",
+      "high": "11°C",
+      "low": "3°C",
+      "condition": {
+        "en": "Crisp New Year Sun",
+        "zh": "初日晴空"
+      }
+    },
     title: {
-      en: "New Year's Eve: Tokyo Departure — Direct Transit to Haneda / Narita",
-      zh: "除夕跨年日：東京告別出發 — 直達羽田/成田機場乘機返程"
+      en: "New Year's Day (元日): Tokyo Departure — Direct Transit to Haneda / Narita",
+      zh: "元旦新年出發日：東京告別 — 皇居悠閒漫步與直達羽田/成田機場返程"
     },
     tags: [
       { type: "city", text: "✈️ Tokyo → Airport (東京 → 機場)" },
       { type: "transport", text: "✈️ Flight (航班)" },
-      { type: "special", text: "🎆 NYE (除夕大晦日)" }
+      { type: "special", text: "🎍 New Year (元旦新年)" }
     ],
     blocks: [
       {
         time: { en: "🌅 Morning", zh: "🌅 早上" },
         activity: {
           title: {
-            en: "Leisurely Hotel Breakfast & Final Packing",
-            zh: "悠閒早餐、整理行李與最後採購"
+            en: "New Year Morning Stroll at Imperial Palace East Gardens (皇居東御苑)",
+            zh: "元旦清晨皇居東御苑悠閒散步與感受新年祥和氛圍"
           },
           desc: {
-            en: "Enjoy a relaxed breakfast, pack suitcases, and pick up last-minute tax-free souvenirs and Japanese confections near the hotel.",
-            zh: "享用酒店豐盛早餐，從容收拾 6 件行李，在酒店附近選購最後的免稅伴手禮與精緻和菓子。"
+            en: "Start the first morning of 2027 with a peaceful walk along the expansive moats and manicured pine gardens of the Imperial Palace. Wide, flat paths offer serene walking.",
+            zh: "在 2027 年的第一個清晨，漫步於皇居護城河畔與平坦的古松庭園，感受日本元旦特有的祥和肅穆新年氣息。"
           },
           meal: {
             icon: "🍳",
-            en: "<strong>Breakfast:</strong> Hotel buffet with both Western and Japanese morning dishes.",
-            zh: "<strong>早餐：</strong> 酒店自助早餐，享用熱咖啡與日式精緻小菜。"
+            en: "<strong>Breakfast:</strong> Festive hotel breakfast buffet featuring traditional Ozoni (New Year mochi soup).",
+            zh: "<strong>早餐：</strong> 酒店元旦特色早餐，品嚐象徵吉祥的日式年糕雜煮 (Ozoni)。"
           },
           locations: [
-            { lat: 35.6812, lng: 139.7671, label: { en: "Central Tokyo Hotel", zh: "東京酒店" } }
+            { lat: 35.6852, lng: 139.7528, label: { en: "Imperial Palace East Gardens", zh: "皇居東御苑" } }
           ]
         }
       },
@@ -2115,12 +1865,12 @@ const ITINERARY_DATA_B = [
             zh: "啟程返航 — 滿載美好回憶告別日本！✈️"
           },
           desc: {
-            en: "Clear tax-free customs using your Visit Japan Web / passport, complete boarding, and take off. Reflect on 12 unforgettable winter days across Tokyo, Mt Fuji, and the scenic coast!",
-            zh: "順利辦理登機與免稅品出境手續。在萬家燈火的璀璨夜色中起飛，回味 12 天東京、富士山、溫泉與海岸的難忘冬日回憶！よい旅を！"
+            en: "Clear tax-free customs using your Visit Japan Web / passport, complete boarding, and take off. Reflect on 7 unforgettable winter days across Tokyo, Mt Fuji, and the scenic coast!",
+            zh: "順利辦理登機與免稅品出境手續。在萬家燈火的璀璨夜色中起飛，回味 7 天東京、富士山、溫泉與海岸的難忘冬日回憶！よい旅を！"
           },
           meal: {
             icon: "✈️",
-            en: "<strong>Flight Dinner:</strong> In-flight service on British Airways / Cathay Pacific.",
+            en: "<strong>Flight Dinner:</strong> In-flight service on British Airways / Cathay Pacific / ANA / JAL.",
             zh: "<strong>晚餐：</strong> 航班機上精緻餐飲服務。"
           },
           locations: [
@@ -2131,7 +1881,7 @@ const ITINERARY_DATA_B = [
     ],
     tip: {
       en: "<strong>💡 Tip:</strong> Plan B enables round-trip flights in and out of Tokyo (HND/NRT), avoiding multi-city transit through Osaka and allowing direct flights back to the UK.",
-      zh: "<strong>💡 實用貼士：</strong> 方案 B 實現東京 (HND/NRT) 原地往返，無需拖著行李橫跨關西，更可享受英國航空直飛往返倫敦或轉機愛丁堡。"
+      zh: "<strong>💡 實用貼士：</strong> 方案 B 實現東京 (HND/NRT) 原地往返，無需拖著行李橫跨關西，更可享受直飛往返倫敦、香港或轉機愛丁堡。"
     }
   }
 ];

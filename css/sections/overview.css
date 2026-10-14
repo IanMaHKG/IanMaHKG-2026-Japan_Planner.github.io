@@ -69,7 +69,6 @@
   box-shadow: 0 4px 20px rgba(1, 41, 92, 0.07);
   padding: 24px 28px 26px;
   overflow-x: auto;
-  scrollbar-width: thin;
 }
 
 .route-visual.jr-board-container::-webkit-scrollbar {

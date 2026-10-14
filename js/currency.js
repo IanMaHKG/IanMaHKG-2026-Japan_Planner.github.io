@@ -73,6 +73,11 @@ function updateConvertedBudgets() {
   const symbol = activeCurr === 'gbp' ? '£' : '$';
   const isGbp = activeCurr === 'gbp';
 
+  // Rates are JPY→X, so X:JPY is the inverse.
+  document.querySelectorAll('.live-rate-pair').forEach(el => {
+    el.textContent = `1 ${activeCurr.toUpperCase()} = ${(1 / rate).toFixed(2)} JPY`;
+  });
+
   document.querySelectorAll('.converted-val').forEach(el => {
     const minJpy = parseFloat(el.getAttribute('data-min'));
     const maxJpy = parseFloat(el.getAttribute('data-max'));

@@ -22,7 +22,7 @@ Before making **any** code change, data edit, or documentation update, the agent
 - [ ] **No orphan grid rows** — No card grid may end with a single item alone on the last row (2+1, 4+1, 5+1 layouts are forbidden). Use the explicit grid rules in the *Column / Grid Layout Rule* section below.
 - [ ] **Data-driven pattern** — Displayed text lives in `data/site-data.js` or `data/itinerary-data.js`, never hard-coded into `index.html` or `js/render.js` unless it is a structural shell label.
 - [ ] **Documentation updated** — If architecture, file structure, features, or design tokens changed, `README.md` and this `AGENTS.md` have been updated to match **before** the response is finalised.
-- [ ] **Flight Selection & Long-Haul Airline Preference** — If editing or adding flight routes: (1) All legs must be live-verified via Google Flights, or Kayak (`kayak.co.uk`) when Google Flights is unavailable, by opening each result's details panel; (2) Only flights **operated by the selling airline itself** — exclude codeshares/wet-leases (e.g. JAL-operated flights sold as BA, Finnair-operated flights sold as BA); record the **operating carrier's flight number**; (3) Long-haul (intercontinental) legs MUST strictly adhere to the priority hierarchy: 1st: BA / Iberia (oneworld), 2nd: Finnair (oneworld), 3rd: Lufthansa / SWISS / Austrian (Star Alliance), 4th: Etihad Airways; (4) Options ordered by total journey time (shortest first); (5) CSV created first in `data-src/flights/` before updating `flights-data.js`; (6) Both depart and arrive dates recorded; (7) Max 5 best options per route.
+- [ ] **Flight Selection & Long-Haul Airline Preference** — If editing or adding flight routes: (1) All legs must be live-fetched with `python scripts/fetch-flights.py <FROM> <TO> <yyyy-mm-dd>` (Google Flights, no browser); if it fails, fall back to Google Flights, or Kayak (`kayak.co.uk`), in the browser by opening each result's details panel; (2) Only flights **operated by the selling airline itself** — exclude codeshares/wet-leases (e.g. JAL-operated flights sold as BA, Finnair-operated flights sold as BA); record the **operating carrier's flight number**; (3) Long-haul (intercontinental) legs MUST strictly adhere to the priority hierarchy: 1st: BA / Iberia (oneworld), 2nd: Finnair (oneworld), 3rd: Lufthansa / SWISS / Austrian (Star Alliance), 4th: Etihad Airways; (4) Options ordered by total journey time (shortest first); (5) CSV created first in `data-src/flights/` before updating `flights-data.js`; (6) Both depart and arrive dates recorded; (7) Max 5 best options per route.
 - [ ] **Privacy / PII** — No personal names, specific family member labels, or home city details exposed in any user-visible text.
 
 > **Tip for the agent:** If any box cannot be ticked, fix the issue before proceeding. Do not respond with a partially compliant change.
@@ -290,11 +290,10 @@ Every airport used in a leg must exist in the top-level `FLIGHTS_DATA.tz` table 
 
 When asked to add a new route, an agent **MUST** follow these steps in order:
 
-1. **Verify live on Google Flights, or Kayak if Google Flights is blocked** using the browser subagent.
-   - Google Flights: `https://www.google.com/travel/flights`. Kayak: `https://www.kayak.co.uk/flights/<ORIGIN>-<DEST>/<yyyy-mm-dd>?sort=duration_a`.
-   - Search for the exact departure and arrival airports and date.
-   - Expand each candidate and read the details panel (flight number, "Operated by" line, airports, local times). Keep only flights **operated by the selling airline itself**; skip codeshares and record the operating carrier's flight number.
-   - Never bypass a CAPTCHA, bot check or "denied" block; fall back to the other source or ask the user.
+1. **Fetch live with the script first** (zero LLM/browser cost): `pip install -r scripts/requirements.txt`, then `python scripts/fetch-flights.py <FROM> <TO> <yyyy-mm-dd>` once per airport pair (e.g. HND and NRT separately). It prints CSV rows in the schema below and records the **operating carrier's** flight number.
+   - The script sends a `SOCS` cookie that only pre-accepts Google's EU/UK consent banner. It reads Google's unofficial page data, so it can break; it then fails with an assert.
+   - **Browser fallback** (script fails, or a result needs checking): Google Flights `https://www.google.com/travel/flights`, or Kayak `https://www.kayak.co.uk/flights/<ORIGIN>-<DEST>/<yyyy-mm-dd>?sort=duration_a`. Expand each candidate and read the details panel (flight number, "Operated by" line, airports, local times). Keep only flights **operated by the selling airline itself**; skip codeshares.
+   - **General browser rule:** whenever a browser is used for anything, never bypass a CAPTCHA, bot check or "denied" block; fall back to another source or ask the user.
    - **Do not save any flight data that has not been verified live.**
 
 2. **Create the CSV file** at `data-src/flights/<route_key>_<date>.csv`.
@@ -355,7 +354,7 @@ Within each route, order options **by total journey time, shortest first** (calc
 - When you add/remove a CSS, JS, data or image file that `index.html` loads, add/remove it in `STATIC_ASSETS` in `sw.js` too.
 - **CSS cascade:** stylesheets in `css/sections/*.css` are linked individually in `index.html`; the link order equals the old single-file order (`dark-overrides`, `flights` come late on purpose) and `responsive.css` must stay last. Do not reorder them.
 - **JS load order:** `data/*` -> `currency.js` -> `map.js` -> `js/features/*.js` -> `render.js` -> `ui.js` -> `script.js`. New section renderers go in `js/features/` and must be exported in `render.js` and listed in `index.html` and `sw.js`.
-- Flight CSV sources live in `data-src/flights/` (not deployed). `flights-data.js` is what the site reads.
+- Flight CSV sources live in `data-src/flights/` (not deployed). `flights-data.js` is what the site reads. `scripts/fetch-flights.py` (+ `scripts/requirements.txt`) is the Python flight fetcher; it is not deployed or loaded by the site.
 - **MapLibre** is pinned to an exact version with an SRI `integrity` hash in `index.html` and precached in `sw.js` (offline maps). When bumping it, update both places plus the hash; `validate.mjs` checks all three.
 - `validate.mjs` also checks: budget totals per plan, hotel nights (legs and quick-pills each cover 20–30 Dec exactly once), flight route sanity (every plan shows ≥1 route) and the CSV-superset rule.
 - Before committing run `node scripts/validate.mjs` (also runs in CI and blocks deploys).

@@ -40,7 +40,7 @@
 - ♿ **Accessibility (a11y)** — Full keyboard navigation (`Tab`, `Enter`, `Space`), ARIA expanded states, semantic HTML
 - 📱 **Strict Anti-Orphan Layout** — 4 vehicle cards (4 columns desktop, 2x2 tablet) and 5 hotel cards on Plan A (3+2) / 6 on Plan B (3+3 desktop, 2+2+2 tablet) with zero orphan cards
 - 🚗 **Car Return & Car Rental sections** — one-way drop-off comparison per plan and rental company search shortcuts
-- ✈️ **Flight Options** — plan-aware tabs (routes tagged `plans: ['plan-a']` / `['plan-b']` only show on that plan; untagged routes show on both), up to 5 options per route, rendered from `data/flights/flights-data.js`. Each curated leg is first recorded in a CSV under `data-src/flights/` (CSV-first rule; the CSV may hold more candidates than the 5 curated options, and `scripts/validate.mjs` fails if a curated leg is missing from its CSV)
+- ✈️ **Flight Options** — plan-aware tabs (routes tagged `plans: ['plan-a']` / `['plan-b']` only show on that plan; untagged routes show on both), up to 5 options per route, rendered from `data/flights/flights-data.js`. Each curated leg is first recorded in a CSV under `data-src/flights/` (CSV-first rule; the CSV may hold more candidates than the 5 curated options, and `scripts/validate.mjs` fails if a curated leg is missing from its CSV). Candidates are fetched with `python scripts/fetch-flights.py <FROM> <TO> <yyyy-mm-dd>` (Google Flights via `fast-flights`, no browser; browser is the fallback)
 - ⌨️ **Keyboard & motion friendly** — visible focus rings, skip link, `aria-pressed` switchers, `prefers-reduced-motion` support, back-to-top button
 
 ---
@@ -66,6 +66,7 @@
 │   └── images/             # hero-fuji-winter.webp, og-1200x630.jpg (social preview)
 │
 ├── scripts/validate.mjs    # Dev/CI checks: `node scripts/validate.mjs` (syntax, assets, SW list, data)
+├── scripts/fetch-flights.py    # Live flight fetcher (fast-flights): prints CSV rows for data-src/flights; deps in scripts/requirements.txt
 │
 ├── css/                    # Modular Design System
 │   ├── palette.css         # Central tokens, brand colours, dark mode overrides

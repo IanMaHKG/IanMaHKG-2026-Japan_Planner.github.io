@@ -133,13 +133,9 @@ function toggleDay(header) {
     const mapEl = document.getElementById('day-map-' + dayId);
 
     if (mapEl && typeof window.initDayMap === 'function') {
-      const targetProp = window.matchMedia('(orientation: landscape) and (min-width: 800px)').matches
-        ? 'width' : 'height';
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      const onMapRevealed = (e) => {
-        if (e.propertyName !== targetProp) return;
-        mapEl.removeEventListener('transitionend', onMapRevealed);
-
+      const triggerMapInit = () => {
         if (mapEl.dataset.mapInited) {
           if (mapEl._leafletMap) mapEl._leafletMap.invalidateSize();
           if (mapEl._leafletFitAll) mapEl._leafletFitAll();
@@ -147,7 +143,26 @@ function toggleDay(header) {
           window.initDayMap(dayId);
         }
       };
-      mapEl.addEventListener('transitionend', onMapRevealed);
+
+      if (prefersReducedMotion) {
+        triggerMapInit();
+      } else {
+        const targetProp = window.matchMedia('(orientation: landscape) and (min-width: 800px)').matches
+          ? 'width' : 'height';
+
+        let revealed = false;
+        const onMapRevealed = (e) => {
+          if (e && e.propertyName !== targetProp) return;
+          if (revealed) return;
+          revealed = true;
+          mapEl.removeEventListener('transitionend', onMapRevealed);
+          triggerMapInit();
+        };
+
+        mapEl.addEventListener('transitionend', onMapRevealed);
+        // Safety timeout in case transitionend is dropped or interrupted
+        setTimeout(onMapRevealed, 450);
+      }
     }
 
     setTimeout(() => {

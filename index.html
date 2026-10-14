@@ -17,13 +17,21 @@
     the inactive language. Switching is handled by ui.js.
 
   SCRIPT LOAD ORDER (bottom of <body>, in dependency order):
-    1. site-data.js       → window.SITE_DATA  (all section data)
-    2. itinerary-data.js  → window.ITINERARY_DATA  (12-day schedule)
-    3. render.js          → DOM injection functions
-    4. currency.js        → JPY conversion functions
-    5. ui.js              → language/nav/scroll/filter/hotel functions
-    6. map.js             → MapLibre GL JS overview + per-day mini maps
-    7. script.js          → DOMContentLoaded bootstrap (calls all of the above)
+    1.  site-data.js        → window.SITE_DATA  (all section data)
+    2.  itinerary-data.js   → window.ITINERARY_DATA  (12-day schedule)
+    3.  flights-data.js     → window.FLIGHTS_DATA  (flight routes)
+    4.  currency.js         → JPY conversion functions
+    5.  map.js              → MapLibre GL JS overview + per-day mini maps
+    6.  features/car.js     → Car rental & return renderers
+    7.  features/overview.js→ Overview cards & JR station sign board
+    8.  features/tips-packing.js → Tips & packing checklist
+    9.  features/budget.js  → Budget table renderer
+    10. features/hotels.js  → Hotels & ryokan cards
+    11. features/itinerary.js → Accordion timeline & day mini-map hooks
+    12. features/flights.js → Flight options & sector tables
+    13. render.js           → DOM injection orchestrator & planchange listener
+    14. ui.js               → Navigation, theme/lang switches, scroll observers
+    15. script.js           → DOMContentLoaded bootstrap (calls all of the above)
 
   SECTIONS MAP  (HTML id → JS function that populates it):
     #hero             — Static HTML (particles injected by ui.js initParticles)
@@ -148,8 +156,8 @@
         <div class="plan-hero-toggle">
           <button class="plan-hero-btn active" data-plan="plan-a" id="hero-plan-a-btn" type="button">
             <span class="plan-btn-tag">Plan A</span>
-            <span class="lang-en">Kansai Golden Route (11 Days)</span>
-            <span class="lang-zh">關西名勝經典 (11天)</span>
+            <span class="lang-en">Kansai Golden Route (12 Days)</span>
+            <span class="lang-zh">關西名勝經典 (12天)</span>
           </button>
           <button class="plan-hero-btn" data-plan="plan-b" id="hero-plan-b-btn" type="button">
             <span class="plan-btn-tag">Plan B</span>

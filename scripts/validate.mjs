@@ -77,6 +77,31 @@ const FL = ctx.FLIGHTS_DATA;
 ok(FL && Array.isArray(FL.routes) && FL.routes.length === 6, `FLIGHTS_DATA should have 6 routes (got ${FL && FL.routes && FL.routes.length})`);
 if (FL && FL.routes) for (const r of FL.routes) ok(Array.isArray(r.options) && r.options.length <= 5 && r.options.length > 0, `route ${r.id || r.key || '?'} must have 1-5 options`);
 
+/* 7b. flight options: valid duration calculations across airport time zones */
+const AIRPORT_TZ_OFFSETS = {
+  EDI: 0, LHR: 0, HEL: 2, FRA: 1, MUC: 1, ZRH: 1, AUH: 4, HKG: 8, HND: 9, NRT: 9, KIX: 9
+};
+const parseUtcMs = (dtStr, iata) => {
+  const offsetHours = AIRPORT_TZ_OFFSETS[iata] ?? 0;
+  const [datePart, timePart] = dtStr.split(' ');
+  const [y, m, d] = datePart.split('-').map(Number);
+  const [hh, mm] = timePart.split(':').map(Number);
+  return Date.UTC(y, m - 1, d, hh - offsetHours, mm);
+};
+if (FL && FL.routes) {
+  for (const r of FL.routes) {
+    for (const opt of r.options || []) {
+      const f = opt.legs && opt.legs[0];
+      const l = opt.legs && opt.legs[opt.legs.length - 1];
+      ok(f && l && f.from in AIRPORT_TZ_OFFSETS && l.to in AIRPORT_TZ_OFFSETS, `airport unknown in option ${opt.id}`);
+      if (f && l && f.from in AIRPORT_TZ_OFFSETS && l.to in AIRPORT_TZ_OFFSETS) {
+        const durHours = (parseUtcMs(l.arr, l.to) - parseUtcMs(f.dep, f.from)) / 3600000;
+        ok(durHours > 1 && durHours < 35, `flight duration for ${opt.id} unreasonable: ${durHours.toFixed(1)}h`);
+      }
+    }
+  }
+}
+
 /* 8. CSVs exist in data-src and are not deployed paths */
 ok(exists('data-src/flights'), 'data-src/flights missing');
 ok(!html.includes('data-src/'), 'index.html must not reference data-src/');

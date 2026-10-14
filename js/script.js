@@ -37,7 +37,6 @@ function bootstrap() {
   if (typeof initFilters === 'function') initFilters();
   if (typeof initScrollReveal === 'function') initScrollReveal();
   if (typeof initSmoothScroll === 'function') initSmoothScroll();
-  if (typeof initHotelSearch === 'function') initHotelSearch();
 
   /* Step 3: Map rendering */
   if (typeof initRouteMap === 'function') initRouteMap();

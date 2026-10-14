@@ -137,7 +137,7 @@ self.addEventListener('fetch', (event) => {
         const network = fetch(req).then((res) => {
           if (res && res.status === 200) cache.put(req, res.clone());
           return res;
-        }).catch(() => cached);
+        }).catch(() => cached || new Response('Offline', { status: 503, statusText: 'Offline' }));
         return cached || network;
       })
     )

@@ -8,8 +8,8 @@
 
 ## Routes
 
-### Plan A: Kansai Golden Route (11 Days)
-**Tokyo** (Days 1–4) → **Kawaguchiko / Mt Fuji** (Day 5) → **Hakone** (Days 6–7) → **Nagoya** (Day 7, transit) → **Kyoto** (Days 7–9) → **Nara** (Day 10) → **Osaka** (Days 10–11)
+### Plan A: Kansai Golden Route (12 Days)
+**Tokyo** (Days 1–4) → **Kawaguchiko / Mt Fuji** (Day 5) → **Hakone** (Days 6–7) → **Nagoya** (Day 7, transit) → **Kyoto** (Days 7–9) → **Nara** (Day 10) → **Osaka** (Days 10–12)
 
 ### Plan B: Kanto & Shizuoka Scenic Loop (12 Days)
 **Tokyo** (Days 1–4) → **Kawaguchiko / Mt Fuji** (Day 5) → **Hakone** (Days 6–7) → **Atami Onsen** (Day 7) → **Kamakura & Yokohama** (Days 8–9) → **Tokyo Finale** (Days 10–12)
@@ -116,7 +116,7 @@ flowchart LR
     subgraph DATA["📦 Data Layer (data/)"]
         direction TB
         SD["data/site-data.js\nSITE_DATA\n\nOverview (Stops A & B) · Tips · Packing\nBudget (Plan A & B) · Hotels (Plan A & B)\nCar Return (Plan A & B) · Vehicle Rec (4 picks)"]
-        ID["data/itinerary-data.js\nITINERARY_DATA_A (11 Days)\nITINERARY_DATA_B (12 Days)\nblocks · tags · tips"]
+        ID["data/itinerary-data.js\nITINERARY_DATA_A (12 Days)\nITINERARY_DATA_B (12 Days)\nblocks · tags · tips"]
     end
 
     %% ── js/render.js ─────────────────────────────────────────────

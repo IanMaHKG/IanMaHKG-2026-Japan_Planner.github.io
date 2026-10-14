@@ -279,6 +279,8 @@ function initHotelSearch() {
   }
 
   pills.forEach(pill => {
+    if (pill.dataset.bound) return;
+    pill.dataset.bound = 'true';
     pill.addEventListener('click', () => {
       pills.forEach(p => p.classList.remove('active'));
       pill.classList.add('active');
@@ -301,6 +303,8 @@ function initHotelSearch() {
   }
 
   legBtns.forEach(btn => {
+    if (btn.dataset.bound) return;
+    btn.dataset.bound = 'true';
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       const dest     = btn.dataset.dest     || 'Tokyo, Japan';

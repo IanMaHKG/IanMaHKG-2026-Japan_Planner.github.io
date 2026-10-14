@@ -34,6 +34,20 @@ function renderFlights() {
     'Etihad Airways':  '🇦🇪',
   };
 
+  // Winter UTC offsets (Dec/Jan) for all route airports
+  const AIRPORT_TZ_OFFSETS = {
+    EDI: 0, LHR: 0, HEL: 2, FRA: 1, MUC: 1, ZRH: 1, AUH: 4, HKG: 8, HND: 9, NRT: 9, KIX: 9
+  };
+
+  function parseUtcMs(dtStr, iata) {
+    if (!dtStr) return NaN;
+    const offsetHours = AIRPORT_TZ_OFFSETS[iata] ?? 0;
+    const [datePart, timePart] = dtStr.split(' ');
+    const [y, m, d] = datePart.split('-').map(Number);
+    const [hh, mm] = timePart.split(':').map(Number);
+    return Date.UTC(y, m - 1, d, hh - offsetHours, mm);
+  }
+
   // Build tabs HTML
   const tabsHtml = data.routes.map((route, i) => `
     <button class="flights-route-tab${i === 0 ? ' active' : ''}"
@@ -77,13 +91,15 @@ function renderFlights() {
           </tr>${layover}`;
       }).join('');
 
-      // Total duration (first dep → last arr)
-      const firstDep = new Date(opt.legs[0].dep.replace(' ', 'T'));
-      const lastArr  = new Date(opt.legs[opt.legs.length - 1].arr.replace(' ', 'T'));
-      const durMs    = lastArr - firstDep;
+      // Total duration in UTC (first dep → last arr, accounting for airport time zones)
+      const firstLeg = opt.legs[0];
+      const lastLeg  = opt.legs[opt.legs.length - 1];
+      const depUtc   = parseUtcMs(firstLeg.dep, firstLeg.from);
+      const arrUtc   = parseUtcMs(lastLeg.arr, lastLeg.to);
+      const durMs    = arrUtc - depUtc;
       const durH     = Math.floor(durMs / 3600000);
       const durM     = Math.round((durMs % 3600000) / 60000);
-      const durStr   = !isNaN(durH) ? `${durH}h ${durM}m` : '';
+      const durStr   = !isNaN(durH) && durMs > 0 ? `${durH}h ${durM}m` : '';
 
       return `
         <article class="flight-option-card" id="flight-opt-${opt.id}">

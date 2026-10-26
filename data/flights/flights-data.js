@@ -213,15 +213,15 @@ window.FLIGHTS_DATA = {
 
         /* ─────────────────────────────────────────────────────
        ROUTE 1B: Edinburgh (EDI) → Tokyo (HND) [Plan B]
-       Departing Friday, 25 December 2026 (arriving Dec 26)
-       Source: edi_to_tokyo_20261225.csv
+       Departing Thursday, 24 December 2026 (arriving Dec 25)
+       Source: edi_to_tokyo_b_20261224.csv
     ───────────────────────────────────────────────────── */
     {
       id: 'edi-to-tokyo-b',
       plans: ['plan-b'],
       label: { en: 'Edinburgh → Tokyo', zh: '愛丁堡 → 東京' },
-      date:  { en: 'Fri 25 Dec 2026 (depart)', zh: '2026年12月25日（出發）' },
-      arrive: '2026-12-26',
+      date:  { en: 'Thu 24 Dec 2026 (depart)', zh: '2026年12月24日（出發）' },
+      arrive: '2026-12-24',
       options: [
         {
           id: 'edi-tyo-b1',
@@ -229,8 +229,8 @@ window.FLIGHTS_DATA = {
           airline: 'British Airways',
           hub: 'LHR',
           legs: [
-            { airline: 'British Airways', flight: 'BA1461', from: 'EDI', to: 'LHR', dep: '2026-12-25 06:20', arr: '2026-12-25 08:00' },
-            { airline: 'British Airways', flight: 'BA5',    from: 'LHR', to: 'HND', dep: '2026-12-25 11:40', arr: '2026-12-26 10:25' },
+            { airline: 'British Airways', flight: 'BA1461', from: 'EDI', to: 'LHR', dep: '2026-12-24 06:20', arr: '2026-12-24 08:00' },
+            { airline: 'British Airways', flight: 'BA5',    from: 'LHR', to: 'HND', dep: '2026-12-24 11:40', arr: '2026-12-25 10:25' },
           ]
         },
         {
@@ -239,8 +239,8 @@ window.FLIGHTS_DATA = {
           airline: 'Finnair',
           hub: 'HEL',
           legs: [
-            { airline: 'Finnair', flight: 'AY1372', from: 'EDI', to: 'HEL', dep: '2026-12-25 09:55', arr: '2026-12-25 14:30' },
-            { airline: 'Finnair', flight: 'AY61',   from: 'HEL', to: 'HND', dep: '2026-12-25 18:00', arr: '2026-12-26 14:25' },
+            { airline: 'Finnair', flight: 'AY1372', from: 'EDI', to: 'HEL', dep: '2026-12-24 09:55', arr: '2026-12-24 14:30' },
+            { airline: 'Finnair', flight: 'AY61',   from: 'HEL', to: 'HND', dep: '2026-12-24 18:00', arr: '2026-12-25 14:25' },
           ]
         },
         {
@@ -249,8 +249,8 @@ window.FLIGHTS_DATA = {
           airline: 'British Airways',
           hub: 'LHR',
           legs: [
-            { airline: 'British Airways', flight: 'BA1465', from: 'EDI', to: 'LHR', dep: '2026-12-25 07:25', arr: '2026-12-25 09:05' },
-            { airline: 'British Airways', flight: 'BA5',    from: 'LHR', to: 'HND', dep: '2026-12-25 11:40', arr: '2026-12-26 10:25' },
+            { airline: 'British Airways', flight: 'BA1465', from: 'EDI', to: 'LHR', dep: '2026-12-24 07:25', arr: '2026-12-24 09:05' },
+            { airline: 'British Airways', flight: 'BA5',    from: 'LHR', to: 'HND', dep: '2026-12-24 11:40', arr: '2026-12-25 10:25' },
           ]
         },
         {
@@ -259,8 +259,8 @@ window.FLIGHTS_DATA = {
           airline: 'Japan Airlines',
           hub: 'LHR',
           legs: [
-            { airline: 'British Airways', flight: 'BA1447', from: 'EDI', to: 'LHR', dep: '2026-12-25 13:35', arr: '2026-12-25 15:10' },
-            { airline: 'Japan Airlines',  flight: 'JL44',   from: 'LHR', to: 'HND', dep: '2026-12-25 18:30', arr: '2026-12-26 17:20' },
+            { airline: 'British Airways', flight: 'BA1447', from: 'EDI', to: 'LHR', dep: '2026-12-24 13:35', arr: '2026-12-24 15:10' },
+            { airline: 'Japan Airlines',  flight: 'JL44',   from: 'LHR', to: 'HND', dep: '2026-12-24 18:30', arr: '2026-12-25 17:20' },
           ]
         },
         {
@@ -269,8 +269,8 @@ window.FLIGHTS_DATA = {
           airline: 'Finnair',
           hub: 'HEL',
           legs: [
-            { airline: 'Finnair',        flight: 'AY1372', from: 'EDI', to: 'HEL', dep: '2026-12-25 09:55', arr: '2026-12-25 14:30' },
-            { airline: 'Japan Airlines', flight: 'JL48',   from: 'HEL', to: 'HND', dep: '2026-12-25 17:30', arr: '2026-12-26 14:25' },
+            { airline: 'Finnair',        flight: 'AY1372', from: 'EDI', to: 'HEL', dep: '2026-12-24 09:55', arr: '2026-12-24 14:30' },
+            { airline: 'Japan Airlines', flight: 'JL48',   from: 'HEL', to: 'HND', dep: '2026-12-24 17:30', arr: '2026-12-25 14:25' },
           ]
         },
       ]
@@ -278,15 +278,15 @@ window.FLIGHTS_DATA = {
 
     /* ─────────────────────────────────────────────────────
        ROUTE 2B: London Heathrow (LHR) → Tokyo (HND) [Plan B]
-       Departing Friday, 25 December 2026 (arriving Dec 26)
-       Source: lhr_to_tokyo_20261225.csv
+       Departing Thursday, 24 December 2026 (arriving Dec 25)
+       Source: lhr_to_tokyo_b_20261224.csv
     ───────────────────────────────────────────────────── */
     {
       id: 'lhr-to-tokyo-b',
       plans: ['plan-b'],
       label: { en: 'London Heathrow → Tokyo', zh: '倫敦希斯路 → 東京' },
-      date:  { en: 'Fri 25 Dec 2026 (depart)', zh: '2026年12月25日（出發）' },
-      arrive: '2026-12-26',
+      date:  { en: 'Thu 24 Dec 2026 (depart)', zh: '2026年12月24日（出發）' },
+      arrive: '2026-12-24',
       options: [
         {
           id: 'lhr-tyo-b1',
@@ -294,7 +294,7 @@ window.FLIGHTS_DATA = {
           airline: 'British Airways',
           hub: null,
           legs: [
-            { airline: 'British Airways', flight: 'BA7', from: 'LHR', to: 'HND', dep: '2026-12-25 09:10', arr: '2026-12-26 07:35' },
+            { airline: 'British Airways', flight: 'BA7', from: 'LHR', to: 'HND', dep: '2026-12-24 09:10', arr: '2026-12-25 07:35' },
           ]
         },
         {
@@ -303,7 +303,7 @@ window.FLIGHTS_DATA = {
           airline: 'British Airways',
           hub: null,
           legs: [
-            { airline: 'British Airways', flight: 'BA5', from: 'LHR', to: 'HND', dep: '2026-12-25 11:40', arr: '2026-12-26 10:25' },
+            { airline: 'British Airways', flight: 'BA5', from: 'LHR', to: 'HND', dep: '2026-12-24 11:40', arr: '2026-12-25 10:25' },
           ]
         },
         {
@@ -312,7 +312,7 @@ window.FLIGHTS_DATA = {
           airline: 'All Nippon Airways',
           hub: null,
           legs: [
-            { airline: 'All Nippon Airways', flight: 'NH212', from: 'LHR', to: 'HND', dep: '2026-12-25 19:00', arr: '2026-12-26 17:55' },
+            { airline: 'All Nippon Airways', flight: 'NH212', from: 'LHR', to: 'HND', dep: '2026-12-24 19:00', arr: '2026-12-25 17:55' },
           ]
         },
         {
@@ -321,7 +321,7 @@ window.FLIGHTS_DATA = {
           airline: 'Japan Airlines',
           hub: null,
           legs: [
-            { airline: 'Japan Airlines', flight: 'JL42', from: 'LHR', to: 'HND', dep: '2026-12-25 08:50', arr: '2026-12-26 07:40' },
+            { airline: 'Japan Airlines', flight: 'JL42', from: 'LHR', to: 'HND', dep: '2026-12-24 08:50', arr: '2026-12-25 07:40' },
           ]
         },
         {
@@ -330,7 +330,7 @@ window.FLIGHTS_DATA = {
           airline: 'Japan Airlines',
           hub: null,
           legs: [
-            { airline: 'Japan Airlines', flight: 'JL44', from: 'LHR', to: 'HND', dep: '2026-12-25 18:30', arr: '2026-12-26 17:20' },
+            { airline: 'Japan Airlines', flight: 'JL44', from: 'LHR', to: 'HND', dep: '2026-12-24 18:30', arr: '2026-12-25 17:20' },
           ]
         },
       ]
@@ -338,15 +338,15 @@ window.FLIGHTS_DATA = {
 
     /* ─────────────────────────────────────────────────────
        ROUTE 3B: Hong Kong (HKG) → Tokyo (HND) [Plan B]
-       Departing Saturday, 26 December 2026 (Boxing Day)
-       Source: hkg_to_tokyo_20261226.csv
+       Departing Friday, 25 December 2026 (Christmas Day)
+       Source: hkg_to_tokyo_b_20261225.csv
     ───────────────────────────────────────────────────── */
     {
       id: 'hkg-to-tokyo-b',
       plans: ['plan-b'],
       label: { en: 'Hong Kong → Tokyo', zh: '香港 → 東京' },
-      date:  { en: 'Sat 26 Dec 2026 (depart)', zh: '2026年12月26日（出發）' },
-      arrive: '2026-12-26',
+      date:  { en: 'Fri 25 Dec 2026 (depart)', zh: '2026年12月25日（出發）' },
+      arrive: '2026-12-24',
       options: [
         {
           id: 'hkg-tyo-b1',
@@ -354,7 +354,7 @@ window.FLIGHTS_DATA = {
           airline: 'Cathay Pacific',
           hub: null,
           legs: [
-            { airline: 'Cathay Pacific', flight: 'CX548', from: 'HKG', to: 'HND', dep: '2026-12-26 08:55', arr: '2026-12-26 13:45' },
+            { airline: 'Cathay Pacific', flight: 'CX548', from: 'HKG', to: 'HND', dep: '2026-12-25 08:55', arr: '2026-12-25 13:45' },
           ]
         },
         {
@@ -363,7 +363,7 @@ window.FLIGHTS_DATA = {
           airline: 'Cathay Pacific',
           hub: null,
           legs: [
-            { airline: 'Cathay Pacific', flight: 'CX542', from: 'HKG', to: 'HND', dep: '2026-12-26 16:30', arr: '2026-12-26 21:15' },
+            { airline: 'Cathay Pacific', flight: 'CX542', from: 'HKG', to: 'HND', dep: '2026-12-25 16:30', arr: '2026-12-25 21:15' },
           ]
         },
         {
@@ -372,7 +372,7 @@ window.FLIGHTS_DATA = {
           airline: 'All Nippon Airways',
           hub: null,
           legs: [
-            { airline: 'All Nippon Airways', flight: 'NH814', from: 'HKG', to: 'HND', dep: '2026-12-26 00:15', arr: '2026-12-26 05:00' },
+            { airline: 'All Nippon Airways', flight: 'NH814', from: 'HKG', to: 'HND', dep: '2026-12-25 00:15', arr: '2026-12-25 05:00' },
           ]
         },
         {
@@ -381,7 +381,7 @@ window.FLIGHTS_DATA = {
           airline: 'All Nippon Airways',
           hub: null,
           legs: [
-            { airline: 'All Nippon Airways', flight: 'NH860', from: 'HKG', to: 'HND', dep: '2026-12-26 14:20', arr: '2026-12-26 19:15' },
+            { airline: 'All Nippon Airways', flight: 'NH860', from: 'HKG', to: 'HND', dep: '2026-12-25 14:20', arr: '2026-12-25 19:15' },
           ]
         },
         {
@@ -390,7 +390,7 @@ window.FLIGHTS_DATA = {
           airline: 'Japan Airlines',
           hub: null,
           legs: [
-            { airline: 'Japan Airlines', flight: 'JL26', from: 'HKG', to: 'HND', dep: '2026-12-26 15:35', arr: '2026-12-26 20:25' },
+            { airline: 'Japan Airlines', flight: 'JL26', from: 'HKG', to: 'HND', dep: '2026-12-25 15:35', arr: '2026-12-25 20:25' },
           ]
         },
       ]
@@ -590,16 +590,16 @@ window.FLIGHTS_DATA = {
 
         /* ─────────────────────────────────────────────────────
        ROUTE 7: Tokyo (HND) → Edinburgh (EDI) [Plan B]
-       Friday, 01 January 2027 (New Year's Day)
-       Source: tokyo_to_edi_20270101.csv
+       Thursday, 31 December 2026 (New Year's Eve)
+       Source: tokyo_to_edi_20261231.csv
     ───────────────────────────────────────────────────── */
     {
       id: 'tokyo-to-edi',
       plans: ['plan-b'],
       label: { en: 'Tokyo → Edinburgh', zh: '東京 → 愛丁堡' },
-      date:  { en: 'Fri 01 Jan 2027', zh: '2027年1月1日' },
-      depart: '2027-01-01',
-      arrive: '2027-01-01',
+      date:  { en: 'Thu 31 Dec 2026', zh: '2026年12月31日' },
+      depart: '2026-12-31',
+      arrive: '2026-12-31',
       options: [
         {
           id: 'tyo-edi-1',
@@ -607,8 +607,8 @@ window.FLIGHTS_DATA = {
           airline: 'British Airways',
           hub: 'LHR',
           legs: [
-            { airline: 'British Airways', flight: 'BA8',    from: 'HND', to: 'LHR', dep: '2027-01-01 09:35', arr: '2027-01-01 15:35' },
-            { airline: 'British Airways', flight: 'BA1456', from: 'LHR', to: 'EDI', dep: '2027-01-01 17:15', arr: '2027-01-01 18:40' },
+            { airline: 'British Airways', flight: 'BA8',    from: 'HND', to: 'LHR', dep: '2026-12-31 09:35', arr: '2026-12-31 15:35' },
+            { airline: 'British Airways', flight: 'BA1456', from: 'LHR', to: 'EDI', dep: '2026-12-31 17:15', arr: '2026-12-31 18:40' },
           ]
         },
         {
@@ -617,8 +617,8 @@ window.FLIGHTS_DATA = {
           airline: 'Japan Airlines',
           hub: 'HEL',
           legs: [
-            { airline: 'Japan Airlines', flight: 'JL47',   from: 'HND', to: 'HEL', dep: '2027-01-01 08:20', arr: '2027-01-01 14:40' },
-            { airline: 'Finnair',        flight: 'AY1373', from: 'HEL', to: 'EDI', dep: '2027-01-01 16:55', arr: '2027-01-01 17:50' },
+            { airline: 'Japan Airlines', flight: 'JL47',   from: 'HND', to: 'HEL', dep: '2026-12-31 08:20', arr: '2026-12-31 14:40' },
+            { airline: 'Finnair',        flight: 'AY1373', from: 'HEL', to: 'EDI', dep: '2026-12-31 16:55', arr: '2026-12-31 17:50' },
           ]
         },
         {
@@ -627,8 +627,8 @@ window.FLIGHTS_DATA = {
           airline: 'British Airways',
           hub: 'LHR',
           legs: [
-            { airline: 'British Airways', flight: 'BA8',    from: 'HND', to: 'LHR', dep: '2027-01-01 09:35', arr: '2027-01-01 15:35' },
-            { airline: 'British Airways', flight: 'BA1460', from: 'LHR', to: 'EDI', dep: '2027-01-01 18:50', arr: '2027-01-01 20:15' },
+            { airline: 'British Airways', flight: 'BA8',    from: 'HND', to: 'LHR', dep: '2026-12-31 09:35', arr: '2026-12-31 15:35' },
+            { airline: 'British Airways', flight: 'BA1460', from: 'LHR', to: 'EDI', dep: '2026-12-31 18:50', arr: '2026-12-31 20:15' },
           ]
         },
         {
@@ -637,8 +637,8 @@ window.FLIGHTS_DATA = {
           airline: 'Japan Airlines',
           hub: 'LHR',
           legs: [
-            { airline: 'Japan Airlines',  flight: 'JL43',   from: 'HND', to: 'LHR', dep: '2027-01-01 09:50', arr: '2027-01-01 15:15' },
-            { airline: 'British Airways', flight: 'BA1460', from: 'LHR', to: 'EDI', dep: '2027-01-01 18:50', arr: '2027-01-01 20:15' },
+            { airline: 'Japan Airlines',  flight: 'JL43',   from: 'HND', to: 'LHR', dep: '2026-12-31 09:50', arr: '2026-12-31 15:15' },
+            { airline: 'British Airways', flight: 'BA1460', from: 'LHR', to: 'EDI', dep: '2026-12-31 18:50', arr: '2026-12-31 20:15' },
           ]
         },
         {
@@ -647,8 +647,8 @@ window.FLIGHTS_DATA = {
           airline: 'Qatar Airways',
           hub: 'DOH',
           legs: [
-            { airline: 'Qatar Airways', flight: 'QR813', from: 'HND', to: 'DOH', dep: '2027-01-01 00:25', arr: '2027-01-01 07:05' },
-            { airline: 'Qatar Airways', flight: 'QR29',  from: 'DOH', to: 'EDI', dep: '2027-01-01 07:55', arr: '2027-01-01 12:35' },
+            { airline: 'Qatar Airways', flight: 'QR813', from: 'HND', to: 'DOH', dep: '2026-12-31 00:25', arr: '2026-12-31 07:05' },
+            { airline: 'Qatar Airways', flight: 'QR29',  from: 'DOH', to: 'EDI', dep: '2026-12-31 07:55', arr: '2026-12-31 12:35' },
           ]
         },
       ]
@@ -656,16 +656,16 @@ window.FLIGHTS_DATA = {
 
     /* ─────────────────────────────────────────────────────
        ROUTE 8: Tokyo (HND) → London Heathrow (LHR) [Plan B]
-       Friday, 01 January 2027 (New Year's Day)
-       Source: tokyo_to_lhr_20270101.csv
+       Thursday, 31 December 2026 (New Year's Eve)
+       Source: tokyo_to_lhr_20261231.csv
     ───────────────────────────────────────────────────── */
     {
       id: 'tokyo-to-lhr',
       plans: ['plan-b'],
       label: { en: 'Tokyo → London Heathrow', zh: '東京 → 倫敦希斯路' },
-      date:  { en: 'Fri 01 Jan 2027', zh: '2027年1月1日' },
-      depart: '2027-01-01',
-      arrive: '2027-01-01',
+      date:  { en: 'Thu 31 Dec 2026', zh: '2026年12月31日' },
+      depart: '2026-12-31',
+      arrive: '2026-12-31',
       options: [
         {
           id: 'tyo-lhr-1',
@@ -673,7 +673,7 @@ window.FLIGHTS_DATA = {
           airline: 'British Airways',
           hub: null,
           legs: [
-            { airline: 'British Airways', flight: 'BA8', from: 'HND', to: 'LHR', dep: '2027-01-01 09:35', arr: '2027-01-01 15:35' },
+            { airline: 'British Airways', flight: 'BA8', from: 'HND', to: 'LHR', dep: '2026-12-31 09:35', arr: '2026-12-31 15:35' },
           ]
         },
         {
@@ -682,7 +682,7 @@ window.FLIGHTS_DATA = {
           airline: 'British Airways',
           hub: null,
           legs: [
-            { airline: 'British Airways', flight: 'BA6', from: 'HND', to: 'LHR', dep: '2027-01-01 13:15', arr: '2027-01-01 19:20' },
+            { airline: 'British Airways', flight: 'BA6', from: 'HND', to: 'LHR', dep: '2026-12-31 13:15', arr: '2026-12-31 19:20' },
           ]
         },
         {
@@ -691,7 +691,7 @@ window.FLIGHTS_DATA = {
           airline: 'All Nippon Airways',
           hub: null,
           legs: [
-            { airline: 'All Nippon Airways', flight: 'NH211', from: 'HND', to: 'LHR', dep: '2027-01-01 10:05', arr: '2027-01-01 15:45' },
+            { airline: 'All Nippon Airways', flight: 'NH211', from: 'HND', to: 'LHR', dep: '2026-12-31 10:05', arr: '2026-12-31 15:45' },
           ]
         },
         {
@@ -700,7 +700,7 @@ window.FLIGHTS_DATA = {
           airline: 'Japan Airlines',
           hub: null,
           legs: [
-            { airline: 'Japan Airlines', flight: 'JL43', from: 'HND', to: 'LHR', dep: '2027-01-01 09:50', arr: '2027-01-01 15:15' },
+            { airline: 'Japan Airlines', flight: 'JL43', from: 'HND', to: 'LHR', dep: '2026-12-31 09:50', arr: '2026-12-31 15:15' },
           ]
         },
         {
@@ -709,7 +709,7 @@ window.FLIGHTS_DATA = {
           airline: 'Japan Airlines',
           hub: null,
           legs: [
-            { airline: 'Japan Airlines', flight: 'JL41', from: 'HND', to: 'LHR', dep: '2027-01-01 01:00', arr: '2027-01-01 06:25' },
+            { airline: 'Japan Airlines', flight: 'JL41', from: 'HND', to: 'LHR', dep: '2026-12-31 01:00', arr: '2026-12-31 06:25' },
           ]
         },
       ]
@@ -717,16 +717,16 @@ window.FLIGHTS_DATA = {
 
     /* ─────────────────────────────────────────────────────
        ROUTE 9: Tokyo (HND) → Hong Kong (HKG) [Plan B]
-       Friday, 01 January 2027 (New Year's Day)
-       Source: tokyo_to_hkg_20270101.csv
+       Thursday, 31 December 2026 (New Year's Eve)
+       Source: tokyo_to_hkg_20261231.csv
     ───────────────────────────────────────────────────── */
     {
       id: 'tokyo-to-hkg',
       plans: ['plan-b'],
       label: { en: 'Tokyo → Hong Kong', zh: '東京 → 香港' },
-      date:  { en: 'Fri 01 Jan 2027 (depart)', zh: '2027年1月1日（出發）' },
-      depart: '2027-01-01',
-      arrive: '2027-01-01',
+      date:  { en: 'Thu 31 Dec 2026 (depart)', zh: '2026年12月31日（出發）' },
+      depart: '2026-12-31',
+      arrive: '2026-12-31',
       options: [
         {
           id: 'tyo-hkg-1',
@@ -734,7 +734,7 @@ window.FLIGHTS_DATA = {
           airline: 'Cathay Pacific',
           hub: null,
           legs: [
-            { airline: 'Cathay Pacific', flight: 'CX543', from: 'HND', to: 'HKG', dep: '2027-01-01 10:10', arr: '2027-01-01 14:25' },
+            { airline: 'Cathay Pacific', flight: 'CX543', from: 'HND', to: 'HKG', dep: '2026-12-31 10:10', arr: '2026-12-31 14:25' },
           ]
         },
         {
@@ -743,7 +743,7 @@ window.FLIGHTS_DATA = {
           airline: 'Cathay Pacific',
           hub: null,
           legs: [
-            { airline: 'Cathay Pacific', flight: 'CX549', from: 'HND', to: 'HKG', dep: '2027-01-01 16:00', arr: '2027-01-01 20:15' },
+            { airline: 'Cathay Pacific', flight: 'CX549', from: 'HND', to: 'HKG', dep: '2026-12-31 16:00', arr: '2026-12-31 20:15' },
           ]
         },
         {
@@ -752,7 +752,7 @@ window.FLIGHTS_DATA = {
           airline: 'Japan Airlines',
           hub: null,
           legs: [
-            { airline: 'Japan Airlines', flight: 'JL29', from: 'HND', to: 'HKG', dep: '2027-01-01 09:35', arr: '2027-01-01 13:50' },
+            { airline: 'Japan Airlines', flight: 'JL29', from: 'HND', to: 'HKG', dep: '2026-12-31 09:35', arr: '2026-12-31 13:50' },
           ]
         },
         {
@@ -761,7 +761,7 @@ window.FLIGHTS_DATA = {
           airline: 'All Nippon Airways',
           hub: null,
           legs: [
-            { airline: 'All Nippon Airways', flight: 'NH859', from: 'HND', to: 'HKG', dep: '2027-01-01 08:50', arr: '2027-01-01 12:55' },
+            { airline: 'All Nippon Airways', flight: 'NH859', from: 'HND', to: 'HKG', dep: '2026-12-31 08:50', arr: '2026-12-31 12:55' },
           ]
         },
         {
@@ -770,7 +770,7 @@ window.FLIGHTS_DATA = {
           airline: 'Hong Kong Express',
           hub: null,
           legs: [
-            { airline: 'Hong Kong Express', flight: 'UO625', from: 'HND', to: 'HKG', dep: '2027-01-01 06:35', arr: '2027-01-01 10:50' },
+            { airline: 'Hong Kong Express', flight: 'UO625', from: 'HND', to: 'HKG', dep: '2026-12-31 06:35', arr: '2026-12-31 10:50' },
           ]
         },
       ]

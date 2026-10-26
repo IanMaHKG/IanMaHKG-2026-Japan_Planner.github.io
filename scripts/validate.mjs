@@ -105,12 +105,12 @@ for (const p of ['planA', 'planB']) {
 }
 
 /* 7a2. hotels: nights covered by the search pills must equal nights covered by the cards,
-        with no gap or overlap (Plan A: Dec 20-30, 11 nights; Plan B: Dec 26-31, 6 nights) */
+        with no gap or overlap (Plan A: Dec 20-30, 11 nights; Plan B: Dec 25-30, 6 nights) */
 const dayNum = (s) => { const [y, m, d] = s.split('-').map(Number); return Date.UTC(y, m - 1, d) / 864e5; };
 const nightsOf = (list) => list.flatMap((l) => { const out = []; for (let n = dayNum(l.checkin); n < dayNum(l.checkout); n++) out.push(n); return out; }).sort((a, b) => a - b);
 const tripNightsMap = {
   planA: Array.from({ length: 11 }, (_, i) => dayNum('2026-12-20') + i),
-  planB: Array.from({ length: 6 }, (_, i) => dayNum('2026-12-26') + i),
+  planB: Array.from({ length: 6 }, (_, i) => dayNum('2026-12-25') + i),
 };
 for (const p of ['planA', 'planB']) {
   const h = ctx.SITE_DATA && ctx.SITE_DATA.hotels && ctx.SITE_DATA.hotels[p];

@@ -411,8 +411,8 @@ const SITE_DATA = {
         zh: "關東靜岡自駕環線應在哪裡歸還租車？（方案 B）"
       },
       context: {
-        en: "The Plan B setup: <strong>pick up the car on Day 3 (Dec 28) leaving Tokyo</strong>, enjoy the 3-day loop across Mt Fuji, Hakone, and Kamakura, then <strong>return it on Day 5 (Dec 30) with ZERO drop-off fee</strong> before taking an easy 30-min train back to your central Tokyo base.",
-        zh: "方案 B 安排：<strong>第 3 天（12 月 28 日）離開東京時取車</strong>，展開富士山、箱根及鎌倉 3 天自駕環線，在<strong>第 5 天（12 月 30 日）以零異地還車費歸還</strong>，隨後搭乘舒適短程火車直達東京市區酒店。"
+        en: "The Plan B setup: <strong>pick up the car on Day 3 (Dec 27) leaving Tokyo</strong>, enjoy the 3-day loop across Mt Fuji, Hakone, and Kamakura, then <strong>return it on Day 5 (Dec 29) with ZERO drop-off fee</strong> before taking an easy 30-min train back to your central Tokyo base.",
+        zh: "方案 B 安排：<strong>第 3 天（12 月 27 日）離開東京時取車</strong>，展開富士山、箱根及鎌倉 3 天自駕環線，在<strong>第 5 天（12 月 29 日）以零異地還車費歸還</strong>，隨後搭乘舒適短程火車直達東京市區酒店。"
       },
       recommendation: {
         en: "🏆 Our pick: <strong>Yokohama Depot (Day 5)</strong> — Zero drop-off fee, drop off after Chinatown lunch, and take a quick 30-min JR train straight back to Tokyo.",
@@ -1224,30 +1224,30 @@ const SITE_DATA = {
         {
           active: true,
           dest: "Tokyo, Japan",
-          checkin: "2026-12-26",
-          checkout: "2026-12-28",
-          label: { en: "Tokyo Base (Dec 26–28)", zh: "東京首站 (12/26–28)" }
+          checkin: "2026-12-25",
+          checkout: "2026-12-27",
+          label: { en: "Tokyo Base (Dec 25–27)", zh: "東京首站 (12/25–27)" }
         },
         {
           active: false,
           dest: "Fujikawaguchiko, Yamanashi, Japan",
-          checkin: "2026-12-28",
-          checkout: "2026-12-29",
-          label: { en: "Kawaguchiko (Dec 28–29)", zh: "河口湖 (12/28–29)" }
+          checkin: "2026-12-27",
+          checkout: "2026-12-28",
+          label: { en: "Kawaguchiko (Dec 27–28)", zh: "河口湖 (12/27–28)" }
         },
         {
           active: false,
           dest: "Hakone, Kanagawa, Japan",
-          checkin: "2026-12-29",
-          checkout: "2026-12-30",
-          label: { en: "Hakone (Dec 29–30)", zh: "箱根 (12/29–30)" }
+          checkin: "2026-12-28",
+          checkout: "2026-12-29",
+          label: { en: "Hakone (Dec 28–29)", zh: "箱根 (12/28–29)" }
         },
         {
           active: false,
           dest: "Tokyo, Japan",
-          checkin: "2026-12-30",
-          checkout: "2027-01-01",
-          label: { en: "Tokyo Finale (Dec 30–Jan 1)", zh: "東京終站 (12/30–1/1)" }
+          checkin: "2026-12-29",
+          checkout: "2026-12-31",
+          label: { en: "Tokyo Finale (Dec 29–31)", zh: "東京終站 (12/29–31)" }
         }
       ],
       legs: [
@@ -1257,7 +1257,7 @@ const SITE_DATA = {
           badgeClass: "",
           highlight: false,
           title: { en: "Tokyo City Hotels (東京首段)", zh: "東京市區精選酒店" },
-          dates: "🗓️ Dec 26 – Dec 28, 2026",
+          dates: "🗓️ Dec 25 – Dec 27, 2026",
           desc: {
             en: "Comfortable twin room near Asakusa or Ginza with step-free station access. Unhurried exploration before the scenic Fuji drive.",
             zh: "入住淺草或銀座一帶無障礙設施完善的雙床房，鄰近地鐵升降機出口，出發自駕前充分享受市區精華。"
@@ -1265,8 +1265,8 @@ const SITE_DATA = {
           tags: ["🚇 Near Metro", "🛍️ Shopping", "🛏️ Twin Room"],
           btnText: { en: "Search Tokyo Hotels ↗", zh: "搜尋東京酒店 ↗" },
           dest: "Tokyo, Japan",
-          checkin: "2026-12-26",
-          checkout: "2026-12-28"
+          checkin: "2026-12-25",
+          checkout: "2026-12-27"
         },
         {
           legNum: 2,
@@ -1274,7 +1274,7 @@ const SITE_DATA = {
           badgeClass: "",
           highlight: false,
           title: { en: "Lake Kawaguchiko Onsen Ryokan (河口湖)", zh: "河口湖富士山景溫泉旅館" },
-          dates: "🗓️ Dec 28 – Dec 29, 2026",
+          dates: "🗓️ Dec 27 – Dec 28, 2026",
           desc: {
             en: "Lakeside stay with private open-air hot spring bath, panoramic snow-capped Mt Fuji views, and seasonal kaiseki feast.",
             zh: "入住正宗日式溫泉旅館，享有一泊二食會席料理及房間/露天風呂眺望富士山絕景。"
@@ -1282,8 +1282,8 @@ const SITE_DATA = {
           tags: ["🗻 Mt Fuji View", "♨️ Hot Spring", "🍱 Kaiseki Dinner"],
           btnText: { en: "Search Fuji Ryokan ↗", zh: "搜尋河口湖溫泉 ↗" },
           dest: "Fujikawaguchiko, Yamanashi, Japan",
-          checkin: "2026-12-28",
-          checkout: "2026-12-29"
+          checkin: "2026-12-27",
+          checkout: "2026-12-28"
         },
         {
           legNum: 3,
@@ -1291,7 +1291,7 @@ const SITE_DATA = {
           badgeClass: "",
           highlight: false,
           title: { en: "Hakone Hot Spring Resort (箱根)", zh: "箱根溫泉度假酒店 / 旅館" },
-          dates: "🗓️ Dec 29 – Dec 30, 2026",
+          dates: "🗓️ Dec 28 – Dec 29, 2026",
           desc: {
             en: "Tranquil night in Hakone's forested volcanic springs after Owakudani and Lake Ashi. (Option: can combine with Leg 2 into a single 2-night Fuji base).",
             zh: "入住箱根森林溫泉區享受天然礦物溫泉。（亦可選擇在河口湖/箱根連住 2 晚同一溫泉旅館免搬行李）。"
@@ -1299,25 +1299,25 @@ const SITE_DATA = {
           tags: ["♨️ Mountain Onsen", "🌲 Forest View", "🚗 Free Parking"],
           btnText: { en: "Search Hakone Stays ↗", zh: "搜尋箱根住宿 ↗" },
           dest: "Hakone, Kanagawa, Japan",
-          checkin: "2026-12-29",
-          checkout: "2026-12-30"
+          checkin: "2026-12-28",
+          checkout: "2026-12-29"
         },
         {
           legNum: 4,
-          nights: { en: "Leg 4 • 2 Nights (NYE Finale)", zh: "第 4 站 • 2 晚 (除夕元旦終站)" },
+          nights: { en: "Leg 4 • 2 Nights (Tokyo Finale)", zh: "第 4 站 • 2 晚 (東京終站)" },
           badgeClass: "",
           highlight: false,
-          title: { en: "Tokyo Finale & NYE Hotels (東京終站)", zh: "東京除夕跨年酒店" },
-          dates: "🗓️ Dec 30, 2026 – Jan 01, 2027",
+          title: { en: "Tokyo Finale & Year-End Hotels (東京終站)", zh: "東京歲末酒店" },
+          dates: "🗓️ Dec 29 – Dec 31, 2026",
           desc: {
-            en: "Central Tokyo for New Year's Eve festivities, Hatsumode temple countdown, and seamless Haneda/Narita airport departures.",
-            zh: "返回東京市區迎接新年，漫步築地、銀座與除夜之鐘祈福，前往機場極為快捷。"
+            en: "Central Tokyo for year-end shopping, winter illuminations, and seamless Haneda/Narita airport departures on New Year's Eve.",
+            zh: "返回東京市區享受歲末熱鬧氛圍，漫步築地、銀座與冬季點燈，除夕直達機場極為快捷。"
           },
           tags: ["🛍️ Year-End Shopping", "🎆 Illuminations", "✈️ Direct Airport Link"],
           btnText: { en: "Search Tokyo Hotels ↗", zh: "搜尋東京酒店 ↗" },
           dest: "Tokyo, Japan",
-          checkin: "2026-12-30",
-          checkout: "2027-01-01"
+          checkin: "2026-12-29",
+          checkout: "2026-12-31"
         }
       ]
     }

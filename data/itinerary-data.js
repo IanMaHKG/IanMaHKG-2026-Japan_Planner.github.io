@@ -1205,7 +1205,7 @@ const ITINERARY_DATA_A = [
 ];
 
 /* ═════════════════════════════════════════════════════════════════════
-   PLAN B: Kanto & Shizuoka Scenic Loop (7 Days · Dec 26 – Jan 01)
+   PLAN B: Kanto & Shizuoka Scenic Loop (7 Days · Dec 25 – Dec 31)
    Route: Tokyo → Kawaguchiko → Hakone → Kamakura → Yokohama → Tokyo
    ═════════════════════════════════════════════════════════════════════ */
 const ITINERARY_DATA_B = [
@@ -1213,7 +1213,7 @@ const ITINERARY_DATA_B = [
   {
     id: "day-1",
     dayNum: "01",
-    date: "Dec 26",
+    date: "Dec 25",
     region: "tokyo",
     weather: {
       "icon": "☀️",
@@ -1310,7 +1310,7 @@ const ITINERARY_DATA_B = [
   {
     id: "day-2",
     dayNum: "02",
-    date: "Dec 27",
+    date: "Dec 26",
     region: "tokyo",
     weather: {
       "icon": "🌤️",
@@ -1406,7 +1406,7 @@ const ITINERARY_DATA_B = [
   {
     id: "day-3",
     dayNum: "03",
-    date: "Dec 28",
+    date: "Dec 27",
     region: "fuji",
     weather: {
       "icon": "☀️",
@@ -1503,7 +1503,7 @@ const ITINERARY_DATA_B = [
   {
     id: "day-4",
     dayNum: "04",
-    date: "Dec 29",
+    date: "Dec 28",
     region: "fuji",
     weather: {
       "icon": "🌤️",
@@ -1600,7 +1600,7 @@ const ITINERARY_DATA_B = [
   {
     id: "day-5",
     dayNum: "05",
-    date: "Dec 30",
+    date: "Dec 29",
     region: "coastal",
     weather: {
       "icon": "☀️",
@@ -1696,24 +1696,24 @@ const ITINERARY_DATA_B = [
   {
     id: "day-6",
     dayNum: "06",
-    date: "Dec 31",
+    date: "Dec 30",
     region: "tokyo",
     weather: {
       "icon": "🌤️",
-      "high": "10°C",
-      "low": "2°C",
+      "high": "11°C",
+      "low": "3°C",
       "condition": {
-        "en": "Clear & Chilly",
-        "zh": "晴朗偏冷"
+        "en": "Clear & Festive",
+        "zh": "歲末晴朗"
       }
     },
     title: {
-      en: "New Year's Eve in Tokyo — Tsukiji Outer Market, Ginza & NYE Hatsumode",
-      zh: "東京除夕大晦日 — 築地場外市場、銀座漫步、跨年蕎麥麵與寺院除夜之鐘"
+      en: "Year-End Festive Tokyo — Tsukiji Outer Market, Ginza & Winter Illuminations",
+      zh: "歲末東京漫步 — 築地場外市場、銀座漫步與冬季燈飾"
     },
     tags: [
       { type: "city", text: "🏙️ Tokyo (東京)" },
-      { type: "special", text: "🎆 NYE (除夕大晦日)" },
+      { type: "special", text: "✨ Year-End Festive (歲末節慶)" },
       { type: "pace", en: "🧘 Relaxed", zh: "🧘 輕鬆悠閒" }
     ],
     blocks: [
@@ -1726,7 +1726,7 @@ const ITINERARY_DATA_B = [
           },
           desc: {
             en: "Experience the vibrant year-end culinary atmosphere. Browse hundreds of stalls selling freshly grilled scallops, tamagoyaki (sweet omelette), dried goods, and premium fruit.",
-            zh: "感受除夕大晦日東京最具活力的市場氛圍！穿梭於充滿節慶氣息的熱鬧攤檔，品嚐現烤鮮甜帆立貝、香甜玉子燒及高檔日本時令水果。"
+            zh: "感受歲末東京最具活力的市場氛圍！穿梭於充滿節慶氣息的熱鬧攤檔，品嚐現烤鮮甜帆立貝、香甜玉子燒及高檔日本時令水果。"
           },
           meal: {
             icon: "🍣",
@@ -1764,28 +1764,28 @@ const ITINERARY_DATA_B = [
         time: { en: "🌆 Evening", zh: "🌆 晚上" },
         activity: {
           title: {
-            en: "Toshikoshi Soba (跨年蕎麥麵) & Joya no Kane (除夜之鐘) Countdown",
-            zh: "除夕跨年蕎麥麵、東京鐵塔夜景與寺院除夜之鐘祈福"
+            en: "Roppongi Hills Winter Illuminations & Festive Dinner",
+            zh: "六本木之丘冬季點燈夜景與精緻節慶晚餐"
           },
           desc: {
-            en: "Join Tokyo locals in the sacred tradition of eating Toshikoshi Soba to bid farewell to hardships and welcome longevity. Visit Zojoji Temple beneath Tokyo Tower to hear the atmospheric resonant 108 bell strikes (Joya no Kane) ringing in 2027.",
-            zh: "融入日本地道傳統，品嚐寓意長壽切斷厄運的「跨年蕎麥麵」。漫步至東京鐵塔旁的增上寺，聆聽迴盪於夜空的 108 響「除夜之鐘」，迎接嶄新的 2027 年。"
+            en: "Experience Tokyo's breathtaking winter illuminations along Keyakizaka Dori with the illuminated Tokyo Tower in the backdrop. Browse festive boutiques and celebrate the penultimate evening of 2026.",
+            zh: "漫步於六本木櫸坂通 (Keyakizaka)，欣賞以璀璨東京鐵塔為背景的夢幻藍白冬季點燈，感受濃厚的歲末浪漫節慶氛圍。"
           },
           meal: {
-            icon: "🍜",
-            en: "<strong>Dinner:</strong> <strong>Kanda Yabu Soba (神田藪蕎麥)</strong> or <strong>Sarashina Horii (更科堀井)</strong> — Traditional New Year's Eve hot buck-wheat soba with crisp prawn tempura.",
-            zh: "<strong>晚餐：</strong> <strong>更科堀井 / 藪蕎麥老店</strong> — 傳統大晦日必吃熱騰騰的海老天婦羅跨年蕎麥麵。"
+            icon: "🥩",
+            en: "<strong>Dinner:</strong> <strong>Roppongi Kuroge Wagyu / Yakiniku</strong> — Savor premium Japanese beef or seasonal dining in festive Tokyo.",
+            zh: "<strong>晚餐：</strong> <strong>六本木黑毛和牛燒肉 / 季節御膳</strong> — 品嚐頂級黑毛和牛或精緻日式御膳料理。"
           },
           locations: [
-            { lat: 35.6575, lng: 139.7483, label: { en: "Zojoji Temple", zh: "增上寺" } },
-            { lat: 35.6586, lng: 139.7454, label: { en: "Tokyo Tower", zh: "東京鐵塔" } }
+            { lat: 35.6599, lng: 139.7302, label: { en: "Roppongi Hills & Keyakizaka", zh: "六本木之丘 櫸坂通" } },
+            { lat: 35.6586, lng: 139.7454, label: { en: "Tokyo Tower View", zh: "東京鐵塔眺望" } }
           ]
         }
       }
     ],
     tip: {
-      en: "<strong>💡 Tip:</strong> Toshikoshi soba should be eaten before midnight to welcome good luck. Major Tokyo train lines operate special late-night services on New Year's Eve.",
-      zh: "<strong>💡 實用貼士：</strong> 跨年蕎麥麵需於午夜 12 點前吃完，象徵將過去一年的辛勞斬斷迎接新年。除夕夜東京主要鐵路亦有深夜通宵行駛安排。"
+      en: "<strong>💡 Tip:</strong> Today is Dec 30, the day before New Year's Eve. Major department stores, Tsukiji stalls, and shopping districts are bustling with festive energy. Perfect for picking up gourmet souvenirs.",
+      zh: "<strong>💡 實用貼士：</strong> 今日為 12 月 30 日歲末時分，各大百貨美食街、築地與商圈充滿熱鬧迎新氣氛，是搜羅精緻伴手禮與品嚐新鮮美饌的絕佳時機。"
     }
   },
 
@@ -1793,42 +1793,42 @@ const ITINERARY_DATA_B = [
   {
     id: "day-7",
     dayNum: "07",
-    date: "Jan 01",
+    date: "Dec 31",
     region: "tokyo",
     weather: {
       "icon": "☀️",
       "high": "11°C",
       "low": "3°C",
       "condition": {
-        "en": "Crisp New Year Sun",
-        "zh": "初日晴空"
+        "en": "Crisp Winter Sun",
+        "zh": "冬日晴空"
       }
     },
     title: {
-      en: "New Year's Day (元日): Tokyo Departure — Direct Transit to Haneda / Narita",
-      zh: "元旦新年出發日：東京告別 — 皇居悠閒漫步與直達羽田/成田機場返程"
+      en: "New Year's Eve: Tokyo Departure — Direct Transit to Haneda / Narita",
+      zh: "除夕告別東京：啟程返港 / 英國 — 皇居漫步與直達羽田/成田機場"
     },
     tags: [
       { type: "city", text: "✈️ Tokyo → Airport (東京 → 機場)" },
       { type: "transport", text: "✈️ Flight (航班)" },
-      { type: "special", text: "🎍 New Year (元旦新年)" }
+      { type: "special", text: "🎆 NYE (除夕大晦日)" }
     ],
     blocks: [
       {
         time: { en: "🌅 Morning", zh: "🌅 早上" },
         activity: {
           title: {
-            en: "New Year Morning Stroll at Imperial Palace East Gardens (皇居東御苑)",
-            zh: "元旦清晨皇居東御苑悠閒散步與感受新年祥和氛圍"
+            en: "New Year's Eve Morning Stroll at Imperial Palace East Gardens (皇居東御苑)",
+            zh: "除夕清晨皇居東御苑悠閒散步與感受冬日祥和"
           },
           desc: {
-            en: "Start the first morning of 2027 with a peaceful walk along the expansive moats and manicured pine gardens of the Imperial Palace. Wide, flat paths offer serene walking.",
-            zh: "在 2027 年的第一個清晨，漫步於皇居護城河畔與平坦的古松庭園，感受日本元旦特有的祥和肅穆新年氣息。"
+            en: "Start the final morning of 2026 with a peaceful walk along the expansive moats and manicured pine gardens of the Imperial Palace. Wide, flat paths offer serene walking before departure.",
+            zh: "在 2026 年的最後一個清晨，漫步於皇居護城河畔與古松庭園，感受東京年末特有的祥和肅穆氣息。"
           },
           meal: {
             icon: "🍳",
-            en: "<strong>Breakfast:</strong> Festive hotel breakfast buffet featuring traditional Ozoni (New Year mochi soup).",
-            zh: "<strong>早餐：</strong> 酒店元旦特色早餐，品嚐象徵吉祥的日式年糕雜煮 (Ozoni)。"
+            en: "<strong>Breakfast:</strong> Relaxing hotel breakfast buffet or morning bakery cafe in Marunouchi.",
+            zh: "<strong>早餐：</strong> 酒店豐盛早餐或丸之內精緻烘焙咖啡館享用晨間咖啡可頌。"
           },
           locations: [
             { lat: 35.6852, lng: 139.7528, label: { en: "Imperial Palace East Gardens", zh: "皇居東御苑" } }
@@ -1848,8 +1848,8 @@ const ITINERARY_DATA_B = [
           },
           meal: {
             icon: "🍜",
-            en: "<strong>Lunch / Pre-flight meal:</strong> Airport dining: hot ramen at Rokurinsha or fresh sushi at the international departure lounge.",
-            zh: "<strong>午餐 / 候機餐點：</strong> 機場航廈品嚐六厘舍沾麵或登機大堂的現做壽司。"
+            en: "<strong>Lunch / Pre-flight meal:</strong> Airport dining: hot Toshikoshi Soba or steaming ramen at the international departure terminal.",
+            zh: "<strong>午餐 / 候機餐點：</strong> 機場航廈品嚐除夕大晦日熱騰騰的蕎麥麵或拉麵。"
           },
           locations: [
             { lat: 35.5494, lng: 139.7798, label: { en: "Haneda Airport", zh: "羽田機場" } },
@@ -1880,8 +1880,8 @@ const ITINERARY_DATA_B = [
       }
     ],
     tip: {
-      en: "<strong>💡 Tip:</strong> Plan B enables round-trip flights in and out of Tokyo (HND/NRT), avoiding multi-city transit through Osaka and allowing direct flights back to the UK.",
-      zh: "<strong>💡 實用貼士：</strong> 方案 B 實現東京 (HND/NRT) 原地往返，無需拖著行李橫跨關西，更可享受直飛往返倫敦、香港或轉機愛丁堡。"
+      en: "<strong>💡 Tip:</strong> Departing on Dec 31 lets you celebrate New Year's Eve in comfort or land back home refreshed for New Year's Day. Plan B enables round-trip flights directly in and out of Tokyo (HND/NRT).",
+      zh: "<strong>💡 實用貼士：</strong> 12 月 31 日除夕出發可舒適踏上歸途，在元旦前返抵家中與親友迎新。方案 B 實現東京 (HND/NRT) 原地往返，無需拖著行李橫跨關西。"
     }
   }
 ];

@@ -188,4 +188,3 @@ function flightsSelectTab(index) {
   document.querySelectorAll('.flights-route-panel').forEach((p, i) =>
     p.classList.toggle('active', i === index));
 }
-

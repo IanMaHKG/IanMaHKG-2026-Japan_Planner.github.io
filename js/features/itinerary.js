@@ -198,4 +198,3 @@ function toggleDay(header) {
 function initDayCards() {
   // All cards start collapsed
 }
-

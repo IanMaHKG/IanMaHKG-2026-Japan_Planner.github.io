@@ -258,4 +258,3 @@ function toggleCarTips(btn) {
   btn.setAttribute('aria-expanded', isOpen);
   if (chevron) chevron.style.transform = isOpen ? 'rotate(180deg)' : '';
 }
-

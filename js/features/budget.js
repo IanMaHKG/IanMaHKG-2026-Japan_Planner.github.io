@@ -45,4 +45,3 @@ function renderBudget(plan) {
   tbodyEl.innerHTML = rowsHtml + totalHtml;
   if (typeof updateConvertedBudgets === 'function') updateConvertedBudgets();
 }
-

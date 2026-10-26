@@ -86,4 +86,3 @@ function renderOverview(plan) {
     `).join('');
   }
 }
-

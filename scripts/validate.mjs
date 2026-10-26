@@ -30,15 +30,53 @@ for (const f of [...walk('js', '.js'), ...walk('data', '.js'), 'sw.js']) {
   try { new vm.Script(read(f), { filename: f }); checks++; } catch (e) { fail(`syntax: ${f}: ${e.message}`); }
 }
 
-/* 2. manifest */
-let manifest;
-try { manifest = JSON.parse(read('manifest.json')); checks++; } catch (e) { fail('manifest.json invalid: ' + e.message); }
-if (manifest) for (const ic of manifest.icons || []) ok(exists(ic.src), `manifest icon missing: ${ic.src}`);
+/* 2. JSON validation (all repo JSON files + manifest) */
+const jsonFiles = walk('.', '.json').filter((f) => !f.startsWith('.git') && !f.startsWith('.agents'));
+for (const f of jsonFiles) {
+  try {
+    const data = JSON.parse(read(f));
+    checks++;
+    if (f === 'manifest.json') {
+      for (const ic of data.icons || []) ok(exists(ic.src), `manifest icon missing: ${ic.src}`);
+    }
+  } catch (e) {
+    fail(`json syntax: ${f}: ${e.message}`);
+  }
+}
 
-/* 3. index.html references + unique ids */
+/* 3. HTML validation (index.html structure, tags, references, unique ids) */
 const html = read('index.html');
+ok(/<!doctype html>/i.test(html), 'index.html missing <!DOCTYPE html>');
+ok(/<html[^>]*lang=["'](?:en|zh)["'][^>]*>/i.test(html), 'index.html missing <html lang="...">');
+ok(/<head>[\s\S]*<\/head>/i.test(html), 'index.html missing <head>...</head>');
+ok(/<body>[\s\S]*<\/body>/i.test(html), 'index.html missing <body>...</body>');
+
 const refs = [...html.matchAll(/<(?:script|link)[^>]+(?:src|href)="([^"#?]+)"/g)].map((m) => m[1]).filter((u) => !/^(https?:)?\/\//.test(u));
 for (const r of refs) ok(exists(r), `index.html references missing file: ${r}`);
+
+const imgRefs = [...html.matchAll(/<img[^>]+src="([^"#?]+)"/g)].map((m) => m[1]).filter((u) => !/^(https?:)?\/\//.test(u) && !u.startsWith('data:'));
+for (const img of imgRefs) ok(exists(img), `index.html img missing on disk: ${img}`);
+
+// Tag balance validation (excluding void and self-closing elements)
+const voidTags = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr']);
+const cleanHtml = html.replace(/<!--[\s\S]*?-->/g, '').replace(/<(script|style)[^>]*>[\s\S]*?<\/\1>/gi, '');
+const tagMatches = cleanHtml.matchAll(/<\/?([a-zA-Z0-9-]+)(?:\s+[^>]*)?\/?>/g);
+const tagStack = [];
+for (const m of tagMatches) {
+  const full = m[0];
+  const tag = m[1].toLowerCase();
+  if (voidTags.has(tag) || full.endsWith('/>')) continue;
+  if (full.startsWith('</')) {
+    const last = tagStack.pop();
+    if (last !== tag) {
+      fail(`index.html mismatched tag: expected </${last}>, found </${tag}>`);
+      break;
+    }
+  } else {
+    tagStack.push(tag);
+  }
+}
+ok(tagStack.length === 0, `index.html unclosed tags: ${tagStack.join(', ')}`);
 
 const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]);
 const dup = ids.filter((id, i) => ids.indexOf(id) !== i);
@@ -52,8 +90,21 @@ const assets = [...swSrc.matchAll(/'\.\/([^']+)'/g)].map((m) => m[1]).filter((a)
 for (const a of assets) ok(exists(a), `sw.js asset missing on disk: ${a}`);
 for (const r of refs.filter((x) => /\.(css|js)$/.test(x))) ok(assets.includes(r), `sw.js STATIC_ASSETS lacks ${r}`);
 
-/* 5. CSS: every file in css/ is linked (no dead stylesheets) */
-for (const f of walk('css', '.css')) ok(refs.includes(f), `css file not linked by index.html: ${f}`);
+/* 5. CSS validation: syntax, balance, and linking */
+for (const f of walk('css', '.css')) {
+  ok(refs.includes(f), `css file not linked by index.html: ${f}`);
+  const css = read(f);
+  const stripped = css
+    .replace(/\/\*[\s\S]*?\*\//g, '')
+    .replace(/"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'/g, '""');
+  const openBraces = (stripped.match(/\{/g) || []).length;
+  const closeBraces = (stripped.match(/\}/g) || []).length;
+  ok(openBraces === closeBraces, `css syntax in ${f}: mismatched braces (${openBraces} open, ${closeBraces} close)`);
+
+  const openParens = (stripped.match(/\(/g) || []).length;
+  const closeParens = (stripped.match(/\)/g) || []).length;
+  ok(openParens === closeParens, `css syntax in ${f}: mismatched parens (${openParens} open, ${closeParens} close)`);
+}
 const cssRefs = refs.filter((r) => r.endsWith('.css'));
 ok(cssRefs.at(-1) === 'css/responsive.css', 'css/responsive.css must be the last stylesheet');
 

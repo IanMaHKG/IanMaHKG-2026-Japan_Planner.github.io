@@ -57,4 +57,3 @@ function renderHotels(plan) {
 
   if (typeof initHotelSearch === 'function') initHotelSearch();
 }
-

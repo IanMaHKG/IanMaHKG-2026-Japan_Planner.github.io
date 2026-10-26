@@ -278,4 +278,3 @@
 [data-theme="dark"] .flights-route-date { background: var(--bg-secondary); color: var(--text-muted); border-color: var(--border-mid); }
 [data-theme="dark"] .flight-layover-row td { background: rgba(201, 169, 110, 0.04); }
 [data-theme="dark"] .flt-airline-logo { box-shadow: 0 1px 3px rgba(0, 0, 0, 0.45); }
-

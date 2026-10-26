@@ -115,7 +115,7 @@
     await Promise.all(
       Array.from(regionMap.values()).map(async ({ coords, days }) => {
         const url = `https://api.open-meteo.com/v1/forecast?latitude=${coords.lat}&longitude=${coords.lon}&daily=temperature_2m_max,temperature_2m_min,weather_code&timezone=Asia%2FTokyo&start_date=${qStart}&end_date=${qEnd}`;
-        
+
         let controller = null;
         let timeoutId = null;
         if (typeof AbortController !== 'undefined') {

@@ -564,7 +564,7 @@ const ITINERARY_DATA_A = [
           },
           desc: {
             en: "Wake early for a stunning Christmas morning sunrise over Mt Fuji. After breakfast, drive to <strong>Iyashi no Sato</strong> — a reconstructed traditional thatched-roof village with Mt Fuji as backdrop. Peaceful and easy walking.",
-            zh: "清晨在旅館醒來，迎接聖誕節清晨金黃色的「逆富士」日出奇景。早餐後開車前往被譽為「富士山下合掌村」的<strong>西湖療癒之里根場</strong>。漫步於传统茅草屋之間，以富士山為背景拍照留念。"
+            zh: "清晨在旅館醒來，迎接聖誕節清晨金黃色的「逆富士」日出奇景。早餐後開車前往被譽為「富士山下合掌村」的<strong>西湖療癒之里根場</strong>。漫步於傳統茅草屋之間，以富士山為背景拍照留念。"
           },
           meal: {
             icon: "🍳",
@@ -585,7 +585,7 @@ const ITINERARY_DATA_A = [
             zh: "山路自駕至箱根與大涌谷火山遺跡"
           },
           desc: {
-            en: "Scenic drive through mountain roads to Hakone (~1.5 hours). Visit <strong>Owakudani</strong> volcanic valley. Try the famous <strong>black eggs (kuro tamago / 黑玉子)</strong> boiled in sulfur springs — legend says each adds 7 years to your life!",
+            en: "Scenic drive through mountain roads to Hakone (~1.5 hours). Visit <strong>Owakudani</strong> volcanic valley. Try the famous <strong>black eggs (kuro tamago / 黑玉子)</strong> boiled in sulphur springs — legend says each adds 7 years to your life!",
             zh: "經由御殿場山路開往箱根（約 1.5 小時）。前往地熱谷<strong>大涌谷</strong>，觀察白煙繚繞的硫磺噴氣口。別忘了買一份著名的<strong>黑玉子（溫泉黑雞蛋）</strong>，傳說吃一顆能延長 7 年壽命！"
           },
           meal: {
@@ -611,7 +611,7 @@ const ITINERARY_DATA_A = [
           },
           meal: {
             icon: "🍱",
-            en: "<strong>Dinner:</strong> <strong>Kaiseki at ryokan</strong> — Expect Hakone specialties like handmade tofu skin (yuba) dishes, seasonal sashimi, and local mountain vegetables.",
+            en: "<strong>Dinner:</strong> <strong>Kaiseki at ryokan</strong> — Expect Hakone specialities like handmade tofu skin (yuba) dishes, seasonal sashimi, and local mountain vegetables.",
             zh: "<strong>晚餐：</strong> <strong>溫泉旅館節慶懷石定食</strong> —— 品嚐以箱根名產「豆腐皮 (Yuba)」製作的精緻料理，以及從相模灣新鮮直送的刺身拼盤。"
           },
           locations: [
@@ -664,7 +664,7 @@ const ITINERARY_DATA_A = [
           meal: {
             icon: "🍳",
             en: "<strong>Breakfast:</strong> <strong>Ryokan breakfast</strong> — A hearty, final hot breakfast at your resort before setting off on the road.",
-            zh: "<strong>早餐：</strong> <strong>溫泉旅館早餐</strong> —— 退房前吃饱熱呼呼的日式朝食，為今天的長途旅程儲備體力。"
+            zh: "<strong>早餐：</strong> <strong>溫泉旅館早餐</strong> —— 退房前吃飽熱呼呼的日式朝食，為今天的長途旅程儲備體力。"
           },
           locations: [
             { lat: 35.1897, lng: 139.0210, label: { en: "Lake Ashi Pier", zh: "蘆之湖碼頭" } },
@@ -685,7 +685,7 @@ const ITINERARY_DATA_A = [
           },
           meal: {
             icon: "🍜",
-            en: "<strong>Lunch:</strong> <strong>Expressway Service Area</strong> — Try regional specialties like Shizuoka green tea ice cream or grilled eel rice at a SA restaurant. NEOPASA Suruga Bay is recommended.",
+            en: "<strong>Lunch:</strong> <strong>Expressway Service Area</strong> — Try regional specialities like Shizuoka green tea ice cream or grilled eel rice at a SA restaurant. NEOPASA Suruga Bay is recommended.",
             zh: "<strong>午餐：</strong> 高速公路服務區美食 —— 日本的 SA 設施極為先進。推介在靜岡路段服務區嘗試綠茶雪糕或現場烤製的鰻魚飯定食，味道不輸市區名店。"
           },
           locations: [
@@ -754,12 +754,12 @@ const ITINERARY_DATA_A = [
             zh: "伏見稻荷大社千本鳥居"
           },
           desc: {
-            en: "Arrive by 8:00 AM to beat the crowds at Kyoto's most iconic shrine. Walk through the mesmerizing <strong>thousands of vermillion torii gates</strong> winding up the mountainside. Walk to the first viewpoint (30 min up) for an easy, barrier-free loop.",
+            en: "Arrive by 8:00 AM to beat the crowds at Kyoto's most iconic shrine. Walk through the mesmerising <strong>thousands of vermillion torii gates</strong> winding up the mountainside. Walk to the first viewpoint (30 min up) for an easy, barrier-free loop.",
             zh: "清晨 8:00 前到達，能拍到無人的朱紅色<strong>千本鳥居</strong>通道。步道沿稻荷山蜿蜒而上，空氣清新。無須登頂，漫步至第一個平台「三德社」（約半小時）即可折返，路況良好平整。"
           },
           meal: {
             icon: "🍳",
-            en: "<strong>Breakfast:</strong> <strong>Vermillion Café</strong> (near Fushimi Inari station) — Excellent coffee and Western-style breakfasts in a cozy space overlooking a pond.",
+            en: "<strong>Breakfast:</strong> <strong>Vermillion Café</strong> (near Fushimi Inari station) — Excellent coffee and Western-style breakfasts in a cosy space overlooking a pond.",
             zh: "<strong>早餐：</strong> <strong>Vermillion Café</strong> —— 緊鄰神社出口旁，坐擁幽靜池塘景致。提供香醇的澳洲式咖啡與美味的牛油果煙燻三文魚多士，環境休閒。"
           },
           locations: [
@@ -1086,7 +1086,7 @@ const ITINERARY_DATA_A = [
             zh: "道頓堀觀光船與 HEP FIVE 摩天輪夜景"
           },
           desc: {
-            en: "Enjoy the glowing neon streetscapes of Dotonbori. Take a ride on the <strong>HEP FIVE Ferris Wheel</strong> in Umeda (梅田) — some cabins feature heated kotatsu tables for a cozy winter perspective!",
+            en: "Enjoy the glowing neon streetscapes of Dotonbori. Take a ride on the <strong>HEP FIVE Ferris Wheel</strong> in Umeda (梅田) — some cabins feature heated kotatsu tables for a cosy winter perspective!",
             zh: "再次漫步道頓堀，拍攝固力果奔跑小人的經典標誌。隨後前往梅田搭乘 <strong>HEP FIVE 紅色摩天輪</strong>。在寒冬中，部分車廂會特別配備溫暖的日式「被爐（Kotatsu）」，讓全家舒適地在高空中欣賞大阪夜景。"
           },
           meal: {
@@ -1435,7 +1435,7 @@ const ITINERARY_DATA_B = [
             zh: "東京市區提取自駕租車，沿中央自動車道前往河口湖"
           },
           desc: {
-            en: "Pick up your rental car (Nissan Serena e-Power / Toyota Noah, winter tires fitted). Drive west along the Chuo Expressway (~100 km, 1.5–2 hrs) with stunning views of Mt Fuji growing larger on the horizon.",
+            en: "Pick up your rental car (Nissan Serena e-Power / Toyota Noah, winter tyres fitted). Drive west along the Chuo Expressway (~100 km, 1.5–2 hrs) with stunning views of Mt Fuji growing larger on the horizon.",
             zh: "在市區租車店提取配備雪胎的舒適 7/8 人座休旅車。取車後沿中央自動車道西行（約 100 公里，1.5–2 小時），富士山雄偉雪頂漸次映入眼簾。"
           },
           meal: {
@@ -1457,7 +1457,7 @@ const ITINERARY_DATA_B = [
             zh: "新倉山淺間公園忠靈塔遠眺與西湖療癒之里根場"
           },
           desc: {
-            en: "Take in the iconic view of the 5-story crimson pagoda framed against snow-capped Mt Fuji. Afterwards, drive 15 mins to Lake Saiko's traditional thatched-roof village.",
+            en: "Take in the iconic view of the 5-storey crimson pagoda framed against snow-capped Mt Fuji. Afterwards, drive 15 mins to Lake Saiko's traditional thatched-roof village.",
             zh: "遠眺五重朱紅忠靈塔與雪白富士山相映的經典明信片絕景。隨後驅車 15 分鐘前往西湖療癒之里根場，漫步於茅葺古民家聚落。"
           },
           meal: {
@@ -1495,7 +1495,7 @@ const ITINERARY_DATA_B = [
     ],
     tip: {
       en: "<strong>💡 Tip:</strong> Mt Fuji visibility is highest in winter mornings. Wake early for the spectacular 'Aka-Fuji' (Red Fuji) at sunrise directly from your room.",
-      zh: "<strong>💡 實用貼士：</strong> 冬季清晨能能見度最高。破曉時分不妨在房間窗前欣賞日出映照下的壯麗「赤富士」絕景。"
+      zh: "<strong>💡 實用貼士：</strong> 冬季清晨能見度最高。破曉時分不妨在房間窗前欣賞日出映照下的壯麗「赤富士」絕景。"
     }
   },
 
@@ -1554,7 +1554,7 @@ const ITINERARY_DATA_B = [
             zh: "大涌谷火山地熱谷、長壽黑玉子與蘆之湖海盜觀光船"
           },
           desc: {
-            en: "Ride the barrier-free Hakone Ropeway over steaming volcanic fumaroles. Sample famous Kuro-tamago (black eggs boiled in sulfur springs). Continue to Togendai to board the majestic Lake Ashi Pirate Cruise.",
+            en: "Ride the barrier-free Hakone Ropeway over steaming volcanic fumaroles. Sample famous Kuro-tamago (black eggs boiled in sulphur springs). Continue to Togendai to board the majestic Lake Ashi Pirate Cruise.",
             zh: "乘搭無障礙箱根空中纜車俯瞰白煙繚繞的火山口地熱景觀，品嚐相傳延壽 7 年的黑玉子。隨後於桃源台登上海盜觀光船，巡遊秀麗的蘆之湖。"
           },
           meal: {
@@ -1773,7 +1773,7 @@ const ITINERARY_DATA_B = [
           },
           meal: {
             icon: "🥩",
-            en: "<strong>Dinner:</strong> <strong>Roppongi Kuroge Wagyu / Yakiniku</strong> — Savor premium Japanese beef or seasonal dining in festive Tokyo.",
+            en: "<strong>Dinner:</strong> <strong>Roppongi Kuroge Wagyu / Yakiniku</strong> — Savour premium Japanese beef or seasonal dining in festive Tokyo.",
             zh: "<strong>晚餐：</strong> <strong>六本木黑毛和牛燒肉 / 季節御膳</strong> — 品嚐頂級黑毛和牛或精緻日式御膳料理。"
           },
           locations: [

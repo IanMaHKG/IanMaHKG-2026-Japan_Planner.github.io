@@ -217,6 +217,30 @@ if (FL && FL.routes) {
   }
 }
 
+/* 9. flight dates and logos: every option lands by its route's `arrive` date; every airline has a logo */
+const logoSrc = read('js/features/flights.js');
+const logoByAirline = Object.fromEntries([...logoSrc.matchAll(/'([^']+)':\s+'(assets\/airlines\/[^']+)'/g)].map((m) => [m[1], m[2]]));
+if (FL && FL.routes) {
+  for (const r of FL.routes) {
+    for (const o of r.options) {
+      const last = o.legs[o.legs.length - 1];
+      ok(!r.arrive || last.arr.slice(0, 10) <= r.arrive, `route ${r.id} option ${o.id} lands ${last.arr.slice(0, 10)}, after arrive ${r.arrive}`);
+      for (const l of o.legs) ok(logoByAirline[l.airline] && exists(logoByAirline[l.airline]), `no airline logo for "${l.airline}" (option ${o.id})`);
+    }
+  }
+}
+
+/* 10. content rules from .agents/AGENTS.md: British spelling, no family labels, no Simplified Chinese in data files */
+for (const f of ['data/site-data.js', 'data/itinerary-data.js']) {
+  const src = read(f);
+  const us = src.match(/\b(tires?|sulfur|specialties|mesmerizing|cozy|5-story|Savor|favorite|traveling|canceled)\b/);
+  ok(!us, `${f}: American spelling "${us && us[0]}" (use British English)`);
+  const pii = src.match(/\b(Mum|Mother|Father)\b/);
+  ok(!pii, `${f}: family label "${pii && pii[0]}" must not appear on the public site`);
+  const simp = src.match(/[传饱们这说]/);
+  ok(!simp, `${f}: Simplified Chinese character "${simp && simp[0]}" (use HK Traditional)`);
+}
+
 console.log(`${checks} checks run.`);
 if (failures.length) { console.error('\nFAILED:\n - ' + failures.join('\n - ')); process.exit(1); }
 console.log('All validation checks passed.');

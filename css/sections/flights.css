@@ -268,7 +268,6 @@
 [data-theme="dark"] .flight-option-card { background: var(--bg-card); border-color: var(--border-light); }
 [data-theme="dark"] .flight-option-header { background: var(--bg-secondary); border-color: var(--border-light); }
 [data-theme="dark"] .flight-option-label { color: var(--text-primary); }
-[data-theme="dark"] .flight-route-heading h3 { color: var(--text-primary); }
 [data-theme="dark"] .flight-legs-table thead th { background: var(--bg-secondary); color: var(--text-muted); }
 [data-theme="dark"] .flight-legs-table tbody td { color: var(--text-primary); border-color: var(--border-light); }
 [data-theme="dark"] .flight-legs-table tbody tr:hover { background: var(--bg-card-hover); }

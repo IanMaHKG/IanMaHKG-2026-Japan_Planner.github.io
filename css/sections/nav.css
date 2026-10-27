@@ -31,11 +31,6 @@
   background: var(--gradient-ba-red);
 }
 
-.nav-bar.visible {
-  transform: none;
-  opacity: 1;
-}
-
 .nav-bar.scrolled {
   background: var(--bg-nav);
   backdrop-filter: none;

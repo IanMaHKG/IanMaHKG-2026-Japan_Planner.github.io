@@ -11,7 +11,7 @@ function renderSiteContent() {
   const plan = localStorage.getItem('user-plan') || 'plan-a';
   renderOverview(plan);
   renderCarReturn(plan);
-  renderCarRental();
+  renderCarRental(plan);
   renderTips();
   renderPacking();
   renderBudget(plan);
@@ -27,6 +27,7 @@ if (typeof window !== 'undefined') {
     const plan = (e.detail && e.detail.plan) ? e.detail.plan : (localStorage.getItem('user-plan') || 'plan-a');
     renderOverview(plan);
     renderCarReturn(plan);
+    renderCarRental(plan);
     renderBudget(plan);
     renderHotels(plan);
     renderItinerary(plan);
@@ -45,8 +46,6 @@ if (typeof window !== 'undefined') {
   window.renderItinerary    = renderItinerary;
   window.toggleDay          = toggleDay;
   window.toggleCarTips      = toggleCarTips;
-  window.selectRentalPickup = selectRentalPickup;
-  window.initDayCards       = initDayCards;
   window.renderFlights      = renderFlights;
   window.flightsSelectTab   = flightsSelectTab;
   if (typeof fetchLiveWeather === 'function') window.fetchLiveWeather = fetchLiveWeather;

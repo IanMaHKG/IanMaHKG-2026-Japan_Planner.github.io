@@ -221,7 +221,7 @@ window.FLIGHTS_DATA = {
       plans: ['plan-b'],
       label: { en: 'Edinburgh → Tokyo', zh: '愛丁堡 → 東京' },
       date:  { en: 'Thu 24 Dec 2026 (depart)', zh: '2026年12月24日（出發）' },
-      arrive: '2026-12-24',
+      arrive: '2026-12-25',
       options: [
         {
           id: 'edi-tyo-b1',
@@ -286,7 +286,7 @@ window.FLIGHTS_DATA = {
       plans: ['plan-b'],
       label: { en: 'London Heathrow → Tokyo', zh: '倫敦希斯路 → 東京' },
       date:  { en: 'Thu 24 Dec 2026 (depart)', zh: '2026年12月24日（出發）' },
-      arrive: '2026-12-24',
+      arrive: '2026-12-25',
       options: [
         {
           id: 'lhr-tyo-b1',
@@ -346,7 +346,7 @@ window.FLIGHTS_DATA = {
       plans: ['plan-b'],
       label: { en: 'Hong Kong → Tokyo', zh: '香港 → 東京' },
       date:  { en: 'Fri 25 Dec 2026 (depart)', zh: '2026年12月25日（出發）' },
-      arrive: '2026-12-24',
+      arrive: '2026-12-25',
       options: [
         {
           id: 'hkg-tyo-b1',
@@ -472,7 +472,7 @@ window.FLIGHTS_DATA = {
       label: { en: 'Osaka → Hong Kong', zh: '大阪 → 香港' },
       date:  { en: 'Thu 31 Dec 2026 (depart)', zh: '2026年12月31日（出發）' },
       depart: '2026-12-31',
-      arrive: '2026-12-31',
+      arrive: '2027-01-01',
       options: [
         {
           id: 'kix-hkg-1',

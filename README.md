@@ -18,7 +18,7 @@
 
 ## Features
 
-- 🔀 **Dual-Route Architecture** — Instant live switching between **Plan A (Kansai Golden Route, 12 Days)** and **Plan B (Kanto & Shizuoka Scenic Loop, 7 Days)** via hero pills or navbar toggle, updating itinerary timeline, route maps, hotels, budget, and car return logistics without page reload
+- 🔀 **Dual-Route Architecture** — Instant live switching between **Plan A (Kansai Golden Route, 12 Days)** and **Plan B (Kanto & Shizuoka Scenic Loop, 7 Days)** via hero pills or navbar toggle, updating itinerary timeline, route maps and legend, hotel search, budget, flights, and car rental / return logistics without page reload
 - 👥 **Tailored for 2 Adults** — Senior-friendly accessible pacing (max 2–3 key activities per day, step-free access, 1 Twin Room throughout)
 - ✈️ **BA-inspired design** — Midnight Navy, BA Red & Gold palette with glassmorphism cards
 - 🎨 **Modular Design System** — Centralised design tokens in `palette.css`, componentised CSS for maintainability
@@ -39,7 +39,7 @@
 - 💰 **Budget estimate table** — per-category with live converted values for 2 adults (1 Twin Room)
 - ♿ **Accessibility (a11y)** — Full keyboard navigation (`Tab`, `Enter`, `Space`), ARIA expanded states, semantic HTML
 - 📱 **Strict Anti-Orphan Layout** — 4 vehicle cards (4 columns desktop, 2x2 tablet) and 5 hotel cards on Plan A (3+2) / 4 on Plan B (4 columns desktop, 2x2 tablet) with zero orphan cards
-- 🚗 **Car Return & Car Rental sections** — one-way drop-off comparison per plan and rental company search shortcuts
+- 🚗 **Car Return & Car Rental sections** — one-way drop-off comparison per plan; the rental intro and pickup/return notes switch with the active plan
 - ✈️ **Flight Options** — plan-aware tabs (routes tagged `plans: ['plan-a']` / `['plan-b']` only show on that plan; untagged routes show on both), up to 5 options per route, rendered from `data/flights/flights-data.js`. Each curated leg is first recorded in a CSV under `data-src/flights/` (CSV-first rule; the CSV may hold more candidates than the 5 curated options, and `scripts/validate.mjs` fails if a curated leg is missing from its CSV). Candidates are fetched with `python scripts/fetch-flights.py <FROM> <TO> <yyyy-mm-dd>` (Google Flights via `fast-flights`, no browser; browser is the fallback)
 - ⌨️ **Keyboard & motion friendly** — visible focus rings, skip link, `aria-pressed` switchers, `prefers-reduced-motion` support, back-to-top button
 
@@ -84,6 +84,9 @@
 │
 ├── data-src/flights/       # CSV archive of live-verified candidate legs (CSV first, then curated into flights-data.js; NOT deployed)
 │   ├── edi_to_tokyo_20261219.csv
+│   ├── edi_to_tokyo_b_20261224.csv
+│   ├── lhr_to_tokyo_b_20261224.csv
+│   ├── hkg_to_tokyo_b_20261225.csv
 │   ├── lhr_to_tokyo_20261219.csv
 │   ├── osaka_to_edi_20261231.csv
 │   ├── osaka_to_lhr_20261231.csv
@@ -102,8 +105,9 @@
     │   ├── tips-packing.js # renderTips / renderPacking
     │   ├── budget.js       # renderBudget
     │   ├── hotels.js       # renderHotels
-    │   ├── itinerary.js    # renderItinerary / toggleDay / initDayCards
-    │   └── flights.js      # renderFlights (reads FLIGHTS_DATA → #flights-section-content)
+    │   ├── itinerary.js    # weatherBadgeHtml / renderItinerary / toggleDay
+    │   ├── flights.js      # renderFlights (reads FLIGHTS_DATA → #flights-section-content)
+    │   └── weather.js      # fetchLiveWeather (Open-Meteo): patches day-card weather badges in place
     ├── render.js           # Orchestrator: renderSiteContent, planchange re-render, window exports
     ├── ui.js               # Navigation, language/theme selectors, observers
     └── script.js           # Application bootstrapper & SW registration
@@ -121,19 +125,19 @@ flowchart LR
     subgraph DATA["📦 Data Layer (data/)"]
         direction TB
         SD["data/site-data.js\nSITE_DATA\n\nOverview (Stops A & B) · Tips · Packing\nBudget (Plan A & B) · Hotels (Plan A & B)\nCar Return (Plan A & B) · Vehicle Rec (4 picks)"]
-        ID["data/itinerary-data.js\nITINERARY_DATA_A (12 Days)\nITINERARY_DATA_B (12 Days)\nblocks · tags · tips"]
+        ID["data/itinerary-data.js\nITINERARY_DATA_A (12 Days)\nITINERARY_DATA_B (7 Days)\nblocks · tags · tips"]
     end
 
     %% ── js/render.js ─────────────────────────────────────────────
     subgraph RENDER["🖨️ js/render.js"]
         direction TB
         rOV["renderOverview(plan)"]
-        rCAR["renderCarRental()\nrenderCarReturn(plan)"]
+        rCAR["renderCarRental(plan)\nrenderCarReturn(plan)"]
         rTIP["renderTips()"]
         rPACK["renderPacking()"]
         rBUD["renderBudget(plan)"]
         rHOT["renderHotels(plan)"]
-        rIT["renderItinerary(plan)\ninitDayCards()"]
+        rIT["renderItinerary(plan)"]
     end
 
     %% ── js/currency.js ───────────────────────────────────────────

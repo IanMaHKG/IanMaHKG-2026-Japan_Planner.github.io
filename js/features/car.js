@@ -1,43 +1,29 @@
-/* ─── Car Rental Search Section ─── */
-function renderCarRental() {
+/* --- Car Rental Search Section --- */
+function renderCarRental(plan) {
   const data = (typeof window !== 'undefined' && window.SITE_DATA) ? window.SITE_DATA.carRental : null;
   if (!data) return;
+  const isB = (plan || localStorage.getItem('user-plan')) === 'plan-b';
 
-  // Search card: intro + pickup pills
+  // Search card: intro (plan-aware)
   const searchEl = document.getElementById('rental-search-card');
   if (searchEl) {
-    const pillsHtml = data.quickPickup.map((p, i) => `
-      <button class="rental-pickup-pill${i === 0 ? ' active' : ''}"
-              onclick="selectRentalPickup(this)"
-              data-location="${p.location}">
-        <span class="lang-en">${p.label.en}</span>
-        <span class="lang-zh">${p.label.zh}</span>
-      </button>`).join('');
-
+    const intro = isB ? data.introB : data.intro;
     searchEl.innerHTML = `
       <div class="rental-search-header">
         <div class="rental-search-brand">
-          <span class="rental-brand-icon">🚗</span>
+          <span class="rental-brand-icon">??</span>
           <div>
             <h3>
               <span class="lang-en">Japan Rental Car Finder</span>
-              <span class="lang-zh">日本租車搜尋器</span>
+              <span class="lang-zh">???????</span>
             </h3>
             <p class="rental-intro">
-              <span class="lang-en">${data.intro.en}</span>
-              <span class="lang-zh">${data.intro.zh}</span>
+              <span class="lang-en">${intro.en}</span>
+              <span class="lang-zh">${intro.zh}</span>
             </p>
           </div>
         </div>
-        <div class="rental-pickup-row">
-          <span class="rental-pickup-label">
-            <span class="lang-en">📍 Pickup location:</span>
-            <span class="lang-zh">📍 取車地點：</span>
-          </span>
-          <div class="rental-pickup-pills">${pillsHtml}</div>
-        </div>
-      </div>
-    `;
+      </div>`;
   }
 
   // Vehicle size recommendation
@@ -120,8 +106,8 @@ function renderCarRental() {
           </p>
           <ul class="rental-features">${featuresHtml}</ul>
           <div class="rental-note">
-            <span class="lang-en">${co.note.en}</span>
-            <span class="lang-zh">${co.note.zh}</span>
+            <span class="lang-en">${(isB ? co.noteB : co.note).en}</span>
+            <span class="lang-zh">${(isB ? co.noteB : co.note).zh}</span>
           </div>
           <a href="${co.searchUrl}" target="_blank" rel="noopener"
              class="rental-book-btn" id="${co.id}-btn">
@@ -132,12 +118,6 @@ function renderCarRental() {
       `;
     }).join('');
   }
-}
-
-function selectRentalPickup(btn) {
-  const all = btn.closest('.rental-pickup-pills').querySelectorAll('.rental-pickup-pill');
-  all.forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
 }
 
 /* ─── Car Return Decision Helper Section ─── */

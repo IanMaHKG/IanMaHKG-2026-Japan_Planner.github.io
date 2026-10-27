@@ -50,6 +50,22 @@ function renderOverview(plan) {
     }
   }
 
+  const legendEl = document.getElementById('map-legend');
+  if (legendEl) {
+    const legs = currentPlan === 'plan-b'
+      ? [['leg-tokyo', 'Tokyo (東京) (Days 1–2)', '東京 (第 1–2 天)'],
+         ['leg-fuji', 'Mt Fuji & Hakone Drive (Days 3–5)', '富士山及箱根自駕 (第 3–5 天)'],
+         ['leg-kansai', 'Kamakura, Yokohama & Tokyo Finale (Days 5–7)', '鎌倉、橫濱及東京終站 (第 5–7 天)']]
+      : [['leg-tokyo', 'Tokyo (東京) (Days 1–4)', '東京 (第 1–4 天)'],
+         ['leg-fuji', 'Mt Fuji Drive (富士山自駕) (Days 5–7)', '富士山自駕路段 (第 5–7 天)'],
+         ['leg-kansai', 'Kansai (關西) (Days 7–12)', '關西 (第 7–12 天)']];
+    legendEl.innerHTML = legs.map(([cls, en, zh]) => `
+      <div class="legend-item">
+        <div class="legend-dot ${cls}"></div>
+        <span><span class="lang-en">${en}</span><span class="lang-zh">${zh}</span></span>
+      </div>`).join('');
+  }
+
   const stops = currentPlan === 'plan-b' ? data.routeStopsB : data.routeStopsA;
   const trackWrapEl = document.querySelector('.route-track-wrap');
   if (trackWrapEl) {

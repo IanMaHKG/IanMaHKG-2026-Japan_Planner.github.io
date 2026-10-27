@@ -12,7 +12,6 @@ function renderFlights(plan) {
   // Routes without `plans` show on both plans; others only on the plans they list.
   const currentPlan = plan || localStorage.getItem('user-plan') || 'plan-a';
   const routes = data.routes.filter(r => !r.plans || r.plans.includes(currentPlan));
-  const hasPlanRoutes = data.routes.some(r => r.plans && r.plans.includes(currentPlan));
 
   // Detect language
   const isZh = document.body.classList.contains('lang-zh-hk');
@@ -40,6 +39,7 @@ function renderFlights(plan) {
     'SWISS':                            'assets/airlines/lx.svg',
     'Edelweiss Air (for SWISS)':        'assets/airlines/wk.svg',
     'Etihad Airways':                   'assets/airlines/ey.svg',
+    'Qatar Airways':                    'assets/airlines/qr.svg',
     'Cathay Pacific':                   'assets/airlines/cx.svg',
     'Hong Kong Express':                'assets/airlines/uo.svg',
     'Peach Aviation':                   'assets/airlines/mm.svg',
@@ -167,17 +167,9 @@ function renderFlights(plan) {
       </div>`;
   }).join('');
 
-  // Interim note: shown while the active plan has no route of its own (e.g. Tokyo returns for Plan B)
-  const planNoteHtml = hasPlanRoutes ? '' : `
-    <p class="section-subtitle">
-      <span class="lang-en">Return flights for this plan depart from Tokyo (HND/NRT); verified options will be added here.</span>
-      <span class="lang-zh">此方案回程由東京（羽田/成田）出發，經核實的航班選擇將會在此補充。</span>
-    </p>`;
-
   el.innerHTML = `
     <div class="flights-route-tabs" role="tablist">${tabsHtml}</div>
     ${panelsHtml}
-    ${planNoteHtml}
   `;
 }
 

@@ -54,50 +54,6 @@
 
 .rental-intro strong { color: #fff; }
 
-.rental-pickup-row {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.rental-pickup-label {
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.70);
-  white-space: nowrap;
-}
-
-.rental-pickup-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.rental-pickup-pill {
-  padding: 6px 14px;
-  border-radius: var(--radius-pill);
-  border: 1.5px solid rgba(255, 255, 255, 0.30);
-  background: transparent;
-  color: rgba(255, 255, 255, 0.80);
-  font-size: 0.8rem;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: var(--font-primary);
-  transition: all var(--transition-fast);
-}
-
-.rental-pickup-pill:hover {
-  border-color: rgba(255, 255, 255, 0.65);
-  color: #fff;
-}
-
-.rental-pickup-pill.active {
-  background: rgba(255, 255, 255, 0.18);
-  border-color: #fff;
-  color: #fff;
-}
-
 .rental-companies-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

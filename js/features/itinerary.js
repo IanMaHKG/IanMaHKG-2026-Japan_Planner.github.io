@@ -1,3 +1,23 @@
+/* ─── Day weather badge (also used by weather.js to refresh a card in place) ─── */
+function weatherBadgeHtml(day) {
+  return day.weather ? `
+          <div class="day-weather" aria-label="Weather: ${day.weather.high} / ${day.weather.low}" title="${day.weather._live ? '🔴 Live Open-Meteo Forecast · Updated ' + day.weather._liveTimestamp + ' · ' : 'Curated Winter Forecast · '}${day.weather.high} / ${day.weather.low}">
+            <span class="weather-day-icon">${day.weather.icon}</span>
+            <div class="weather-meta">
+              <div class="weather-temp-range">
+                <span class="temp-high">${day.weather.high}</span>
+                <span class="temp-divider">/</span>
+                <span class="temp-low">${day.weather.low}</span>
+                ${day.weather._live ? '<span class="weather-live-chip">🔴 LIVE</span>' : ''}
+              </div>
+              <div class="weather-condition">
+                <span class="lang-en">${day.weather.condition.en}</span>
+                <span class="lang-zh">${day.weather.condition.zh}</span>
+              </div>
+            </div>
+          </div>` : '';
+}
+
 /* ─── Itinerary Timeline ─── */
 function renderItinerary(plan) {
   const currentPlan = plan || localStorage.getItem('user-plan') || 'plan-a';
@@ -94,22 +114,7 @@ function renderItinerary(plan) {
               ${tagsHtml}
             </div>
           </div>
-          ${day.weather ? `
-          <div class="day-weather" aria-label="Weather: ${day.weather.high} / ${day.weather.low}" title="${day.weather._live ? '🔴 Live Open-Meteo Forecast · Updated ' + day.weather._liveTimestamp + ' · ' : 'Curated Winter Forecast · '}${day.weather.high} / ${day.weather.low}">
-            <span class="weather-day-icon">${day.weather.icon}</span>
-            <div class="weather-meta">
-              <div class="weather-temp-range">
-                <span class="temp-high">${day.weather.high}</span>
-                <span class="temp-divider">/</span>
-                <span class="temp-low">${day.weather.low}</span>
-                ${day.weather._live ? '<span class="weather-live-chip">🔴 LIVE</span>' : ''}
-              </div>
-              <div class="weather-condition">
-                <span class="lang-en">${day.weather.condition.en}</span>
-                <span class="lang-zh">${day.weather.condition.zh}</span>
-              </div>
-            </div>
-          </div>` : ''}
+          ${weatherBadgeHtml(day)}
           <div class="day-chevron">▼</div>
         </div>
         <div class="day-body">
@@ -193,8 +198,4 @@ function toggleDay(header) {
   } else {
     if (typeof window.destroyDayMap === 'function') window.destroyDayMap(card.id);
   }
-}
-
-function initDayCards() {
-  // All cards start collapsed
 }

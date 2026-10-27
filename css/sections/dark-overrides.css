@@ -40,7 +40,6 @@
 [data-theme="dark"] .cr-cons-heading          { color: #F87171; }
 [data-theme="dark"] .cr-con strong            { color: var(--text-primary); }
 [data-theme="dark"] .cr-recommendation strong { color: var(--text-primary); }
-[data-theme="dark"] .cr-option-card h3        { color: var(--text-primary); }
 [data-theme="dark"] .cr-tip-detail strong     { color: var(--text-primary); }
 
 [data-theme="dark"] .rental-name              { color: var(--text-primary); }

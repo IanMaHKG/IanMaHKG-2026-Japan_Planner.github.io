@@ -137,6 +137,9 @@ Taiwan-specific vocabulary.
 │
 ├── data-src/flights/       # Source-of-truth CSVs (NOT deployed to GitHub Pages)
 │   ├── edi_to_tokyo_20261219.csv
+│   ├── edi_to_tokyo_b_20261224.csv
+│   ├── lhr_to_tokyo_b_20261224.csv
+│   ├── hkg_to_tokyo_b_20261225.csv
 │   ├── lhr_to_tokyo_20261219.csv
 │   ├── osaka_to_edi_20261231.csv
 │   ├── osaka_to_lhr_20261231.csv
@@ -155,8 +158,9 @@ Taiwan-specific vocabulary.
     │   ├── tips-packing.js # renderTips / renderPacking
     │   ├── budget.js       # renderBudget
     │   ├── hotels.js       # renderHotels
-    │   ├── itinerary.js    # renderItinerary / toggleDay / initDayCards
-    │   └── flights.js      # renderFlights (reads FLIGHTS_DATA → #flights-section-content)
+    │   ├── itinerary.js    # weatherBadgeHtml / renderItinerary / toggleDay
+    │   ├── flights.js      # renderFlights (reads FLIGHTS_DATA → #flights-section-content)
+    │   └── weather.js      # fetchLiveWeather (Open-Meteo): patches day-card weather badges in place
     ├── render.js           # Orchestrator: renderSiteContent, planchange re-render, window exports
     ├── ui.js               # Navigation, language/theme selectors, observers
     └── script.js           # Application bootstrapper & SW registration
@@ -180,9 +184,9 @@ Taiwan-specific vocabulary.
 - **Driving Licences:** 1 designated driver holds a **UK Photocard Driving Licence**. Japan strictly requires a **1949 Geneva Convention IDP** obtained from a UK Post Office (£5.50) before departure.
 - **Dates:** 20 Dec – 31 Dec 2026.
 - **Dual-Route Architecture:**
-  - **Plan A (Kansai Golden Route, 11 Days):** Tokyo → Kawaguchiko / Mt Fuji → Hakone → Nagoya (car return Day 7) → Kyoto / Nara → Osaka (KIX departure).
-  - **Plan B (Kanto & Shizuoka Scenic Loop, 12 Days):** Tokyo → Kawaguchiko / Mt Fuji → Hakone → Atami Onsen (Boxing Day) → Kamakura & Yokohama (night of 27 Dec in Yokohama; car return Day 9, zero drop-off fee) → Tokyo Finale (Dec 28–31) → Haneda/Narita departure. Hotel cards: Hakone 25–26, Atami 26–27, Yokohama 27–28, Tokyo 28–31 (6 cards in total).
-- **Car rental:** Pick up Day 5 (24 Dec) leaving Tokyo; return Day 7 (Plan A in Nagoya/Kyoto) or Day 9 (Plan B in Yokohama/Tokyo with ¥0 drop-off fee).
+  - **Plan A (Kansai Golden Route, 12 Days, 20–31 Dec):** Tokyo → Kawaguchiko / Mt Fuji → Hakone → Nagoya (car return Day 7) → Kyoto / Nara → Osaka (KIX departure).
+  - **Plan B (Kanto & Shizuoka Scenic Loop, 7 Days, 25–31 Dec):** Tokyo (25–27 Dec) → Kawaguchiko / Mt Fuji (27 Dec) → Hakone (28 Dec) → Kamakura & Yokohama (29 Dec; car return, zero drop-off fee) → Tokyo finale (29–31 Dec) → Haneda/Narita departure. Hotel cards: Tokyo 25–27, Kawaguchiko 27–28, Hakone 28–29, Tokyo 29–31 (4 cards in total).
+- **Car rental:** Plan A: pick up Day 5 (24 Dec) leaving Tokyo, return Day 7 (26 Dec) in Nagoya/Kyoto. Plan B: pick up Day 3 (27 Dec) leaving Tokyo, return Day 5 (29 Dec) in Yokohama with a ¥0 drop-off fee. `renderCarRental(plan)` switches `intro`/`introB` and each company's `note`/`noteB`.
 - **Vehicle Picks (4-Card Grid for 2 Adults + 6 Luggage Pieces):**
   1. Mid-size SUV (RAV4, X-Trail, Forester 4WD/AWD) — **Recommended**
   2. Liftback / Wagon (Prius 5th Gen E-Four, Corolla Touring) — **Agility & Economy Alternative**
@@ -190,7 +194,7 @@ Taiwan-specific vocabulary.
   4. Kei Car (660cc) — **Avoid**
   - Note: Enthusiast hatchbacks (GR Yaris / GR Corolla) ruled out due to tiny boot capacity and harsh ride for senior comfort.
 - **Language switch:** Always visible top of page next to the theme toggle and hamburger menu.
-- **Route Plan switch:** Available via Hero segment toggle and navbar switcher (`Plan A | Plan B`). Stored in `localStorage` under `'user-plan'`; dispatches `'planchange'` event that updates itinerary data, route board, route map, budget, hotels, and car return.
+- **Route Plan switch:** Available via Hero segment toggle and navbar switcher (`Plan A | Plan B`). Stored in `localStorage` under `'user-plan'`; dispatches `'planchange'` event that updates itinerary data, route board, route map and legend, budget, hotel search form, flights, car rental and car return.
 - **Dark mode toggle:** Moon/sun button in the nav bar; persists in `localStorage` as `user-theme`; dispatches a `'themechange'` CustomEvent that switches MapLibre map styles (Positron ↔ Fiord) and re-applies all CSS variable overrides.
 
 ### Column / Grid Layout Rule (CRITICAL)
@@ -201,7 +205,7 @@ Taiwan-specific vocabulary.
 - **Explicit Grid Rules by Item Count:**
   - **6 items** (e.g. `.tips-grid`): Use `repeat(3, 1fr)` on desktop (2 rows of 3: 3+3), `repeat(2, 1fr)` on tablet (3 rows of 2: 2+2+2), `1fr` on mobile.
   - **5 items** (e.g. `.itinerary-hotels-grid` in Plan A): Use a 6-column backbone (`grid-template-columns: repeat(6, 1fr)`) with `grid-column: span 2` and `nth-child(4)` / `nth-child(5)` offsets so the last 2 items sit centered (3+2 layout).
-  - **6 hotel cards** (`.itinerary-hotels-grid[data-count="6"]` in Plan B): 6-column backbone with `span 2` (3+3) on desktop; 2+2+2 on tablet (the `nth-child(5)` offset is reset in `responsive.css`); `1fr` on mobile.
+  - **4 hotel cards** (`.itinerary-hotels-grid[data-count="4"]` in Plan B): `repeat(4, 1fr)` on desktop, 2+2 on tablet, `1fr` on mobile.
   - **4 items** (e.g. `.overview-grid`, `.vr-grid`): Use `repeat(4, 1fr)` on desktop (1 row of 4), `repeat(2, 1fr)` on tablet (2 rows of 2), `1fr` on mobile.
   - **3 items** (e.g. `.packing-grid`, `.cr-grid`, `.rental-companies-grid`): Use `repeat(3, 1fr)` on desktop (1 row of 3), `repeat(2, 1fr)` or `1fr` on tablet/mobile.
 
@@ -356,5 +360,5 @@ Within each route, order options **by total journey time, shortest first** (calc
 - **JS load order:** `data/*` -> `currency.js` -> `map.js` -> `js/features/*.js` -> `render.js` -> `ui.js` -> `script.js`. New section renderers go in `js/features/` and must be exported in `render.js` and listed in `index.html` and `sw.js`.
 - Flight CSV sources live in `data-src/flights/` (not deployed). `flights-data.js` is what the site reads. `scripts/fetch-flights.py` (+ `scripts/requirements.txt`) is the Python flight fetcher; it is not deployed or loaded by the site.
 - **MapLibre** is pinned to an exact version with an SRI `integrity` hash in `index.html` and precached in `sw.js` (offline maps). When bumping it, update both places plus the hash; `validate.mjs` checks all three.
-- `validate.mjs` also checks: budget totals per plan, hotel nights (legs and quick-pills each cover 20–30 Dec exactly once), flight route sanity (every plan shows ≥1 route) and the CSV-superset rule.
+- `validate.mjs` also checks: every flight option lands by its route's `arrive` date, every airline in `FLIGHTS_DATA` has a logo in `js/features/flights.js` (`assets/airlines/`), British spelling / no family labels / no Simplified Chinese in `data/site-data.js` and `data/itinerary-data.js`, budget totals per plan, hotel nights (legs and quick-pills each cover 20–30 Dec exactly once), flight route sanity (every plan shows ≥1 route) and the CSV-superset rule.
 - Before committing run `node scripts/validate.mjs` (also runs in CI and blocks deploys).

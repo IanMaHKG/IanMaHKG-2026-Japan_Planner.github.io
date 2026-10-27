@@ -7,6 +7,13 @@ function renderHotels(plan) {
   const data = (currentPlan === 'plan-b') ? rootData.planB : rootData.planA;
   if (!data) return;
 
+  // Keep the search form in step with the active plan's first leg (pill 0 is rendered active)
+  const first = data.quickLegs && data.quickLegs[0];
+  if (first) {
+    const f = { 'hotel-destination': first.dest, 'hotel-checkin': first.checkin, 'hotel-checkout': first.checkout };
+    Object.keys(f).forEach(id => { const el = document.getElementById(id); if (el) el.value = f[id]; });
+  }
+
   const quickLegsEl = document.getElementById('quick-leg-pills');
   if (quickLegsEl && data.quickLegs) {
     quickLegsEl.innerHTML = data.quickLegs.map((leg, idx) => `

@@ -168,9 +168,11 @@
     );
 
     if (updatedCount > 0) {
-      if (typeof window.renderItinerary === 'function') {
-        window.renderItinerary(plan);
-      }
+      // Patch badges in place: re-rendering would close the open day card and reset the region filter
+      itin.forEach(day => {
+        const el = document.querySelector('#' + day.id + ' .day-weather');
+        if (el && day.weather) el.outerHTML = weatherBadgeHtml(day);
+      });
       console.info(`[weather] Successfully updated ${updatedCount} day card(s) with live Open-Meteo forecast (${timestamp}).`);
     }
   }

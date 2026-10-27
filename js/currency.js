@@ -17,7 +17,7 @@ function initCurrencySelector() {
   btns.forEach(btn => {
     btn.classList.toggle('active', btn.dataset.curr === currentCurr);
     btn.addEventListener('click', (e) => {
-      const selected = e.target.dataset.curr;
+      const selected = e.currentTarget.dataset.curr;
       setCurrency(selected);
       btns.forEach(b => b.classList.toggle('active', b.dataset.curr === selected));
     });

@@ -8,6 +8,16 @@ function renderBudget(plan) {
   const data = (currentPlan === 'plan-b') ? rootData.planB : rootData.planA;
   if (!data || !data.items) return;
 
+  const subEl = document.getElementById('budget-subtitle');
+  if (subEl) {
+    const b = currentPlan === 'plan-b';
+    subEl.innerHTML = b
+      ? `<span class="lang-en">Approximate costs for 2 adults, 7 days (1 Twin Room throughout, moderate comfort level).</span>
+         <span class="lang-zh">兩位成人同行，7天日本之旅大約費用估算（全程 1 間雙床房，以中等舒適標準計算，未含機票）。</span>`
+      : `<span class="lang-en">Approximate costs for 2 adults, 12 days (1 Twin Room throughout, moderate comfort level).</span>
+         <span class="lang-zh">兩位成人同行，12天日本之旅大約費用估算（全程 1 間雙床房，以中等舒適標準計算，未含機票）。</span>`;
+  }
+
   const rowsHtml = data.items.map(item => `
     <tr>
       <td>

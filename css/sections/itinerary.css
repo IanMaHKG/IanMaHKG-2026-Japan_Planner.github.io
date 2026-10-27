@@ -68,8 +68,6 @@
   transition: all var(--transition-smooth);
 }
 
-.day-card.hidden { display: none; }
-
 .day-header {
   display: flex;
   align-items: center;

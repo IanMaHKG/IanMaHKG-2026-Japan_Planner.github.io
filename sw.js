@@ -40,6 +40,7 @@ const STATIC_ASSETS = [
   './assets/airlines/lx.svg',
   './assets/airlines/mm.svg',
   './assets/airlines/nh.svg',
+  './assets/airlines/qr.svg',
   './assets/airlines/uo.svg',
   './assets/airlines/wk.svg',
   './css/palette.css',
@@ -124,7 +125,7 @@ self.addEventListener('fetch', (event) => {
       fetch(req).then((res) => {
         if (res && (res.status === 200 || res.type === 'opaque')) {
           const copy = res.clone();
-          caches.open(RUNTIME_CACHE).then((c) => c.put(req, copy)).then(trimRuntimeCache);
+          event.waitUntil(caches.open(RUNTIME_CACHE).then((c) => c.put(req, copy)).then(trimRuntimeCache));
         }
         return res;
       }).catch(() => caches.match(req))
@@ -138,7 +139,7 @@ self.addEventListener('fetch', (event) => {
       fetch(req).then((res) => {
         if (res && res.status === 200) {
           const copy = res.clone();
-          caches.open(CACHE_NAME).then((c) => c.put(req, copy));
+          event.waitUntil(caches.open(CACHE_NAME).then((c) => c.put(req, copy)));
         }
         return res;
       }).catch(() => caches.match(req).then((hit) => hit || caches.match('./index.html')))
@@ -151,7 +152,7 @@ self.addEventListener('fetch', (event) => {
     caches.open(CACHE_NAME).then((cache) =>
       cache.match(req).then((cached) => {
         const network = fetch(req).then((res) => {
-          if (res && res.status === 200) cache.put(req, res.clone());
+          if (res && res.status === 200) event.waitUntil(cache.put(req, res.clone()));
           return res;
         }).catch(() => cached || new Response('Offline', { status: 503, statusText: 'Offline' }));
         return cached || network;

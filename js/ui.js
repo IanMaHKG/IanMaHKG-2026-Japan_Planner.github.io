@@ -63,7 +63,7 @@ function initLanguageSelector() {
     btn.classList.toggle('active', btn.dataset.lang === currentLang);
     btn.setAttribute('aria-pressed', String(btn.dataset.lang === currentLang));
     btn.addEventListener('click', (e) => {
-      const selected = e.target.dataset.lang;
+      const selected = e.currentTarget.dataset.lang;
       setLanguage(selected);
       btns.forEach(b => {
         b.classList.toggle('active', b.dataset.lang === selected);
@@ -199,6 +199,7 @@ function initParticles() {
 
 /* ─── Scroll Reveal Observer ─── */
 function initScrollReveal() {
+  document.querySelectorAll('section.section').forEach(s => s.classList.add('reveal'));
   const reveals = document.querySelectorAll('.reveal');
   if (!reveals.length) return;
 

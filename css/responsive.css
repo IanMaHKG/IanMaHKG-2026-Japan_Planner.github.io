@@ -85,7 +85,7 @@
     gap: 16px;
   }
   .packing-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     gap: 16px;
   }
 
@@ -269,7 +269,6 @@
 
   #route-map { height: 350px; }
   .map-legend { gap: 10px; padding: 0 8px; }
-  .tips-grid { grid-template-columns: 1fr; }
 
   .nav-inner { padding: 0 16px; }
   .nav-logo { font-size: 0.95rem; gap: 8px; }
@@ -295,9 +294,6 @@
   }
   .itinerary-hotels-grid > .hotel-leg-card:nth-child(5) {
     grid-column: 1 / -1 !important;
-  }
-  .itinerary-hotels-grid[data-count="6"] > .hotel-leg-card:nth-child(5) {
-    grid-column: span 1 !important;
   }
   .day-card.open .day-map { height: 220px; }
 }
@@ -326,7 +322,7 @@
   .section-title { font-size: 1.6rem; }
   .section-subtitle { font-size: 0.9rem; margin-bottom: 30px; }
   .overview-grid { grid-template-columns: 1fr; }
-  .packing-grid { grid-template-columns: 1fr; }
+  .tips-grid { grid-template-columns: 1fr; }
   .day-header { padding: 12px 10px; gap: 8px; }
   .day-weather {
     padding: 3px 7px;
@@ -384,40 +380,8 @@
   padding-top: env(safe-area-inset-top, 0px);
 }
 
-@media (max-width: 768px) {
-  .mobile-bottom-nav {
-    height: calc(64px + env(safe-area-inset-bottom, 0px));
-  }
-}
-
 /* ── CJK Typography: prevent orphaned characters in subtitles ── */
-body.lang-zh .section-subtitle,
-body.lang-secondary .section-subtitle,
-body.lang-zh-cn .section-subtitle,
-body.lang-tertiary .section-subtitle {
+body.lang-zh-hk .section-subtitle {
   word-break: keep-all;
   overflow-wrap: anywhere;
-}
-
-/* ── Food Filter Pills: right-edge fade to hint horizontal scroll ── */
-@media (max-width: 768px) {
-  .food-filter-container {
-    position: relative;
-  }
-
-  .food-filter-container::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    width: 36px;
-    background: linear-gradient(to left, var(--bg-primary, #0F172A), transparent);
-    pointer-events: none;
-    border-radius: 0 var(--radius-pill, 9999px) var(--radius-pill, 9999px) 0;
-  }
-
-  [data-theme="light"] .food-filter-container::after {
-    background: linear-gradient(to left, var(--bg-primary, #FFFFFF), transparent);
-  }
 }

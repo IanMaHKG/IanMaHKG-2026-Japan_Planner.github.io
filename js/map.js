@@ -68,15 +68,6 @@ function initRouteMap() {
     return p === 'plan-b' ? data.overview.routeStopsB : data.overview.routeStopsA;
   };
 
-  const initialPlan = localStorage.getItem('user-plan') || 'plan-a';
-  const initialStops = getActiveStops(initialPlan);
-
-  const coords = initialStops.map(s => [s.lng, s.lat]);
-  const bounds = coords.reduce(
-    (b, c) => b.extend(c),
-    new maplibregl.LngLatBounds(coords[0], coords[0])
-  );
-
   const map = new maplibregl.Map({
     container: 'route-map',
     style: getStyle(),
@@ -318,7 +309,6 @@ function initDayMap(dayId) {
     });
   };
 
-  let markersAdded = false;
   const markerRefs = [];
   let dayMapReady = false;
 
@@ -326,7 +316,6 @@ function initDayMap(dayId) {
     dayMapReady = true;
     addDayLayers();
 
-    markersAdded = true;
     const lang = getLang();
     points.forEach((point, idx) => {
       const el = document.createElement('div');

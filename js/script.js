@@ -32,7 +32,6 @@ function bootstrap() {
   if (typeof initCurrencySelector === 'function') initCurrencySelector();
   if (typeof initParticles === 'function') initParticles();
   if (typeof initNav === 'function') initNav();
-  if (typeof initDayCards === 'function') initDayCards();
   if (typeof initFilters === 'function') initFilters();
   if (typeof initScrollReveal === 'function') initScrollReveal();
   if (typeof initSmoothScroll === 'function') initSmoothScroll();

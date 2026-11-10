@@ -35,10 +35,6 @@
   box-shadow: var(--shadow-btn);
 }
 
-.plan-b-tab {
-  display: none;
-}
-
 .timeline {
   display: flex;
   flex-direction: column;
@@ -365,4 +361,73 @@
 
 .day-map .maplibregl-popup-tip {
   border-top-color: #FFFFFF !important;
+}
+
+/* ─── Activity option toggle (pick one of several choices inside a block) ─── */
+.activity-options {
+  margin-top: 14px;
+  padding: 12px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+}
+
+.activity-options-bar {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.activity-option-btn {
+  padding: 7px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-mid);
+  border-radius: var(--radius-pill);
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: var(--font-primary);
+}
+
+.activity-option-btn:hover {
+  border-color: var(--ba-blue);
+  color: var(--ba-blue);
+}
+
+.activity-option-btn.active {
+  background: var(--ba-blue);
+  border-color: var(--ba-blue);
+  color: #fff;
+  box-shadow: var(--shadow-btn);
+}
+
+.activity-option-panel {
+  display: none;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.activity-option-panel.active {
+  display: flex;
+}
+
+.activity-option-panel li {
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.activity-option-panel li strong {
+  display: block;
+  color: var(--ba-midnight);
+}
+
+[data-theme="dark"] .activity-option-panel li strong {
+  color: var(--text-primary);
 }

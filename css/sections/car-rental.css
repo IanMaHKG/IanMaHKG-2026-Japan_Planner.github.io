@@ -54,10 +54,50 @@
 
 .rental-intro strong { color: #fff; }
 
-.rental-companies-grid {
+.rental-booking-summary {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-lg);
+  padding: 18px 24px;
+  margin-bottom: 20px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.92rem;
+}
+
+.rental-booking-summary strong { color: #fff; }
+.rental-booking-summary p { margin: 6px 0 0; }
+.rental-booking-status { color: #86efac; font-weight: 700; }
+
+.rental-booking-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
+}
+
+.rental-booking-card .rental-book-btn { margin-top: auto; }
+.rental-booking-card a { color: var(--ba-blue); }
+.rental-booking-card a.rental-book-btn { color: #fff; }
+
+.rental-price-table {
+  width: calc(100% - 40px);
+  margin: 0 20px 16px;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+.rental-price-table td {
+  padding: 5px 0;
+  border-bottom: 1px solid var(--border-light);
+  color: var(--text-secondary);
+}
+
+.rental-price-table td:last-child { text-align: right; font-weight: 600; }
+
+.rental-price-total td {
+  border-bottom: none;
+  color: var(--ba-midnight);
+  font-weight: 800;
+  font-size: 0.9rem;
 }
 
 .rental-card {
@@ -85,13 +125,6 @@
   flex-wrap: wrap;
 }
 
-.rental-logo {
-  font-size: 2.2rem;
-  line-height: 1;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
 .rental-name-wrap { flex: 1; min-width: 0; }
 
 .rental-name {
@@ -106,25 +139,6 @@
   font-size: 0.75rem;
   color: var(--text-muted);
   margin: 0;
-}
-
-.rental-badge {
-  font-size: 0.68rem;
-  font-weight: 700;
-  padding: 4px 10px;
-  border-radius: var(--radius-pill);
-  white-space: nowrap;
-  align-self: flex-start;
-  flex-shrink: 0;
-}
-
-.rental-tagline {
-  font-size: 0.83rem;
-  color: var(--text-secondary);
-  padding: 12px 20px 0;
-  margin: 0;
-  line-height: 1.5;
-  font-style: italic;
 }
 
 .rental-features {
@@ -172,116 +186,3 @@
 }
 
 .rental-book-btn:hover { background: var(--ba-blue); }
-
-.rental-vehicle-rec {
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: var(--radius-lg);
-  padding: 24px 28px;
-  margin-bottom: 28px;
-}
-
-.vr-heading {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  margin-bottom: 20px;
-}
-
-.vr-heading-icon {
-  font-size: 1.8rem;
-  flex-shrink: 0;
-  line-height: 1;
-  margin-top: 3px;
-}
-
-.vr-heading-title {
-  font-size: 1.05rem;
-  font-weight: 800;
-  color: #fff;
-  margin: 0 0 5px;
-}
-
-.vr-luggage-context {
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.75);
-  line-height: 1.6;
-  margin: 0;
-}
-
-.vr-luggage-context strong { color: #fff; }
-
-.vr-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-}
-
-.vr-card {
-  background: #fff;
-  border-radius: var(--radius-md);
-  border-top: 4px solid var(--border-light);
-  padding: 16px 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
-  transition: transform var(--transition-smooth);
-}
-
-.vr-card:hover { transform: translateY(-3px); }
-
-.vr-recommended { border-top-color: #22c55e; }
-.vr-alternative  { border-top-color: #f59e0b; }
-.vr-avoid        { border-top-color: #ef4444; }
-
-.vr-card-top {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.vr-icon { font-size: 1.8rem; flex-shrink: 0; line-height: 1; }
-.vr-info { flex: 1; min-width: 0; }
-
-.vr-category {
-  font-size: 0.9rem;
-  font-weight: 800;
-  color: var(--ba-midnight);
-  margin: 0 0 2px;
-}
-
-.vr-models {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  margin: 0;
-}
-
-.vr-badge {
-  font-size: 0.66rem;
-  font-weight: 700;
-  padding: 4px 9px;
-  border-radius: var(--radius-pill);
-  white-space: nowrap;
-  align-self: flex-start;
-  flex-shrink: 0;
-}
-
-.vr-boot {
-  font-size: 0.78rem;
-  color: var(--text-secondary);
-  margin: 0;
-  line-height: 1.4;
-}
-
-.vr-boot strong { color: var(--ba-midnight); }
-
-.vr-why {
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-  line-height: 1.55;
-  margin: 0;
-}
-
-.vr-why strong { color: var(--ba-midnight); font-weight: 600; }

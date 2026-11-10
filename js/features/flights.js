@@ -3,15 +3,13 @@
  * Renders the Flight Options section from window.FLIGHTS_DATA.
  * Displays up to 5 route options per tab, each with a legs table.
  */
-function renderFlights(plan) {
+function renderFlights() {
   const el = document.getElementById('flights-section-content');
   if (!el) return;
   const data = (typeof window !== 'undefined' && window.FLIGHTS_DATA) ? window.FLIGHTS_DATA : null;
   if (!data || !data.routes || !data.routes.length) return;
 
-  // Routes without `plans` show on both plans; others only on the plans they list.
-  const currentPlan = plan || localStorage.getItem('user-plan') || 'plan-a';
-  const routes = data.routes.filter(r => !r.plans || r.plans.includes(currentPlan));
+  const routes = data.routes;
 
   // Detect language
   const isZh = document.body.classList.contains('lang-zh-hk');
@@ -34,18 +32,14 @@ function renderFlights(plan) {
     'British Airways':                  'assets/airlines/ba.svg',
     'Finnair':                          'assets/airlines/ay.svg',
     'Finnair (opr. Nordic Reg)':        'assets/airlines/ay.svg',
-    'Finnair (operated by Nordic Reg)': 'assets/airlines/ay.svg',
     'Lufthansa':                        'assets/airlines/lh.svg',
     'SWISS':                            'assets/airlines/lx.svg',
     'Edelweiss Air (for SWISS)':        'assets/airlines/wk.svg',
-    'Etihad Airways':                   'assets/airlines/ey.svg',
     'Qatar Airways':                    'assets/airlines/qr.svg',
     'Cathay Pacific':                   'assets/airlines/cx.svg',
     'Hong Kong Express':                'assets/airlines/uo.svg',
-    'Peach Aviation':                   'assets/airlines/mm.svg',
     'All Nippon Airways':               'assets/airlines/nh.svg',
     'Japan Airlines':                   'assets/airlines/jl.svg',
-    'Jetstar Japan':                    'assets/airlines/gk.svg',
   };
 
   // Winter UTC offsets live once in FLIGHTS_DATA.tz (also read by scripts/validate.mjs)

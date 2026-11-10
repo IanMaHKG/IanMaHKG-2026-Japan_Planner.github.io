@@ -3,7 +3,9 @@
    ═══════════════════════════════════════════════════ */
 
 /* ── Reset & Box Sizing ── */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -109,11 +111,11 @@ img {
 }
 
 /* ── Visibility Rules — Language & Currency ── */
-body.lang-en .lang-zh     { display: none !important; }
+body.lang-en .lang-zh { display: none !important; }
 body.lang-zh-hk .lang-en { display: none !important; }
 
-body.lang-en span.lang-en       { display: inline !important; }
-body.lang-zh-hk span.lang-zh   { display: inline !important; }
+body.lang-en span.lang-en { display: inline !important; }
+body.lang-zh-hk span.lang-zh { display: inline !important; }
 
 body.curr-hkd .curr-gbp { display: none !important; }
 body.curr-gbp .curr-hkd { display: none !important; }
@@ -134,7 +136,6 @@ body.curr-gbp span.curr-gbp { display: inline !important; }
   background: rgba(7, 90, 170, 0.18);
   color: var(--ba-midnight);
 }
-
 
 /* ── Accessibility: focus, reduced motion, touch targets ── */
 :focus-visible {
@@ -157,7 +158,9 @@ body.curr-gbp span.curr-gbp { display: inline !important; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, *::before, *::after {
+  *,
+*::before,
+*::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -167,7 +170,10 @@ body.curr-gbp span.curr-gbp { display: inline !important; }
 }
 
 @media (pointer: coarse) {
-  .day-tab, .leg-pill, .lang-btn, .plan-nav-btn, .curr-btn, .theme-toggle {
+  .day-tab,
+.lang-btn,
+.curr-btn,
+.theme-toggle {
     min-height: 44px;
   }
 }
@@ -194,10 +200,14 @@ body.curr-gbp span.curr-gbp { display: inline !important; }
 }
 .back-to-top.visible { opacity: 1; pointer-events: auto; transform: none; }
 
-
 /* ── Performance: skip layout/paint for below-the-fold sections until near the viewport ──
    (#overview and #itinerary are excluded so anchor scrolling and the active-nav spy stay exact) */
-#tips, #car-return, #car-rental, #packing, #budget, #hotels, #flights {
+#tips,
+#car-rental,
+#packing,
+#budget,
+#hotels,
+#flights {
   content-visibility: auto;
   contain-intrinsic-size: auto 900px;
 }

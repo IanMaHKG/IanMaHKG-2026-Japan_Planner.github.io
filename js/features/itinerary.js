@@ -19,20 +19,10 @@ function weatherBadgeHtml(day) {
 }
 
 /* ─── Itinerary Timeline ─── */
-function renderItinerary(plan) {
-  const currentPlan = plan || localStorage.getItem('user-plan') || 'plan-a';
+function renderItinerary() {
   const container = document.getElementById('timeline');
-  const itin = (currentPlan === 'plan-b' ? window.ITINERARY_DATA_B : window.ITINERARY_DATA_A) || window.ITINERARY_DATA;
+  const itin = window.ITINERARY_DATA;
   if (!container || !itin) return;
-
-  // Sync window.ITINERARY_DATA so day mini-maps and lookup handlers receive active data
-  window.ITINERARY_DATA = itin;
-
-  // Update day filter tab visibility
-  const planATab = document.querySelector('.plan-a-tab');
-  const planBTab = document.querySelector('.plan-b-tab');
-  if (planATab) planATab.style.display = currentPlan === 'plan-b' ? 'none' : '';
-  if (planBTab) planBTab.style.display = currentPlan === 'plan-b' ? '' : 'none';
 
   // Reset active filter button to "all" and ensure day cards are shown
   document.querySelectorAll('.day-tab').forEach(t => t.classList.remove('active'));
@@ -73,6 +63,25 @@ function renderItinerary(plan) {
           <span class="lang-zh">${block.activity.meal.zh}</span>
         </div>` : '';
 
+      const optionsHtml = (block.activity.options && block.activity.options.length) ? `
+        <div class="activity-options" data-active="0">
+          <div class="activity-options-bar" role="tablist">
+            ${block.activity.options.map((opt, oi) => `
+            <button type="button" class="activity-option-btn${oi === 0 ? ' active' : ''}" role="tab" aria-selected="${oi === 0}" onclick="selectActivityOption(this, ${oi})">
+              <span class="lang-en">${opt.label.en}</span>
+              <span class="lang-zh">${opt.label.zh}</span>
+            </button>`).join('')}
+          </div>
+          ${block.activity.options.map((opt, oi) => `
+          <ul class="activity-option-panel${oi === 0 ? ' active' : ''}" role="tabpanel">
+            ${opt.places.map(p => `
+            <li>
+              <strong class="lang-en">${p.name.en}</strong><strong class="lang-zh">${p.name.zh}</strong>
+              <span class="lang-en">${p.desc.en}</span><span class="lang-zh">${p.desc.zh}</span>
+            </li>`).join('')}
+          </ul>`).join('')}
+        </div>` : '';
+
       return `
         <div class="timeline-block">
           <div class="time-badge">
@@ -87,6 +96,7 @@ function renderItinerary(plan) {
             <p class="lang-en">${block.activity.desc.en}</p>
             <p class="lang-zh">${block.activity.desc.zh}</p>
             ${mealHtml}
+            ${optionsHtml}
           </div>
         </div>`;
     }).join('');
@@ -127,13 +137,24 @@ function renderItinerary(plan) {
       </div>`;
   }).join('\n');
 
-  // Tear down open day maps first: both plans share ids (day-1..day-12), so
+  // Tear down open day maps first: day ids are reused on every render, so
   // replacing the HTML would otherwise orphan live MapLibre instances (WebGL contexts).
   document.querySelectorAll('.day-card.open').forEach(c => {
     if (typeof window.destroyDayMap === 'function') window.destroyDayMap(c.id);
   });
 
   container.innerHTML = html;
+}
+
+/* ─── Activity option toggle (pick one of several choices inside a block) ─── */
+function selectActivityOption(btn, index) {
+  const wrap = btn.closest('.activity-options');
+  if (!wrap) return;
+  wrap.querySelectorAll('.activity-option-btn').forEach((b, i) => {
+    b.classList.toggle('active', i === index);
+    b.setAttribute('aria-selected', String(i === index));
+  });
+  wrap.querySelectorAll('.activity-option-panel').forEach((p, i) => p.classList.toggle('active', i === index));
 }
 
 /* ─── Day Card Accordion ─── */

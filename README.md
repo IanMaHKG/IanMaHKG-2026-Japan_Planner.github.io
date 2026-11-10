@@ -1,46 +1,48 @@
 # 🗾 Japan Winter Journey 2026
 
-**A modern, modular, interactive day-by-day travel itinerary for Japan with dual-route planning.**
+**A modern, modular, interactive day-by-day travel itinerary for a finalised 7-day Japan winter trip.**
 
-📅 **Dec 20 – Dec 31, 2026** · 👥 **2 Adults** · 🚗 **Self-drive + Rail** · 🔀 **Dual-Route Architecture (Plan A / Plan B)**
+📅 **Dec 25 – Dec 31, 2026** · 👥 **2 Adults** · 🚗 **2-day self-drive + Metro** · ✅ **Hotels & car rental booked**
 
 ---
 
-## Routes
+## Itinerary & Bookings
 
-### Plan A: Kansai Golden Route (12 Days)
-**Tokyo** (Days 1–4) → **Kawaguchiko / Mt Fuji** (Day 5) → **Hakone** (Days 6–7) → **Nagoya** (Day 7, transit) → **Kyoto** (Days 7–9) → **Nara** (Day 10) → **Osaka** (Days 10–12)
+**Tokyo** (Days 1–2, 25–27 Dec) → **Lake Kawaguchi, Arakurayama Sengen Park, Lake Yamanaka & Lake Ashi** (Day 3, 27 Dec self-drive) → **Hakone / Owakudani, Odawara (Totoco Odawara lunch) & a Kamakura / Enoshima / Yokohama choice** (Day 4, 28 Dec) → **Tokyo finale & NYE departure** (Days 5–7, 29–31 Dec).
 
-### Plan B: Kanto & Shizuoka Scenic Loop (7 Days)
-**Tokyo** (Days 1–2) → **Kawaguchiko / Mt Fuji** (Day 3) → **Hakone** (Day 4) → **Kamakura & Yokohama** (Day 5) → **Tokyo Finale & NYE** (Days 5–7)
+| Booking | Details |
+|---|---|
+| Hotel, 25–27 Dec (2 nights) | Villa Fontaine Tokyo Nihombashi Mitsukoshimae — ¥58,604 |
+| Hotel, 27–28 Dec (1 night) | Hotel Kagetsuen, Sengokuhara, Hakone — ¥33,264 |
+| Hotel, 28–31 Dec (3 nights) | Villa Fontaine Tokyo Hamamatsucho — ¥86,002 |
+| Car rental (paid online, ¥48,400) | Toyota Rent a Car, C3 Corolla Touring Hybrid with winter tyres. Pick up 27 Dec 09:00 at Tokyo Sta. Nihonbashi Ext. Shop; return 28 Dec by 20:00 at Nishi-Shimbashi Shop |
 
 ---
 
 ## Features
 
-- 🔀 **Dual-Route Architecture** — Instant live switching between **Plan A (Kansai Golden Route, 12 Days)** and **Plan B (Kanto & Shizuoka Scenic Loop, 7 Days)** via hero pills or navbar toggle, updating itinerary timeline, route maps and legend, hotel search, budget, flights, and car rental / return logistics without page reload
+- ✅ **Confirmed bookings** — three hotel cards and the paid Toyota Rent a Car reservation (pick-up, return, price breakdown) are built into the hotels, car and budget sections
 - 👥 **Tailored for 2 Adults** — Senior-friendly accessible pacing (max 2–3 key activities per day, step-free access, 1 Twin Room throughout)
 - ✈️ **BA-inspired design** — Midnight Navy, BA Red & Gold palette with glassmorphism cards
 - 🎨 **Modular Design System** — Centralised design tokens in `palette.css`, componentised CSS for maintainability
 - ⚡ **Universal Modular Architecture** — Clean JavaScript modules supporting static hosting and local browser preview with zero build requirements
 - 📱 **Progressive Web App (PWA)** — Offline support via Service Worker (`sw.js`) and installable web app manifest (`manifest.json`)
 - 🌙 **Dark / Light mode toggle** — persistent across sessions via `localStorage`; maps switch styles automatically (Positron ↔ Fiord)
-- 🚉 **JR Station Sign Route Board** — Authentic Japanese station sign (駅名標) timeline with Kanji, Furigana, Romaji, Station Codes & day badges (dynamically switches between Tokaido Main Line and Shizuoka Loop)
-- 📅 **7–12 expandable day cards** with morning / afternoon / evening schedules and meal picks
-- 🗺️ **Interactive route map** (MapLibre GL JS) — colour-coded route with self-drive, bullet train & local rail segments dynamically synced with active plan
+- 🚉 **JR Station Sign Route Board** — Authentic Japanese station sign (駅名標) timeline with Kanji, Furigana, Romaji, Station Codes & day badges for the six journey stops
+- 📅 **7 expandable day cards** with morning / afternoon / evening schedules and meal picks, plus on-page **choice toggles** (Day 4: Odawara Castle Park vs Hakone Shrine in the morning, and Kamakura / Enoshima / Yokohama in the afternoon)
+- 🗺️ **Interactive route map** (MapLibre GL JS) — the self-drive loop from Tokyo through Kawaguchiko, Hakone and Odawara to Tokyo Hamamatsucho
 - 🗾 **Per-day mini-maps** — lazy-initialised MapLibre map inside each accordion day card
 - 🎌 **Senior-friendly Bilingual Switcher** — Always-visible English & Traditional Chinese (`EN | 繁中`) toggle in top navigation bar with high-contrast tactile active pills
 - 💴 **Live currency conversion** — JPY → HKD or GBP via open.er-api.com
-- 🚙 **Vehicle size recommendation** — 4-card grid tailored for 2 adults + 6 luggage items (Mid-size SUV 4WD, Prius/Corolla Touring Wagon, Minivan/MPV, Kei Car avoid)
-- 🏨 **Booking.com hotel search** — pre-filled for each leg (destination, dates, 2 adults in 1 Twin Room)
-- 🏷️ **Dynamic region filter tabs** — Tokyo / Mt Fuji Drive / Kansai (Plan A) or Coastal Loop (Plan B)
+- 🧭 **Trip-story page order** — Overview → Itinerary → Map → Hotels → Car → Flights → Budget → Tips → Packing; the top menu and footer links follow exactly the same order
+- 🏷️ **Region filter tabs** — All Days / Tokyo / Mt Fuji & Hakone Drive
 - 📋 **Practical tips** — Transport passes, advance bookings, etiquette, winter driving, UK licence + 1949 IDP guidelines
 - 🧳 **Packing checklist** — winter-specific, self-drive aware
 - 💰 **Budget estimate table** — per-category with live converted values for 2 adults (1 Twin Room)
 - ♿ **Accessibility (a11y)** — Full keyboard navigation (`Tab`, `Enter`, `Space`), ARIA expanded states, semantic HTML
-- 📱 **Strict Anti-Orphan Layout** — 4 vehicle cards (4 columns desktop, 2x2 tablet) and 5 hotel cards on Plan A (3+2) / 4 on Plan B (4 columns desktop, 2x2 tablet) with zero orphan cards
-- 🚗 **Car Return & Car Rental sections** — one-way drop-off comparison per plan; the rental intro and pickup/return notes switch with the active plan
-- ✈️ **Flight Options** — plan-aware tabs (routes tagged `plans: ['plan-a']` / `['plan-b']` only show on that plan; untagged routes show on both), up to 5 options per route, rendered from `data/flights/flights-data.js`. Each curated leg is first recorded in a CSV under `data-src/flights/` (CSV-first rule; the CSV may hold more candidates than the 5 curated options, and `scripts/validate.mjs` fails if a curated leg is missing from its CSV). Candidates are fetched with `python scripts/fetch-flights.py <FROM> <TO> <yyyy-mm-dd>` (Google Flights via `fast-flights`, no browser; browser is the fallback)
+- 📱 **Strict Anti-Orphan Layout** — 4 overview cards (4 columns desktop, 2x2 tablet), 3 hotel cards and 3 car-booking cards (3 columns desktop, stacked on tablet/mobile) with zero orphan cards
+- 🚗 **Car Rental section** — one section for the paid booking: shop addresses, phone numbers, pick-up and return notes, included options and price breakdown
+- ✈️ **Flight Options** — tabs for the Tokyo round trip (outbound 24–25 Dec, return 31 Dec) and Hong Kong → Edinburgh on 14 Jan 2027, up to 5 options per route, rendered from `data/flights/flights-data.js`. Each curated leg is first recorded in a CSV under `data-src/flights/` (CSV-first rule; the CSV may hold more candidates than the 5 curated options, and `scripts/validate.mjs` fails if a curated leg is missing from its CSV). Candidates are fetched with `python scripts/fetch-flights.py <FROM> <TO> <yyyy-mm-dd>` (Google Flights via `fast-flights`, no browser; browser is the fallback)
 - ⌨️ **Keyboard & motion friendly** — visible focus rings, skip link, `aria-pressed` switchers, `prefers-reduced-motion` support, back-to-top button
 
 ---
@@ -73,24 +75,19 @@
 │   ├── base.css            # CSS reset, typography, container, a11y (focus, reduced motion), back-to-top
 │   ├── components.css      # UI components (buttons, tags, JR dots, markers)
 │   ├── sections/           # One stylesheet per page section (link order = cascade order!)
-│   │   ├── nav, hero, overview, map, tips, car-return, car-rental, itinerary,
+│   │   ├── nav, hero, overview, map, tips, car-rental, itinerary,
 │   │   │   packing, budget, hotels, footer, dark-overrides, flights (.css)
 │   └── responsive.css      # Responsive media queries (must stay last)
 │
 ├── data/                   # Data Modules (Universal format)
-│   ├── flights/flights-data.js   # FLIGHTS_DATA — airport `tz` table + routes (plan-tagged), up to 5 options each
-│   ├── site-data.js        # Overview, tips, packing, budget, hotels, car rental
-│   └── itinerary-data.js   # 12-day schedule, blocks, location coordinates
+│   ├── flights/flights-data.js   # FLIGHTS_DATA — airport `tz` table + 7 routes, up to 5 options each
+│   ├── site-data.js        # Overview, tips, packing, budget, confirmed hotels, car booking
+│   └── itinerary-data.js   # 7-day schedule, blocks, option toggles, location coordinates
 │
 ├── data-src/flights/       # CSV archive of live-verified candidate legs (CSV first, then curated into flights-data.js; NOT deployed)
-│   ├── edi_to_tokyo_20261219.csv
 │   ├── edi_to_tokyo_b_20261224.csv
 │   ├── lhr_to_tokyo_b_20261224.csv
 │   ├── hkg_to_tokyo_b_20261225.csv
-│   ├── lhr_to_tokyo_20261219.csv
-│   ├── osaka_to_edi_20261231.csv
-│   ├── osaka_to_lhr_20261231.csv
-│   ├── kix_to_hkg_20261231.csv
 │   ├── tokyo_to_edi_20261231.csv
 │   ├── tokyo_to_lhr_20261231.csv
 │   ├── tokyo_to_hkg_20261231.csv
@@ -100,7 +97,7 @@
     ├── currency.js         # Exchange rate fetch & JPY conversion
     ├── map.js              # MapLibre GL JS — overview & lazy day maps
     ├── features/           # Section renderers (load BEFORE render.js)
-    │   ├── car.js          # renderCarRental / renderCarReturn / toggleCarTips
+    │   ├── car.js          # renderCarRental
     │   ├── overview.js     # renderOverview
     │   ├── tips-packing.js # renderTips / renderPacking
     │   ├── budget.js       # renderBudget
@@ -108,7 +105,7 @@
     │   ├── itinerary.js    # weatherBadgeHtml / renderItinerary / toggleDay
     │   ├── flights.js      # renderFlights (reads FLIGHTS_DATA → #flights-section-content)
     │   └── weather.js      # fetchLiveWeather (Open-Meteo): patches day-card weather badges in place
-    ├── render.js           # Orchestrator: renderSiteContent, planchange re-render, window exports
+    ├── render.js           # Orchestrator: renderSiteContent and window exports
     ├── ui.js               # Navigation, language/theme selectors, observers
     └── script.js           # Application bootstrapper & SW registration
 ```
@@ -124,20 +121,20 @@ flowchart LR
     %% ── Data layer ───────────────────────────────────────────────
     subgraph DATA["📦 Data Layer (data/)"]
         direction TB
-        SD["data/site-data.js\nSITE_DATA\n\nOverview (Stops A & B) · Tips · Packing\nBudget (Plan A & B) · Hotels (Plan A & B)\nCar Return (Plan A & B) · Vehicle Rec (4 picks)"]
-        ID["data/itinerary-data.js\nITINERARY_DATA_A (12 Days)\nITINERARY_DATA_B (7 Days)\nblocks · tags · tips"]
+        SD["data/site-data.js\nSITE_DATA\n\nOverview (6 stops) · Tips · Packing\nBudget · Confirmed Hotels (3)\nCar Booking"]
+        ID["data/itinerary-data.js\nITINERARY_DATA (7 Days)\nblocks · tags · tips · option toggles"]
     end
 
     %% ── js/render.js ─────────────────────────────────────────────
     subgraph RENDER["🖨️ js/render.js"]
         direction TB
-        rOV["renderOverview(plan)"]
-        rCAR["renderCarRental(plan)\nrenderCarReturn(plan)"]
+        rOV["renderOverview()"]
+        rCAR["renderCarRental()"]
         rTIP["renderTips()"]
         rPACK["renderPacking()"]
-        rBUD["renderBudget(plan)"]
-        rHOT["renderHotels(plan)"]
-        rIT["renderItinerary(plan)"]
+        rBUD["renderBudget()"]
+        rHOT["renderHotels()"]
+        rIT["renderItinerary()"]
     end
 
     %% ── js/currency.js ───────────────────────────────────────────
@@ -152,7 +149,6 @@ flowchart LR
     %% ── js/ui.js ─────────────────────────────────────────────────
     subgraph UI["🎛️ js/ui.js"]
         direction TB
-        uPLAN["initPlanSwitcher()\nsetPlan()\n'planchange' event"]
         uTHEME["initTheme()\nsetTheme()\n'themechange' event"]
         uLANG["initLanguageSelector()\nsetLanguage()"]
         uNAV["initNav()\nupdateActiveNav()"]
@@ -160,27 +156,26 @@ flowchart LR
         uREV["initScrollReveal()"]
         uSCR["initSmoothScroll()"]
         uFILT["initFilters()"]
-        uHOT["initHotelSearch()"]
     end
 
     %% ── js/map.js ────────────────────────────────────────────────
     subgraph MAP["🗺️ js/map.js"]
-        mROUTE["initRouteMap()\nMapLibre GL JS + OpenFreeMap\nSyncs with 'planchange'"]
+        mROUTE["initRouteMap()\nMapLibre GL JS + OpenFreeMap"]
         mDAY["initDayMap(dayId)\nlazy per-day mini-map"]
     end
 
     %% ── HTML sections ────────────────────────────────────────────
     subgraph HTML["📄 index.html — Target Sections"]
         direction TB
-        H_HERO["✨ Hero\n#hero · #particles\n#route-switcher-hero"]
-        H_NAV["🧭 Nav\n#main-nav · #nav-links\n.plan-nav-switcher · #theme-toggle"]
+        H_HERO["✨ Hero\n#hero · #particles"]
+        H_NAV["🧭 Nav\n#main-nav · #nav-links\n#theme-toggle"]
         H_OV["🗺️ Overview\n#overview-grid · #route-stops"]
         H_RMAP["🗾 Route Map\n#route-map"]
         H_TIP["💡 Tips\n#tips-grid"]
         H_IT["📅 Itinerary\n#timeline · .day-card · .day-tab\n.day-map-*"]
         H_PACK["🧳 Packing\n#packing-grid"]
         H_BUD["💰 Budget\n#budget-tbody · .converted-val · .live-rate-date"]
-        H_HOT["🏨 Hotels\n#itinerary-hotels-grid\n#quick-leg-pills · #hotel-search-form"]
+        H_HOT["🏨 Hotels\n#itinerary-hotels-grid"]
         H_LANG["🎌 Language\nbody.lang-* · .lang-switcher"]
         H_CURR["💱 Currency\n.currency-switcher"]
     end
@@ -221,7 +216,6 @@ flowchart LR
     uNAV   --> H_NAV
     uPART  --> H_HERO
     uFILT  --> H_IT
-    uHOT   --> H_HOT
     uREV   -. "adds .reveal to all sections" .-> HTML
     uSCR   -. "intercepts all anchor links" .-> HTML
 

@@ -147,27 +147,15 @@
   height: 6px;
   background: linear-gradient(90deg,
     var(--marker-tokyo) 0%,
-    var(--marker-fuji) 17%,
-    var(--marker-hakone) 34%,
-    var(--marker-nagoya) 51%,
-    var(--marker-kyoto) 68%,
-    var(--marker-nara) 84%,
-    var(--marker-osaka) 100%
+    var(--marker-fuji) 20%,
+    var(--marker-hakone) 40%,
+    var(--marker-nagoya) 60%,
+    var(--marker-nara) 80%,
+    var(--marker-tokyo) 100%
   );
   border-radius: 4px;
   z-index: 1;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
-}
-
-.route-track-wrap[data-plan="plan-b"] .route-line {
-  background: linear-gradient(90deg,
-    var(--marker-tokyo) 0%,
-    var(--marker-fuji) 20%,
-    var(--marker-hakone) 40%,
-    var(--marker-nara) 60%,
-    var(--marker-nagoya) 80%,
-    var(--marker-tokyo) 100%
-  );
 }
 
 .route-stops {
@@ -280,13 +268,11 @@
   margin: 0;
 }
 
-.stop-dot.tokyo   { --dot-color: var(--marker-tokyo); }
-.stop-dot.fuji    { --dot-color: var(--marker-fuji); }
-.stop-dot.hakone  { --dot-color: var(--marker-hakone); }
-.stop-dot.nagoya  { --dot-color: var(--marker-nagoya); }
-.stop-dot.kyoto   { --dot-color: var(--marker-kyoto); }
-.stop-dot.nara    { --dot-color: var(--marker-nara); }
-.stop-dot.osaka   { --dot-color: var(--marker-osaka); }
+.stop-dot.tokyo { --dot-color: var(--marker-tokyo); }
+.stop-dot.fuji { --dot-color: var(--marker-fuji); }
+.stop-dot.hakone { --dot-color: var(--marker-hakone); }
+.stop-dot.nagoya { --dot-color: var(--marker-nagoya); }
+.stop-dot.nara { --dot-color: var(--marker-nara); }
 
 .jr-station-node:hover .stop-dot {
   transform: scale(1.3);

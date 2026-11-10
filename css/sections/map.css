@@ -41,8 +41,8 @@
   flex-shrink: 0;
 }
 
-.legend-dot.leg-tokyo  { background: var(--ba-red); }
-.legend-dot.leg-fuji   { background: var(--ba-blue); }
+.legend-dot.leg-tokyo { background: var(--ba-red); }
+.legend-dot.leg-fuji { background: var(--ba-blue); }
 .legend-dot.leg-kansai { background: var(--ba-gold); }
 
 /* MapLibre GL JS overrides */
@@ -111,8 +111,6 @@
 }
 
 .maplibregl-ctrl-attrib-inner a { color: var(--ba-blue) !important; }
-
-
 
 /* Contrast fix (WCAG AA): MapLibre attribution links sit on a light control background in both themes */
 .maplibregl-ctrl-attrib a { color: #0B4F8A; }

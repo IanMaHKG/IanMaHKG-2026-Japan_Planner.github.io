@@ -13,9 +13,7 @@
   const REGION_COORDS = {
     tokyo:    { lat: 35.6895, lon: 139.6917, name: 'Tokyo' },
     fuji:     { lat: 35.5031, lon: 138.7646, name: 'Kawaguchiko' },
-    hakone:   { lat: 35.2333, lon: 139.1069, name: 'Hakone' },
-    coastal:  { lat: 35.4437, lon: 139.6380, name: 'Yokohama/Kamakura' },
-    kansai:   { lat: 34.9858, lon: 135.7588, name: 'Kyoto/Osaka' }
+    hakone:   { lat: 35.2333, lon: 139.1069, name: 'Hakone' }
   };
 
   // WMO weather code mapping to emoji and bilingual conditions
@@ -56,19 +54,17 @@
   }
 
   function getDayCoords(day) {
-    if (day.id === 'day-6' && day.region === 'fuji') return REGION_COORDS.hakone;
-    if (day.id === 'day-4' && day.region === 'fuji' && day.title.en.includes('Hakone')) return REGION_COORDS.hakone;
+    if (day.id === 'day-4') return REGION_COORDS.hakone;   // Day 4 starts and lunches in Hakone / Odawara
     return REGION_COORDS[day.region] || REGION_COORDS.tokyo;
   }
 
   /**
    * Fetch live weather from Open-Meteo
-   * @param {Object} [opts] - { plan: 'plan-a'|'plan-b', simulate: boolean }
+   * @param {Object} [opts] - { simulate: boolean }
    */
   async function fetchLiveWeather(opts) {
     opts = opts || {};
-    const plan = opts.plan || localStorage.getItem('user-plan') || 'plan-a';
-    const itin = (plan === 'plan-b' ? window.ITINERARY_DATA_B : window.ITINERARY_DATA_A) || window.ITINERARY_DATA;
+    const itin = window.ITINERARY_DATA;
     if (!Array.isArray(itin) || itin.length === 0) return;
 
     const startDateIso = parseDateToIso(itin[0].date);

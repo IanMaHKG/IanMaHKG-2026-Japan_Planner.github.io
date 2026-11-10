@@ -4,55 +4,6 @@
  * scroll observers, particle backgrounds, filters, and booking widgets.
  */
 
-/* ─── Route Plan Switcher (Plan A / Plan B) ─── */
-function initPlanSwitcher() {
-  const currentPlan = localStorage.getItem('user-plan') || 'plan-a';
-  setPlan(currentPlan, true);
-
-  // Nav switcher buttons
-  const navBtns = document.querySelectorAll('.plan-nav-btn');
-  navBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const selected = e.currentTarget.dataset.plan;
-      setPlan(selected);
-    });
-  });
-
-  // Hero switcher buttons
-  const heroBtns = document.querySelectorAll('.plan-hero-btn');
-  heroBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const selected = e.currentTarget.dataset.plan;
-      setPlan(selected);
-    });
-  });
-}
-
-function setPlan(plan, isInitial = false) {
-  const safePlan = plan === 'plan-b' ? 'plan-b' : 'plan-a';
-  localStorage.setItem('user-plan', safePlan);
-
-  // Update nav buttons
-  const navBtns = document.querySelectorAll('.plan-nav-btn');
-  navBtns.forEach(b => {
-    const on = b.dataset.plan === safePlan;
-    b.classList.toggle('active', on);
-    b.setAttribute('aria-pressed', String(on));
-  });
-
-  const navSwitcher = document.querySelector('.plan-nav-switcher');
-  if (navSwitcher) {
-    navSwitcher.classList.toggle('slide-right', safePlan === 'plan-b');
-  }
-
-  // Update hero buttons
-  const heroBtns = document.querySelectorAll('.plan-hero-btn');
-  heroBtns.forEach(b => b.classList.toggle('active', b.dataset.plan === safePlan));
-
-  // Dispatch custom planchange event
-  window.dispatchEvent(new CustomEvent('planchange', { detail: { plan: safePlan, isInitial } }));
-}
-
 /* ─── Language Selector ─── */
 function initLanguageSelector() {
   const currentLang = localStorage.getItem('user-lang') || 'en';
@@ -257,56 +208,8 @@ function initFilters() {
   });
 }
 
-/* ─── Booking.com Hotel Search Form ─── */
-function initHotelSearch() {
-  const form          = document.getElementById('hotel-search-form');
-  const destInput     = document.getElementById('hotel-destination') || document.getElementById('hotel-dest');
-  const checkinInput  = document.getElementById('hotel-checkin');
-  const checkoutInput = document.getElementById('hotel-checkout');
-  const adultsSelect  = document.getElementById('hotel-adults');
-  const pills         = document.querySelectorAll('.leg-pill');
-
-  function buildBookingUrl(dest, checkin, checkout, adults) {
-    const params = new URLSearchParams({
-      ss: dest,
-      checkin: checkin,
-      checkout: checkout,
-      group_adults: adults,
-      no_rooms: '1',
-      group_children: '0'
-    });
-    return `https://www.booking.com/searchresults.html?${params.toString()}`;
-  }
-
-  pills.forEach(pill => {
-    if (pill.dataset.bound) return;
-    pill.dataset.bound = 'true';
-    pill.addEventListener('click', () => {
-      pills.forEach(p => p.classList.remove('active'));
-      pill.classList.add('active');
-      if (destInput)     destInput.value     = pill.dataset.dest     || '';
-      if (checkinInput)  checkinInput.value  = pill.dataset.checkin  || '';
-      if (checkoutInput) checkoutInput.value = pill.dataset.checkout || '';
-    });
-  });
-
-  if (form && !form.dataset.bound) {
-    form.dataset.bound = 'true';
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const dest     = destInput     ? destInput.value.trim() : 'Tokyo, Japan';
-      const checkin  = checkinInput  ? checkinInput.value     : '2026-12-20';
-      const checkout = checkoutInput ? checkoutInput.value    : '2026-12-24';
-      const adults   = adultsSelect  ? adultsSelect.value     : '2';
-      window.open(buildBookingUrl(dest, checkin, checkout, adults), '_blank', 'noopener,noreferrer');
-    });
-  }
-}
-
 if (typeof window !== 'undefined') {
-  window.initPlanSwitcher     = initPlanSwitcher;
-  window.setPlan              = setPlan;
-  window.initLanguageSelector = initLanguageSelector;
+      window.initLanguageSelector = initLanguageSelector;
   window.setLanguage          = setLanguage;
   window.initTheme             = initTheme;
   window.setTheme              = setTheme;
@@ -316,5 +219,4 @@ if (typeof window !== 'undefined') {
   window.initScrollReveal      = initScrollReveal;
   window.initSmoothScroll      = initSmoothScroll;
   window.initFilters           = initFilters;
-  window.initHotelSearch       = initHotelSearch;
 }

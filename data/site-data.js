@@ -1,62 +1,58 @@
 /**
  * @file site-data.js
- * @description DATA SOURCE — all non-itinerary content for the Japan 2026 planner.
- * Sets window.SITE_DATA, a single global object consumed by render.js and map.js.
+ * @description DATA SOURCE — all non-itinerary content for the Japan 2026 planner (25–31 Dec 2026).
+ * Sets window.SITE_DATA, a single global object consumed by the js/features/*.js renderers and map.js.
  *
  * STRUCTURE OF window.SITE_DATA:
  *
  *   overview
- *     .cards[]          3 summary cards (pace, transport, weather).
+ *     .cards[]          4 summary cards (pace, transport, weather, travellers).
  *                       Each: { id, icon, title:{en,zh}, desc:{en,zh} }
  *
- *     .routeStopsA[] / .routeStopsB[]   7 journey stops per plan, used by BOTH:
- *                         (a) the JR Station Sign route board visual in render.js
+ *     .routeStops[]     6 journey stops, used by BOTH:
+ *                         (a) the JR Station Sign route board visual in features/overview.js
  *                         (b) the MapLibre interactive map markers in map.js
  *
  *                       Each stop must have ALL of these fields:
  *                       {
- *                         code:       string  — 2-digit station order ("01"–"07")
+ *                         code:       string  — 2-digit station order ("01"–"06")
  *                         label:      string  — 3-letter code shown on map marker & station badge ("TYO")
  *                         kanji:      string  — Station name in Japanese Kanji ("東京")
  *                         hiragana:   string  — Hiragana reading / furigana ("とうきょう")
  *                         romaji:     string  — Romanised name shown below the track line ("Tokyo")
  *                         dotClass:   string  — CSS class for stop-dot colour variant ("tokyo")
  *                         name:       { en, zh }  — Localised full display name
- *                         days:       { en, zh }  — Travel days label ("Days 1–4" / "第 1–4 天")
- *                         desc:       { en, zh }  — Short description for Leaflet popup
- *                         lat:        number  — Latitude (WGS84)
- *                         lng:        number  — Longitude (WGS84)
- *                         color:      string  — Hex colour used for station code badge border and dot
- *                         markerClass: string — CSS class applied to the Leaflet DivIcon
+ *                         days:       { en, zh }  — Travel days label ("Days 1–2" / "第 1–2 天")
+ *                         desc:       { en, zh }  — Short description for the map popup
+ *                         lat, lng:   number  — WGS84 coordinates
+ *                         color:      string  — CSS colour used for the station code badge border and dot
+ *                         markerClass: string — CSS class applied to the map marker
  *                       }
  *
- *   tips[]              4 practical tip cards (transport, bookings, etiquette, winter driving).
- *                       Each: { id, icon, title:{en,zh}, items:[{en,zh}] }
+ *   carRental           { intro:{en,zh}, booking:{ company, status, vehicle, pickup, returnShop, included[], price[], total } }
+ *                       `booking` is the paid Toyota Rent a Car reservation shown in features/car.js.
  *
- *   packing[]           3 packing category cards (clothing, tech, misc).
- *                       Each: { id, icon, title:{en,zh}, items:[{en,zh}] }
+ *   tips[]              6 practical tip cards. Each: { id, icon, title:{en,zh}, items:[{en,zh}] }
+ *
+ *   packing[]           3 packing category cards. Each: { id, icon, title:{en,zh}, items:[{en,zh}] }
  *
  *   budget
- *     .planA / .planB   one block per plan, each with:
- *       .items[]        5 budget line items. Each: { category:{en,zh}, jpy, min, max,
+ *     .items[]          5 budget line items. Each: { category:{en,zh}, jpy, min, max,
  *                       initial (display string), notes:{en,zh} }
  *                       `min` and `max` are plain JPY numbers used by currency.js for conversion.
- *       .total          Same shape as an item; rendered as a <tr class="budget-total"> row.
+ *     .total            Same shape as an item; rendered as a <tr class="budget-total"> row.
  *                       scripts/validate.mjs checks that total equals the sum of items.
  *
  *   hotels
- *     .planA / .planB   one block per plan, each with:
- *       .quickLegs[]    destination presets for the hotel search form pills (one per night-block).
- *                       Each: { active, dest, checkin, checkout, label:{en,zh} }
- *       .legs[]         curated accommodation cards (one per journey leg; Plan A 5, Plan B 6).
- *                       Each: { legNum, nights:{en,zh}, badgeClass, highlight, title:{en,zh},
- *                               dates, desc:{en,zh}, tags[], btnText:{en,zh}, dest, checkin, checkout }
- *                       The nights covered by quickLegs and legs must be identical (validate.mjs).
+ *     .legs[]         the 3 confirmed hotel bookings (cards). Each: { legNum, nights:{en,zh}, badgeClass,
+ *                     highlight, title:{en,zh}, dates, desc:{en,zh}, tags[], btnText:{en,zh}, mapUrl,
+ *                     dest, checkin, checkout }
+ *                     validate.mjs checks the legs cover 25–30 Dec (6 nights) exactly once.
  *
  * TO ADD A NEW TIP:     Push a new object into the tips[] array following the existing pattern.
- * TO ADD A BUDGET ROW:  Push into budget.planA.items[] AND budget.planB.items[] and update that plan's total.
- * TO CHANGE MAP STOPS:  Edit overview.routeStopsA[] / routeStopsB[] — changes apply to BOTH the JR route board AND the map.
- * TO ADD AN OVERVIEW CARD: Push into overview.cards[]. style.css uses repeat(3, 1fr) grid.
+ * TO ADD A BUDGET ROW:  Push into budget.items[] and update budget.total.
+ * TO CHANGE MAP STOPS:  Edit overview.routeStops[] — changes apply to BOTH the JR route board AND the map.
+ * TO ADD AN OVERVIEW CARD: Push into overview.cards[]. The overview grid uses repeat(4, 1fr).
  */
 
 const SITE_DATA = {
@@ -77,8 +73,8 @@ const SITE_DATA = {
         icon: "🚗",
         title: { en: "Transport", zh: "交通方式" },
         desc: {
-          en: "Flexible hybrid model: rental car for Mt Fuji drive (Days 5–7 for Plan A; Days 3–5 loop for Plan B), plus bullet train / local rail.",
-          zh: "靈活出行：第 5 至 7 天（方案 A）或第 3 至 5 天（方案 B）自駕租車，市區搭配新幹線及鐵路。"
+          en: "Flexible hybrid model: a booked rental car for the Mt Fuji, Hakone and Odawara drive (Days 3–4, 27–28 Dec), plus Tokyo metro and rail.",
+          zh: "靈活出行：第 3 至 4 天（12 月 27–28 日）自駕已預訂的租車遊覽富士山、箱根及小田原，市區搭配地鐵及鐵路。"
         }
       },
       {
@@ -86,8 +82,8 @@ const SITE_DATA = {
         icon: "🌡️",
         title: { en: "Weather", zh: "氣候與溫度" },
         desc: {
-          en: "Crisp & clear. Tokyo 4–13°C, Fuji area 0–8°C, Kansai/Coast 3–12°C. Layer up with warm thermal wear!",
-          zh: "寒冷乾燥且晴朗。東京 4–13°C，富士山區 0–8°C，關西及沿海 3–12°C。請準備洋蔥式保暖穿法！"
+          en: "Crisp & clear. Tokyo 4–13°C, Fuji area 0–8°C, Hakone/Coast 3–12°C. Layer up with warm thermal wear!",
+          zh: "寒冷乾燥且晴朗。東京 4–13°C，富士山區 0–8°C，箱根及沿海 3–12°C。請準備洋蔥式保暖穿法！"
         }
       },
       {
@@ -100,19 +96,19 @@ const SITE_DATA = {
         }
       }
     ],
-    routeStopsA: [
+    routeStops: [
       {
         code: "01",
         label: "TYO",
         kanji: "東京",
         hiragana: "とうきょう",
-        romaji: "Tokyo",
+        romaji: "Tokyo Nihombashi",
         dotClass: "tokyo",
-        name:  { en: "Tokyo (東京)",       zh: "東京"   },
-        days:  { en: "Days 1–4",           zh: "第 1–4 天" },
-        desc:  { en: "Asakusa, Shibuya, teamLab, Ginza, winter illuminations",
-                 zh: "參訪淺草寺、澀谷、teamLab、銀座，賞冬季燈飾" },
-        lat: 35.6762, lng: 139.6503,
+        name:  { en: "Tokyo Nihombashi (東京日本橋)", zh: "東京日本橋" },
+        days:  { en: "Days 1–2", zh: "第 1–2 天" },
+        desc:  { en: "Asakusa, Skytree, Meiji Jingu, Shibuya Sky; stay at Villa Fontaine Nihombashi Mitsukoshimae",
+                 zh: "淺草寺、晴空塔、明治神宮、澀谷 SKY；入住日本橋三越前 Villa Fontaine" },
+        lat: 35.6841, lng: 139.7733,
         color: "var(--marker-tokyo)", markerClass: "marker-tokyo"
       },
       {
@@ -122,10 +118,10 @@ const SITE_DATA = {
         hiragana: "かわぐちこ",
         romaji: "Kawaguchiko",
         dotClass: "fuji",
-        name:  { en: "Kawaguchiko (河口湖)", zh: "河口湖" },
-        days:  { en: "Day 5",               zh: "第 5 天" },
-        desc:  { en: "Mt Fuji views, Chureito Pagoda, ryokan & onsen",
-                 zh: "賞富士山美景，登新倉山淺間公園忠靈塔，住溫泉旅館" },
+        name:  { en: "Kawaguchiko & Yamanakako (河口湖・山中湖)", zh: "河口湖・山中湖" },
+        days:  { en: "Day 3", zh: "第 3 天" },
+        desc:  { en: "Pick up the car, Lake Kawaguchi, Arakurayama Sengen Park and Lake Yamanaka",
+                 zh: "取車後遊覽河口湖、新倉山淺間公園與山中湖" },
         lat: 35.5104, lng: 138.7564,
         color: "var(--marker-fuji)", markerClass: "marker-fuji"
       },
@@ -136,547 +132,115 @@ const SITE_DATA = {
         hiragana: "はこね",
         romaji: "Hakone",
         dotClass: "hakone",
-        name:  { en: "Hakone (箱根)",       zh: "箱根"   },
-        days:  { en: "Days 6–7",            zh: "第 6–7 天" },
-        desc:  { en: "Explore Owakudani volcanic valley, pirate ship on Lake Ashi, stay at a top luxury hot spring ryokan",
-                 zh: "走訪大涌谷地熱景點、搭蘆之湖海盜船、享頂級溫泉" },
-        lat: 35.2329, lng: 139.1069,
+        name:  { en: "Hakone & Lake Ashi (箱根・蘆之湖)", zh: "箱根・蘆之湖" },
+        days:  { en: "Days 3–4", zh: "第 3–4 天" },
+        desc:  { en: "Lake Ashi sunset, Hotel Kagetsuen hot spring in Sengokuhara, Owakudani black eggs",
+                 zh: "蘆之湖日落、仙石原花月園溫泉、大涌谷黑玉子" },
+        lat: 35.25, lng: 139.01,
         color: "var(--marker-hakone)", markerClass: "marker-hakone"
       },
       {
         code: "04",
-        label: "NGO",
-        kanji: "名古屋",
-        hiragana: "なごや",
-        romaji: "Nagoya",
+        label: "ODW",
+        kanji: "小田原",
+        hiragana: "おだわら",
+        romaji: "Odawara",
         dotClass: "nagoya",
-        name:  { en: "Nagoya (名古屋)",     zh: "名古屋" },
-        days:  { en: "Day 7",              zh: "第 7 天" },
-        desc:  { en: "Miso katsu dinner, drop off rental car",
-                 zh: "享用味噌炸豬排晚餐，名古屋還車，轉搭新幹線" },
-        lat: 35.1815, lng: 136.9066,
+        name:  { en: "Odawara (小田原)", zh: "小田原" },
+        days:  { en: "Day 4", zh: "第 4 天" },
+        desc:  { en: "Odawara Castle Park and seafood lunch at Totoco Odawara",
+                 zh: "小田原城址公園及 TOTOCO 小田原海鮮午餐" },
+        lat: 35.235, lng: 139.138,
         color: "var(--marker-nagoya)", markerClass: "marker-nagoya"
       },
       {
         code: "05",
-        label: "KYO",
-        kanji: "京都",
-        hiragana: "きょうと",
-        romaji: "Kyoto",
-        dotClass: "kyoto",
-        name:  { en: "Kyoto (京都)",        zh: "京都"   },
-        days:  { en: "Days 7–9",            zh: "第 7–9 天" },
-        desc:  { en: "Fushimi Inari, Kinkaku-ji, Arashiyama, tea ceremony",
-                 zh: "千本鳥居、金閣寺、嵐山竹林、體驗京都傳統茶道" },
-        lat: 35.0116, lng: 135.7681,
-        color: "var(--marker-kyoto)", markerClass: "marker-kyoto"
-      },
-      {
-        code: "06",
-        label: "NAR",
-        kanji: "奈良",
-        hiragana: "なら",
-        romaji: "Nara",
+        label: "SHN",
+        kanji: "湘南",
+        hiragana: "しょうなん",
+        romaji: "Shonan Coast",
         dotClass: "nara",
-        name:  { en: "Nara (奈良)",         zh: "奈良"   },
-        days:  { en: "Day 10",             zh: "第 10 天" },
-        desc:  { en: "Deer Park, Todai-ji, Kasuga Taisha",
-                 zh: "造訪奈良公園親近小鹿、東大寺大佛殿、春日大社" },
-        lat: 34.6851, lng: 135.8048,
+        name:  { en: "Shonan Coast (湘南海岸)", zh: "湘南海岸" },
+        days:  { en: "Day 4 (choose one)", zh: "第 4 天（三選一）" },
+        desc:  { en: "Your choice on the page: Kamakura, Enoshima or Yokohama on the drive back",
+                 zh: "於網頁選擇回程景點：鎌倉、江之島或橫濱" },
+        lat: 35.31, lng: 139.5,
         color: "var(--marker-nara)", markerClass: "marker-nara"
-      },
-      {
-        code: "07",
-        label: "OSA",
-        kanji: "大阪",
-        hiragana: "おおさか",
-        romaji: "Osaka",
-        dotClass: "osaka",
-        name:  { en: "Osaka (大阪)",        zh: "大阪"   },
-        days:  { en: "Days 10–12",         zh: "第 10–12 天" },
-        desc:  { en: "Osaka Castle, Dotonbori, street food, New Year's Eve",
-                 zh: "大阪城天守閣、道頓堀夜景與街頭美食、敲鐘跨年" },
-        lat: 34.6937, lng: 135.5023,
-        color: "var(--marker-osaka)", markerClass: "marker-osaka"
-      }
-    ],
-    routeStopsB: [
-      {
-        code: "01",
-        label: "TYO",
-        kanji: "東京",
-        hiragana: "とうきょう",
-        romaji: "Tokyo",
-        dotClass: "tokyo",
-        name:  { en: "Tokyo (東京)",       zh: "東京"   },
-        days:  { en: "Days 1–2",           zh: "第 1–2 天" },
-        desc:  { en: "Asakusa, Skytree, Meiji Jingu, Shibuya Sky",
-                 zh: "淺草寺、晴空塔、明治神宮、澀谷 SKY" },
-        lat: 35.6762, lng: 139.6503,
-        color: "var(--marker-tokyo)", markerClass: "marker-tokyo"
-      },
-      {
-        code: "02",
-        label: "FUJ",
-        kanji: "河口湖",
-        hiragana: "かわぐちこ",
-        romaji: "Kawaguchiko",
-        dotClass: "fuji",
-        name:  { en: "Kawaguchiko (河口湖)", zh: "河口湖" },
-        days:  { en: "Day 3",               zh: "第 3 天" },
-        desc:  { en: "Mt Fuji panoramic views, Chureito Pagoda, Lake Saiko, onsen ryokan",
-                 zh: "富士山全景、新倉山忠靈塔、西湖療癒之里、會席料理溫泉旅館" },
-        lat: 35.5104, lng: 138.7564,
-        color: "var(--marker-fuji)", markerClass: "marker-fuji"
-      },
-      {
-        code: "03",
-        label: "HKN",
-        kanji: "箱根",
-        hiragana: "はこね",
-        romaji: "Hakone",
-        dotClass: "hakone",
-        name:  { en: "Hakone (箱根)",       zh: "箱根"   },
-        days:  { en: "Day 4",               zh: "第 4 天" },
-        desc:  { en: "Oshino Hakkai, Owakudani geothermal valley, Lake Ashi pirate ship, onsen",
-                 zh: "忍野八海、大涌谷火山谷地熱黑玉子、蘆之湖海盜船、溫泉度假" },
-        lat: 35.2329, lng: 139.1069,
-        color: "var(--marker-hakone)", markerClass: "marker-hakone"
-      },
-      {
-        code: "04",
-        label: "KMR",
-        kanji: "鎌倉",
-        hiragana: "かまくら",
-        romaji: "Kamakura",
-        dotClass: "nara",
-        name:  { en: "Kamakura (鎌倉)",     zh: "鎌倉"   },
-        days:  { en: "Day 5",               zh: "第 5 天" },
-        desc:  { en: "Kotoku-in Great Buddha flat walk, scenic coastal Route 134 drive",
-                 zh: "高德院大佛平路參觀、湘南海岸公路觀海自駕" },
-        lat: 35.3197, lng: 139.5467,
-        color: "var(--marker-nara)", markerClass: "marker-nara"
-      },
-      {
-        code: "05",
-        label: "YKH",
-        kanji: "橫濱",
-        hiragana: "よこはま",
-        romaji: "Yokohama",
-        dotClass: "nagoya",
-        name:  { en: "Yokohama (橫濱)",     zh: "橫濱"   },
-        days:  { en: "Day 5",               zh: "第 5 天" },
-        desc:  { en: "Chinatown dim sum lunch, zero drop-off fee car return, 30-min JR to Tokyo",
-                 zh: "中華街午餐點心、零附加費交還租車、30 分鐘 JR 直達東京" },
-        lat: 35.4437, lng: 139.6380,
-        color: "var(--marker-nagoya)", markerClass: "marker-nagoya"
       },
       {
         code: "06",
         label: "TYO",
         kanji: "東京",
         hiragana: "とうきょう",
-        romaji: "Tokyo Finale",
+        romaji: "Tokyo Hamamatsucho",
         dotClass: "tokyo",
-        name:  { en: "Tokyo Finale (東京終站)", zh: "東京終站" },
-        days:  { en: "Days 5–7",            zh: "第 5–7 天" },
-        desc:  { en: "Sukiyaki dinner, Tsukiji, Ginza, NYE Toshikoshi soba, temple bells & departure",
-                 zh: "壽喜燒、築地市場、銀座、除夕跨年蕎麥麵、除夜之鐘與出發返程" },
-        lat: 35.6812, lng: 139.7671,
+        name:  { en: "Tokyo Hamamatsucho (東京濱松町)", zh: "東京濱松町" },
+        days:  { en: "Days 4–7", zh: "第 4–7 天" },
+        desc:  { en: "Return the car at Nishi-Shimbashi by 20:00, Tokyo Tower, teamLab, NYE departure by monorail",
+                 zh: "西新橋還車（20:00 前）、東京鐵塔、teamLab、除夕乘單軌電車前往機場" },
+        lat: 35.6552, lng: 139.7571,
         color: "var(--marker-tokyo)", markerClass: "marker-tokyo"
       }
     ]
   },
 
-  /* ─── Car Return Decision Helper ───────────────────────────────────
-   * Displays a 3-option pros/cons comparison for where to return the
-   * rental car: Nagoya (current plan), Kyoto, or Osaka.
-   * Each option has: id, icon, title, subtitle, verdict, pros[], cons[].
-   * Rendered by render.js renderCarReturn() → #car-return-grid.
-   * ──────────────────────────────────────────────────────────────────*/
-  carReturn: {
-    planA: {
-      question: {
-        en: "Where should you return the rental car? (Plan A: Kansai Route)",
-        zh: "租車應在哪裡歸還？（方案 A：關西經典線）"
-      },
-      context: {
-        en: "The plan: <strong>pick up the car on Day 5 (Dec 24, Christmas Eve) when leaving Tokyo</strong>, use it for the Mt Fuji / Kawaguchiko / Hakone self-drive segment (Days 5–7), then <strong>return it on Day 7 (Dec 26) as soon as you have checked in at your destination city</strong>. After drop-off, you're free — Kyoto, Nara, and Osaka are all best explored by train.",
-        zh: "計劃安排：<strong>第 5 天（12 月 24 日平安夜）離開東京時取車</strong>，用於富士山/河口湖/箱根自駕路段（第 5 至 7 天），然後在<strong>第 7 天（12 月 26 日）辦妥目的地酒店入住後即行歸還</strong>。還車後全程以公共交通出行 — 京都、奈良及大阪均最適合以火車遊覽。"
-      },
-      recommendation: {
-        en: "🏆 Our pick: <strong>Nagoya</strong> — lowest cost, keeps luggage light through Kyoto, and a quick Shinkansen hop gets you there.",
-        zh: "🏆 建議選擇：<strong>名古屋</strong> — 費用最低，令你輕裝遊覽京都，且搭新幹線往返方便快捷。"
-      },
-      options: [
-        {
-          id: "car-return-nagoya",
-          icon: "🚗",
-          title: { en: "Nagoya", zh: "名古屋" },
-          subtitle: { en: "Current Plan · Day 7 transit stop", zh: "現有計劃 · 第 7 天中途站" },
-          verdict: "current",
-          verdictLabel: { en: "Current Plan", zh: "現有計劃" },
-          pros: [
-            { en: "<strong>Cheapest one-way fee</strong> — Tokyo→Nagoya drop-off costs approx ¥15,000–¥20,000 (vs ¥25,000–¥35,000 to Kyoto/Osaka)", zh: "<strong>異地還車費用最低</strong> — 東京→名古屋約 ¥15,000–¥20,000（京都/大阪則需 ¥25,000–¥35,000）" },
-            { en: "<strong>No driving stress in Kansai</strong> — Kyoto city centre and Osaka are notoriously car-unfriendly (narrow streets, expensive parking)", zh: "<strong>無需在關西開車</strong> — 京都市區巷道窄小、停車費高昂；大阪市區行車亦複雜" },
-            { en: "<strong>Shinkansen to Kyoto in 35 min</strong> — Fast, comfortable, luggage goes in overhead rack or coin locker at Nagoya station", zh: "<strong>35 分鐘新幹線直達京都</strong> — 快捷舒適，行李可放行李架或名古屋站儲物櫃" },
-            { en: "<strong>Miso katsu dinner</strong> — Makes for a natural, enjoyable transit stop with a local specialty meal", zh: "<strong>順道品嚐味噌炸豬排</strong> — 名古屋特色晚餐，讓中途換車成為享受" },
-            { en: "<strong>Lighter in Kyoto</strong> — Arriving by train means you walk off with only day bags; full luggage can go to your Kyoto hotel by takkyubin delivery", zh: "<strong>京都輕裝遊覽</strong> — 以火車抵達，只需帶隨身小包，大件行李可由名古屋酒店宅配到京都酒店" }
-          ],
-          cons: [
-            { en: "<strong>Nagoya is a transit-only stop</strong> — You won't have time to explore it as a tourist destination", zh: "<strong>名古屋只作中途換乘</strong> — 沒有額外時間深度遊覽名古屋景點" },
-            { en: "<strong>One-way drop-off surcharge still applies</strong> — ¥15,000–¥20,000 fee on top of rental cost", zh: "<strong>仍需支付異地還車附加費</strong> — 約 ¥15,000–¥20,000 額外收費" },
-            { en: "<strong>Need to plan luggage logistics</strong> — Consider takkyubin (宅配便) from Nagoya hotel to Kyoto hotel (¥2,000–¥3,000 per bag)", zh: "<strong>需安排行李物流</strong> — 建議使用宅配便（¥2,000–¥3,000/件）從名古屋酒店寄往京都酒店" }
-          ],
-          tips: [
-            {
-              icon: "🏨",
-              label: { en: "Where to Stay", zh: "住宿建議" },
-              detail: {
-                en: "Stay <strong>near Nagoya Station</strong> — all rental offices are within a 5-min taxi. Good options: <strong>JR Gate Tower Hotel</strong> (right above the station, stunning city views), <strong>Marriott Associa Nagoya</strong> (connected to the station), or the more affordable <strong>Mitsui Garden Hotel Nagoya Premier</strong>. Book 1 night.",
-                zh: "建議住在<strong>名古屋車站附近</strong> — 所有租車公司均在車站 5 分鐘的士範圍內。推薦酒店：<strong>JR Gate Tower Hotel</strong>（直接連接車站，城市景觀一流）、<strong>Marriott Associa 名古屋</strong>（車站連接）或性價比更高的 <strong>Mitsui Garden Hotel 名古屋 Premier</strong>。建議預訂 1 晚。"
-              }
-            },
-            {
-              icon: "🍽️",
-              label: { en: "What to Eat", zh: "美食推介" },
-              detail: {
-                en: "Don't miss Nagoya's signature dishes: <strong>Miso Katsu</strong> (味噌豬排 — Yabaton is the classic chain; Misokatsu Matsunoya for sit-down), <strong>Hitsumabushi</strong> (ひつまぶし — grilled eel rice eaten three ways; try Atsuta Horaiken near the station), and <strong>Tebasaki</strong> (手羽先 — spicy chicken wings at Yamachan).",
-                zh: "必嚐名古屋特色美食：<strong>味噌炸豬排</strong>（矢場とん是經典連鎖；松乃家為舒適坐食選擇）、<strong>鰻魚飯三吃（Hitsumabushi）</strong>（推薦車站附近的熱田蓬萊軒）及<strong>手羽先（Tebasaki）</strong>（炸辣雞翼，推薦山ちゃん）。"
-              }
-            }
-          ]
-        },
-        {
-          id: "car-return-kyoto",
-          icon: "⛩️",
-          title: { en: "Kyoto", zh: "京都" },
-          subtitle: { en: "Drive direct to Kyoto · Drop off Day 7 night", zh: "直接開車到京都 · 第 7 天晚上歸還" },
-          verdict: "caution",
-          verdictLabel: { en: "Alternative", zh: "可行替代" },
-          pros: [
-            { en: "<strong>No train transfer with luggage</strong> — Pack bags in the car at Hakone and don't touch them until your Kyoto hotel lobby", zh: "<strong>無需轉車搬運行李</strong> — 箱根上車後行李全程在尾箱，直至京都酒店大堂才取下" },
-            { en: "<strong>Door-to-door comfort</strong> — Drive right to your Kyoto hotel entrance, unload, then return the car nearby", zh: "<strong>點對點舒適直達</strong> — 直接開到京都酒店門口放下行李，再到附近分店還車" },
-            { en: "<strong>Scenic Mei-Shin Expressway route</strong> — Beautiful drive through Shizuoka and Aichi prefectures", zh: "<strong>名神高速公路沿途風景優美</strong> — 途經靜岡及愛知縣，一路欣賞冬日景色" }
-          ],
-          cons: [
-            { en: "<strong>Higher one-way fee</strong> — Tokyo→Kyoto costs approx ¥25,000–¥35,000 (¥10,000+ more than Nagoya)", zh: "<strong>異地還車費較高</strong> — 東京→京都約需 ¥25,000–¥35,000（比名古屋貴 ¥10,000 以上）" },
-            { en: "<strong>Long driving day (~4.5–5.5 hrs)</strong> — Dec 26 traffic around Nagoya and Kyoto can be heavy; fatigue for sole driver", zh: "<strong>駕駛時間偏長（約 4.5–5.5 小時）</strong> — 12月26日名古屋至京都路段車流較多，單一司機容易疲倦" },
-            { en: "<strong>Kyoto city traffic is challenging</strong> — Narrow streets, one-way systems, and expensive parking if return is delayed", zh: "<strong>京都市內交通極具挑戰</strong> — 道路狹窄、單程路多，若延遲還車停車費昂貴" }
-          ],
-          tips: [
-            {
-              icon: "🏨",
-              label: { en: "Where to Stay", zh: "住宿建議" },
-              detail: {
-                en: "Stay near <strong>Kyoto Station South (Hachijo Exit)</strong> — this is where most car rental drop-off locations are clustered (Toyota, Nissan, Times). Recommended: <strong>Hotel Granvia Kyoto</strong> (inside the station), <strong>Miyako Hotel Kyoto Hachijo</strong>, or <strong>Daiwa Roynet Hotel Kyoto Terrace Hachijo</strong>. Easy drop-off within 500m of the hotel.",
-                zh: "建議住在<strong>京都站南口（八條口）附近</strong> — 這是租車分店（Toyota、Nissan、Times）集中地。推薦：<strong>Hotel Granvia 京都</strong>（站內直通）、<strong>京都八條都酒店</strong>或 <strong>Daiwa Roynet Hotel 京都 Terrace 八條</strong>。還車點距酒店僅 500 米內。"
-              }
-            }
-          ]
-        },
-        {
-          id: "car-return-osaka",
-          icon: "🏙️",
-          title: { en: "Osaka", zh: "大阪" },
-          subtitle: { en: "Keep car through Kyoto · Return Day 10–12", zh: "繼續開車遊關西 · 第 10–12 天歸還" },
-          verdict: "notrecommended",
-          verdictLabel: { en: "Not Recommended", zh: "不建議" },
-          pros: [
-            { en: "<strong>Maximum flexibility for Kansai segment</strong> — Could theoretically drive Kyoto → Nara → Osaka at your own pace", zh: "<strong>關西段行程最靈活</strong> — 理論上可自駕 京都→奈良→大阪，按自訂節奏遊覽" },
-            { en: "<strong>Useful if visiting rural Nara or off-route spots</strong> — Some outer Nara temples (e.g. Hōryū-ji) are easier with a car", zh: "<strong>若遊覽奈良郊區景點較方便</strong> — 部分奈良郊外寺院（如法隆寺）有車更易到達" },
-            { en: "<strong>No mid-trip vehicle switch needed</strong> — Everything in one booking for the full duration", zh: "<strong>全程一張合約</strong> — 無需中途更換預訂或安排換車" }
-          ],
-          cons: [
-            { en: "<strong>Highest one-way drop fee</strong> — Tokyo→Osaka can cost ¥35,000–¥50,000+", zh: "<strong>異地還車費用最高</strong> — 東京→大阪可達 ¥35,000–¥50,000 甚至以上" },
-            { en: "<strong>Parking in Kyoto AND Osaka is very costly</strong> — You'll pay ¥500–¥1,500/hour across multiple days in the city", zh: "<strong>京都及大阪泊車費用高昂</strong> — 多天市區停車每小時 ¥500–¥1,500，費用可觀" },
-            { en: "<strong>Osaka city driving is complex</strong> — Heavy traffic, taxi/bus lanes, and aggressive drivers near Dotonbori / Namba", zh: "<strong>大阪市區行車複雜</strong> — 道頓堀 / 難波一帶交通繁忙、的士巴士專線多，駕車壓力大" }
-          ],
-          tips: [
-            {
-              icon: "🏨",
-              label: { en: "Where to Stay", zh: "住宿建議" },
-              detail: {
-                en: "If returning in Osaka, stay near <strong>Osaka Station / Umeda</strong> or <strong>Namba</strong>. Recommended: <strong>Hotel Monterey Grasmere Osaka</strong> or <strong>Cross Hotel Osaka</strong>.",
-                zh: "若選擇在大阪還車，建議住在<strong>大阪站 / 梅田</strong>或<strong>難波</strong>附近。推薦：<strong>Hotel Monterey Grasmere Osaka</strong> 或 <strong>Cross Hotel 大阪</strong>。"
-              }
-            }
-          ]
-        }
-      ]
-    },
-    planB: {
-      question: {
-        en: "Where should you return the rental car in the Scenic Loop? (Plan B)",
-        zh: "關東靜岡自駕環線應在哪裡歸還租車？（方案 B）"
-      },
-      context: {
-        en: "The Plan B setup: <strong>pick up the car on Day 3 (Dec 27) leaving Tokyo</strong>, enjoy the 3-day loop across Mt Fuji, Hakone, and Kamakura, then <strong>return it on Day 5 (Dec 29) with ZERO drop-off fee</strong> before taking an easy 30-min train back to your central Tokyo base.",
-        zh: "方案 B 安排：<strong>第 3 天（12 月 27 日）離開東京時取車</strong>，展開富士山、箱根及鎌倉 3 天自駕環線，在<strong>第 5 天（12 月 29 日）以零異地還車費歸還</strong>，隨後搭乘舒適短程火車直達東京市區酒店。"
-      },
-      recommendation: {
-        en: "🏆 Our pick: <strong>Yokohama Depot (Day 5)</strong> — Zero drop-off fee, drop off after Chinatown lunch, and take a quick 30-min JR train straight back to Tokyo.",
-        zh: "🏆 建議選擇：<strong>橫濱分店（第 5 天）</strong> — 零異地還車費，遊覽紅磚倉庫及中華街後交車，搭乘 30 分鐘 JR 直達東京市區酒店。"
-      },
-      options: [
-        {
-          id: "car-return-yokohama",
-          icon: "🎡",
-          title: { en: "Yokohama Depot (Day 5)", zh: "橫濱分店（第 5 天）" },
-          subtitle: { en: "Plan B Recommended · Post-Chinatown drop-off", zh: "方案 B 推薦 · 中華街午餐後還車" },
-          verdict: "current",
-          verdictLabel: { en: "Best Choice", zh: "最佳首選" },
-          pros: [
-            { en: "<strong>¥0 one-way drop-off fee</strong> — Returning within Greater Tokyo/Kanagawa area incurs zero penalties", zh: "<strong>零異地還車附加費</strong> — 於首都圈/神奈川地區內歸還無任何異地手續費" },
-            { en: "<strong>Avoids dense Tokyo city traffic</strong> — Avoids heavy Shinjuku/Shibuya expressways and parking fees", zh: "<strong>避開東京市區繁雜交通</strong> — 無須在市中心塞車或支付昂貴泊車費" },
-            { en: "<strong>Direct 30-min JR train to Tokyo</strong> — JR Tokaido Line / Yokosuka Line takes you straight into central Tokyo with ease", zh: "<strong>30 分鐘 JR 直達東京</strong> — JR 東海道線 / 橫須賀線直達東京站或新橋站" }
-          ],
-          cons: [
-            { en: "<strong>Short train ride with luggage</strong> — 30-min local rapid train journey into Tokyo station", zh: "<strong>需帶行李乘搭 30 分鐘火車</strong> — 需攜帶行李搭乘一段短途 JR 回東京" }
-          ],
-          tips: [
-            {
-              icon: "🏨",
-              label: { en: "Logistics", zh: "交車物流" },
-              detail: {
-                en: "Drop off near Yokohama Station. Take the JR Tokaido Line straight to Tokyo Station or Shimbashi. Highly comfortable with elevators at all stations.",
-                zh: "在橫濱站周邊分店交還車輛。乘搭 JR 東海道線直達東京站或新橋，各大車站全程均設有升降機。"
-              }
-            }
-          ]
-        },
-        {
-          id: "car-return-tokyo",
-          icon: "🏙️",
-          title: { en: "Central Tokyo Depot (Day 5)", zh: "東京市區分店（第 5 天）" },
-          subtitle: { en: "Drive all the way to Tokyo hotel", zh: "直接開至東京酒店門口" },
-          verdict: "caution",
-          verdictLabel: { en: "Alternative", zh: "可行替代" },
-          pros: [
-            { en: "<strong>Door-to-door luggage drop</strong> — Unload all suitcases directly at your Tokyo hotel lobby before returning car", zh: "<strong>行李直接送達酒店大堂</strong> — 先在東京酒店放下行李才交還車輛" },
-            { en: "<strong>Zero drop-off fee</strong> — Pick up and return in same Tokyo municipality", zh: "<strong>零異地還車費</strong> — 同在東京市區借還，無異地手續費" }
-          ],
-          cons: [
-            { en: "<strong>Heavy Metropolitan Expressway traffic</strong> — Evening peak traffic heading into Tokyo can be slow and stressful", zh: "<strong>東京首都高易塞車</strong> — 傍晚進入東京市中心車流較大，行車需時" }
-          ],
-          tips: [
-            {
-              icon: "🚦",
-              label: { en: "Timing", zh: "時間安排" },
-              detail: {
-                en: "Return the car early in the afternoon (by 15:00) to avoid the evening rush hour on Route 1 / Metropolitan Expressway.",
-                zh: "建議下午 3 點前抵達交車，避開傍晚下班高峰期的首都高速道路擁堵。"
-              }
-            }
-          ]
-        },
-        {
-          id: "car-return-airport",
-          icon: "✈️",
-          title: { en: "Haneda Airport (Day 12)", zh: "羽田機場歸還（第 12 天）" },
-          subtitle: { en: "Keep car until departure flight", zh: "一直保留至登機當日" },
-          verdict: "notrecommended",
-          verdictLabel: { en: "Not Recommended", zh: "不建議" },
-          pros: [
-            { en: "<strong>No train transit with bags</strong> — Drive straight to the terminal on departure day", zh: "<strong>最後一日直達航廈</strong> — 啟程當天直接將行李載到機場" }
-          ],
-          cons: [
-            { en: "<strong>Wasteful rental & parking costs</strong> — You pay 3 extra rental days + ~¥3,000–5,000/night hotel parking in Tokyo where you do not need a car", zh: "<strong>額外租車與停車費用高昂</strong> — 多付 3 天租車費及東京每晚 ¥3,000–5,000 停車費，且市區完全用不上車" }
-          ],
-          tips: [
-            {
-              icon: "💡",
-              label: { en: "Advice", zh: "建議" },
-              detail: {
-                en: "Central Tokyo has the world's best subway network. Keeping a rental car in Tokyo adds expense and stress.",
-                zh: "東京市區鐵路網絡極為發達，在市區保留租車只會增加泊車成本與找車位的困擾。"
-              }
-            }
-          ]
-        }
-      ]
-    }
-  },
-
-  /* ─── Car Rental Search Section ─────────────────────────────────────
-   * Displays a search widget + 3 rental company cards below the
-   * Car Return Decision section.
-   * Rendered by render.js renderCarRental() → #car-rental-section.
+  /* ─── Car Rental Section ─────────────────────────────────────────────
+   * The confirmed, paid Toyota Rent a Car booking. Rendered by features/car.js
+   * renderCarRental() → #rental-search-card (intro) and #rental-booking.
    *
-   * intro / introB and each company's note / noteB are the Plan A / Plan B texts.
-   *
-   * companies[]    — 3 rental company cards.
-   *                  Each: { id, logo (emoji), name, nameJp, tagline:{en,zh},
-   *                          features:[{en,zh}], note:{en,zh},
-   *                          badge:{en,zh}, badgeClass,
-   *                          searchUrl  — deep-link to the company's
-   *                          English search page with pickup location
-   *                          pre-set to Tokyo. }
+   * booking — pickup / returnShop (with a `note`), included[] options, price[] breakdown and total.
    * ──────────────────────────────────────────────────────────────────*/
   carRental: {
     intro: {
-      en: "<strong>Plan:</strong> Pick up on <strong>Day 5 (Dec 24)</strong> when leaving Tokyo → drive Mt Fuji / Kawaguchiko / Hakone → return the car on <strong>Day 7 (Dec 26) immediately after hotel check-in</strong> at your chosen drop-off city. All three companies support one-way (異地還車) rentals, English GPS, and studless winter tyres on request. Book at least 4–6 weeks ahead — December is peak season.",
-      zh: "<strong>計劃安排：</strong><strong>第 5 天（12 月 24 日）</strong>離開東京時取車 → 自駕遊覽富士山/河口湖/箱根 → 在<strong>第 7 天（12 月 26 日）辦妥目的地酒店入住後立即歸還</strong>。三家公司均提供異地還車、英文 GPS 及冬季無釘雪地輪胎（需指定）。12 月為旺季，請至少提前 4–6 週預訂。"
+      en: "<strong>Confirmed &amp; paid:</strong> Toyota Rent a Car, pick up on <strong>Day 3 (27 Dec) at 09:00</strong> and return on <strong>Day 4 (28 Dec) by 20:00</strong> — the Mt Fuji, Hakone and Odawara self-drive loop. Everything you need on the day is below.",
+      zh: "<strong>已確認及付款：</strong>豐田租車，<strong>第 3 天（12 月 27 日）09:00</strong> 取車，<strong>第 4 天（12 月 28 日）20:00 前</strong>還車 — 富士山、箱根及小田原自駕環線。當日所需資料如下。"
     },
-    introB: {
-      en: "<strong>Plan:</strong> Pick up on <strong>Day 3 (Dec 27)</strong> when leaving Tokyo → drive Mt Fuji / Kawaguchiko / Hakone / Kamakura → return the car in <strong>Yokohama on Day 5 (Dec 29)</strong> with a ¥0 one-way fee. All three companies support English GPS and studless winter tyres on request. Book at least 4–6 weeks ahead — December is peak season.",
-      zh: "<strong>計劃安排：</strong><strong>第 3 天（12 月 27 日）</strong>離開東京時取車 → 自駕遊覽富士山/河口湖/箱根/鎌倉 → 在<strong>第 5 天（12 月 29 日）於橫濱還車</strong>，零異地還車費。三家公司均提供英文 GPS 及冬季無釘雪地輪胎（需指定）。12 月為旺季，請至少提前 4–6 週預訂。"
-    },
-    /* ─── Vehicle Recommendation ──────────────────────────────────────
-     * Luggage context: 2 adults × (1 large suitcase + 1 cabin bag + 1 backpack)
-     *   = 2 large suitcases (≈75L each) + 2 cabin bags + 2 backpacks (6 pieces total)
-     * 4-card grid: Mid-size SUV, Liftback/Wagon, Minivan/MPV, Kei Car (Avoid)
-     * ──────────────────────────────────────────────────────────────── */
-    vehicleRec: {
-      luggageContext: {
-        en: "Your party: <strong>2 adults</strong> — bringing 2 large suitcases (check-in size, ~75L), 2 cabin bags, and 2 personal backpacks. That is <strong>6 pieces of luggage total</strong>. You also need boot space for winter coats and souvenirs during the Mt Fuji drive.",
-        zh: "同行共 <strong>2 位成人</strong>，攜帶 2 件大型行李箱（寄艙尺寸，約 75L）、2 件手提行李及 2 個個人背包，合共 <strong>6 件行李</strong>。另需預留車尾箱空間放置厚外套及自駕途中的特產手信。"
+    booking: {
+      company: { en: "Toyota Rent a Car", zh: "豐田租車 (Toyota Rent a Car)", jp: "トヨタレンタカー" },
+      status: { en: "✅ Paid online · ¥48,400", zh: "✅ 已網上付款 · ¥48,400" },
+      vehicle: {
+        en: "C3 Class — <strong>Toyota Corolla Touring Hybrid</strong> · automatic · non-smoking · studless winter tyres",
+        zh: "C3 級 — <strong>Toyota Corolla Touring 油電車</strong> · 自動波 · 禁煙 · 無釘雪地胎"
       },
-      picks: [
-        {
-          id: "vehicle-suv",
-          verdict: "recommended",
-          icon: "🚙",
-          category: { en: "Mid-size SUV (4WD/AWD)", zh: "中型 SUV (四驅)" },
-          models: { en: "Toyota RAV4, Nissan X-Trail, Subaru Forester", zh: "Toyota RAV4、Nissan X-Trail、Subaru Forester" },
-          boot: { en: "~500–580L (fits 2 large 75L suitcases flat)", zh: "~500–580L（可平放 2 件 75L 大行李箱）" },
-          why: {
-            en: "<strong>The ideal balance of luggage capacity and winter capability.</strong> The boot easily fits 2 large 75L suitcases flat side-by-side, with cabin bags and backpacks on top or on the rear seats. High ground clearance and AWD give exceptional confidence on snowy Hakone and Gotemba mountain passes.",
-            zh: "<strong>行李容量與冬季駕駛性能的理想平衡。</strong>車尾箱可輕鬆平放 2 件 75L 大型行李箱，其餘手提行李及背包可放於上方或後座。較高底盤與 AWD 四驅系統在積雪的箱根與御殿場山路提供卓越的抓地力與安全感。"
-          },
-          badge: { en: "✅ Recommended Pick", zh: "✅ 首選推薦" },
-          badgeClass: "vbadge-green"
-        },
-        {
-          id: "vehicle-liftback",
-          verdict: "alternative",
-          icon: "🚗",
-          category: { en: "Liftback / Wagon (Hybrid)", zh: "揭背車 / 旅行車 (油電混合)" },
-          models: { en: "Toyota Prius (5th Gen E-Four), Corolla Touring", zh: "Toyota Prius (第5代 E-Four)、Corolla Touring" },
-          boot: { en: "~390–410L (liftback hatch)", zh: "~390–410L（掀背大開口尾箱）" },
-          why: {
-            en: "<strong>Agile, whisper-quiet, and extremely economical.</strong> The 5th-gen Prius wide liftback hatch takes 2 large suitcases flat. Ultra-quiet TNGA cabin ensures a peaceful ride for senior comfort, while achieving ~30 km/L hybrid efficiency. E-Four electric AWD provides winter traction, and compact dimensions make parking in scenic towns effortless.",
-            zh: "<strong>靈活好揸、車廂極靜且超級省油。</strong>第 5 代 Prius 揭背大開口尾箱可平放 2 件大行李箱。TNGA 隔音極佳，為長輩提供寧靜舒適的乘坐感，油耗達 ~30 km/L。配備 E-Four 電子四驅應對積雪，車身緊湊在溫泉小鎮窄路穿梭及泊車毫無壓力。"
-          },
-          badge: { en: "💡 Agility & Economy", zh: "💡 靈活省油推薦" },
-          badgeClass: "vbadge-amber"
-        },
-        {
-          id: "vehicle-minivan",
-          verdict: "alternative",
-          icon: "🚐",
-          category: { en: "Minivan / MPV", zh: "廂式客貨車 / 七人車" },
-          models: { en: "Toyota Voxy/Noah, Nissan Serena, Toyota Alphard", zh: "Toyota Voxy/Noah、Nissan Serena、Toyota Alphard" },
-          boot: { en: "~500–900L (vast flat floor)", zh: "~500–900L（超大平整空間）" },
-          why: {
-            en: "<strong>Maximum senior passenger comfort and boarding ease.</strong> Ultra-low flat step-in floors and electric sliding doors make getting in and out completely effortless for senior passengers. Larger than strictly necessary for 2 adults, but offers unbeatable space and relaxation.",
-            zh: "<strong>極致長輩上下車便利度與寬敞感。</strong>超低地台設計與電動雙側滑門，讓長輩上下車完全無須彎腰費力。雖然對 2 位成人而言空間偏大，但在舒適放鬆度方面無可挑剔。"
-          },
-          badge: { en: "🛋️ Senior Comfort", zh: "🛋️ 長輩舒適首選" },
-          badgeClass: "vbadge-amber"
-        },
-        {
-          id: "vehicle-kei",
-          verdict: "avoid",
-          icon: "🚗",
-          category: { en: "Kei Car (軽自動車, 660cc)", zh: "輕型車 (軽自動車, 660cc)" },
-          models: { en: "Honda N-Box, Suzuki Jimny, Suzuki Alto", zh: "Honda N-Box、Suzuki Jimny、Suzuki Alto" },
-          boot: { en: "~100–200L — inadequate for 2 large suitcases", zh: "~100–200L — 無法容納 2 件大行李箱" },
-          why: {
-            en: "<strong>Avoid for winter mountain driving.</strong> Kei car boots cannot fit 2 large check-in suitcases. Additionally, the 660cc engine struggles on steep snowy mountain switchbacks (Hakone Skyline) in December. (Note: Enthusiast hatches like GR Yaris / GR Corolla were also evaluated and ruled out due to stiff damping and insufficient boot space).",
-            zh: "<strong>冬季山路自駕請避免。</strong>微型車車尾箱無法容納 2 件 75L 寄艙大行李箱。此外，660cc 引擎在 12 月積雪的箱根陡峭山路與高速公路上爬坡極為吃力。（註：熱血鋼炮如 GR Yaris / GR Corolla 經評估後亦已排除，其避震過硬且尾箱極小，不適合長輩同行）。"
-          },
-          badge: { en: "❌ Avoid for this route", zh: "❌ 冬季山路不建議" },
-          badgeClass: "vbadge-red"
+      pickup: {
+        heading: { en: "Pick-up", zh: "取車" },
+        when: { en: "Sun 27 Dec 2026 · 09:00", zh: "2026 年 12 月 27 日（日）· 09:00" },
+        shop: { en: "Tokyo Sta. Nihonbashi Ext. Shop", zh: "東京駅日本橋口店" },
+        address: { en: "Trust Tower N Wing, B2 car park, 1-8-1 Marunouchi, Chiyoda-ku, Tokyo 100-0005", zh: "東京都千代田區丸之內 1-8-1 トラストタワーN館 B2 停車場（100-0005）" },
+        phone: "03-5220-2220",
+        url: "https://rent.toyota.co.jp/global_eng/shop/route/63601_01V.html",
+        note: {
+          en: "Bring your UK photocard driving licence, <strong>1949 IDP</strong>, passport and booking confirmation. Arrive on time so you keep the daylight for Mt Fuji and Hakone.",
+          zh: "請帶備英國駕駛執照正本、<strong>1949 IDP</strong>、護照及預訂確認書，並準時到達，以把握日間遊覽富士山及箱根。"
         }
-      ]
-    },
-    companies: [
-      {
-        id: "rental-toyota",
-        logo: "🚙",
-        name: "Toyota Rent a Car",
-        nameJp: "トヨタレンタカー",
-        tagline: {
-          en: "Japan's largest rental network — most locations, widest vehicle choice.",
-          zh: "日本最大租車網絡 — 分店最多、車款選擇最廣。"
-        },
-        badge: { en: "Most Locations", zh: "分店最多" },
-        badgeClass: "badge-blue",
-        features: [
-          { en: "✔ One-way drop-off nationwide (Tokyo → Nagoya / Kyoto / Osaka)", zh: "✔ 全國異地還車（東京→名古屋/京都/大阪）" },
-          { en: "✔ English online booking & English GPS available", zh: "✔ 提供英文網上預訂及英文 GPS" },
-          { en: "✔ Studless winter tyres — request at booking (必須指定)", zh: "✔ 無釘雪地輪胎 — 預訂時請特別指定（必須指定）" },
-          { en: "✔ Wide range: mid-size SUV, hybrid liftback & MPV for 2 adults + luggage", zh: "✔ 車型齊全：中型 SUV、油電掀背車及 MPV，適合兩人行李與長輩乘坐" },
-          { en: "✔ ETC card rental available for expressway toll auto-pay", zh: "✔ 提供 ETC 卡租用，高速公路過路費自動繳付" }
-        ],
-        note: {
-          en: "<strong>Pickup:</strong> Toyota Rent-a-Car Shinjuku Station East or Haneda Airport Terminal 3 on <strong>Day 5, Dec 24</strong>. <strong>Return:</strong> Drop off on <strong>Day 7 (Dec 26) at the branch closest to your hotel, immediately after check-in</strong> — hand over the keys and head straight to your room.",
-          zh: "<strong>取車：</strong>豐田租車新宿駅東口店或羽田機場第 3 航廈店，<strong>第 5 天（12 月 24 日）</strong>辦理取車手續。<strong>還車：</strong>在<strong>第 7 天（12 月 26 日）辦妥酒店入住後立即</strong>前往最近分店歸還 — 交還鑰匙後即可輕鬆入房。"
-        },
-        noteB: {
-          en: "<strong>Pickup:</strong> Toyota Rent-a-Car Shinjuku Station East or Haneda Airport Terminal 3 on <strong>Day 3, Dec 27</strong>. <strong>Return:</strong> Drop off at a Yokohama branch on <strong>Day 5 (Dec 29)</strong> — ¥0 one-way fee within the Tokyo / Kanagawa area, then take the JR train back to Tokyo.",
-          zh: "<strong>取車：</strong>豐田租車新宿駅東口店或羽田機場第 3 航廈店，<strong>第 3 天（12 月 27 日）</strong>辦理取車手續。<strong>還車：</strong>在<strong>第 5 天（12 月 29 日）</strong>於橫濱分店歸還 — 東京/神奈川地區內零異地還車費，隨後搭 JR 返回東京。"
-        },
-        searchUrl: "https://rent.toyota.co.jp/en/"
       },
-      {
-        id: "rental-nissan",
-        logo: "🚘",
-        name: "Nissan Rent a Car",
-        nameJp: "日産レンタカー",
-        tagline: {
-          en: "Great value EV & hybrid fleet — Nissan LEAFs available nationwide.",
-          zh: "超值油電/純電車隊 — 日產 LEAF 電動車全國可租。"
-        },
-        badge: { en: "Best for EV / Hybrid", zh: "電動車首選" },
-        badgeClass: "badge-green",
-        features: [
-          { en: "✔ One-way rentals: Tokyo → Nagoya / Kyoto / Osaka available", zh: "✔ 提供異地還車：東京→名古屋/京都/大阪" },
-          { en: "✔ Nissan LEAF (electric) & Note e-POWER (hybrid) ideal for Mt Fuji drive", zh: "✔ 日產 LEAF（電動）及 Note e-POWER（油電）— 富士山路段理想之選" },
-          { en: "✔ English GPS system available at most branches", zh: "✔ 大多數分店提供英文 GPS" },
-          { en: "✔ Studless winter tyres — available on request", zh: "✔ 提供無釘雪地輪胎（需預訂時指定）" },
-          { en: "✔ Transparent pricing, no hidden fuel surcharges on EV models", zh: "✔ 定價透明，電動車款無隱藏燃油附加費" }
-        ],
+      returnShop: {
+        heading: { en: "Return", zh: "還車" },
+        when: { en: "Mon 28 Dec 2026 · by 20:00", zh: "2026 年 12 月 28 日（一）· 20:00 前" },
+        shop: { en: "Nishi-Shimbashi Shop", zh: "西新橋店" },
+        address: { en: "1-12-10 Nishishinbashi, Minato-ku, Tokyo 105-0003", zh: "東京都港區西新橋 1-12-10（105-0003）" },
+        phone: "050-3132-1045",
+        phoneNote: { en: "number displayed when the shop calls you", zh: "分店來電時顯示的號碼" },
         note: {
-          en: "<strong>Pickup:</strong> Nissan Rent-a-Car Shinjuku or Ikebukuro on <strong>Day 5, Dec 24</strong>. Note: EV range is reduced in cold December weather — plan charging stops around Mt Fuji. <strong>Return:</strong> Day 7 (Dec 26) immediately after hotel check-in at your chosen city.",
-          zh: "<strong>取車：</strong>日産租車新宿或池袋分店，<strong>第 5 天（12 月 24 日）</strong>辦理。注意：12 月低溫令電動車續航下降，請提前規劃富士山周邊充電點。<strong>還車：</strong>第 7 天（12 月 26 日）於目的地酒店辦妥入住後立即歸還。"
-        },
-        noteB: {
-          en: "<strong>Pickup:</strong> Nissan Rent-a-Car Shinjuku or Ikebukuro on <strong>Day 3, Dec 27</strong>. Note: EV range is reduced in cold December weather — plan charging stops around Mt Fuji. <strong>Return:</strong> Yokohama branch on <strong>Day 5 (Dec 29)</strong>, ¥0 one-way fee.",
-          zh: "<strong>取車：</strong>日産租車新宿或池袋分店，<strong>第 3 天（12 月 27 日）</strong>辦理。注意：12 月低溫令電動車續航下降，請提前規劃富士山周邊充電點。<strong>還車：</strong>第 5 天（12 月 29 日）於橫濱分店歸還，零異地還車費。"
-        },
-        searchUrl: "https://nissan-rentacar.com/en/"
+          en: "<strong>20:00 is a firm deadline</strong> — late returns can cost extra. Fill the tank first, after dropping your luggage at the Hamamatsucho hotel (a few minutes away).",
+          zh: "<strong>20:00 為嚴格期限</strong>，逾時還車可能需額外收費。請先在濱松町酒店放下行李（只需數分鐘），並把油加滿後再還車。"
+        }
       },
-      {
-        id: "rental-nippon",
-        logo: "🚐",
-        name: "Nippon Rent-A-Car",
-        nameJp: "ニッポンレンタカー",
-        tagline: {
-          en: "Nationwide budget-friendly option — great for families watching costs.",
-          zh: "全國性經濟之選 — 注重預算的家庭首選。"
-        },
-        badge: { en: "Best Value", zh: "最佳性價比" },
-        badgeClass: "badge-gold",
-        features: [
-          { en: "✔ Competitive one-way fees — often lower than Toyota/Nissan for Tokyo→Nagoya", zh: "✔ 極具競爭力的異地還車費 — 東京→名古屋路段費用常低於豐田/日産" },
-          { en: "✔ English online reservation system", zh: "✔ 提供英文網上預訂系統" },
-          { en: "✔ Studless winter tyres available (冬用スタッドレスタイヤ)", zh: "✔ 提供冬季無釘雪地輪胎（冬用スタッドレスタイヤ）" },
-          { en: "✔ Good selection of minivans & compact SUVs for family trips", zh: "✔ 廂式客貨車及 SUV 選擇充裕，適合家庭旅遊" },
-          { en: "✔ Over 500 branches across Japan including all major airports", zh: "✔ 全日本逾 500 間分店，涵蓋各主要機場" }
-        ],
-        note: {
-          en: "<strong>Pickup:</strong> Nippon Rent-A-Car Shinjuku or nearest Tokyo branch on <strong>Day 5, Dec 24</strong>. <strong>Return:</strong> Day 7 (Dec 26) immediately after hotel check-in — the earlier you return, the lower your daily charge. Compare Nippon's Tokyo→Nagoya one-way fee against Toyota before booking; it is frequently ¥3,000–¥5,000 cheaper.",
-          zh: "<strong>取車：</strong>Nippon 租車新宿店或最近的東京分店，<strong>第 5 天（12 月 24 日）</strong>辦理。<strong>還車：</strong>第 7 天（12 月 26 日）辦妥酒店入住後盡早歸還 — 越早還車費用越低。預訂前請比較 Nippon 與豐田的東京→名古屋異地還車費，前者通常便宜 ¥3,000–¥5,000。"
-        },
-        noteB: {
-          en: "<strong>Pickup:</strong> Nippon Rent-A-Car Shinjuku or nearest Tokyo branch on <strong>Day 3, Dec 27</strong>. <strong>Return:</strong> Yokohama branch on <strong>Day 5 (Dec 29)</strong> — confirm the Tokyo → Yokohama drop-off is ¥0 when booking.",
-          zh: "<strong>取車：</strong>Nippon 租車新宿店或最近的東京分店，<strong>第 3 天（12 月 27 日）</strong>辦理。<strong>還車：</strong>第 5 天（12 月 29 日）於橫濱分店歸還 — 預訂時請確認東京→橫濱還車費為 ¥0。"
-        },
-        searchUrl: "https://www.nipponrentacar.co.jp/en/"
-      }
-    ]
+      included: [
+        { en: "✔ Liability compensation (免責補償) and Double Protection Plan (NOC exemption)", zh: "✔ 免責補償及安心 W 計劃（免除營業損失補償）" },
+        { en: "✔ Studless winter tyres (スタッドレスタイヤ) · 4WD not required", zh: "✔ 無釘雪地胎（スタッドレスタイヤ）· 無須四驅" },
+        { en: "✔ ETC card and JAF membership certificate", zh: "✔ ETC 卡及 JAF 會員證" },
+        { en: "✔ Car model selection option (車種指定)", zh: "✔ 車種指定選項" },
+        { en: "✘ Not included: petrol, expressway tolls and parking", zh: "✘ 不包括：油費、高速公路費及停車費" }
+      ],
+      price: [
+        { label: { en: "Base rate", zh: "基本費" }, jpy: "¥37,400" },
+        { label: { en: "Liability compensation", zh: "免責補償" }, jpy: "¥2,200" },
+        { label: { en: "Winter tyres", zh: "雪地胎" }, jpy: "¥4,400" },
+        { label: { en: "Options", zh: "選項" }, jpy: "¥4,400" }
+      ],
+      total: { label: { en: "Total paid (tax included)", zh: "已付總額（含稅）" }, jpy: "¥48,400" }
+    }
   },
 
   /* ─── Practical Tips Section ─── */
@@ -691,12 +255,8 @@ const SITE_DATA = {
           zh: "<strong>Suica / PASMO 卡</strong> — 適用於東京所有地鐵、巴士和便利店。可以直接加入 Apple/Google Wallet。"
         },
         {
-          en: "<strong>JR Kansai Area Pass (4-day)</strong> — Covers JR trains in Kyoto (京都), Osaka (大阪), Nara (奈良), Kobe (神戶). Buy online before departure for discount.",
-          zh: "<strong>JR 關西地區鐵路周遊券 (4日)</strong> — 覆蓋京都、大阪、奈良、神戶的 JR 火車。出發前網上購買享優惠。"
-        },
-        {
-          en: "<strong>Rental car</strong> — Book via Nissan or Toyota Rent-a-Car. Request <strong>studless winter tyres + GPS with English</strong>. One-way drop-off fee applies (Tokyo → Nagoya ≈ ¥15,000–20,000).",
-          zh: "<strong>自駕租車</strong> — 建議選擇日產 (Nissan) 或豐田 (Toyota) 租車。<strong>必須指定配備雪地無釘輪胎 (Studless Winter Tyres)</strong> 及英文 GPS。異地還車（東京借、名古屋還）需收約 ¥15,000–20,000 附加費。"
+          en: "<strong>Airport transfers</strong> — Haneda: Tokyo Monorail direct from Hamamatsucho Station (about 20 minutes). Narita: JR Yamanote Line to Tokyo or Shinagawa, then the Narita Express (N'EX).",
+          zh: "<strong>機場交通</strong> — 羽田機場：在濱松町站乘搭東京單軌電車直達（約 20 分鐘）。成田機場：乘搭 JR 山手線到東京站或品川站，再轉乘成田特快 (N'EX)。"
         },
         {
           en: "<strong>1949 International Driving Permit (IDP 1949)</strong> — As UK licence holders, all drivers must obtain the <strong>1949 Geneva Convention IDP</strong> at a UK Post Office (£5.50) before travelling.",
@@ -753,8 +313,8 @@ const SITE_DATA = {
           zh: "<strong>請務必指定 1949 IDP</strong> — 英國郵局同時提供適用於歐洲的 1968 年公約 IDP。在郵局辦理時，<strong>必須特別指明申請 1949 年公約版本</strong>。"
         },
         {
-          en: "<strong>Documents Required at Car Pickup</strong> — When picking up the car in Tokyo (Day 5), present: <strong>1) Original UK Photocard Driving Licence</strong>, <strong>2) 1949 IDP</strong>, and <strong>3) Passport</strong>.",
-          zh: "<strong>取車時所需文件</strong> — 在東京取車時（第 5 天），必須同時出示：<strong>1) 英國駕駛執照正本</strong>、<strong>2) 1949 IDP 國際駕照</strong>及 <strong>3) 護照</strong>。"
+          en: "<strong>Documents Required at Car Pickup</strong> — When picking up the car in Tokyo (Day 3, 27 Dec), present: <strong>1) Original UK Photocard Driving Licence</strong>, <strong>2) 1949 IDP</strong>, and <strong>3) Passport</strong>.",
+          zh: "<strong>取車時所需文件</strong> — 在東京取車時（第 3 天，12 月 27 日），必須同時出示：<strong>1) 英國駕駛執照正本</strong>、<strong>2) 1949 IDP 國際駕照</strong>及 <strong>3) 護照</strong>。"
         }
       ]
     },
@@ -764,10 +324,6 @@ const SITE_DATA = {
       title: { en: "Advance Bookings", zh: "景點與餐飲預約" },
       items: [
         {
-          en: "<strong>Ryokan (Mt Fuji / Hakone)</strong> — Book 2–3 months ahead. Request \"Fuji-view\" room specifically.",
-          zh: "<strong>溫泉旅館（富士山 / 箱根）</strong> — 必須提前 2 至 3 個月預訂。預訂時請特別註明需要「富士山景房 (Fuji-view room)」。"
-        },
-        {
           en: "<strong>teamLab Borderless</strong> — Online tickets only, sell out fast. Book 2+ weeks ahead.",
           zh: "<strong>teamLab 無界美術館</strong> — 僅限網上預售門票，極快售罄。請至少提早 2 星期預購。"
         },
@@ -776,8 +332,8 @@ const SITE_DATA = {
           zh: "<strong>餐廳預約</strong> — 聖誕黃金周期間，熱門餐廳必須提早 3 星期以上預約。可使用 Tabelog 網站或請酒店禮賓部協助。"
         },
         {
-          en: "<strong>Fushimi Inari (伏見稻荷大社)</strong> — Free entry, no reservation needed, but go early (before 9 AM) to beat crowds.",
-          zh: "<strong>伏見稻荷大社</strong> — 免費入場，無須預約，但建議早上 9 點前抵達以避開旅行團。"
+          en: "<strong>Shibuya Sky</strong> — Sunset slots (about 16:20) sell out weeks ahead. Book timed tickets online for Day 2.",
+          zh: "<strong>澀谷 SKY</strong> — 日落時段（約下午 4:20）通常提早數星期售罄，請預先網上預訂第 2 天的指定時段門票。"
         }
       ]
     },
@@ -920,136 +476,47 @@ const SITE_DATA = {
 
   /* ─── Budget Estimation Section ─── */
   budget: {
-    planA: {
-      items: [
+    items: [
         {
           category: {
-            en: "🏨 Accommodation (11 nights)",
-            zh: "🏨 酒店與溫泉旅館 (11晚)"
+            en: "🏨 Accommodation (6 nights, booked)",
+            zh: "🏨 酒店住宿 (6晚，已預訂)"
           },
-          jpy: "¥300,000–490,000",
-          min: 300000,
-          max: 490000,
-          initial: "$15,500–25,200",
+          jpy: "¥177,870",
+          min: 177870,
+          max: 177870,
+          initial: "$9,150",
           notes: {
-            en: "1 Twin Room (9 hotel nights + 2 ryokan nights)",
-            zh: "全程 1 間雙床房（9 晚市區酒店 + 2 晚一泊二食溫泉旅館）"
+            en: "Confirmed: Villa Fontaine Nihombashi ¥58,604 + Hotel Kagetsuen ¥33,264 + Villa Fontaine Hamamatsucho ¥86,002",
+            zh: "已確認：日本橋 Villa Fontaine ¥58,604 + 花月園 ¥33,264 + 濱松町 Villa Fontaine ¥86,002"
           }
         },
         {
           category: {
-            en: "🚗 Car Rental (3 days + gas/tolls)",
-            zh: "🚗 租車自駕 (3天，含路費油費)"
+            en: "🚗 Car Rental (2 days, paid + petrol/tolls)",
+            zh: "🚗 租車自駕 (2天，已付款，另計油費及路費)"
           },
-          jpy: "¥45,000–65,000",
-          min: 45000,
-          max: 65000,
-          initial: "$2,300–3,350",
+          jpy: "¥55,400–60,400",
+          min: 55400,
+          max: 60400,
+          initial: "$2,850–3,100",
           notes: {
-            en: "SUV / Prius + winter tyres + Tokyo→Nagoya one-way fee",
-            zh: "SUV / Prius + 雪胎 + 東京至名古屋異地還車費"
-          }
-        },
-        {
-          category: {
-            en: "🚆 Trains & Metro",
-            zh: "🚆 城市鐵路及新幹線"
-          },
-          jpy: "¥35,000–45,000",
-          min: 35000,
-          max: 45000,
-          initial: "$1,800–2,300",
-          notes: {
-            en: "Nagoya→Kyoto Shinkansen (2 reserved seats) + Suica & Haruka",
-            zh: "名古屋至京都新幹線指定席（2位）+ Suica 及 Haruka 機場特急"
-          }
-        },
-        {
-          category: {
-            en: "🍽️ Food & Drinks",
-            zh: "🍽️ 餐飲美食 (12天)"
-          },
-          jpy: "¥130,000–200,000",
-          min: 130000,
-          max: 200000,
-          initial: "$6,700–10,300",
-          notes: {
-            en: "2 adults, 12 days. Mix of fine dining & local favourites",
-            zh: "2 位成人 12 天餐飲，包含和牛料理、精緻懷石及地道美食"
-          }
-        },
-        {
-          category: {
-            en: "🎫 Activities & Entrance Fees",
-            zh: "🎫 景點門票及體驗活動"
-          },
-          jpy: "¥20,000–30,000",
-          min: 20000,
-          max: 30000,
-          initial: "$1,000–1,550",
-          notes: {
-            en: "Skytree, teamLab, ropeways, temple entries",
-            zh: "晴空塔、teamLab、箱根纜車、各名剎門票"
-          }
-        }
-      ],
-      total: {
-        category: {
-          en: "<strong>Total (excl. flights)</strong>",
-          zh: "<strong>總預算估算 (不含機票)</strong>"
-        },
-        jpy: "<strong>¥530,000–830,000</strong>",
-        min: 530000,
-        max: 830000,
-        initial: "<strong>$27,300–42,700</strong>",
-        notes: {
-          en: "For 2 adults, 12 days (1 Twin Room throughout)",
-          zh: "2 位成人 12 天的行程預算（全程 1 間雙床房）"
-        }
-      }
-    },
-    planB: {
-      items: [
-        {
-          category: {
-            en: "🏨 Accommodation (6 nights)",
-            zh: "🏨 酒店與溫泉旅館 (6晚)"
-          },
-          jpy: "¥160,000–250,000",
-          min: 160000,
-          max: 250000,
-          initial: "$8,200–12,900",
-          notes: {
-            en: "1 Twin Room (4 hotel nights + 2 onsen ryokan nights)",
-            zh: "全程 1 間雙床房（4 晚酒店 + 2 晚頂級溫泉旅館一泊二食）"
-          }
-        },
-        {
-          category: {
-            en: "🚗 Car Rental (3 days loop)",
-            zh: "🚗 租車自駕 (3天環線)"
-          },
-          jpy: "¥36,000–48,000",
-          min: 36000,
-          max: 48000,
-          initial: "$1,850–2,470",
-          notes: {
-            en: "3-day MPV/SUV loop. Zero one-way fee! Gas, tolls & winter tyres",
-            zh: "3 天自駕環線，零異地還車費！包含油費、ETC 過路費及雪胎"
+            en: "¥48,400 prepaid online + roughly ¥7,000–12,000 for petrol and expressway tolls",
+            zh: "¥48,400 已網上付款 + 油費及高速公路費約 ¥7,000–12,000"
           }
         },
         {
           category: {
             en: "🚆 Trains & Metro",
-            zh: "🚆 城市鐵路及地鐵"
+            zh: "🚆 地鐵及鐵路"
           },
-          jpy: "¥14,000–20,000",
-          min: 14000,
-          max: 20000,
-          initial: "$720–1,030",
+          jpy: "¥10,000–16,000",
+          min: 10000,
+          max: 16000,
+          initial: "$500–820",
           notes: {
-            en: "Tokyo metro, Keikyu / N'EX airport trains, Yokohama-Tokyo JR. No Shinkansen needed",
-            zh: "東京地鐵、京急/成田快線機場鐵路、橫濱回東京 JR。無需新幹線！"
+            en: "Tokyo metro, Suica top-ups and the airport transfer (Haneda monorail or Narita Express)",
+            zh: "東京地鐵、Suica 增值及機場交通（羽田單軌電車或成田特快）"
           }
         },
         {
@@ -1062,8 +529,8 @@ const SITE_DATA = {
           max: 115000,
           initial: "$3,850–5,900",
           notes: {
-            en: "2 adults (covers 5 days; 2 ryokan dinners & breakfasts included in room rate)",
-            zh: "2 位成人（覆蓋其餘 5 天；2 晚一泊二食早晚餐已含在房費中）"
+            en: "2 adults, 7 days. Mix of seafood, set meals and local favourites (check which hotel meals are included)",
+            zh: "2 位成人 7 天餐飲，包含海鮮、定食及地道美食（請核對酒店是否已含餐）"
           }
         },
         {
@@ -1076,258 +543,85 @@ const SITE_DATA = {
           max: 18000,
           initial: "$620–930",
           notes: {
-            en: "Skytree, Shibuya Sky, Kamakura Buddha, Hakone ropeway & Lake Ashi cruise",
-            zh: "晴空塔、澀谷 SKY、鎌倉大佛、箱根纜車與蘆之湖海盜船"
+            en: "Skytree, Shibuya Sky, teamLab Borderless and Tokyo Tower",
+            zh: "晴空塔、澀谷 SKY、teamLab Borderless 及東京鐵塔"
           }
         }
-      ],
-      total: {
-        category: {
-          en: "<strong>Total (excl. flights)</strong>",
-          zh: "<strong>總預算估算 (不含機票)</strong>"
-        },
-        jpy: "<strong>¥297,000–451,000</strong>",
-        min: 297000,
-        max: 451000,
-        initial: "<strong>$15,250–23,200</strong>",
-        notes: {
-          en: "For 2 adults, 7 days (saves ~¥230,000–380,000 vs 12-day Plan A)",
-          zh: "2 位成人 7 天的行程預算（較 12 天方案 A 節省約 ¥230,000–380,000）"
-        }
+    ],
+    total: {
+      category: {
+        en: "<strong>Total (excl. flights)</strong>",
+        zh: "<strong>總預算估算 (不含機票)</strong>"
+      },
+      jpy: "<strong>¥330,270–387,270</strong>",
+      min: 330270,
+      max: 387270,
+      initial: "<strong>$17,000–20,000</strong>",
+      notes: {
+        en: "For 2 adults, 7 days (1 Twin Room throughout). Hotels and the car rental are already booked",
+        zh: "2 位成人 7 天的行程預算（全程 1 間雙床房）。酒店及租車已預訂"
       }
     }
   },
 
   /* ─── Hotels & Ryokan Recommendations Section ─── */
   hotels: {
-    planA: {
-      quickLegs: [
-        {
-          active: true,
-          dest: "Tokyo, Japan",
-          checkin: "2026-12-20",
-          checkout: "2026-12-24",
-          label: { en: "Tokyo (Dec 20–24)", zh: "東京 (12/20–24)" }
-        },
-        {
-          active: false,
-          dest: "Fujikawaguchiko, Yamanashi, Japan",
-          checkin: "2026-12-24",
-          checkout: "2026-12-25",
-          label: { en: "Mt Fuji / Kawaguchiko (Dec 24–25)", zh: "河口湖富士山 (12/24–25)" }
-        },
-        {
-          active: false,
-          dest: "Hakone, Kanagawa, Japan",
-          checkin: "2026-12-25",
-          checkout: "2026-12-26",
-          label: { en: "Hakone (Dec 25–26)", zh: "箱根 (12/25–26)" }
-        },
-        {
-          active: false,
-          dest: "Kyoto, Japan",
-          checkin: "2026-12-26",
-          checkout: "2026-12-29",
-          label: { en: "Kyoto (Dec 26–29)", zh: "京都 (12/26–29)" }
-        },
-        {
-          active: false,
-          dest: "Osaka, Japan",
-          checkin: "2026-12-29",
-          checkout: "2026-12-31",
-          label: { en: "Osaka (Dec 29–31)", zh: "大阪 (12/29–31)" }
-        }
-      ],
-      legs: [
+    legs: [
         {
           legNum: 1,
-          nights: { en: "Leg 1 • 4 Nights", zh: "第 1 站 • 4 晚" },
+          nights: { en: "Leg 1 • 2 Nights • Booked", zh: "第 1 站 • 2 晚 • 已預訂" },
           badgeClass: "",
           highlight: false,
-          title: { en: "Tokyo City Hotels (東京)", zh: "東京市區精選酒店" },
-          dates: "🗓️ Dec 20 – Dec 24, 2026",
+          title: { en: "Villa Fontaine Tokyo Nihombashi Mitsukoshimae (ヴィラフォンテーヌ東京日本橋三越前)", zh: "ヴィラフォンテーヌ東京日本橋三越前" },
+          dates: "🗓️ Dec 25 – Dec 27, 2026 · ¥58,604",
           desc: {
-            en: "Convenient base near Asakusa, Ginza, or Shibuya. Look for comfortable twin rooms with step-free elevator access near major transit hubs.",
-            zh: "推薦入住淺草、銀座或澀谷一帶，交通極為方便，挑選具升降機無障礙設施的雙床房，便於長輩出入地鐵。"
+            en: "Confirmed booking for 2 nights. Next to Mitsukoshimae Station for easy metro access to Asakusa, Ginza and Shibuya; the car pick-up shop is a short taxi ride away.",
+            zh: "已確認預訂 2 晚。鄰近三越前站，乘地鐵前往淺草、銀座及澀谷十分方便；取車分店只需乘的士數分鐘。"
           },
-          tags: ["🚇 Near Metro", "🛍️ Shopping", "🛏️ Twin Room"],
-          btnText: { en: "Search Tokyo Hotels ↗", zh: "搜尋東京酒店 ↗" },
-          dest: "Tokyo, Japan",
-          checkin: "2026-12-20",
-          checkout: "2026-12-24"
-        },
-        {
-          legNum: 2,
-          nights: { en: "Leg 2 • 1 Night (Ryokan)", zh: "第 2 站 • 1 晚 (溫泉旅館)" },
-          badgeClass: "",
-          highlight: false,
-          title: { en: "Lake Kawaguchiko Onsen Ryokan (河口湖)", zh: "河口湖富士山景溫泉旅館" },
-          dates: "🗓️ Dec 24 – Dec 25, 2026 (Christmas Eve)",
-          desc: {
-            en: "Traditional Japanese ryokan with private open-air hot spring bath (rotenburo), Mt Fuji views, and multi-course Kaiseki dinner.",
-            zh: "平安夜入住正宗日式溫泉旅館，享有一泊二食會席料理及房間/露天風呂眺望富士山絕景。"
-          },
-          tags: ["🗻 Mt Fuji View", "♨️ Hot Spring", "🍱 Kaiseki Dinner"],
-          btnText: { en: "Search Fuji Ryokan ↗", zh: "搜尋河口湖溫泉 ↗" },
-          dest: "Fujikawaguchiko, Yamanashi, Japan",
-          checkin: "2026-12-24",
-          checkout: "2026-12-25"
-        },
-        {
-          legNum: 3,
-          nights: { en: "Leg 3 • 1 Night (Onsen Resort)", zh: "第 3 站 • 1 晚 (箱根溫泉)" },
-          badgeClass: "",
-          highlight: false,
-          title: { en: "Hakone Hot Spring Resort (箱根)", zh: "箱根溫泉度假酒店 / 旅館" },
-          dates: "🗓️ Dec 25 – Dec 26, 2026 (Christmas Night)",
-          desc: {
-            en: "Relaxing stay in Hakone Yumoto or Gora on Christmas night. Soak in natural hot springs after exploring Owakudani, before heading west via Lake Ashi & Nagoya.",
-            zh: "聖誕節當晚入住箱根湯本或強羅溫泉區，造訪大涌谷後享受優質天然礦物溫泉，隔日遊覽蘆之湖後啟程經名古屋前往關西。"
-          },
-          tags: ["♨️ Natural Onsen", "🌲 Forest View", "🚗 Free Parking"],
-          btnText: { en: "Search Hakone Stays ↗", zh: "搜尋箱根住宿 ↗" },
-          dest: "Hakone, Kanagawa, Japan",
-          checkin: "2026-12-25",
-          checkout: "2026-12-26"
-        },
-        {
-          legNum: 4,
-          nights: { en: "Leg 4 • 3 Nights", zh: "第 4 站 • 3 晚" },
-          badgeClass: "",
-          highlight: false,
-          title: { en: "Kyoto Historic Hotels & Machiya (京都)", zh: "京都古風酒店與傳統町屋" },
-          dates: "🗓️ Dec 26 – Dec 29, 2026",
-          desc: {
-            en: "Stay 3 nights near Gion, Shijo-Kawaramachi, or Kyoto Station. Arrive smoothly on Dec 26 evening via Shinkansen, and wake up ready for Fushimi Inari and Arashiyama.",
-            zh: "12月26日傍晚搭乘新幹線抵達後入住京都（共3晚）。建議選擇祇園、四條河原町或京都車站周邊，翌日精神飽滿地展開千本鳥居與嵐山之旅。"
-          },
-          tags: ["⛩️ Heritage Area", "🍵 Cultural Vibe", "🚶 Walkable"],
-          btnText: { en: "Search Kyoto Hotels ↗", zh: "搜尋京都酒店 ↗" },
-          dest: "Kyoto, Japan",
-          checkin: "2026-12-26",
-          checkout: "2026-12-29"
-        },
-        {
-          legNum: 5,
-          nights: { en: "Leg 5 • 2 Nights (New Year's Eve)", zh: "第 5 站 • 2 晚 (跨年夜)" },
-          badgeClass: "",
-          highlight: false,
-          title: { en: "Osaka City & Dotonbori Hotels (大阪)", zh: "大阪心齋橋 / 難波市區酒店" },
-          dates: "🗓️ Dec 29 – Dec 31, 2026",
-          desc: {
-            en: "Stay near Namba or Umeda to celebrate New Year's Eve, enjoy vibrant street food, and access Kansai Airport (KIX) effortlessly.",
-            zh: "入住難波或梅田商圈，近距離體驗道頓堀跨年熱鬧氛圍，並可直達關西國際機場 (KIX)。"
-          },
-          tags: ["🎆 New Year's Eve", "🍜 Food Capital", "✈️ Direct Airport Link"],
-          btnText: { en: "Search Osaka Hotels ↗", zh: "搜尋大阪酒店 ↗" },
-          dest: "Osaka, Japan",
-          checkin: "2026-12-29",
-          checkout: "2026-12-31"
-        }
-      ]
-    },
-    planB: {
-      quickLegs: [
-        {
-          active: true,
-          dest: "Tokyo, Japan",
-          checkin: "2026-12-25",
-          checkout: "2026-12-27",
-          label: { en: "Tokyo Base (Dec 25–27)", zh: "東京首站 (12/25–27)" }
-        },
-        {
-          active: false,
-          dest: "Fujikawaguchiko, Yamanashi, Japan",
-          checkin: "2026-12-27",
-          checkout: "2026-12-28",
-          label: { en: "Kawaguchiko (Dec 27–28)", zh: "河口湖 (12/27–28)" }
-        },
-        {
-          active: false,
-          dest: "Hakone, Kanagawa, Japan",
-          checkin: "2026-12-28",
-          checkout: "2026-12-29",
-          label: { en: "Hakone (Dec 28–29)", zh: "箱根 (12/28–29)" }
-        },
-        {
-          active: false,
-          dest: "Tokyo, Japan",
-          checkin: "2026-12-29",
-          checkout: "2026-12-31",
-          label: { en: "Tokyo Finale (Dec 29–31)", zh: "東京終站 (12/29–31)" }
-        }
-      ],
-      legs: [
-        {
-          legNum: 1,
-          nights: { en: "Leg 1 • 2 Nights", zh: "第 1 站 • 2 晚" },
-          badgeClass: "",
-          highlight: false,
-          title: { en: "Tokyo City Hotels (東京首段)", zh: "東京市區精選酒店" },
-          dates: "🗓️ Dec 25 – Dec 27, 2026",
-          desc: {
-            en: "Comfortable twin room near Asakusa or Ginza with step-free station access. Unhurried exploration before the scenic Fuji drive.",
-            zh: "入住淺草或銀座一帶無障礙設施完善的雙床房，鄰近地鐵升降機出口，出發自駕前充分享受市區精華。"
-          },
-          tags: ["🚇 Near Metro", "🛍️ Shopping", "🛏️ Twin Room"],
-          btnText: { en: "Search Tokyo Hotels ↗", zh: "搜尋東京酒店 ↗" },
-          dest: "Tokyo, Japan",
+          tags: ["✅ Booked","🚇 Mitsukoshimae Stn","🛏️ Twin Room"],
+          btnText: { en: "View on Google Maps ↗", zh: "在 Google 地圖查看 ↗" },
+          mapUrl: "https://www.google.com/maps/search/?api=1&query=Villa%20Fontaine%20Tokyo%20Nihombashi%20Mitsukoshimae",
+          dest: "Villa Fontaine Tokyo Nihombashi Mitsukoshimae, Tokyo, Japan",
           checkin: "2026-12-25",
           checkout: "2026-12-27"
         },
         {
           legNum: 2,
-          nights: { en: "Leg 2 • 1 Night (Ryokan)", zh: "第 2 站 • 1 晚 (溫泉旅館)" },
+          nights: { en: "Leg 2 • 1 Night • Booked", zh: "第 2 站 • 1 晚 • 已預訂" },
           badgeClass: "",
           highlight: false,
-          title: { en: "Lake Kawaguchiko Onsen Ryokan (河口湖)", zh: "河口湖富士山景溫泉旅館" },
-          dates: "🗓️ Dec 27 – Dec 28, 2026",
+          title: { en: "Hotel Kagetsuen, Sengokuhara (ホテル花月園)", zh: "仙石原 ホテル花月園" },
+          dates: "🗓️ Dec 27 – Dec 28, 2026 · ¥33,264",
           desc: {
-            en: "Lakeside stay with private open-air hot spring bath, panoramic snow-capped Mt Fuji views, and seasonal kaiseki feast.",
-            zh: "入住正宗日式溫泉旅館，享有一泊二食會席料理及房間/露天風呂眺望富士山絕景。"
+            en: "Confirmed booking for 1 night in Sengokuhara, Hakone — a hot spring stay after the Fuji lakes and Lake Ashi sunset. Check your confirmation for the meal plan and arrival time.",
+            zh: "已確認預訂 1 晚，位於箱根仙石原 — 遊覽富士五湖及蘆之湖日落後入住溫泉酒店。餐飲安排及抵達時間請查閱訂房確認電郵。"
           },
-          tags: ["🗻 Mt Fuji View", "♨️ Hot Spring", "🍱 Kaiseki Dinner"],
-          btnText: { en: "Search Fuji Ryokan ↗", zh: "搜尋河口湖溫泉 ↗" },
-          dest: "Fujikawaguchiko, Yamanashi, Japan",
+          tags: ["✅ Booked","♨️ Hot Spring","🌲 Sengokuhara"],
+          btnText: { en: "View on Google Maps ↗", zh: "在 Google 地圖查看 ↗" },
+          mapUrl: "https://www.google.com/maps/search/?api=1&query=%E3%83%9B%E3%83%86%E3%83%AB%E8%8A%B1%E6%9C%88%E5%9C%92%20%E4%BB%99%E7%9F%B3%E5%8E%9F%20%E7%AE%B1%E6%A0%B9",
+          dest: "Hotel Kagetsuen, Sengokuhara, Hakone, Japan",
           checkin: "2026-12-27",
           checkout: "2026-12-28"
         },
         {
           legNum: 3,
-          nights: { en: "Leg 3 • 1 Night (Onsen Resort)", zh: "第 3 站 • 1 晚 (箱根溫泉)" },
+          nights: { en: "Leg 3 • 3 Nights • Booked", zh: "第 3 站 • 3 晚 • 已預訂" },
           badgeClass: "",
           highlight: false,
-          title: { en: "Hakone Hot Spring Resort (箱根)", zh: "箱根溫泉度假酒店 / 旅館" },
-          dates: "🗓️ Dec 28 – Dec 29, 2026",
+          title: { en: "Villa Fontaine Tokyo Hamamatsucho (ヴィラフォンテーヌ東京浜松町)", zh: "ヴィラフォンテーヌ東京浜松町" },
+          dates: "🗓️ Dec 28 – Dec 31, 2026 · ¥86,002",
           desc: {
-            en: "Tranquil night in Hakone's forested volcanic springs after Owakudani and Lake Ashi. (Option: can combine with Leg 2 into a single 2-night Fuji base).",
-            zh: "入住箱根森林溫泉區享受天然礦物溫泉。（亦可選擇在河口湖/箱根連住 2 晚同一溫泉旅館免搬行李）。"
+            en: "Confirmed booking for 3 nights. A few minutes from the car-return shop, close to Tokyo Tower, Shiba Park and Hamarikyu Gardens, with a direct monorail from Hamamatsucho Station to Haneda Airport.",
+            zh: "已確認預訂 3 晚。距離還車分店僅數分鐘，鄰近東京鐵塔、芝公園及濱離宮，並可在濱松町站乘單軌電車直達羽田機場。"
           },
-          tags: ["♨️ Mountain Onsen", "🌲 Forest View", "🚗 Free Parking"],
-          btnText: { en: "Search Hakone Stays ↗", zh: "搜尋箱根住宿 ↗" },
-          dest: "Hakone, Kanagawa, Japan",
+          tags: ["✅ Booked","✈️ Monorail to Haneda","🛏️ Twin Room"],
+          btnText: { en: "View on Google Maps ↗", zh: "在 Google 地圖查看 ↗" },
+          mapUrl: "https://www.google.com/maps/search/?api=1&query=Villa%20Fontaine%20Tokyo%20Hamamatsucho",
+          dest: "Villa Fontaine Tokyo Hamamatsucho, Tokyo, Japan",
           checkin: "2026-12-28",
-          checkout: "2026-12-29"
-        },
-        {
-          legNum: 4,
-          nights: { en: "Leg 4 • 2 Nights (Tokyo Finale)", zh: "第 4 站 • 2 晚 (東京終站)" },
-          badgeClass: "",
-          highlight: false,
-          title: { en: "Tokyo Finale & Year-End Hotels (東京終站)", zh: "東京歲末酒店" },
-          dates: "🗓️ Dec 29 – Dec 31, 2026",
-          desc: {
-            en: "Central Tokyo for year-end shopping, winter illuminations, and seamless Haneda/Narita airport departures on New Year's Eve.",
-            zh: "返回東京市區享受歲末熱鬧氛圍，漫步築地、銀座與冬季點燈，除夕直達機場極為快捷。"
-          },
-          tags: ["🛍️ Year-End Shopping", "🎆 Illuminations", "✈️ Direct Airport Link"],
-          btnText: { en: "Search Tokyo Hotels ↗", zh: "搜尋東京酒店 ↗" },
-          dest: "Tokyo, Japan",
-          checkin: "2026-12-29",
           checkout: "2026-12-31"
         }
-      ]
-    }
+    ]
   }
 };
 

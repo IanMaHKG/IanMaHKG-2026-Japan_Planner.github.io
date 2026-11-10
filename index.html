@@ -18,7 +18,7 @@
 
   SCRIPT LOAD ORDER (bottom of <body>, in dependency order):
     1.  site-data.js        → window.SITE_DATA  (all section data)
-    2.  itinerary-data.js   → window.ITINERARY_DATA  (12-day schedule)
+    2.  itinerary-data.js   → window.ITINERARY_DATA  (7-day schedule)
     3.  flights-data.js     → window.FLIGHTS_DATA  (flight routes)
     4.  currency.js         → JPY conversion functions
     5.  map.js              → MapLibre GL JS overview + per-day mini maps
@@ -38,13 +38,13 @@
     #main-nav         — Static HTML (wired by ui.js initNav)
     #overview         → render.js renderOverview()
       #overview-grid  → 3 summary cards from SITE_DATA.overview.cards
-      #route-stops    → JR Station Sign route board from SITE_DATA.overview.routeStopsA / routeStopsB
-    #map-section      → map.js initRouteMap() (MapLibre GL JS, reads the same routeStopsA / routeStopsB)
+      #route-stops    → JR Station Sign route board from SITE_DATA.overview.routeStops
+    #map-section      → map.js initRouteMap() (MapLibre GL JS, reads the same routeStops)
     #tips             → render.js renderTips()
     #itinerary        → render.js renderItinerary() + ui.js initFilters()
     #packing          → render.js renderPacking()
     #budget           → render.js renderBudget() + currency.js updateConvertedBudgets()
-    #hotels           → render.js renderHotels() + ui.js initHotelSearch()
+    #hotels           → features/hotels.js renderHotels()
     #footer           — Static HTML
   ================================================================
 -->
@@ -54,13 +54,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Japan Winter Journey 2026 — Dec 20–31 Dual-Route Winter Itinerary</title>
+  <title>Japan Winter Journey 2026 — Dec 25–31 Tokyo, Mt Fuji &amp; Hakone Itinerary</title>
   <meta name="description"
-    content="A detailed day-by-day Japan travel itinerary for 2 adults. Features dual routes: Plan A (Tokyo → Mt Fuji → Kansai, Dec 20–31, 12 Days) and Plan B (Tokyo → Mt Fuji &amp; Hakone Scenic Loop, Dec 25–31, 7 Days)." />
+    content="A finalised 7-day Japan travel itinerary for 2 adults, 25–31 Dec 2026: Tokyo, a Mt Fuji, Hakone and Odawara self-drive, then a Tokyo finale — with confirmed hotels and car rental." />
 
   <!-- Open Graph / social sharing (WhatsApp, iMessage, Slack previews) -->
   <meta property="og:title"       content="Japan Winter Journey 2026" />
-  <meta property="og:description" content="Day-by-day dual-route winter itinerary for 2 adults: Plan A (Dec 20–31, Kansai) or Plan B (Dec 25–31, Kanto &amp; Fuji Loop)." />
+  <meta property="og:description" content="Day-by-day winter itinerary for 2 adults, Dec 25–31: Tokyo, Mt Fuji, Hakone and Odawara." />
   <meta property="og:type"        content="website" />
   <meta property="og:image"       content="https://ianmahkg.github.io/IanMaHKG-2026-Japan_Planner.github.io/assets/images/og-1200x630.jpg" />
   <meta property="og:image:width"  content="1200" />
@@ -69,7 +69,7 @@
   <meta name="twitter:card"       content="summary_large_image" />
   <meta name="twitter:image"      content="https://ianmahkg.github.io/IanMaHKG-2026-Japan_Planner.github.io/assets/images/og-1200x630.jpg" />
   <meta name="twitter:title"      content="Japan Winter Journey 2026" />
-  <meta name="twitter:description" content="Day-by-day dual-route winter itinerary for 2 adults: Plan A (Dec 20–31, Kansai) or Plan B (Dec 25–31, Kanto &amp; Fuji Loop)." />
+  <meta name="twitter:description" content="Day-by-day winter itinerary for 2 adults, Dec 25–31: Tokyo, Mt Fuji, Hakone and Odawara." />
 
   <!-- PWA & Mobile Settings -->
   <meta name="color-scheme" content="light dark" />
@@ -99,8 +99,7 @@
   <link rel="stylesheet" href="css/sections/overview.css" />
   <link rel="stylesheet" href="css/sections/map.css" />
   <link rel="stylesheet" href="css/sections/tips.css" />
-  <link rel="stylesheet" href="css/sections/car-return.css" />
-  <link rel="stylesheet" href="css/sections/car-rental.css" />
+    <link rel="stylesheet" href="css/sections/car-rental.css" />
   <link rel="stylesheet" href="css/sections/itinerary.css" />
   <link rel="stylesheet" href="css/sections/packing.css" />
   <link rel="stylesheet" href="css/sections/budget.css" />
@@ -123,8 +122,8 @@
     <div class="hero-particles" id="particles"></div>
     <div class="hero-content">
       <p class="hero-eyebrow">
-        <span class="lang-en">🇯🇵 Winter Adventure · Dual-Route Planner</span>
-        <span class="lang-zh">🇯🇵 冬日探險 · 雙路線規劃</span>
+        <span class="lang-en">🇯🇵 Winter Adventure · Finalised Itinerary</span>
+        <span class="lang-zh">🇯🇵 冬日探險 · 已確認行程</span>
       </p>
       <h1 class="hero-title">
         <span class="title-line">Japan</span>
@@ -132,39 +131,24 @@
         <span class="title-line year">2026</span>
       </h1>
       <p class="hero-subtitle">
-        <span class="lang-en">Plan A: Dec 20–31 (12 Days) &nbsp;|&nbsp; Plan B: Dec 25–31 (7 Days)</span>
-        <span class="lang-zh">方案 A：12月20日–31日 (12天) &nbsp;|&nbsp; 方案 B：12月25日–31日 (7天)</span>
+        <span class="lang-en">Dec 25–31, 2026 (7 Days)</span>
+        <span class="lang-zh">2026 年 12 月 25 日–31 日 (7 天)</span>
       </p>
       <div class="hero-badges">
         <span class="badge">
-          <span class="lang-en">🏔️ 7–12 Days</span>
-          <span class="lang-zh">🏔️ 7–12天行程</span>
+          <span class="lang-en">🏔️ 7 Days</span>
+          <span class="lang-zh">🏔️ 7 天行程</span>
         </span>
         <span class="badge">
           <span class="lang-en">👥 2 Adults</span>
           <span class="lang-zh">👥 2 位成人</span>
         </span>
         <span class="badge">
-          <span class="lang-en">🚗 Road Trip + Rail</span>
-          <span class="lang-zh">🚗 自駕遊 + 鐵路</span>
+          <span class="lang-en">🚗 2-Day Road Trip + Metro</span>
+          <span class="lang-zh">🚗 2 天自駕 + 地鐵</span>
         </span>
       </div>
 
-      <!-- Hero Route Plan Switcher -->
-      <div class="route-switcher-hero" id="route-switcher-hero" role="group" aria-label="Route Plan Selection">
-        <div class="plan-hero-toggle">
-          <button class="plan-hero-btn active" data-plan="plan-a" id="hero-plan-a-btn" type="button">
-            <span class="plan-btn-tag">Plan A</span>
-            <span class="lang-en">Kansai Golden Route (12 Days)</span>
-            <span class="lang-zh">關西名勝經典 (12天)</span>
-          </button>
-          <button class="plan-hero-btn" data-plan="plan-b" id="hero-plan-b-btn" type="button">
-            <span class="plan-btn-tag">Plan B</span>
-            <span class="lang-en">Kanto &amp; Shizuoka Loop (7 Days)</span>
-            <span class="lang-zh">關東靜岡環線 (7天)</span>
-          </button>
-        </div>
-      </div>
 
       <a href="#overview" class="hero-cta" id="hero-cta">
         <span class="lang-en">Explore Itinerary</span>
@@ -190,25 +174,21 @@
           <span class="lang-en">Overview</span>
           <span class="lang-zh">概覽</span>
         </a>
-        <a href="#map-section">
-          <span class="lang-en">Map</span>
-          <span class="lang-zh">地圖</span>
-        </a>
-        <a href="#tips">
-          <span class="lang-en">Tips</span>
-          <span class="lang-zh">資訊</span>
-        </a>
         <a href="#itinerary">
           <span class="lang-en">Itinerary</span>
           <span class="lang-zh">行程</span>
         </a>
-        <a href="#car-return">
+        <a href="#map-section">
+          <span class="lang-en">Map</span>
+          <span class="lang-zh">地圖</span>
+        </a>
+        <a href="#hotels">
+          <span class="lang-en">Hotels</span>
+          <span class="lang-zh">酒店</span>
+        </a>
+        <a href="#car-rental">
           <span class="lang-en">Car</span>
           <span class="lang-zh">租車</span>
-        </a>
-        <a href="#packing">
-          <span class="lang-en">Packing</span>
-          <span class="lang-zh">行李</span>
         </a>
         <a href="#flights">
           <span class="lang-en">Flights</span>
@@ -218,18 +198,16 @@
           <span class="lang-en">Budget</span>
           <span class="lang-zh">預算</span>
         </a>
-        <a href="#hotels">
-          <span class="lang-en">Hotels</span>
-          <span class="lang-zh">酒店</span>
+        <a href="#tips">
+          <span class="lang-en">Tips</span>
+          <span class="lang-zh">資訊</span>
+        </a>
+        <a href="#packing">
+          <span class="lang-en">Packing</span>
+          <span class="lang-zh">行李</span>
         </a>
       </div>
       <div class="nav-actions">
-        <!-- Route Plan Switcher -->
-        <div class="plan-nav-switcher" role="group" aria-label="Route selector" title="Switch Route Plan">
-          <div class="switcher-slider"></div>
-          <button class="plan-nav-btn active" data-plan="plan-a" aria-label="Plan A">Plan A</button>
-          <button class="plan-nav-btn" data-plan="plan-b" aria-label="Plan B">Plan B</button>
-        </div>
         <!-- Always-Visible Language Switcher -->
         <div class="lang-switcher" role="group" aria-label="Language selector">
           <div class="switcher-slider"></div>
@@ -267,13 +245,13 @@
           <div class="jr-line-branding">
             <span class="jr-badge">JR</span>
             <span class="jr-line-title">
-              <span class="lang-en">Tokaido & Kansai Main Line · Winter 2026</span>
-              <span class="lang-zh">東海道・關西橫斷本線 · 2026 冬</span>
+              <span class="lang-en">Fuji, Hakone &amp; Odawara Self-Drive Loop · Winter 2026</span>
+              <span class="lang-zh">富士・箱根・小田原自駕環線 · 2026 冬</span>
             </span>
           </div>
           <div class="jr-direction">
-            <span class="lang-en">Bound for Osaka 方面 <span class="jr-arrow">▶</span></span>
-            <span class="lang-zh">往 大阪 方面 <span class="jr-arrow">▶</span></span>
+            <span class="lang-en">Loop via Fuji, Hakone &amp; Odawara 方面 <span class="jr-arrow">▶</span></span>
+            <span class="lang-zh">經 富士山、箱根、小田原 環線方面 <span class="jr-arrow">▶</span></span>
           </div>
         </div>
         <div class="route-track-wrap">
@@ -281,113 +259,6 @@
           <div class="route-stops" id="route-stops"></div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════ ROUTE MAP ═══════════════════ -->
-  <section id="map-section" class="section">
-    <div class="container">
-      <h2 class="section-title">
-        <span class="lang-en">Route Map</span>
-        <span class="lang-zh">路線地圖</span>
-      </h2>
-      <p class="section-subtitle" id="map-subtitle">
-        <span class="lang-en">Your journey across Japan — interactive route lines, mountain drives, and scenic stops.</span>
-        <span class="lang-zh">在日本展開跨地區之旅 —— 互動路線圖、壯麗富士山自駕與沿途名勝。</span>
-      </p>
-
-      <div class="map-container">
-        <div id="route-map"></div>
-      </div>
-
-      <div class="map-legend" id="map-legend">
-        <div class="legend-item">
-          <div class="legend-dot leg-tokyo"></div>
-          <span>
-            <span class="lang-en">Tokyo (東京) (Days 1–4)</span>
-            <span class="lang-zh">東京 (第 1–4 天)</span>
-          </span>
-        </div>
-        <div class="legend-item">
-          <div class="legend-dot leg-fuji"></div>
-          <span>
-            <span class="lang-en">Mt Fuji Drive (富士山自駕) (Days 5–7)</span>
-            <span class="lang-zh">富士山自駕路段 (第 5–7 天)</span>
-          </span>
-        </div>
-        <div class="legend-item" id="legend-leg-three">
-          <div class="legend-dot leg-kansai"></div>
-          <span>
-            <span class="lang-en">Kansai / Loop Segment (Days 8+)</span>
-            <span class="lang-zh">關西 / 環線路段 (第 8 天起)</span>
-          </span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════ PRACTICAL TIPS ═══════════════════ -->
-  <section id="tips" class="section section-dark">
-    <div class="container">
-      <h2 class="section-title light">
-        <span class="lang-en">Practical Tips</span>
-        <span class="lang-zh">實用出遊資訊</span>
-      </h2>
-      <p class="section-subtitle light">
-        <span class="lang-en">Everything you need to prepare before departure.</span>
-        <span class="lang-zh">出發前必須做好的準備工作與交通卡券指南。</span>
-      </p>
-
-      <div class="tips-grid" id="tips-grid"></div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════ CAR RETURN DECISION ═══════════════════ -->
-  <!-- This section is populated by render.js renderCarReturn()    -->
-  <!-- Data source: SITE_DATA.carReturn in site-data.js            -->
-  <section id="car-return" class="section">
-    <div class="container">
-      <h2 class="section-title">
-        <span class="lang-en">🚗 Car Return Decision</span>
-        <span class="lang-zh">🚗 租車歸還地點比較</span>
-      </h2>
-      <p class="section-subtitle" id="car-return-subtitle">
-        <span class="lang-en">Compare returning your rental car — evaluate one-way fees, luggage transfer, and onward transit for your chosen route.</span>
-        <span class="lang-zh">比較各還車地點之安排與費用，評估對行李轉移與後續交通之實際影響。</span>
-      </p>
-
-      <!-- Context paragraph (injected by renderCarReturn) -->
-      <p class="cr-context" id="car-return-context"></p>
-
-      <!-- 3-option comparison cards (injected by renderCarReturn) -->
-      <div class="cr-grid" id="car-return-grid"></div>
-
-      <!-- Bottom recommendation callout (injected by renderCarReturn) -->
-      <div class="cr-recommendation" id="car-return-rec"></div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════ CAR RENTAL SEARCH ═══════════════════════ -->
-  <!-- Populated by render.js renderCarRental() via SITE_DATA.carRental -->
-  <section id="car-rental" class="section section-dark">
-    <div class="container">
-      <h2 class="section-title light">
-        <span class="lang-en">🚙 Book Your Rental Car</span>
-        <span class="lang-zh">🚙 租車預訂</span>
-      </h2>
-      <p class="section-subtitle light">
-        <span class="lang-en">Compare and book directly with Japan's top rental companies — all support one-way drop-off for your Mt Fuji self-drive segment.</span>
-        <span class="lang-zh">直接於日本三大租車公司官網比較及預訂 — 均支援富士山自駕路段的異地還車服務。</span>
-      </p>
-
-      <!-- Pickup location quick-select pills + search widget -->
-      <div class="rental-search-card" id="rental-search-card"></div>
-
-      <!-- Vehicle size recommendation (injected by renderCarRental) -->
-      <div class="rental-vehicle-rec" id="rental-vehicle-rec"></div>
-
-      <!-- 3 company cards -->
-      <div class="rental-companies-grid" id="rental-companies-grid"></div>
     </div>
   </section>
 
@@ -414,16 +285,8 @@
           <span class="lang-zh">東京段</span>
         </button>
         <button class="day-tab" data-region="fuji">
-          <span class="lang-en">Mt Fuji Drive (富士自駕)</span>
-          <span class="lang-zh">富士自駕段</span>
-        </button>
-        <button class="day-tab plan-a-tab" data-region="kansai">
-          <span class="lang-en">Kansai (關西)</span>
-          <span class="lang-zh">關西段</span>
-        </button>
-        <button class="day-tab plan-b-tab" data-region="coastal">
-          <span class="lang-en">Izu &amp; Coast (伊豆沿海)</span>
-          <span class="lang-zh">伊豆沿海段</span>
+          <span class="lang-en">Mt Fuji &amp; Hakone Drive (富士・箱根自駕)</span>
+          <span class="lang-zh">富士・箱根自駕段</span>
         </button>
       </div>
 
@@ -432,19 +295,98 @@
     </div>
   </section>
 
-  <!-- ═══════════════════ PACKING ═══════════════════ -->
-  <section id="packing" class="section section-dark">
+  <!-- ═══════════════════ ROUTE MAP ═══════════════════ -->
+  <section id="map-section" class="section section-dark">
     <div class="container">
-      <h2 class="section-title light">
-        <span class="lang-en">Packing Essentials</span>
-        <span class="lang-zh">行李打包清單</span>
+      <h2 class="section-title">
+        <span class="lang-en">Route Map</span>
+        <span class="lang-zh">路線地圖</span>
       </h2>
-      <p class="section-subtitle light">
-        <span class="lang-en">A winter-ready checklist for December in Japan.</span>
-        <span class="lang-zh">12月冬遊日本防寒與自駕出行必備物品。</span>
+      <p class="section-subtitle" id="map-subtitle">
+        <span class="lang-en">Your journey — the Mt Fuji, Hakone and Odawara self-drive loop with interactive stops.</span>
+        <span class="lang-zh">你的旅程 —— 富士山、箱根及小田原自駕環線與互動景點地圖。</span>
       </p>
 
-      <div class="packing-grid" id="packing-grid"></div>
+      <div class="map-container">
+        <div id="route-map"></div>
+      </div>
+
+      <div class="map-legend" id="map-legend">
+        <div class="legend-item">
+          <div class="legend-dot leg-tokyo"></div>
+          <span>
+            <span class="lang-en">Tokyo (東京) (Days 1–2)</span>
+            <span class="lang-zh">東京 (第 1–2 天)</span>
+          </span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot leg-fuji"></div>
+          <span>
+            <span class="lang-en">Mt Fuji &amp; Hakone Self-Drive (Days 3–4)</span>
+            <span class="lang-zh">富士山及箱根自駕 (第 3–4 天)</span>
+          </span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot leg-kansai"></div>
+          <span>
+            <span class="lang-en">Odawara, Coast &amp; Tokyo Finale (Days 4–7)</span>
+            <span class="lang-zh">小田原、海岸及東京終站 (第 4–7 天)</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ HOTEL SEARCH (BOOKING.COM) ═══════════════════ -->
+  <section id="hotels" class="section">
+    <div class="container">
+      <h2 class="section-title">
+        <span class="lang-en">Confirmed Hotels</span>
+        <span class="lang-zh">已確認酒店</span>
+      </h2>
+      <p class="section-subtitle">
+        <span class="lang-en">Your three confirmed stays for 2 adults (1 Twin Room), 6 nights in total.</span>
+        <span class="lang-zh">2 位成人（1 間雙床房）共 6 晚的三個已確認住宿。</span>
+      </p>
+
+      <!-- Curated Itinerary Stay Recommendations Grid -->
+      <div class="itinerary-hotels-grid" id="itinerary-hotels-grid"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ CAR RENTAL SEARCH ═══════════════════════ -->
+  <!-- Populated by features/car.js renderCarRental() via SITE_DATA.carRental -->
+  <section id="car-rental" class="section section-dark">
+    <div class="container">
+      <h2 class="section-title light">
+        <span class="lang-en">🚙 Car Rental</span>
+        <span class="lang-zh">🚙 租車安排</span>
+      </h2>
+      <p class="section-subtitle light">
+        <span class="lang-en">Your Toyota Rent a Car booking is confirmed and paid — pick-up, return and cost at a glance.</span>
+        <span class="lang-zh">豐田租車預訂已確認及付款 — 取車、還車及費用一覽。</span>
+      </p>
+
+      <!-- Booking summary card -->
+      <div class="rental-search-card" id="rental-search-card"></div>
+
+      <!-- Confirmed booking: pick-up, return, price -->
+      <div class="rental-booking" id="rental-booking"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ FLIGHT OPTIONS ═══════════════════ -->
+  <section id="flights" class="section flights-section">
+    <div class="container">
+      <h2 class="section-title">
+        <span class="lang-en">✈ Flight Options</span>
+        <span class="lang-zh">✈ 航班選擇</span>
+      </h2>
+      <p class="section-subtitle">
+        <span class="lang-en">Flight options for the Tokyo round trip (outbound 24–25 Dec, return 31 Dec) and Hong Kong → Edinburgh on 14 Jan 2027, verified live on Google Flights. All times are local.</span>
+        <span class="lang-zh">東京來回航班選擇（12 月 24–25 日出發、12 月 31 日回程）及 2027 年 1 月 14 日香港 → 愛丁堡航班，經 Google Flights 即時核實。所有時間均為當地時間。</span>
+      </p>
+      <div id="flights-section-content"></div>
     </div>
   </section>
 
@@ -456,8 +398,8 @@
         <span class="lang-zh">預算估算</span>
       </h2>
       <p class="section-subtitle" id="budget-subtitle">
-        <span class="lang-en">Approximate costs for 2 adults, 12 days (1 Twin Room throughout, moderate comfort level).</span>
-        <span class="lang-zh">兩位成人同行，12天日本之旅大約費用估算（全程 1 間雙床房，以中等舒適標準計算，未含機票）。</span>
+        <span class="lang-en">Approximate costs for 2 adults, 7 days (1 Twin Room throughout). Hotels and the car rental are already booked.</span>
+        <span class="lang-zh">兩位成人同行，7 天日本之旅大約費用估算（全程 1 間雙床房，未含機票）。酒店及租車已預訂。</span>
       </p>
 
       <!-- Currency Switcher in Budget -->
@@ -514,123 +456,35 @@
     </div>
   </section>
 
-  <!-- ═══════════════════ HOTEL SEARCH (BOOKING.COM) ═══════════════════ -->
-  <section id="hotels" class="section section-dark">
+  <!-- ═══════════════════ PRACTICAL TIPS ═══════════════════ -->
+  <section id="tips" class="section section-dark">
     <div class="container">
-      <h2 class="section-title">
-        <span class="lang-en">Hotel & Ryokan Search</span>
-        <span class="lang-zh">酒店與溫泉旅館搜尋</span>
+      <h2 class="section-title light">
+        <span class="lang-en">Practical Tips</span>
+        <span class="lang-zh">實用出遊資訊</span>
       </h2>
-      <p class="section-subtitle">
-        <span class="lang-en">Find and book accommodations directly on Booking.com for 2 adults (1 Twin Room) throughout all journey legs.</span>
-        <span class="lang-zh">透過 Booking.com 即時搜尋及預訂本次旅程 2 位成人（1 間雙床房）各站之優質市區酒店及一泊二食溫泉旅館。</span>
+      <p class="section-subtitle light">
+        <span class="lang-en">Everything you need to prepare before departure.</span>
+        <span class="lang-zh">出發前必須做好的準備工作與交通卡券指南。</span>
       </p>
 
-      <!-- Hotel Search Widget Box -->
-      <div class="hotel-search-card">
-        <div class="hotel-search-header">
-          <div class="hotel-search-brand">
-            <span class="booking-logo-icon">🛏️</span>
-            <div>
-              <h3>
-                <span class="lang-en">Booking.com Japan Hotel Finder</span>
-                <span class="lang-zh">Booking.com 日本酒店與溫泉旅館搜尋器</span>
-              </h3>
-              <p>
-                <span class="lang-en">Configured for 2 Adults (1 Twin Room) • Real-time rates</span>
-                <span class="lang-zh">已預設 2 位成人（1 間雙床房）• 即時房價</span>
-              </p>
-            </div>
-          </div>
-          <div class="hotel-quick-legs">
-            <span class="quick-legs-label">
-              <span class="lang-en">Quick Leg:</span>
-              <span class="lang-zh">快速選擇行程：</span>
-            </span>
-            <div class="quick-leg-pills" id="quick-leg-pills"></div>
-          </div>
-        </div>
-
-        <form id="hotel-search-form" class="hotel-search-form" target="_blank">
-          <div class="form-row">
-            <div class="form-group form-dest">
-              <label for="hotel-destination">
-                <span class="lang-en">Destination / City</span>
-                <span class="lang-zh">目的地 / 城市</span>
-              </label>
-              <div class="input-with-icon">
-                <span class="input-icon">📍</span>
-                <input type="text" id="hotel-destination" name="ss" value="Tokyo, Japan"
-                  placeholder="City or region in Japan" required />
-              </div>
-            </div>
-
-            <div class="form-group form-date">
-              <label for="hotel-checkin">
-                <span class="lang-en">Check-in</span>
-                <span class="lang-zh">入住日期</span>
-              </label>
-              <div class="input-with-icon">
-                <span class="input-icon">📅</span>
-                <input type="date" id="hotel-checkin" name="checkin" value="2026-12-20" required />
-              </div>
-            </div>
-
-            <div class="form-group form-date">
-              <label for="hotel-checkout">
-                <span class="lang-en">Check-out</span>
-                <span class="lang-zh">退房日期</span>
-              </label>
-              <div class="input-with-icon">
-                <span class="input-icon">📅</span>
-                <input type="date" id="hotel-checkout" name="checkout" value="2026-12-24" required />
-              </div>
-            </div>
-
-            <div class="form-group form-guests">
-              <label for="hotel-adults">
-                <span class="lang-en">Guests</span>
-                <span class="lang-zh">人數與房間</span>
-              </label>
-              <div class="input-with-icon">
-                <span class="input-icon">👥</span>
-                <select id="hotel-adults" name="group_adults">
-                  <option value="2" selected>2 Adults (兩位成人 · 1 間房)</option>
-                  <option value="1">1 Adult (一位成人)</option>
-                  <option value="3">3 Adults (三位成人)</option>
-                  <option value="4">4 Adults (四位成人)</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-group form-submit">
-              <label>&nbsp;</label>
-              <button type="submit" class="hotel-search-btn" id="hotel-search-btn">
-                <span class="lang-en">Search Booking.com ↗</span>
-                <span class="lang-zh">在 Booking.com 搜尋 ↗</span>
-              </button>
-            </div>
-          </div>
-        </form>
-      </div>
-
-      <!-- Curated Itinerary Stay Recommendations Grid -->
-      <div class="itinerary-hotels-grid" id="itinerary-hotels-grid"></div>
+      <div class="tips-grid" id="tips-grid"></div>
     </div>
   </section>
 
-  <!-- ═══════════════════ FLIGHT OPTIONS ═══════════════════ -->
-  <section id="flights" class="section flights-section">
+  <!-- ═══════════════════ PACKING ═══════════════════ -->
+  <section id="packing" class="section">
     <div class="container">
-      <h2 class="section-title">
-        <span class="lang-en">✈ Flight Options</span>
-        <span class="lang-zh">✈ 航班選擇</span>
+      <h2 class="section-title light">
+        <span class="lang-en">Packing Essentials</span>
+        <span class="lang-zh">行李打包清單</span>
       </h2>
-      <p class="section-subtitle">
-        <span class="lang-en">Top standby-friendly flight options across British Airways, Finnair, Lufthansa, SWISS and Etihad — verified live on Google Flights. All times are local.</span>
-        <span class="lang-zh">精選英航、芬蘭航空、漢莎、瑞士及阿提哈德的候補友好航班，經 Google Flights 即時核實。所有時間均為當地時間。</span>
+      <p class="section-subtitle light">
+        <span class="lang-en">A winter-ready checklist for December in Japan.</span>
+        <span class="lang-zh">12月冬遊日本防寒與自駕出行必備物品。</span>
       </p>
-      <div id="flights-section-content"></div>
+
+      <div class="packing-grid" id="packing-grid"></div>
     </div>
   </section>
 
@@ -643,42 +497,46 @@
         <div class="footer-brand">
           <h3>
             <span class="lang-en">🗾 Japan Winter Journey 2026</span>
-            <span class="lang-zh">🗾 日本冬日雙路線之旅 2026</span>
+            <span class="lang-zh">🗾 日本冬日之旅 2026</span>
           </h3>
-          <p>Dec 20 — Dec 31 &nbsp;|&nbsp; 2 Adults Scenic Journey 🇯🇵</p>
+          <p>Dec 25 — Dec 31 &nbsp;|&nbsp; 2 Adults Scenic Journey 🇯🇵</p>
         </div>
         <div class="footer-links">
           <a href="#overview">
             <span class="lang-en">Overview</span>
             <span class="lang-zh">概覽</span>
           </a>
-          <a href="#map-section">
-            <span class="lang-en">Map</span>
-            <span class="lang-zh">地圖</span>
-          </a>
-          <a href="#tips">
-            <span class="lang-en">Tips</span>
-            <span class="lang-zh">資訊</span>
-          </a>
           <a href="#itinerary">
             <span class="lang-en">Itinerary</span>
             <span class="lang-zh">行程</span>
           </a>
-          <a href="#packing">
-            <span class="lang-en">Packing</span>
-            <span class="lang-zh">行李</span>
-          </a>
-          <a href="#budget">
-            <span class="lang-en">Budget</span>
-            <span class="lang-zh">預算</span>
+          <a href="#map-section">
+            <span class="lang-en">Map</span>
+            <span class="lang-zh">地圖</span>
           </a>
           <a href="#hotels">
             <span class="lang-en">Hotels</span>
             <span class="lang-zh">酒店</span>
           </a>
+          <a href="#car-rental">
+            <span class="lang-en">Car</span>
+            <span class="lang-zh">租車</span>
+          </a>
           <a href="#flights">
             <span class="lang-en">Flights</span>
             <span class="lang-zh">航班</span>
+          </a>
+          <a href="#budget">
+            <span class="lang-en">Budget</span>
+            <span class="lang-zh">預算</span>
+          </a>
+          <a href="#tips">
+            <span class="lang-en">Tips</span>
+            <span class="lang-zh">資訊</span>
+          </a>
+          <a href="#packing">
+            <span class="lang-en">Packing</span>
+            <span class="lang-zh">行李</span>
           </a>
         </div>
       </div>

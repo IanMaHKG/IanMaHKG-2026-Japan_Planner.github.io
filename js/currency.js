@@ -97,11 +97,12 @@ function updateConvertedBudgets() {
 
     const fMin = roundedMin.toLocaleString('en-US');
     const fMax = roundedMax.toLocaleString('en-US');
+    const rangeText = fMin === fMax ? `${symbol}${fMin}` : `${symbol}${fMin}–${symbol}${fMax}`;
 
     if (el.classList.contains('budget-total-val')) {
-      el.innerHTML = `<strong>${symbol}${fMin}–${symbol}${fMax}</strong>`;
+      el.innerHTML = `<strong>${rangeText}</strong>`;
     } else {
-      el.innerHTML = `${symbol}${fMin}–${symbol}${fMax}`;
+      el.innerHTML = rangeText;
     }
   });
 }

@@ -126,24 +126,19 @@ Taiwan-specific vocabulary.
 │   ├── base.css            # CSS reset, typography, container, a11y (focus, reduced motion), back-to-top
 │   ├── components.css      # UI components (buttons, tags, JR dots, markers)
 │   ├── sections/           # One stylesheet per page section (link order = cascade order!)
-│   │   ├── nav, hero, overview, map, tips, car-return, car-rental, itinerary,
+│   │   ├── nav, hero, overview, map, tips, car-rental, itinerary,
 │   │   │   packing, budget, hotels, footer, dark-overrides, flights (.css)
 │   └── responsive.css      # Responsive media queries (must stay last)
 │
 ├── data/                   # Data Modules (Universal format)
-│   ├── flights/flights-data.js   # FLIGHTS_DATA — routes (each tagged with `plans`), `tz` table, ≤5 options each
+│   ├── flights/flights-data.js   # FLIGHTS_DATA — 7 routes, `tz` table, ≤5 options each
 │   ├── site-data.js        # Overview, tips, packing, budget, hotels, car rental
-│   └── itinerary-data.js   # 12-day schedule, blocks, location coordinates
+│   └── itinerary-data.js   # 7-day schedule (25–31 Dec), blocks, option toggles, location coordinates
 │
 ├── data-src/flights/       # Source-of-truth CSVs (NOT deployed to GitHub Pages)
-│   ├── edi_to_tokyo_20261219.csv
 │   ├── edi_to_tokyo_b_20261224.csv
 │   ├── lhr_to_tokyo_b_20261224.csv
 │   ├── hkg_to_tokyo_b_20261225.csv
-│   ├── lhr_to_tokyo_20261219.csv
-│   ├── osaka_to_edi_20261231.csv
-│   ├── osaka_to_lhr_20261231.csv
-│   ├── kix_to_hkg_20261231.csv
 │   ├── tokyo_to_edi_20261231.csv
 │   ├── tokyo_to_lhr_20261231.csv
 │   ├── tokyo_to_hkg_20261231.csv
@@ -153,7 +148,7 @@ Taiwan-specific vocabulary.
     ├── currency.js         # Exchange rate fetch & JPY conversion
     ├── map.js              # MapLibre GL JS — overview & lazy day maps
     ├── features/           # Section renderers (load BEFORE render.js)
-    │   ├── car.js          # renderCarRental / renderCarReturn / toggleCarTips
+    │   ├── car.js          # renderCarRental
     │   ├── overview.js     # renderOverview
     │   ├── tips-packing.js # renderTips / renderPacking
     │   ├── budget.js       # renderBudget
@@ -161,7 +156,7 @@ Taiwan-specific vocabulary.
     │   ├── itinerary.js    # weatherBadgeHtml / renderItinerary / toggleDay
     │   ├── flights.js      # renderFlights (reads FLIGHTS_DATA → #flights-section-content)
     │   └── weather.js      # fetchLiveWeather (Open-Meteo): patches day-card weather badges in place
-    ├── render.js           # Orchestrator: renderSiteContent, planchange re-render, window exports
+    ├── render.js           # Orchestrator: renderSiteContent and window exports
     ├── ui.js               # Navigation, language/theme selectors, observers
     └── script.js           # Application bootstrapper & SW registration
 ```
@@ -169,7 +164,7 @@ Taiwan-specific vocabulary.
 ### Data-Driven Pattern
 
 - All text content lives in **`data/site-data.js`** (overview, tips, packing,
-  budget, car return, car rental) or **`data/itinerary-data.js`** (day-by-day).
+  budget, car rental) or **`data/itinerary-data.js`** (day-by-day).
 - `js/render.js` reads data and injects HTML into placeholder IDs in
   `index.html`. Do **not** hardcode displayed text in `index.html`
   unless it is a structural label that does not need i18n.
@@ -182,19 +177,12 @@ Taiwan-specific vocabulary.
 - **Privacy & PII Protection:** Do NOT display personal names, specific family member mappings ("Mother", "Father"), or home cities in website text. State passport rules strictly by passport type (BC, BN(O), HKSAR, Portuguese). Refer in public UI only to "2 Adults / 2 位成人".
 - **Passports:** BC, BN(O), Portuguese, & HKSAR passports. **All 4 passports enjoy 90-day visa-free entry to Japan.**
 - **Driving Licences:** 1 designated driver holds a **UK Photocard Driving Licence**. Japan strictly requires a **1949 Geneva Convention IDP** obtained from a UK Post Office (£5.50) before departure.
-- **Dates:** 20 Dec – 31 Dec 2026.
-- **Dual-Route Architecture:**
-  - **Plan A (Kansai Golden Route, 12 Days, 20–31 Dec):** Tokyo → Kawaguchiko / Mt Fuji → Hakone → Nagoya (car return Day 7) → Kyoto / Nara → Osaka (KIX departure).
-  - **Plan B (Kanto & Shizuoka Scenic Loop, 7 Days, 25–31 Dec):** Tokyo (25–27 Dec) → Kawaguchiko / Mt Fuji (27 Dec) → Hakone (28 Dec) → Kamakura & Yokohama (29 Dec; car return, zero drop-off fee) → Tokyo finale (29–31 Dec) → Haneda/Narita departure. Hotel cards: Tokyo 25–27, Kawaguchiko 27–28, Hakone 28–29, Tokyo 29–31 (4 cards in total).
-- **Car rental:** Plan A: pick up Day 5 (24 Dec) leaving Tokyo, return Day 7 (26 Dec) in Nagoya/Kyoto. Plan B: pick up Day 3 (27 Dec) leaving Tokyo, return Day 5 (29 Dec) in Yokohama with a ¥0 drop-off fee. `renderCarRental(plan)` switches `intro`/`introB` and each company's `note`/`noteB`.
-- **Vehicle Picks (4-Card Grid for 2 Adults + 6 Luggage Pieces):**
-  1. Mid-size SUV (RAV4, X-Trail, Forester 4WD/AWD) — **Recommended**
-  2. Liftback / Wagon (Prius 5th Gen E-Four, Corolla Touring) — **Agility & Economy Alternative**
-  3. Minivan / MPV (Voxy/Noah, Serena, Alphard) — **Senior Comfort**
-  4. Kei Car (660cc) — **Avoid**
-  - Note: Enthusiast hatchbacks (GR Yaris / GR Corolla) ruled out due to tiny boot capacity and harsh ride for senior comfort.
+- **Dates:** 25 Dec – 31 Dec 2026 (7 days, single finalised itinerary — the old 12-day Kansai route and the Plan A / Plan B switch were removed).
+- **Itinerary:** Tokyo (25–27 Dec) → Day 3 (27 Dec) self-drive via Lake Kawaguchi, Arakurayama Sengen Park and Lake Yamanaka to Lake Ashi (north shore) and Hotel Kagetsuen in Sengokuhara → Day 4 (28 Dec) Owakudani, Odawara Castle Park (alternative: Hakone Shrine), lunch at Totoco Odawara, a Kamakura / Enoshima / Yokohama choice, then car return in Tokyo by 20:00 → Tokyo finale (28–31 Dec) → Haneda/Narita departure on 31 Dec. The choices are rendered as on-page toggles (`activity.options` in `itinerary-data.js`).
+- **Confirmed hotels (3 cards, 6 nights):** Villa Fontaine Tokyo Nihombashi Mitsukoshimae 25–27 Dec (¥58,604); Hotel Kagetsuen, Sengokuhara 27–28 Dec (¥33,264); Villa Fontaine Tokyo Hamamatsucho 28–31 Dec (¥86,002).
+- **Car rental (paid, ¥48,400):** Toyota Rent a Car, C3 Corolla Touring Hybrid (automatic, studless winter tyres, ETC card, JAF certificate). Pick up Day 3 (27 Dec) 09:00 at Tokyo Sta. Nihonbashi Ext. Shop (Trust Tower N Wing B2, 03-5220-2220); return Day 4 (28 Dec) by 20:00 at Nishi-Shimbashi Shop (050-3132-1045). `SITE_DATA.carRental.booking` and `SITE_DATA.carReturn` hold these details.
+- **Page section order (menu = page = footer):** Overview → Itinerary → Map → Hotels → Car → Flights → Budget → Tips → Packing. When adding, removing or moving a section, change `index.html`, the nav links and the footer links together, and keep tinted (`section-dark`) sections from touching each other (the Car section is always midnight blue).
 - **Language switch:** Always visible top of page next to the theme toggle and hamburger menu.
-- **Route Plan switch:** Available via Hero segment toggle and navbar switcher (`Plan A | Plan B`). Stored in `localStorage` under `'user-plan'`; dispatches `'planchange'` event that updates itinerary data, route board, route map and legend, budget, hotel search form, flights, car rental and car return.
 - **Dark mode toggle:** Moon/sun button in the nav bar; persists in `localStorage` as `user-theme`; dispatches a `'themechange'` CustomEvent that switches MapLibre map styles (Positron ↔ Fiord) and re-applies all CSS variable overrides.
 
 ### Column / Grid Layout Rule (CRITICAL)
@@ -204,10 +192,9 @@ Taiwan-specific vocabulary.
 - **Do NOT use `repeat(auto-fit, minmax(...))` for card grids.** On wide desktop monitors (1320px–1600px container), `auto-fit` dynamically calculates 5+ columns and spills a single item onto the last row.
 - **Explicit Grid Rules by Item Count:**
   - **6 items** (e.g. `.tips-grid`): Use `repeat(3, 1fr)` on desktop (2 rows of 3: 3+3), `repeat(2, 1fr)` on tablet (3 rows of 2: 2+2+2), `1fr` on mobile.
-  - **5 items** (e.g. `.itinerary-hotels-grid` in Plan A): Use a 6-column backbone (`grid-template-columns: repeat(6, 1fr)`) with `grid-column: span 2` and `nth-child(4)` / `nth-child(5)` offsets so the last 2 items sit centered (3+2 layout).
-  - **4 hotel cards** (`.itinerary-hotels-grid[data-count="4"]` in Plan B): `repeat(4, 1fr)` on desktop, 2+2 on tablet, `1fr` on mobile.
-  - **4 items** (e.g. `.overview-grid`, `.vr-grid`): Use `repeat(4, 1fr)` on desktop (1 row of 4), `repeat(2, 1fr)` on tablet (2 rows of 2), `1fr` on mobile.
-  - **3 items** (e.g. `.packing-grid`, `.cr-grid`, `.rental-companies-grid`): Use `repeat(3, 1fr)` on desktop (1 row of 3), `repeat(2, 1fr)` or `1fr` on tablet/mobile.
+  - **3 hotel cards** (`.itinerary-hotels-grid`) and **3 car-booking cards** (`.rental-booking-grid`): `repeat(3, 1fr)` on desktop (1 row of 3), `1fr` on tablet/mobile (never 2+1).
+  - **4 items** (e.g. `.overview-grid`): Use `repeat(4, 1fr)` on desktop (1 row of 4), `repeat(2, 1fr)` on tablet (2 rows of 2), `1fr` on mobile.
+  - **3 items** (e.g. `.packing-grid`, `.rental-booking-grid`): Use `repeat(3, 1fr)` on desktop (1 row of 3), `1fr` on tablet/mobile (a 2+1 split would leave an orphan).
 
 ---
 
@@ -229,9 +216,9 @@ The flight options system has a two-layer architecture:
 ```
 
 Examples:
-- `edi_to_tokyo_20261219.csv` — Edinburgh to Tokyo, departing 19 Dec 2026
-- `lhr_to_tokyo_20261219.csv` — London Heathrow to Tokyo, departing 19 Dec 2026
-- `osaka_to_edi_20261231.csv` — Osaka Kansai to Edinburgh, departing 31 Dec 2026
+- `edi_to_tokyo_b_20261224.csv` — Edinburgh to Tokyo, departing 24 Dec 2026
+- `hkg_to_tokyo_b_20261225.csv` — Hong Kong to Tokyo, departing 25 Dec 2026
+- `tokyo_to_edi_20261231.csv` — Tokyo to Edinburgh, departing 31 Dec 2026
 
 Use the **departure date** in the filename, even when the flight lands the following day.
 
@@ -257,12 +244,11 @@ Each entry in `window.FLIGHTS_DATA.routes` must conform to this structure:
     zh: 'String',        // HK Traditional Chinese, e.g. '愛丁堡 → 東京'
   },
   date: {
-    en: 'String',        // e.g. 'Sat 19 Dec 2026 (depart)'
+    en: 'String',        // e.g. 'Thu 24 Dec 2026 (depart)'
     zh: 'String',        // e.g. '2026年12月19日（出發）'
   },
   depart: 'YYYY-MM-DD',  // Earliest possible departure date for this route
   arrive: 'YYYY-MM-DD',  // Required arrival date (FIXED — do not alter without user approval)
-  plans: ['plan-a'],     // Optional. Which plan(s) show this route (omit = all plans). Osaka/KIX returns are Plan A only; Plan B departs Tokyo (HND/NRT).
   options: [ /* see below */ ]
 }
 ```
@@ -360,5 +346,5 @@ Within each route, order options **by total journey time, shortest first** (calc
 - **JS load order:** `data/*` -> `currency.js` -> `map.js` -> `js/features/*.js` -> `render.js` -> `ui.js` -> `script.js`. New section renderers go in `js/features/` and must be exported in `render.js` and listed in `index.html` and `sw.js`.
 - Flight CSV sources live in `data-src/flights/` (not deployed). `flights-data.js` is what the site reads. `scripts/fetch-flights.py` (+ `scripts/requirements.txt`) is the Python flight fetcher; it is not deployed or loaded by the site.
 - **MapLibre** is pinned to an exact version with an SRI `integrity` hash in `index.html` and precached in `sw.js` (offline maps). When bumping it, update both places plus the hash; `validate.mjs` checks all three.
-- `validate.mjs` also checks: every flight option lands by its route's `arrive` date, every airline in `FLIGHTS_DATA` has a logo in `js/features/flights.js` (`assets/airlines/`), British spelling / no family labels / no Simplified Chinese in `data/site-data.js` and `data/itinerary-data.js`, budget totals per plan, hotel nights (legs and quick-pills each cover 20–30 Dec exactly once), flight route sanity (every plan shows ≥1 route) and the CSV-superset rule.
+- `validate.mjs` also checks: every flight option lands by its route's `arrive` date, every airline in `FLIGHTS_DATA` has a logo in `js/features/flights.js` (`assets/airlines/`), British spelling / no family labels / no Simplified Chinese in `data/site-data.js` and `data/itinerary-data.js`, budget totals (rows sum to the total), hotel nights (legs and quick-pills each cover 25–30 Dec exactly once), the 7-day itinerary dates and bilingual option toggles, and the CSV-superset rule.
 - Before committing run `node scripts/validate.mjs` (also runs in CI and blocks deploys).

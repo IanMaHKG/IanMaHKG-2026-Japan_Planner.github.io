@@ -27,7 +27,6 @@ function bootstrap() {
   if (typeof renderItinerary === 'function') renderItinerary();
 
   /* Step 2: UI & interaction wiring */
-  if (typeof initPlanSwitcher === 'function') initPlanSwitcher();
   if (typeof initLanguageSelector === 'function') initLanguageSelector();
   if (typeof initCurrencySelector === 'function') initCurrencySelector();
   if (typeof initParticles === 'function') initParticles();

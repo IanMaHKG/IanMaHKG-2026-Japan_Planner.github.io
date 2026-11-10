@@ -130,46 +130,42 @@ ctx.window = ctx; vm.createContext(ctx);
 for (const f of ['data/site-data.js', 'data/itinerary-data.js', 'data/flights/flights-data.js']) {
   try { vm.runInContext(read(f), ctx, { filename: f }); checks++; } catch (e) { fail(`data load: ${f}: ${e.message}`); }
 }
-const A = ctx.ITINERARY_DATA_A || ctx.window.ITINERARY_DATA_A;
-const B = ctx.ITINERARY_DATA_B || ctx.window.ITINERARY_DATA_B;
-ok(Array.isArray(A) && A.length === 12, `Plan A should have 12 days, Dec 20-31 (got ${A && A.length})`);
-ok(Array.isArray(B) && B.length === 7, `Plan B should have 7 days (got ${B && B.length})`);
+const ITIN = ctx.ITINERARY_DATA || ctx.window.ITINERARY_DATA;
+ok(Array.isArray(ITIN) && ITIN.length === 7, `Itinerary should have 7 days, Dec 25-31 (got ${ITIN && ITIN.length})`);
+if (Array.isArray(ITIN)) {
+  ITIN.forEach((d, i) => ok(d.date === `Dec ${25 + i}`, `day ${i + 1} should be dated Dec ${25 + i} (got ${d.date})`));
+  for (const d of ITIN) for (const b of d.blocks) for (const o of (b.activity.options || [])) {
+    ok(o.label && o.label.en && o.label.zh && Array.isArray(o.places) && o.places.length > 0, `${d.id}: activity option needs a bilingual label and places`);
+  }
+}
 ok(!!ctx.SITE_DATA, 'SITE_DATA not defined');
 const FL = ctx.FLIGHTS_DATA;
 ok(FL && Array.isArray(FL.routes) && FL.routes.length > 0, 'FLIGHTS_DATA.routes missing');
 if (FL && FL.routes) {
   for (const r of FL.routes) {
     ok(Array.isArray(r.options) && r.options.length <= 5 && r.options.length > 0, `route ${r.id || '?'} must have 1-5 options`);
-    ok(!r.plans || r.plans.every((p) => p === 'plan-a' || p === 'plan-b'), `route ${r.id} has an invalid plans value`);
   }
-  for (const p of ['plan-a', 'plan-b']) ok(FL.routes.some((r) => !r.plans || r.plans.includes(p)), `no flight routes visible on ${p}`);
 }
 
-/* 7a. budget: hand-typed totals must equal the sum of their rows, per plan */
-for (const p of ['planA', 'planB']) {
-  const b = ctx.SITE_DATA && ctx.SITE_DATA.budget && ctx.SITE_DATA.budget[p];
-  ok(b && Array.isArray(b.items) && b.total, `budget.${p} missing`);
-  if (!b || !b.items) continue;
-  const sum = (k) => b.items.reduce((s, i) => s + i[k], 0);
-  ok(sum('min') === b.total.min, `budget.${p}: sum of min (${sum('min')}) != total.min (${b.total.min})`);
-  ok(sum('max') === b.total.max, `budget.${p}: sum of max (${sum('max')}) != total.max (${b.total.max})`);
+/* 7a. budget: hand-typed totals must equal the sum of their rows */
+{
+  const b = ctx.SITE_DATA && ctx.SITE_DATA.budget;
+  ok(b && Array.isArray(b.items) && b.total, 'budget missing');
+  if (b && b.items) {
+    const sum = (k) => b.items.reduce((s, i) => s + i[k], 0);
+    ok(sum('min') === b.total.min, `budget: sum of min (${sum('min')}) != total.min (${b.total.min})`);
+    ok(sum('max') === b.total.max, `budget: sum of max (${sum('max')}) != total.max (${b.total.max})`);
+  }
 }
 
-/* 7a2. hotels: nights covered by the search pills must equal nights covered by the cards,
-        with no gap or overlap (Plan A: Dec 20-30, 11 nights; Plan B: Dec 25-30, 6 nights) */
+/* 7a2. hotels: the cards must cover each night of the trip (Dec 25-30, 6 nights) exactly once */
 const dayNum = (s) => { const [y, m, d] = s.split('-').map(Number); return Date.UTC(y, m - 1, d) / 864e5; };
 const nightsOf = (list) => list.flatMap((l) => { const out = []; for (let n = dayNum(l.checkin); n < dayNum(l.checkout); n++) out.push(n); return out; }).sort((a, b) => a - b);
-const tripNightsMap = {
-  planA: Array.from({ length: 11 }, (_, i) => dayNum('2026-12-20') + i),
-  planB: Array.from({ length: 6 }, (_, i) => dayNum('2026-12-25') + i),
-};
-for (const p of ['planA', 'planB']) {
-  const h = ctx.SITE_DATA && ctx.SITE_DATA.hotels && ctx.SITE_DATA.hotels[p];
-  ok(h && h.quickLegs && h.legs, `hotels.${p} missing quickLegs/legs`);
-  if (!h || !h.quickLegs || !h.legs) continue;
-  const expectedNights = tripNightsMap[p];
-  ok(JSON.stringify(nightsOf(h.legs)) === JSON.stringify(expectedNights), `hotels.${p}.legs must cover each night of trip exactly once`);
-  ok(JSON.stringify(nightsOf(h.quickLegs)) === JSON.stringify(expectedNights), `hotels.${p}.quickLegs must cover each night of trip exactly once`);
+const tripNights = Array.from({ length: 6 }, (_, i) => dayNum('2026-12-25') + i);
+{
+  const h = ctx.SITE_DATA && ctx.SITE_DATA.hotels;
+  ok(h && h.legs, 'hotels missing legs');
+  if (h && h.legs) ok(JSON.stringify(nightsOf(h.legs)) === JSON.stringify(tripNights), 'hotels.legs must cover each night of the trip exactly once');
 }
 
 /* 7b. flight options: valid duration calculations across airport time zones (offsets: FLIGHTS_DATA.tz) */

@@ -131,18 +131,16 @@ Taiwan-specific vocabulary.
 │   └── responsive.css      # Responsive media queries (must stay last)
 │
 ├── data/                   # Data Modules (Universal format)
-│   ├── flights/flights-data.js   # FLIGHTS_DATA — 7 routes, `tz` table, ≤5 options each
+│   ├── flights/flights-data.js   # FLIGHTS_DATA — 5 routes, `tz` table, ≤5 options each
 │   ├── site-data.js        # Overview, tips, packing, budget, hotels, car rental
 │   └── itinerary-data.js   # 7-day schedule (25–31 Dec), blocks, option toggles, location coordinates
 │
 ├── data-src/flights/       # Source-of-truth CSVs (NOT deployed to GitHub Pages)
 │   ├── edi_to_tokyo_b_20261224.csv
 │   ├── lhr_to_tokyo_b_20261224.csv
-│   ├── hkg_to_tokyo_b_20261225.csv
-│   ├── tokyo_to_edi_20261231.csv
 │   ├── tokyo_to_lhr_20261231.csv
 │   ├── tokyo_to_hkg_20261231.csv
-│   └── hkg_to_edi_20270114.csv
+│   └── hkg_to_edi_20270121.csv
 │
 └── js/                     # Application Logic (classic scripts, window.* globals)
     ├── currency.js         # Exchange rate fetch & JPY conversion
@@ -217,8 +215,8 @@ The flight options system has a two-layer architecture:
 
 Examples:
 - `edi_to_tokyo_b_20261224.csv` — Edinburgh to Tokyo, departing 24 Dec 2026
-- `hkg_to_tokyo_b_20261225.csv` — Hong Kong to Tokyo, departing 25 Dec 2026
-- `tokyo_to_edi_20261231.csv` — Tokyo to Edinburgh, departing 31 Dec 2026
+- `tokyo_to_hkg_20261231.csv` — Tokyo to Hong Kong, departing 31 Dec 2026
+- `hkg_to_edi_20270121.csv` — Hong Kong to Edinburgh, departing 21 Jan 2027
 
 Use the **departure date** in the filename, even when the flight lands the following day.
 

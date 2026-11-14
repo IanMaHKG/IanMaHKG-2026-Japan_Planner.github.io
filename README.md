@@ -42,7 +42,7 @@
 - ♿ **Accessibility (a11y)** — Full keyboard navigation (`Tab`, `Enter`, `Space`), ARIA expanded states, semantic HTML
 - 📱 **Strict Anti-Orphan Layout** — 4 overview cards (4 columns desktop, 2x2 tablet), 3 hotel cards and 3 car-booking cards (3 columns desktop, stacked on tablet/mobile) with zero orphan cards
 - 🚗 **Car Rental section** — one section for the paid booking: shop addresses, phone numbers, pick-up and return notes, included options and price breakdown
-- ✈️ **Flight Options** — tabs for the Tokyo round trip (outbound 24–25 Dec, return 31 Dec) and Hong Kong → Edinburgh on 14 Jan 2027, up to 5 options per route, rendered from `data/flights/flights-data.js`. Each curated leg is first recorded in a CSV under `data-src/flights/` (CSV-first rule; the CSV may hold more candidates than the 5 curated options, and `scripts/validate.mjs` fails if a curated leg is missing from its CSV). Candidates are fetched with `python scripts/fetch-flights.py <FROM> <TO> <yyyy-mm-dd>` (Google Flights via `fast-flights`, no browser; browser is the fallback)
+- ✈️ **Flight Options** — tabs for the Tokyo round trip (outbound 24–25 Dec, return 31 Dec – 1 Jan) and Hong Kong → Edinburgh on 21 Jan 2027, up to 5 options per route, rendered from `data/flights/flights-data.js`. Each curated leg is first recorded in a CSV under `data-src/flights/` (CSV-first rule; the CSV may hold more candidates than the 5 curated options, and `scripts/validate.mjs` fails if a curated leg is missing from its CSV). Candidates are fetched with `python scripts/fetch-flights.py <FROM> <TO> <yyyy-mm-dd>` (Google Flights via `fast-flights`, no browser; browser is the fallback)
 - ⌨️ **Keyboard & motion friendly** — visible focus rings, skip link, `aria-pressed` switchers, `prefers-reduced-motion` support, back-to-top button
 
 ---
@@ -80,18 +80,16 @@
 │   └── responsive.css      # Responsive media queries (must stay last)
 │
 ├── data/                   # Data Modules (Universal format)
-│   ├── flights/flights-data.js   # FLIGHTS_DATA — airport `tz` table + 7 routes, up to 5 options each
+│   ├── flights/flights-data.js   # FLIGHTS_DATA — airport `tz` table + 5 routes, up to 5 options each
 │   ├── site-data.js        # Overview, tips, packing, budget, confirmed hotels, car booking
 │   └── itinerary-data.js   # 7-day schedule, blocks, option toggles, location coordinates
 │
 ├── data-src/flights/       # CSV archive of live-verified candidate legs (CSV first, then curated into flights-data.js; NOT deployed)
 │   ├── edi_to_tokyo_b_20261224.csv
 │   ├── lhr_to_tokyo_b_20261224.csv
-│   ├── hkg_to_tokyo_b_20261225.csv
-│   ├── tokyo_to_edi_20261231.csv
 │   ├── tokyo_to_lhr_20261231.csv
 │   ├── tokyo_to_hkg_20261231.csv
-│   └── hkg_to_edi_20270114.csv
+│   └── hkg_to_edi_20270121.csv
 │
 └── js/                     # Application Logic (classic scripts, window.* globals)
     ├── currency.js         # Exchange rate fetch & JPY conversion

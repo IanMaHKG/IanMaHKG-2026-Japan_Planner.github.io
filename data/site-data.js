@@ -44,8 +44,8 @@
  *                       scripts/validate.mjs checks that total equals the sum of items.
  *
  *   hotels
- *     .legs[]         the 3 confirmed hotel bookings (cards). Each: { legNum, nights:{en,zh}, badgeClass,
- *                     highlight, title:{en,zh}, dates, desc:{en,zh}, tags[], btnText:{en,zh}, mapUrl,
+ *     .legs[]         the 3 confirmed hotel bookings (cards). Each: { legNum, nights:{en,zh},
+ *                     title:{en,zh}, dates, desc:{en,zh}, tags[], btnText:{en,zh}, mapUrl,
  *                     dest, checkin, checkout }
  *                     validate.mjs checks the legs cover 25–30 Dec (6 nights) exactly once.
  *
@@ -104,10 +104,12 @@ const SITE_DATA = {
         hiragana: "とうきょう",
         romaji: "Tokyo Nihombashi",
         dotClass: "tokyo",
-        name:  { en: "Tokyo Nihombashi (東京日本橋)", zh: "東京日本橋" },
-        days:  { en: "Days 1–2", zh: "第 1–2 天" },
-        desc:  { en: "Asakusa, Skytree, Meiji Jingu, Shibuya Sky; stay at Villa Fontaine Nihombashi Mitsukoshimae",
-                 zh: "淺草寺、晴空塔、明治神宮、澀谷 SKY；入住日本橋三越前 Villa Fontaine" },
+        name: { en: "Tokyo Nihombashi (東京日本橋)", zh: "東京日本橋" },
+        days: { en: "Days 1–2", zh: "第 1–2 天" },
+        desc: {
+          en: "Asakusa, Skytree, Meiji Jingu, Shibuya Sky; stay at Villa Fontaine Nihombashi Mitsukoshimae",
+          zh: "淺草寺、晴空塔、明治神宮、澀谷 SKY；入住日本橋三越前 Villa Fontaine"
+        },
         lat: 35.6841, lng: 139.7733,
         color: "var(--marker-tokyo)", markerClass: "marker-tokyo"
       },
@@ -118,10 +120,12 @@ const SITE_DATA = {
         hiragana: "かわぐちこ",
         romaji: "Kawaguchiko",
         dotClass: "fuji",
-        name:  { en: "Kawaguchiko & Yamanakako (河口湖・山中湖)", zh: "河口湖・山中湖" },
-        days:  { en: "Day 3", zh: "第 3 天" },
-        desc:  { en: "Pick up the car, Lake Kawaguchi, Arakurayama Sengen Park and Lake Yamanaka",
-                 zh: "取車後遊覽河口湖、新倉山淺間公園與山中湖" },
+        name: { en: "Kawaguchiko & Yamanakako (河口湖・山中湖)", zh: "河口湖・山中湖" },
+        days: { en: "Day 3", zh: "第 3 天" },
+        desc: {
+          en: "Pick up the car, Lake Kawaguchi, Arakurayama Sengen Park and Lake Yamanaka",
+          zh: "取車後遊覽河口湖、新倉山淺間公園與山中湖"
+        },
         lat: 35.5104, lng: 138.7564,
         color: "var(--marker-fuji)", markerClass: "marker-fuji"
       },
@@ -132,11 +136,13 @@ const SITE_DATA = {
         hiragana: "はこね",
         romaji: "Hakone",
         dotClass: "hakone",
-        name:  { en: "Hakone & Lake Ashi (箱根・蘆之湖)", zh: "箱根・蘆之湖" },
-        days:  { en: "Days 3–4", zh: "第 3–4 天" },
-        desc:  { en: "Lake Ashi sunset, Hotel Kagetsuen hot spring in Sengokuhara, Owakudani black eggs",
-                 zh: "蘆之湖日落、仙石原花月園溫泉、大涌谷黑玉子" },
-        lat: 35.25, lng: 139.01,
+        name: { en: "Hakone & Lake Ashi (箱根・蘆之湖)", zh: "箱根・蘆之湖" },
+        days: { en: "Days 3–4", zh: "第 3–4 天" },
+        desc: {
+          en: "Lake Ashi sunset, WPU HOTEL Hakone hot spring in Gora, Owakudani black eggs",
+          zh: "蘆之湖日落、強羅 WPU HOTEL Hakone 溫泉、大涌谷黑玉子"
+        },
+        lat: 35.2511, lng: 139.0477,
         color: "var(--marker-hakone)", markerClass: "marker-hakone"
       },
       {
@@ -146,10 +152,12 @@ const SITE_DATA = {
         hiragana: "おだわら",
         romaji: "Odawara",
         dotClass: "nagoya",
-        name:  { en: "Odawara (小田原)", zh: "小田原" },
-        days:  { en: "Day 4", zh: "第 4 天" },
-        desc:  { en: "Odawara Castle Park and seafood lunch at Totoco Odawara",
-                 zh: "小田原城址公園及 TOTOCO 小田原海鮮午餐" },
+        name: { en: "Odawara (小田原)", zh: "小田原" },
+        days: { en: "Day 4", zh: "第 4 天" },
+        desc: {
+          en: "Odawara Castle Park and seafood lunch at Totoco Odawara",
+          zh: "小田原城址公園及 TOTOCO 小田原海鮮午餐"
+        },
         lat: 35.235, lng: 139.138,
         color: "var(--marker-nagoya)", markerClass: "marker-nagoya"
       },
@@ -160,10 +168,12 @@ const SITE_DATA = {
         hiragana: "しょうなん",
         romaji: "Shonan Coast",
         dotClass: "nara",
-        name:  { en: "Shonan Coast (湘南海岸)", zh: "湘南海岸" },
-        days:  { en: "Day 4 (choose one)", zh: "第 4 天（三選一）" },
-        desc:  { en: "Your choice on the page: Kamakura, Enoshima or Yokohama on the drive back",
-                 zh: "於網頁選擇回程景點：鎌倉、江之島或橫濱" },
+        name: { en: "Shonan Coast (湘南海岸)", zh: "湘南海岸" },
+        days: { en: "Day 4 (choose one)", zh: "第 4 天（三選一）" },
+        desc: {
+          en: "Your choice on the page: Kamakura, Enoshima or Yokohama on the drive back",
+          zh: "於網頁選擇回程景點：鎌倉、江之島或橫濱"
+        },
         lat: 35.31, lng: 139.5,
         color: "var(--marker-nara)", markerClass: "marker-nara"
       },
@@ -174,10 +184,12 @@ const SITE_DATA = {
         hiragana: "とうきょう",
         romaji: "Tokyo Hamamatsucho",
         dotClass: "tokyo",
-        name:  { en: "Tokyo Hamamatsucho (東京濱松町)", zh: "東京濱松町" },
-        days:  { en: "Days 4–7", zh: "第 4–7 天" },
-        desc:  { en: "Return the car at Nishi-Shimbashi by 20:00, Tokyo Tower, teamLab, NYE departure by monorail",
-                 zh: "西新橋還車（20:00 前）、東京鐵塔、teamLab、除夕乘單軌電車前往機場" },
+        name: { en: "Tokyo Hamamatsucho (東京濱松町)", zh: "東京濱松町" },
+        days: { en: "Days 4–7", zh: "第 4–7 天" },
+        desc: {
+          en: "Return the car at Nishi-Shimbashi by 20:00, Tokyo Tower, teamLab, NYE departure by monorail",
+          zh: "西新橋還車（20:00 前）、東京鐵塔、teamLab、除夕乘單軌電車前往機場"
+        },
         lat: 35.6552, lng: 139.7571,
         color: "var(--marker-tokyo)", markerClass: "marker-tokyo"
       }
@@ -477,86 +489,86 @@ const SITE_DATA = {
   /* ─── Budget Estimation Section ─── */
   budget: {
     items: [
-        {
-          category: {
-            en: "🏨 Accommodation (6 nights, booked)",
-            zh: "🏨 酒店住宿 (6晚，已預訂)"
-          },
-          jpy: "¥177,870",
-          min: 177870,
-          max: 177870,
-          initial: "$9,150",
-          notes: {
-            en: "Confirmed: Villa Fontaine Nihombashi ¥58,604 + Hotel Kagetsuen ¥33,264 + Villa Fontaine Hamamatsucho ¥86,002",
-            zh: "已確認：日本橋 Villa Fontaine ¥58,604 + 花月園 ¥33,264 + 濱松町 Villa Fontaine ¥86,002"
-          }
+      {
+        category: {
+          en: "🏨 Accommodation (6 nights, booked)",
+          zh: "🏨 酒店住宿 (6晚，已預訂)"
         },
-        {
-          category: {
-            en: "🚗 Car Rental (2 days, paid + petrol/tolls)",
-            zh: "🚗 租車自駕 (2天，已付款，另計油費及路費)"
-          },
-          jpy: "¥55,400–60,400",
-          min: 55400,
-          max: 60400,
-          initial: "$2,850–3,100",
-          notes: {
-            en: "¥48,400 prepaid online + roughly ¥7,000–12,000 for petrol and expressway tolls",
-            zh: "¥48,400 已網上付款 + 油費及高速公路費約 ¥7,000–12,000"
-          }
-        },
-        {
-          category: {
-            en: "🚆 Trains & Metro",
-            zh: "🚆 地鐵及鐵路"
-          },
-          jpy: "¥10,000–16,000",
-          min: 10000,
-          max: 16000,
-          initial: "$500–820",
-          notes: {
-            en: "Tokyo metro, Suica top-ups and the airport transfer (Haneda monorail or Narita Express)",
-            zh: "東京地鐵、Suica 增值及機場交通（羽田單軌電車或成田特快）"
-          }
-        },
-        {
-          category: {
-            en: "🍽️ Food & Drinks",
-            zh: "🍽️ 餐飲美食 (7天)"
-          },
-          jpy: "¥75,000–115,000",
-          min: 75000,
-          max: 115000,
-          initial: "$3,850–5,900",
-          notes: {
-            en: "2 adults, 7 days. Mix of seafood, set meals and local favourites (check which hotel meals are included)",
-            zh: "2 位成人 7 天餐飲，包含海鮮、定食及地道美食（請核對酒店是否已含餐）"
-          }
-        },
-        {
-          category: {
-            en: "🎫 Activities & Entrance Fees",
-            zh: "🎫 景點門票及體驗活動"
-          },
-          jpy: "¥12,000–18,000",
-          min: 12000,
-          max: 18000,
-          initial: "$620–930",
-          notes: {
-            en: "Skytree, Shibuya Sky, teamLab Borderless and Tokyo Tower",
-            zh: "晴空塔、澀谷 SKY、teamLab Borderless 及東京鐵塔"
-          }
+        jpy: "¥183,330",
+        min: 183330,
+        max: 183330,
+        initial: "$9,350",
+        notes: {
+          en: "Confirmed: Villa Fontaine Nihombashi ¥58,604 + WPU HOTEL Hakone ¥38,724 + Villa Fontaine Hamamatsucho ¥86,002",
+          zh: "已確認：日本橋 Villa Fontaine ¥58,604 + WPU HOTEL Hakone ¥38,724 + 濱松町 Villa Fontaine ¥86,002"
         }
+      },
+      {
+        category: {
+          en: "🚗 Car Rental (2 days, paid + petrol/tolls)",
+          zh: "🚗 租車自駕 (2天，已付款，另計油費及路費)"
+        },
+        jpy: "¥55,400–60,400",
+        min: 55400,
+        max: 60400,
+        initial: "$2,850–3,100",
+        notes: {
+          en: "¥48,400 prepaid online + roughly ¥7,000–12,000 for petrol and expressway tolls",
+          zh: "¥48,400 已網上付款 + 油費及高速公路費約 ¥7,000–12,000"
+        }
+      },
+      {
+        category: {
+          en: "🚆 Trains & Metro",
+          zh: "🚆 地鐵及鐵路"
+        },
+        jpy: "¥10,000–16,000",
+        min: 10000,
+        max: 16000,
+        initial: "$500–820",
+        notes: {
+          en: "Tokyo metro, Suica top-ups and the airport transfer (Haneda monorail or Narita Express)",
+          zh: "東京地鐵、Suica 增值及機場交通（羽田單軌電車或成田特快）"
+        }
+      },
+      {
+        category: {
+          en: "🍽️ Food & Drinks",
+          zh: "🍽️ 餐飲美食 (7天)"
+        },
+        jpy: "¥75,000–115,000",
+        min: 75000,
+        max: 115000,
+        initial: "$3,850–5,900",
+        notes: {
+          en: "2 adults, 7 days. Mix of seafood, set meals and local favourites (check which hotel meals are included)",
+          zh: "2 位成人 7 天餐飲，包含海鮮、定食及地道美食（請核對酒店是否已含餐）"
+        }
+      },
+      {
+        category: {
+          en: "🎫 Activities & Entrance Fees",
+          zh: "🎫 景點門票及體驗活動"
+        },
+        jpy: "¥12,000–18,000",
+        min: 12000,
+        max: 18000,
+        initial: "$620–930",
+        notes: {
+          en: "Skytree, Shibuya Sky, teamLab Borderless and Tokyo Tower",
+          zh: "晴空塔、澀谷 SKY、teamLab Borderless 及東京鐵塔"
+        }
+      }
     ],
     total: {
       category: {
         en: "<strong>Total (excl. flights)</strong>",
         zh: "<strong>總預算估算 (不含機票)</strong>"
       },
-      jpy: "<strong>¥330,270–387,270</strong>",
-      min: 330270,
-      max: 387270,
-      initial: "<strong>$17,000–20,000</strong>",
+      jpy: "<strong>¥335,730–392,730</strong>",
+      min: 335730,
+      max: 392730,
+      initial: "<strong>$17,100–20,000</strong>",
       notes: {
         en: "For 2 adults, 7 days (1 Twin Room throughout). Hotels and the car rental are already booked",
         zh: "2 位成人 7 天的行程預算（全程 1 間雙床房）。酒店及租車已預訂"
@@ -567,60 +579,54 @@ const SITE_DATA = {
   /* ─── Hotels & Ryokan Recommendations Section ─── */
   hotels: {
     legs: [
-        {
-          legNum: 1,
-          nights: { en: "Leg 1 • 2 Nights • Booked", zh: "第 1 站 • 2 晚 • 已預訂" },
-          badgeClass: "",
-          highlight: false,
-          title: { en: "Villa Fontaine Tokyo Nihombashi Mitsukoshimae (ヴィラフォンテーヌ東京日本橋三越前)", zh: "ヴィラフォンテーヌ東京日本橋三越前" },
-          dates: "🗓️ Dec 25 – Dec 27, 2026 · ¥58,604",
-          desc: {
-            en: "Confirmed booking for 2 nights. Next to Mitsukoshimae Station for easy metro access to Asakusa, Ginza and Shibuya; the car pick-up shop is a short taxi ride away.",
-            zh: "已確認預訂 2 晚。鄰近三越前站，乘地鐵前往淺草、銀座及澀谷十分方便；取車分店只需乘的士數分鐘。"
-          },
-          tags: ["✅ Booked","🚇 Mitsukoshimae Stn","🛏️ Twin Room"],
-          btnText: { en: "View on Google Maps ↗", zh: "在 Google 地圖查看 ↗" },
-          mapUrl: "https://www.google.com/maps/search/?api=1&query=Villa%20Fontaine%20Tokyo%20Nihombashi%20Mitsukoshimae",
-          dest: "Villa Fontaine Tokyo Nihombashi Mitsukoshimae, Tokyo, Japan",
-          checkin: "2026-12-25",
-          checkout: "2026-12-27"
+      {
+        legNum: 1,
+        nights: { en: "Leg 1 • 2 Nights • Booked", zh: "第 1 站 • 2 晚 • 已預訂" },
+        title: { en: "Villa Fontaine Tokyo Nihombashi Mitsukoshimae (ヴィラフォンテーヌ東京日本橋三越前)", zh: "ヴィラフォンテーヌ東京日本橋三越前" },
+        dates: "🗓️ Dec 25 – Dec 27, 2026 · ¥58,604",
+        desc: {
+          en: "Confirmed booking for 2 nights. Next to Mitsukoshimae Station for easy metro access to Asakusa, Ginza and Shibuya; the car pick-up shop is a short taxi ride away.",
+          zh: "已確認預訂 2 晚。鄰近三越前站，乘地鐵前往淺草、銀座及澀谷十分方便；取車分店只需乘的士數分鐘。"
         },
-        {
-          legNum: 2,
-          nights: { en: "Leg 2 • 1 Night • Booked", zh: "第 2 站 • 1 晚 • 已預訂" },
-          badgeClass: "",
-          highlight: false,
-          title: { en: "Hotel Kagetsuen, Sengokuhara (ホテル花月園)", zh: "仙石原 ホテル花月園" },
-          dates: "🗓️ Dec 27 – Dec 28, 2026 · ¥33,264",
-          desc: {
-            en: "Confirmed booking for 1 night in Sengokuhara, Hakone — a hot spring stay after the Fuji lakes and Lake Ashi sunset. Check your confirmation for the meal plan and arrival time.",
-            zh: "已確認預訂 1 晚，位於箱根仙石原 — 遊覽富士五湖及蘆之湖日落後入住溫泉酒店。餐飲安排及抵達時間請查閱訂房確認電郵。"
-          },
-          tags: ["✅ Booked","♨️ Hot Spring","🌲 Sengokuhara"],
-          btnText: { en: "View on Google Maps ↗", zh: "在 Google 地圖查看 ↗" },
-          mapUrl: "https://www.google.com/maps/search/?api=1&query=%E3%83%9B%E3%83%86%E3%83%AB%E8%8A%B1%E6%9C%88%E5%9C%92%20%E4%BB%99%E7%9F%B3%E5%8E%9F%20%E7%AE%B1%E6%A0%B9",
-          dest: "Hotel Kagetsuen, Sengokuhara, Hakone, Japan",
-          checkin: "2026-12-27",
-          checkout: "2026-12-28"
+        tags: ["✅ Booked", "🚇 Mitsukoshimae Stn", "🛏️ Twin Room"],
+        btnText: { en: "View on Google Maps ↗", zh: "在 Google 地圖查看 ↗" },
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=Villa%20Fontaine%20Tokyo%20Nihombashi%20Mitsukoshimae",
+        dest: "Villa Fontaine Tokyo Nihombashi Mitsukoshimae, Tokyo, Japan",
+        checkin: "2026-12-25",
+        checkout: "2026-12-27"
+      },
+      {
+        legNum: 2,
+        nights: { en: "Leg 2 • 1 Night • Booked", zh: "第 2 站 • 1 晚 • 已預訂" },
+        title: { en: "WPU HOTEL Hakone (WPÜ HAKONE)", zh: "箱根強羅 WPU HOTEL Hakone (WPÜ HAKONE)" },
+        dates: "🗓️ Dec 27 – Dec 28, 2026 · ¥38,724",
+        desc: {
+          en: "Confirmed booking for 1 night at Gora 1320-179, Hakone, Japan 250-0408, right next to Gora Station — featuring indoor milky-white natural onsen baths, an on-site restaurant and bar, and free first-come, first-served parking (approx. 10 spaces, no reservations). Check your confirmation for the meal plan and arrival details.",
+          zh: "已確認預訂 1 晚，位於箱根強羅 1320-179（郵區 250-0408），緊鄰強羅站 — 設有室內乳白色天然溫泉、館內餐廳及酒吧，並提供免費先到先得停車場（約 10 個車位，不設預約）。餐飲安排及入住詳情請查閱訂房確認電郵。"
         },
-        {
-          legNum: 3,
-          nights: { en: "Leg 3 • 3 Nights • Booked", zh: "第 3 站 • 3 晚 • 已預訂" },
-          badgeClass: "",
-          highlight: false,
-          title: { en: "Villa Fontaine Tokyo Hamamatsucho (ヴィラフォンテーヌ東京浜松町)", zh: "ヴィラフォンテーヌ東京浜松町" },
-          dates: "🗓️ Dec 28 – Dec 31, 2026 · ¥86,002",
-          desc: {
-            en: "Confirmed booking for 3 nights. A few minutes from the car-return shop, close to Tokyo Tower, Shiba Park and Hamarikyu Gardens, with a direct monorail from Hamamatsucho Station to Haneda Airport.",
-            zh: "已確認預訂 3 晚。距離還車分店僅數分鐘，鄰近東京鐵塔、芝公園及濱離宮，並可在濱松町站乘單軌電車直達羽田機場。"
-          },
-          tags: ["✅ Booked","✈️ Monorail to Haneda","🛏️ Twin Room"],
-          btnText: { en: "View on Google Maps ↗", zh: "在 Google 地圖查看 ↗" },
-          mapUrl: "https://www.google.com/maps/search/?api=1&query=Villa%20Fontaine%20Tokyo%20Hamamatsucho",
-          dest: "Villa Fontaine Tokyo Hamamatsucho, Tokyo, Japan",
-          checkin: "2026-12-28",
-          checkout: "2026-12-31"
-        }
+        tags: ["✅ Booked", "♨️ Hot Spring", "🅿️ Free Parking (First-Come)"],
+        btnText: { en: "View on Google Maps ↗", zh: "在 Google 地圖查看 ↗" },
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=WPU%20HOTEL%20Hakone%20Gora%201320-179",
+        dest: "WPU HOTEL Hakone, 1320-179 Gora, Hakone, Japan 250-0408",
+        checkin: "2026-12-27",
+        checkout: "2026-12-28"
+      },
+      {
+        legNum: 3,
+        nights: { en: "Leg 3 • 3 Nights • Booked", zh: "第 3 站 • 3 晚 • 已預訂" },
+        title: { en: "Villa Fontaine Tokyo Hamamatsucho (ヴィラフォンテーヌ東京浜松町)", zh: "ヴィラフォンテーヌ東京浜松町" },
+        dates: "🗓️ Dec 28 – Dec 31, 2026 · ¥86,002",
+        desc: {
+          en: "Confirmed booking for 3 nights. A few minutes from the car-return shop, close to Tokyo Tower, Shiba Park and Hamarikyu Gardens, with a direct monorail from Hamamatsucho Station to Haneda Airport.",
+          zh: "已確認預訂 3 晚。距離還車分店僅數分鐘，鄰近東京鐵塔、芝公園及濱離宮，並可在濱松町站乘單軌電車直達羽田機場。"
+        },
+        tags: ["✅ Booked", "✈️ Monorail to Haneda", "🛏️ Twin Room"],
+        btnText: { en: "View on Google Maps ↗", zh: "在 Google 地圖查看 ↗" },
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=Villa%20Fontaine%20Tokyo%20Hamamatsucho",
+        dest: "Villa Fontaine Tokyo Hamamatsucho, Tokyo, Japan",
+        checkin: "2026-12-28",
+        checkout: "2026-12-31"
+      }
     ]
   }
 };

@@ -1,7 +1,7 @@
 /* ─── Flight Options Section ─── */
 /**
  * Renders the Flight Options section from window.FLIGHTS_DATA.
- * Displays up to 5 route options per tab, each with a legs table.
+ * Displays curated route options per tab, each with a legs table.
  */
 function renderFlights() {
   const el = document.getElementById('flights-section-content');
@@ -10,9 +10,6 @@ function renderFlights() {
   if (!data || !data.routes || !data.routes.length) return;
 
   const routes = data.routes;
-
-  // Detect language
-  const isZh = document.body.classList.contains('lang-zh-hk');
 
   // Helper: format "2026-12-19 09:10" → "09:10" and date portion
   function fmtTime(dt) {
@@ -35,6 +32,8 @@ function renderFlights() {
     'Lufthansa':                        'assets/airlines/lh.svg',
     'SWISS':                            'assets/airlines/lx.svg',
     'Edelweiss Air (for SWISS)':        'assets/airlines/wk.svg',
+    'Etihad Airways':                   'assets/airlines/ey.svg',
+    'LOT Polish Airlines':              'assets/airlines/lo.svg',
     'Qatar Airways':                    'assets/airlines/qr.svg',
     'Cathay Pacific':                   'assets/airlines/cx.svg',
     'Hong Kong Express':                'assets/airlines/uo.svg',
@@ -59,6 +58,7 @@ function renderFlights() {
   const tabsHtml = routes.map((route, i) => `
     <button class="flights-route-tab${i === 0 ? ' active' : ''}"
             onclick="flightsSelectTab(${i})" role="tab"
+            aria-selected="${i === 0 ? 'true' : 'false'}"
             id="flights-tab-${i}">
       <span class="lang-en">${route.label.en}</span>
       <span class="lang-zh">${route.label.zh}</span>
@@ -169,8 +169,10 @@ function renderFlights() {
 
 /** Tab switcher for the flights section */
 function flightsSelectTab(index) {
-  document.querySelectorAll('.flights-route-tab').forEach((t, i) =>
-    t.classList.toggle('active', i === index));
+  document.querySelectorAll('.flights-route-tab').forEach((t, i) => {
+    t.classList.toggle('active', i === index);
+    t.setAttribute('aria-selected', String(i === index));
+  });
   document.querySelectorAll('.flights-route-panel').forEach((p, i) =>
     p.classList.toggle('active', i === index));
 }

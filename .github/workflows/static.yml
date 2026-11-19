@@ -37,6 +37,10 @@ jobs:
           node-version: 22
       - name: Validate site (syntax, assets, data, service worker list)
         run: node scripts/validate.mjs
+      - name: Run JS & Python unit tests
+        run: |
+          node --test scripts/test.mjs
+          python3 -m unittest scripts/test_fetch_flights.py
 
   build:
     needs: validate

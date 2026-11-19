@@ -22,7 +22,7 @@ Before making **any** code change, data edit, or documentation update, the agent
 - [ ] **No orphan grid rows** — No card grid may end with a single item alone on the last row (2+1, 4+1, 5+1 layouts are forbidden). Use the explicit grid rules in the *Column / Grid Layout Rule* section below.
 - [ ] **Data-driven pattern** — Displayed text lives in `data/site-data.js` or `data/itinerary-data.js`, never hard-coded into `index.html` or `js/render.js` unless it is a structural shell label.
 - [ ] **Documentation updated** — If architecture, file structure, features, or design tokens changed, `README.md` and this `AGENTS.md` have been updated to match **before** the response is finalised.
-- [ ] **Flight Selection & Long-Haul Airline Preference** — If editing or adding flight routes: (1) All legs must be live-fetched with `python scripts/fetch-flights.py <FROM> <TO> <yyyy-mm-dd>` (Google Flights, no browser); if it fails, fall back to Google Flights, or Kayak (`kayak.co.uk`), in the browser by opening each result's details panel; (2) Only flights **operated by the selling airline itself** — exclude codeshares/wet-leases (e.g. JAL-operated flights sold as BA, Finnair-operated flights sold as BA); record the **operating carrier's flight number**; (3) Long-haul (intercontinental) legs MUST strictly adhere to the priority hierarchy: 1st: BA / Iberia (oneworld), 2nd: Finnair (oneworld), 3rd: Lufthansa / SWISS / Austrian (Star Alliance), 4th: Etihad Airways; (4) Options ordered by total journey time (shortest first); (5) CSV created first in `data-src/flights/` before updating `flights-data.js`; (6) Both depart and arrive dates recorded; (7) Max 5 best options per route.
+- [ ] **Flight Selection & Long-Haul Airline Preference** — If editing or adding flight routes: (1) All legs must be live-fetched with `python scripts/fetch-flights.py <FROM> <TO> <yyyy-mm-dd>` (Google Flights, no browser); if it fails, fall back to Google Flights, or Kayak (`kayak.co.uk`), in the browser by opening each result's details panel; (2) Only flights **operated by the selling airline itself** — exclude codeshares/wet-leases (e.g. JAL-operated flights sold as BA, Finnair-operated flights sold as BA); record the **operating carrier's flight number**; (3) Long-haul (intercontinental) legs MUST strictly adhere to the priority hierarchy: 1st: BA / Iberia (oneworld), 2nd: Finnair (oneworld), 3rd: Lufthansa / SWISS / Austrian (Star Alliance), 4th: Etihad Airways, 5th: LOT Polish Airlines (Star Alliance); (4) Options ordered by total journey time (shortest first); (5) CSV created first in `data-src/flights/` before updating `flights-data.js`; (6) Both depart and arrive dates recorded; (7) Max 5 best options on return/HKG–EDI routes; expanded outbound Tokyo routes (`edi-to-tokyo-b` ≤ 2 legs unless transiting `LHR` for ≤ 3 legs, `lhr-to-tokyo-b` ≤ 2 legs) permit mixed-airline connections across those 7 carriers.
 - [ ] **Privacy / PII** — No personal names, specific family member labels, or home city details exposed in any user-visible text.
 
 > **Tip for the agent:** If any box cannot be ticked, fix the issue before proceeding. Do not respond with a partially compliant change.
@@ -131,7 +131,7 @@ Taiwan-specific vocabulary.
 │   └── responsive.css      # Responsive media queries (must stay last)
 │
 ├── data/                   # Data Modules (Universal format)
-│   ├── flights/flights-data.js   # FLIGHTS_DATA — 5 routes, `tz` table, ≤5 options each
+│   ├── flights/flights-data.js   # FLIGHTS_DATA — 5 routes, `tz` table (expanded EDI/LHR→TYO, ≤5 on others)
 │   ├── site-data.js        # Overview, tips, packing, budget, hotels, car rental
 │   └── itinerary-data.js   # 7-day schedule (25–31 Dec), blocks, option toggles, location coordinates
 │
@@ -176,8 +176,8 @@ Taiwan-specific vocabulary.
 - **Passports:** BC, BN(O), Portuguese, & HKSAR passports. **All 4 passports enjoy 90-day visa-free entry to Japan.**
 - **Driving Licences:** 1 designated driver holds a **UK Photocard Driving Licence**. Japan strictly requires a **1949 Geneva Convention IDP** obtained from a UK Post Office (£5.50) before departure.
 - **Dates:** 25 Dec – 31 Dec 2026 (7 days, single finalised itinerary — the old 12-day Kansai route and the Plan A / Plan B switch were removed).
-- **Itinerary:** Tokyo (25–27 Dec) → Day 3 (27 Dec) self-drive via Lake Kawaguchi, Arakurayama Sengen Park and Lake Yamanaka to Lake Ashi (north shore) and Hotel Kagetsuen in Sengokuhara → Day 4 (28 Dec) Owakudani, Odawara Castle Park (alternative: Hakone Shrine), lunch at Totoco Odawara, a Kamakura / Enoshima / Yokohama choice, then car return in Tokyo by 20:00 → Tokyo finale (28–31 Dec) → Haneda/Narita departure on 31 Dec. The choices are rendered as on-page toggles (`activity.options` in `itinerary-data.js`).
-- **Confirmed hotels (3 cards, 6 nights):** Villa Fontaine Tokyo Nihombashi Mitsukoshimae 25–27 Dec (¥58,604); Hotel Kagetsuen, Sengokuhara 27–28 Dec (¥33,264); Villa Fontaine Tokyo Hamamatsucho 28–31 Dec (¥86,002).
+- **Itinerary:** Tokyo (25–27 Dec) → Day 3 (27 Dec) self-drive via Lake Kawaguchi, Arakurayama Sengen Park and Lake Yamanaka to Lake Ashi (north shore) and WPU HOTEL Hakone in Gora → Day 4 (28 Dec) Owakudani, Odawara Castle Park (alternative: Hakone Shrine), lunch at Totoco Odawara, a Kamakura / Enoshima / Yokohama choice, then car return in Tokyo by 20:00 → Tokyo finale (28–31 Dec) → Haneda/Narita departure on 31 Dec. The choices are rendered as on-page toggles (`activity.options` in `itinerary-data.js`).
+- **Confirmed hotels (3 cards, 6 nights):** Villa Fontaine Tokyo Nihombashi Mitsukoshimae 25–27 Dec (¥58,604); WPU HOTEL Hakone, Gora 27–28 Dec (¥38,724); Villa Fontaine Tokyo Hamamatsucho 28–31 Dec (¥86,002).
 - **Car rental (paid, ¥48,400):** Toyota Rent a Car, C3 Corolla Touring Hybrid (automatic, studless winter tyres, ETC card, JAF certificate). Pick up Day 3 (27 Dec) 09:00 at Tokyo Sta. Nihonbashi Ext. Shop (Trust Tower N Wing B2, 03-5220-2220); return Day 4 (28 Dec) by 20:00 at Nishi-Shimbashi Shop (050-3132-1045). `SITE_DATA.carRental.booking` and `SITE_DATA.carReturn` hold these details.
 - **Page section order (menu = page = footer):** Overview → Itinerary → Map → Hotels → Car → Flights → Budget → Tips → Packing. When adding, removing or moving a section, change `index.html`, the nav links and the footer links together, and keep tinted (`section-dark`) sections from touching each other (the Car section is always midnight blue).
 - **Language switch:** Always visible top of page next to the theme toggle and hamburger menu.
@@ -286,10 +286,10 @@ When asked to add a new route, an agent **MUST** follow these steps in order:
 
 2. **Create the CSV file** at `data-src/flights/<route_key>_<date>.csv`.
    - Follow the CSV column schema exactly.
-   - Include all candidate legs, even ones that may not make the final top 5.
+   - Include all candidate legs, even ones that may not make the final curated list.
 
-3. **Select the top 5 options** using the ranking criteria below.
-   - If fewer than 5 verified options exist, include all available.
+3. **Select the curated options** using the ranking criteria below (up to 5 on capped/return routes; `edi-to-tokyo-b` and `lhr-to-tokyo-b` retain existing options alongside expanded allowed-carrier connections).
+   - If fewer than 5 verified options exist on a capped route, include all available.
 
 4. **Append the new route object** to `window.FLIGHTS_DATA.routes` in `data/flights/flights-data.js`.
    - Do **not** re-sort or re-number existing routes.
@@ -299,12 +299,12 @@ When asked to add a new route, an agent **MUST** follow these steps in order:
 
 6. **Update documentation:**
    - Add the new CSV filename to the `data-src/flights/` tree in both `AGENTS.md` and `README.md`.
-   - Update the route count description (e.g. "4 routes, 5 options each" → "5 routes, …").
+   - Update the route count description in `.agents/AGENTS.md` and `README.md`.
    - Record the change in the active `walkthrough.md` artifact.
 
 ### Airline Preference for Long-Haul Legs
 
-When selecting the top 5 options, prefer the following airlines **for long-haul (intercontinental) legs**:
+When selecting curated options, prefer the following airlines **for long-haul (intercontinental) legs**:
 
 | Priority | Airline(s) |
 |---|---|
@@ -312,8 +312,15 @@ When selecting the top 5 options, prefer the following airlines **for long-haul 
 | 2nd | Finnair (oneworld) |
 | 3rd | Lufthansa / SWISS / Austrian (Star Alliance) |
 | 4th | Etihad Airways |
+| 5th | LOT Polish Airlines (Star Alliance) |
 
 For **short-haul connecting legs** (e.g. EDI–LHR, HEL–EDI, MUC–FRA), there is no airline restriction — use whichever connects best to the preferred long-haul carrier.
+
+For the expanded outbound Tokyo routes (`2026-12-24` departure, `2026-12-25` latest arrival at `HND` or `NRT`):
+- **Mixed-airline connections** are allowed across British Airways, Finnair, Lufthansa, SWISS, Austrian, LOT Polish Airlines, and Etihad Airways.
+- **`edi-to-tokyo-b`**: at most **2 legs**, or up to **3 legs** only when transiting via `LHR`.
+- **`lhr-to-tokyo-b`**: at most **2 legs** for all options.
+- Note: On `2026-12-24`, SWISS (`LX160` operates 23 & 25 Dec) and Austrian have no direct Tokyo service, so no `ZRH` or `VIE` options appear on the Christmas Eve outbound routes.
 
 ### Option Ranking
 
@@ -344,5 +351,5 @@ Within each route, order options **by total journey time, shortest first** (calc
 - **JS load order:** `data/*` -> `currency.js` -> `map.js` -> `js/features/*.js` -> `render.js` -> `ui.js` -> `script.js`. New section renderers go in `js/features/` and must be exported in `render.js` and listed in `index.html` and `sw.js`.
 - Flight CSV sources live in `data-src/flights/` (not deployed). `flights-data.js` is what the site reads. `scripts/fetch-flights.py` (+ `scripts/requirements.txt`) is the Python flight fetcher; it is not deployed or loaded by the site.
 - **MapLibre** is pinned to an exact version with an SRI `integrity` hash in `index.html` and precached in `sw.js` (offline maps). When bumping it, update both places plus the hash; `validate.mjs` checks all three.
-- `validate.mjs` also checks: every flight option lands by its route's `arrive` date, every airline in `FLIGHTS_DATA` has a logo in `js/features/flights.js` (`assets/airlines/`), British spelling / no family labels / no Simplified Chinese in `data/site-data.js` and `data/itinerary-data.js`, budget totals (rows sum to the total), hotel nights (legs and quick-pills each cover 25–30 Dec exactly once), the 7-day itinerary dates and bilingual option toggles, and the CSV-superset rule.
-- Before committing run `node scripts/validate.mjs` (also runs in CI and blocks deploys).
+- `validate.mjs` also checks: every flight option lands by its route's `arrive` date and is sorted shortest UTC journey time first, every airline in `FLIGHTS_DATA` has a logo in `js/features/flights.js` (`assets/airlines/`), British spelling / no family labels / no Simplified Chinese in `data/site-data.js` and `data/itinerary-data.js`, budget totals (rows sum to the total), hotel nights (legs and quick-pills each cover 25–30 Dec exactly once), the 7-day itinerary dates and bilingual option toggles, and the CSV-superset rule.
+- Before committing run `node scripts/validate.mjs`, `node --test scripts/test.mjs`, and `python -m unittest scripts/test_fetch_flights.py` (all run in CI and block deploys).

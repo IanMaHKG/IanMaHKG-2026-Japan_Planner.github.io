@@ -26,11 +26,6 @@
   border-color: rgba(7, 90, 170, 0.25);
 }
 
-.hotel-leg-card.highlight-card {
-  border-color: rgba(235, 34, 38, 0.25);
-  background: #FFFDFC;
-}
-
 .hotel-leg-badge {
   background: var(--ba-midnight);
   color: #FFFFFF;
@@ -111,17 +106,4 @@
   color: #ffffff !important;
   border-color: var(--ba-blue);
   box-shadow: var(--shadow-btn);
-}
-
-.hotel-leg-card.highlight-card .hotel-leg-btn {
-  background: rgba(235, 34, 38, 0.06);
-  border-color: rgba(235, 34, 38, 0.2);
-  color: var(--ba-red) !important;
-}
-
-.hotel-leg-card.highlight-card .hotel-leg-btn:hover {
-  background: var(--ba-red);
-  color: #ffffff !important;
-  border-color: var(--ba-red);
-  box-shadow: var(--shadow-btn-red);
 }

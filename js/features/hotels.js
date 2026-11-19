@@ -7,12 +7,10 @@ function renderHotels() {
   gridEl.setAttribute('data-count', data.legs.length);
   gridEl.innerHTML = data.legs.map(leg => {
     const tagsHtml = leg.tags.map(tag => `<span>${tag}</span>`).join('');
-    const badgeCls = leg.badgeClass ? ` ${leg.badgeClass}` : '';
-    const cardCls = leg.highlight ? 'hotel-leg-card highlight-card' : 'hotel-leg-card';
 
     return `
-      <div class="${cardCls}">
-        <div class="hotel-leg-badge${badgeCls}">
+      <div class="hotel-leg-card">
+        <div class="hotel-leg-badge">
           <span class="lang-en">${leg.nights.en}</span>
           <span class="lang-zh">${leg.nights.zh}</span>
         </div>

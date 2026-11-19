@@ -36,15 +36,17 @@
   SECTIONS MAP  (HTML id → JS function that populates it):
     #hero             — Static HTML (particles injected by ui.js initParticles)
     #main-nav         — Static HTML (wired by ui.js initNav)
-    #overview         → render.js renderOverview()
-      #overview-grid  → 3 summary cards from SITE_DATA.overview.cards
+    #overview         → features/overview.js renderOverview()
+      #overview-grid  → 4 summary cards from SITE_DATA.overview.cards
       #route-stops    → JR Station Sign route board from SITE_DATA.overview.routeStops
+    #itinerary        → features/itinerary.js renderItinerary() + ui.js initFilters()
     #map-section      → map.js initRouteMap() (MapLibre GL JS, reads the same routeStops)
-    #tips             → render.js renderTips()
-    #itinerary        → render.js renderItinerary() + ui.js initFilters()
-    #packing          → render.js renderPacking()
-    #budget           → render.js renderBudget() + currency.js updateConvertedBudgets()
     #hotels           → features/hotels.js renderHotels()
+    #car-rental       → features/car.js renderCarRental()
+    #flights          → features/flights.js renderFlights()
+    #budget           → features/budget.js renderBudget() + currency.js updateConvertedBudgets()
+    #tips             → features/tips-packing.js renderTips()
+    #packing          → features/tips-packing.js renderPacking()
     #footer           — Static HTML
   ================================================================
 -->
@@ -53,23 +55,27 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Japan Winter Journey 2026 — Dec 25–31 Tokyo, Mt Fuji &amp; Hakone Itinerary</title>
   <meta name="description"
     content="A finalised 7-day Japan travel itinerary for 2 adults, 25–31 Dec 2026: Tokyo, a Mt Fuji, Hakone and Odawara self-drive, then a Tokyo finale — with confirmed hotels and car rental." />
 
   <!-- Open Graph / social sharing (WhatsApp, iMessage, Slack previews) -->
-  <meta property="og:title"       content="Japan Winter Journey 2026" />
-  <meta property="og:description" content="Day-by-day winter itinerary for 2 adults, Dec 25–31: Tokyo, Mt Fuji, Hakone and Odawara." />
-  <meta property="og:type"        content="website" />
-  <meta property="og:image"       content="https://ianmahkg.github.io/IanMaHKG-2026-Japan_Planner.github.io/assets/images/og-1200x630.jpg" />
-  <meta property="og:image:width"  content="1200" />
+  <meta property="og:title" content="Japan Winter Journey 2026" />
+  <meta property="og:description"
+    content="Day-by-day winter itinerary for 2 adults, Dec 25–31: Tokyo, Mt Fuji, Hakone and Odawara." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image"
+    content="https://ianmahkg.github.io/IanMaHKG-2026-Japan_Planner.github.io/assets/images/og-1200x630.jpg" />
+  <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:url"         content="https://ianmahkg.github.io/IanMaHKG-2026-Japan_Planner.github.io/" />
-  <meta name="twitter:card"       content="summary_large_image" />
-  <meta name="twitter:image"      content="https://ianmahkg.github.io/IanMaHKG-2026-Japan_Planner.github.io/assets/images/og-1200x630.jpg" />
-  <meta name="twitter:title"      content="Japan Winter Journey 2026" />
-  <meta name="twitter:description" content="Day-by-day winter itinerary for 2 adults, Dec 25–31: Tokyo, Mt Fuji, Hakone and Odawara." />
+  <meta property="og:url" content="https://ianmahkg.github.io/IanMaHKG-2026-Japan_Planner.github.io/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image"
+    content="https://ianmahkg.github.io/IanMaHKG-2026-Japan_Planner.github.io/assets/images/og-1200x630.jpg" />
+  <meta name="twitter:title" content="Japan Winter Journey 2026" />
+  <meta name="twitter:description"
+    content="Day-by-day winter itinerary for 2 adults, Dec 25–31: Tokyo, Mt Fuji, Hakone and Odawara." />
 
   <!-- PWA & Mobile Settings -->
   <meta name="color-scheme" content="light dark" />
@@ -85,11 +91,17 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
     rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" /></noscript>
+  <noscript>
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" />
+  </noscript>
 
   <!-- MapLibre GL JS 4.7.1 — pinned + SRI; also precached in sw.js so maps work offline -->
-  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" integrity="sha384-MinO0mNliZ3vwppuPOUnGa+iq619pfMhLVUXfC4LHwSCvF9H+6P/KO4Q7qBOYV5V" crossorigin="anonymous" />
-  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js" integrity="sha384-SYKAG6cglRMN0RVvhNeBY0r3FYKNOJtznwA0v7B5Vp9tr31xAHsZC0DqkQ/pZDmj" crossorigin="anonymous" defer></script>
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css"
+    integrity="sha384-MinO0mNliZ3vwppuPOUnGa+iq619pfMhLVUXfC4LHwSCvF9H+6P/KO4Q7qBOYV5V" crossorigin="anonymous" />
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"
+    integrity="sha384-SYKAG6cglRMN0RVvhNeBY0r3FYKNOJtznwA0v7B5Vp9tr31xAHsZC0DqkQ/pZDmj" crossorigin="anonymous"
+    defer></script>
 
   <link rel="stylesheet" href="css/palette.css" />
   <link rel="stylesheet" href="css/base.css" />
@@ -99,7 +111,7 @@
   <link rel="stylesheet" href="css/sections/overview.css" />
   <link rel="stylesheet" href="css/sections/map.css" />
   <link rel="stylesheet" href="css/sections/tips.css" />
-    <link rel="stylesheet" href="css/sections/car-rental.css" />
+  <link rel="stylesheet" href="css/sections/car-rental.css" />
   <link rel="stylesheet" href="css/sections/itinerary.css" />
   <link rel="stylesheet" href="css/sections/packing.css" />
   <link rel="stylesheet" href="css/sections/budget.css" />
@@ -110,7 +122,7 @@
   <link rel="stylesheet" href="css/responsive.css" />
 
   <!-- Theme flash prevention: apply saved theme before first CSS paint -->
-  <script>(function(){var t=localStorage.getItem('user-theme');if(!t&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)t='dark';if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}());</script>
+  <script>(function () { var t = null; try { t = localStorage.getItem('user-theme'); } catch (e) {} if (!t && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) t = 'dark'; if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); }());</script>
 </head>
 
 <body class="lang-en">
@@ -215,9 +227,10 @@
           <button class="lang-btn" data-lang="zh-hk" aria-label="繁體中文">繁中</button>
         </div>
         <!-- Dark Mode Toggle -->
-        <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false"
-                aria-label="Toggle dark mode" title="Toggle dark mode"></button>
-        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-controls="nav-links" aria-expanded="false">
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false" aria-label="Toggle dark mode"
+          title="Toggle dark mode"></button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-controls="nav-links"
+          aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
       </div>
@@ -225,268 +238,276 @@
   </nav>
 
   <main id="main">
-  <!-- ═══════════════════ OVERVIEW ═══════════════════ -->
-  <section id="overview" class="section">
-    <div class="container">
-      <h2 class="section-title">
-        <span class="lang-en">Trip Overview</span>
-        <span class="lang-zh">行程概覽</span>
-      </h2>
-      <p class="section-subtitle">
-        <span class="lang-en">A balanced, relaxed journey through Japan's most iconic winter landscapes — tailored for 2 adults with accessible, senior-friendly pacing.</span>
-        <span class="lang-zh">專為兩位成人度身設計的平衡悠閒冬日旅程 —— 步調輕鬆適中、景點無障礙友善。</span>
-      </p>
+    <!-- ═══════════════════ OVERVIEW ═══════════════════ -->
+    <section id="overview" class="section">
+      <div class="container">
+        <h2 class="section-title">
+          <span class="lang-en">Trip Overview</span>
+          <span class="lang-zh">行程概覽</span>
+        </h2>
+        <p class="section-subtitle">
+          <span class="lang-en">A balanced, relaxed journey through Japan's most iconic winter landscapes — tailored for
+            2 adults with accessible, senior-friendly pacing.</span>
+          <span class="lang-zh">專為兩位成人度身設計的平衡悠閒冬日旅程 —— 步調輕鬆適中、景點無障礙友善。</span>
+        </p>
 
-      <div class="overview-grid" id="overview-grid"></div>
+        <div class="overview-grid" id="overview-grid"></div>
 
-      <!-- JR Station Sign Style Journey Route Board -->
-      <div class="route-visual jr-board-container">
-        <div class="jr-board-header">
-          <div class="jr-line-branding">
-            <span class="jr-badge">JR</span>
-            <span class="jr-line-title">
-              <span class="lang-en">Fuji, Hakone &amp; Odawara Self-Drive Loop · Winter 2026</span>
-              <span class="lang-zh">富士・箱根・小田原自駕環線 · 2026 冬</span>
+        <!-- JR Station Sign Style Journey Route Board -->
+        <div class="route-visual jr-board-container">
+          <div class="jr-board-header">
+            <div class="jr-line-branding">
+              <span class="jr-badge">JR</span>
+              <span class="jr-line-title">
+                <span class="lang-en">Fuji, Hakone &amp; Odawara Self-Drive Loop · Winter 2026</span>
+                <span class="lang-zh">富士・箱根・小田原自駕環線 · 2026 冬</span>
+              </span>
+            </div>
+            <div class="jr-direction">
+              <span class="lang-en">Loop via Fuji, Hakone &amp; Odawara 方面 <span class="jr-arrow">▶</span></span>
+              <span class="lang-zh">經 富士山、箱根、小田原 環線方面 <span class="jr-arrow">▶</span></span>
+            </div>
+          </div>
+          <div class="route-track-wrap">
+            <div class="route-line"></div>
+            <div class="route-stops" id="route-stops"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ ITINERARY ═══════════════════ -->
+    <section id="itinerary" class="section">
+      <div class="container">
+        <h2 class="section-title">
+          <span class="lang-en">Day-by-Day Itinerary</span>
+          <span class="lang-zh">每日詳細行程</span>
+        </h2>
+        <p class="section-subtitle">
+          <span class="lang-en">Click any day to expand the full schedule with meal recommendations.</span>
+          <span class="lang-zh">點擊下方任一天數以展開詳細日程及美食推介。</span>
+        </p>
+
+        <!-- DAY FILTER TABS -->
+        <div class="day-filters" id="day-filters">
+          <button class="day-tab active" data-region="all">
+            <span class="lang-en">All Days</span>
+            <span class="lang-zh">全部天數</span>
+          </button>
+          <button class="day-tab" data-region="tokyo">
+            <span class="lang-en">Tokyo (東京)</span>
+            <span class="lang-zh">東京段</span>
+          </button>
+          <button class="day-tab" data-region="fuji">
+            <span class="lang-en">Mt Fuji &amp; Hakone Drive (富士・箱根自駕)</span>
+            <span class="lang-zh">富士・箱根自駕段</span>
+          </button>
+        </div>
+
+        <!-- Dynamic Timeline rendered via itinerary-data.js & script.js -->
+        <div class="timeline" id="timeline"></div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ ROUTE MAP ═══════════════════ -->
+    <section id="map-section" class="section section-dark">
+      <div class="container">
+        <h2 class="section-title">
+          <span class="lang-en">Route Map</span>
+          <span class="lang-zh">路線地圖</span>
+        </h2>
+        <p class="section-subtitle" id="map-subtitle">
+          <span class="lang-en">Your journey — the Mt Fuji, Hakone and Odawara self-drive loop with interactive
+            stops.</span>
+          <span class="lang-zh">你的旅程 —— 富士山、箱根及小田原自駕環線與互動景點地圖。</span>
+        </p>
+
+        <div class="map-container">
+          <div id="route-map"></div>
+        </div>
+
+        <div class="map-legend" id="map-legend">
+          <div class="legend-item">
+            <div class="legend-dot leg-tokyo"></div>
+            <span>
+              <span class="lang-en">Tokyo (東京) (Days 1–2)</span>
+              <span class="lang-zh">東京 (第 1–2 天)</span>
             </span>
           </div>
-          <div class="jr-direction">
-            <span class="lang-en">Loop via Fuji, Hakone &amp; Odawara 方面 <span class="jr-arrow">▶</span></span>
-            <span class="lang-zh">經 富士山、箱根、小田原 環線方面 <span class="jr-arrow">▶</span></span>
+          <div class="legend-item">
+            <div class="legend-dot leg-fuji"></div>
+            <span>
+              <span class="lang-en">Mt Fuji &amp; Hakone Self-Drive (Days 3–4)</span>
+              <span class="lang-zh">富士山及箱根自駕 (第 3–4 天)</span>
+            </span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot leg-kansai"></div>
+            <span>
+              <span class="lang-en">Odawara, Coast &amp; Tokyo Finale (Days 4–7)</span>
+              <span class="lang-zh">小田原、海岸及東京終站 (第 4–7 天)</span>
+            </span>
           </div>
         </div>
-        <div class="route-track-wrap">
-          <div class="route-line"></div>
-          <div class="route-stops" id="route-stops"></div>
-        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ═══════════════════ ITINERARY ═══════════════════ -->
-  <section id="itinerary" class="section">
-    <div class="container">
-      <h2 class="section-title">
-        <span class="lang-en">Day-by-Day Itinerary</span>
-        <span class="lang-zh">每日詳細行程</span>
-      </h2>
-      <p class="section-subtitle">
-        <span class="lang-en">Click any day to expand the full schedule with meal recommendations.</span>
-        <span class="lang-zh">點擊下方任一天數以展開詳細日程及美食推介。</span>
-      </p>
+    <!-- ═══════════════════ HOTEL SEARCH (BOOKING.COM) ═══════════════════ -->
+    <section id="hotels" class="section">
+      <div class="container">
+        <h2 class="section-title">
+          <span class="lang-en">Confirmed Hotels</span>
+          <span class="lang-zh">已確認酒店</span>
+        </h2>
+        <p class="section-subtitle">
+          <span class="lang-en">Your three confirmed stays for 2 adults (1 Twin Room), 6 nights in total.</span>
+          <span class="lang-zh">2 位成人（1 間雙床房）共 6 晚的三個已確認住宿。</span>
+        </p>
 
-      <!-- DAY FILTER TABS -->
-      <div class="day-filters" id="day-filters">
-        <button class="day-tab active" data-region="all">
-          <span class="lang-en">All Days</span>
-          <span class="lang-zh">全部天數</span>
-        </button>
-        <button class="day-tab" data-region="tokyo">
-          <span class="lang-en">Tokyo (東京)</span>
-          <span class="lang-zh">東京段</span>
-        </button>
-        <button class="day-tab" data-region="fuji">
-          <span class="lang-en">Mt Fuji &amp; Hakone Drive (富士・箱根自駕)</span>
-          <span class="lang-zh">富士・箱根自駕段</span>
-        </button>
+        <!-- Curated Itinerary Stay Recommendations Grid -->
+        <div class="itinerary-hotels-grid" id="itinerary-hotels-grid"></div>
       </div>
+    </section>
 
-      <!-- Dynamic Timeline rendered via itinerary-data.js & script.js -->
-      <div class="timeline" id="timeline"></div>
-    </div>
-  </section>
+    <!-- ═══════════════════ CAR RENTAL SEARCH ═══════════════════════ -->
+    <!-- Populated by features/car.js renderCarRental() via SITE_DATA.carRental -->
+    <section id="car-rental" class="section section-dark">
+      <div class="container">
+        <h2 class="section-title light">
+          <span class="lang-en">🚙 Car Rental</span>
+          <span class="lang-zh">🚙 租車安排</span>
+        </h2>
+        <p class="section-subtitle light">
+          <span class="lang-en">Your Toyota Rent a Car booking is confirmed and paid — pick-up, return and cost at a
+            glance.</span>
+          <span class="lang-zh">豐田租車預訂已確認及付款 — 取車、還車及費用一覽。</span>
+        </p>
 
-  <!-- ═══════════════════ ROUTE MAP ═══════════════════ -->
-  <section id="map-section" class="section section-dark">
-    <div class="container">
-      <h2 class="section-title">
-        <span class="lang-en">Route Map</span>
-        <span class="lang-zh">路線地圖</span>
-      </h2>
-      <p class="section-subtitle" id="map-subtitle">
-        <span class="lang-en">Your journey — the Mt Fuji, Hakone and Odawara self-drive loop with interactive stops.</span>
-        <span class="lang-zh">你的旅程 —— 富士山、箱根及小田原自駕環線與互動景點地圖。</span>
-      </p>
+        <!-- Booking summary card -->
+        <div class="rental-search-card" id="rental-search-card"></div>
 
-      <div class="map-container">
-        <div id="route-map"></div>
+        <!-- Confirmed booking: pick-up, return, price -->
+        <div class="rental-booking" id="rental-booking"></div>
       </div>
+    </section>
 
-      <div class="map-legend" id="map-legend">
-        <div class="legend-item">
-          <div class="legend-dot leg-tokyo"></div>
-          <span>
-            <span class="lang-en">Tokyo (東京) (Days 1–2)</span>
-            <span class="lang-zh">東京 (第 1–2 天)</span>
+    <!-- ═══════════════════ FLIGHT OPTIONS ═══════════════════ -->
+    <section id="flights" class="section flights-section">
+      <div class="container">
+        <h2 class="section-title">
+          <span class="lang-en">✈ Flight Options</span>
+          <span class="lang-zh">✈ 航班選擇</span>
+        </h2>
+        <p class="section-subtitle">
+          <span class="lang-en">Flight options for the Tokyo round trip (outbound 24–25 Dec, return 31 Dec – 1 Jan) and
+            Hong Kong → Edinburgh on 21 Jan 2027, verified live on Google Flights. All times are local.</span>
+          <span class="lang-zh">東京來回航班選擇（12 月 24–25 日出發、12 月 31 日至 1 月 1 日回程）及 2027 年 1 月 21 日香港 → 愛丁堡航班，經 Google
+            Flights 即時核實。所有時間均為當地時間。</span>
+        </p>
+        <div id="flights-section-content"></div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ BUDGET ═══════════════════ -->
+    <section id="budget" class="section">
+      <div class="container">
+        <h2 class="section-title">
+          <span class="lang-en">Budget Estimate</span>
+          <span class="lang-zh">預算估算</span>
+        </h2>
+        <p class="section-subtitle" id="budget-subtitle">
+          <span class="lang-en">Approximate costs for 2 adults, 7 days (1 Twin Room throughout). Hotels and the car
+            rental are already booked.</span>
+          <span class="lang-zh">兩位成人同行，7 天日本之旅大約費用估算（全程 1 間雙床房，未含機票）。酒店及租車已預訂。</span>
+        </p>
+
+        <!-- Currency Switcher in Budget -->
+        <div class="currency-switcher-container">
+          <span class="switcher-label">
+            <span class="lang-en">Convert display currency:</span>
+            <span class="lang-zh">轉換顯示貨幣：</span>
           </span>
+          <div class="currency-switcher" role="group" aria-label="Display currency">
+            <div class="switcher-slider"></div>
+            <button class="curr-btn active" data-curr="hkd">HKD ($)</button>
+            <button class="curr-btn" data-curr="gbp">GBP (£)</button>
+          </div>
         </div>
-        <div class="legend-item">
-          <div class="legend-dot leg-fuji"></div>
-          <span>
-            <span class="lang-en">Mt Fuji &amp; Hakone Self-Drive (Days 3–4)</span>
-            <span class="lang-zh">富士山及箱根自駕 (第 3–4 天)</span>
-          </span>
+
+        <div class="budget-table-wrap">
+          <table class="budget-table" id="budget-table">
+            <thead>
+              <tr>
+                <th>
+                  <span class="lang-en">Category</span>
+                  <span class="lang-zh">項目分類</span>
+                </th>
+                <th>
+                  <span class="lang-en">Estimated Cost (¥)</span>
+                  <span class="lang-zh">估算金額 (日元)</span>
+                </th>
+                <th>
+                  <span class="curr-hkd">
+                    <span class="lang-en">~HKD ($)</span>
+                    <span class="lang-zh">~折合港幣 ($)</span>
+                  </span>
+                  <span class="curr-gbp">
+                    <span class="lang-en">~GBP (£)</span>
+                    <span class="lang-zh">~折合英鎊 (£)</span>
+                  </span>
+                </th>
+                <th>
+                  <span class="lang-en">Notes</span>
+                  <span class="lang-zh">備註說明</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody id="budget-tbody"></tbody>
+          </table>
         </div>
-        <div class="legend-item">
-          <div class="legend-dot leg-kansai"></div>
-          <span>
-            <span class="lang-en">Odawara, Coast &amp; Tokyo Finale (Days 4–7)</span>
-            <span class="lang-zh">小田原、海岸及東京終站 (第 4–7 天)</span>
-          </span>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ═══════════════════ HOTEL SEARCH (BOOKING.COM) ═══════════════════ -->
-  <section id="hotels" class="section">
-    <div class="container">
-      <h2 class="section-title">
-        <span class="lang-en">Confirmed Hotels</span>
-        <span class="lang-zh">已確認酒店</span>
-      </h2>
-      <p class="section-subtitle">
-        <span class="lang-en">Your three confirmed stays for 2 adults (1 Twin Room), 6 nights in total.</span>
-        <span class="lang-zh">2 位成人（1 間雙床房）共 6 晚的三個已確認住宿。</span>
-      </p>
-
-      <!-- Curated Itinerary Stay Recommendations Grid -->
-      <div class="itinerary-hotels-grid" id="itinerary-hotels-grid"></div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════ CAR RENTAL SEARCH ═══════════════════════ -->
-  <!-- Populated by features/car.js renderCarRental() via SITE_DATA.carRental -->
-  <section id="car-rental" class="section section-dark">
-    <div class="container">
-      <h2 class="section-title light">
-        <span class="lang-en">🚙 Car Rental</span>
-        <span class="lang-zh">🚙 租車安排</span>
-      </h2>
-      <p class="section-subtitle light">
-        <span class="lang-en">Your Toyota Rent a Car booking is confirmed and paid — pick-up, return and cost at a glance.</span>
-        <span class="lang-zh">豐田租車預訂已確認及付款 — 取車、還車及費用一覽。</span>
-      </p>
-
-      <!-- Booking summary card -->
-      <div class="rental-search-card" id="rental-search-card"></div>
-
-      <!-- Confirmed booking: pick-up, return, price -->
-      <div class="rental-booking" id="rental-booking"></div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════ FLIGHT OPTIONS ═══════════════════ -->
-  <section id="flights" class="section flights-section">
-    <div class="container">
-      <h2 class="section-title">
-        <span class="lang-en">✈ Flight Options</span>
-        <span class="lang-zh">✈ 航班選擇</span>
-      </h2>
-      <p class="section-subtitle">
-        <span class="lang-en">Flight options for the Tokyo round trip (outbound 24–25 Dec, return 31 Dec – 1 Jan) and Hong Kong → Edinburgh on 21 Jan 2027, verified live on Google Flights. All times are local.</span>
-        <span class="lang-zh">東京來回航班選擇（12 月 24–25 日出發、12 月 31 日至 1 月 1 日回程）及 2027 年 1 月 21 日香港 → 愛丁堡航班，經 Google Flights 即時核實。所有時間均為當地時間。</span>
-      </p>
-      <div id="flights-section-content"></div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════ BUDGET ═══════════════════ -->
-  <section id="budget" class="section">
-    <div class="container">
-      <h2 class="section-title">
-        <span class="lang-en">Budget Estimate</span>
-        <span class="lang-zh">預算估算</span>
-      </h2>
-      <p class="section-subtitle" id="budget-subtitle">
-        <span class="lang-en">Approximate costs for 2 adults, 7 days (1 Twin Room throughout). Hotels and the car rental are already booked.</span>
-        <span class="lang-zh">兩位成人同行，7 天日本之旅大約費用估算（全程 1 間雙床房，未含機票）。酒店及租車已預訂。</span>
-      </p>
-
-      <!-- Currency Switcher in Budget -->
-      <div class="currency-switcher-container">
-        <span class="switcher-label">
-          <span class="lang-en">Convert display currency:</span>
-          <span class="lang-zh">轉換顯示貨幣：</span>
-        </span>
-        <div class="currency-switcher" role="group" aria-label="Display currency">
-          <div class="switcher-slider"></div>
-          <button class="curr-btn active" data-curr="hkd">HKD ($)</button>
-          <button class="curr-btn" data-curr="gbp">GBP (£)</button>
+        <div class="budget-attribution">
+          <span class="lang-en">Rates provided live by <a href="https://www.exchangerate-api.com" target="_blank"
+              rel="noopener">ExchangeRate-API</a> (last updated: <span class="live-rate-date">N/A</span>) · <span
+              class="live-rate-pair"></span></span>
+          <span class="lang-zh">匯率由 <a href="https://www.exchangerate-api.com" target="_blank"
+              rel="noopener">ExchangeRate-API</a> 即時提供 (最後更新：<span class="live-rate-date">N/A</span>) · <span
+              class="live-rate-pair"></span></span>
         </div>
       </div>
+    </section>
 
-      <div class="budget-table-wrap">
-        <table class="budget-table" id="budget-table">
-          <thead>
-            <tr>
-              <th>
-                <span class="lang-en">Category</span>
-                <span class="lang-zh">項目分類</span>
-              </th>
-              <th>
-                <span class="lang-en">Estimated Cost (¥)</span>
-                <span class="lang-zh">估算金額 (日元)</span>
-              </th>
-              <th>
-                <span class="curr-hkd">
-                  <span class="lang-en">~HKD ($)</span>
-                  <span class="lang-zh">~折合港幣 ($)</span>
-                </span>
-                <span class="curr-gbp">
-                  <span class="lang-en">~GBP (£)</span>
-                  <span class="lang-zh">~折合英鎊 (£)</span>
-                </span>
-              </th>
-              <th>
-                <span class="lang-en">Notes</span>
-                <span class="lang-zh">備註說明</span>
-              </th>
-            </tr>
-          </thead>
-          <tbody id="budget-tbody"></tbody>
-        </table>
+    <!-- ═══════════════════ PRACTICAL TIPS ═══════════════════ -->
+    <section id="tips" class="section section-dark">
+      <div class="container">
+        <h2 class="section-title light">
+          <span class="lang-en">Practical Tips</span>
+          <span class="lang-zh">實用出遊資訊</span>
+        </h2>
+        <p class="section-subtitle light">
+          <span class="lang-en">Everything you need to prepare before departure.</span>
+          <span class="lang-zh">出發前必須做好的準備工作與交通卡券指南。</span>
+        </p>
+
+        <div class="tips-grid" id="tips-grid"></div>
       </div>
+    </section>
 
-      <div class="budget-attribution">
-        <span class="lang-en">Rates provided live by <a href="https://www.exchangerate-api.com" target="_blank"
-            rel="noopener">ExchangeRate-API</a> (last updated: <span class="live-rate-date">N/A</span>) · <span class="live-rate-pair"></span></span>
-        <span class="lang-zh">匯率由 <a href="https://www.exchangerate-api.com" target="_blank"
-            rel="noopener">ExchangeRate-API</a> 即時提供 (最後更新：<span class="live-rate-date">N/A</span>) · <span class="live-rate-pair"></span></span>
+    <!-- ═══════════════════ PACKING ═══════════════════ -->
+    <section id="packing" class="section">
+      <div class="container">
+        <h2 class="section-title light">
+          <span class="lang-en">Packing Essentials</span>
+          <span class="lang-zh">行李打包清單</span>
+        </h2>
+        <p class="section-subtitle light">
+          <span class="lang-en">A winter-ready checklist for December in Japan.</span>
+          <span class="lang-zh">12月冬遊日本防寒與自駕出行必備物品。</span>
+        </p>
+
+        <div class="packing-grid" id="packing-grid"></div>
       </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════ PRACTICAL TIPS ═══════════════════ -->
-  <section id="tips" class="section section-dark">
-    <div class="container">
-      <h2 class="section-title light">
-        <span class="lang-en">Practical Tips</span>
-        <span class="lang-zh">實用出遊資訊</span>
-      </h2>
-      <p class="section-subtitle light">
-        <span class="lang-en">Everything you need to prepare before departure.</span>
-        <span class="lang-zh">出發前必須做好的準備工作與交通卡券指南。</span>
-      </p>
-
-      <div class="tips-grid" id="tips-grid"></div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════ PACKING ═══════════════════ -->
-  <section id="packing" class="section">
-    <div class="container">
-      <h2 class="section-title light">
-        <span class="lang-en">Packing Essentials</span>
-        <span class="lang-zh">行李打包清單</span>
-      </h2>
-      <p class="section-subtitle light">
-        <span class="lang-en">A winter-ready checklist for December in Japan.</span>
-        <span class="lang-zh">12月冬遊日本防寒與自駕出行必備物品。</span>
-      </p>
-
-      <div class="packing-grid" id="packing-grid"></div>
-    </div>
-  </section>
+    </section>
 
   </main>
 

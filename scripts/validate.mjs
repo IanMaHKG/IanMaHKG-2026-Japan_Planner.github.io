@@ -89,6 +89,7 @@ const swSrc = read('sw.js');
 const assets = [...swSrc.matchAll(/'\.\/([^']+)'/g)].map((m) => m[1]).filter((a) => /\.(css|js|json|svg|png|webp|html)$/.test(a));
 for (const a of assets) ok(exists(a), `sw.js asset missing on disk: ${a}`);
 for (const r of refs.filter((x) => /\.(css|js)$/.test(x))) ok(assets.includes(r), `sw.js STATIC_ASSETS lacks ${r}`);
+for (const svg of walk('assets/airlines', '.svg')) ok(assets.includes(svg), `sw.js STATIC_ASSETS lacks ${svg}`);
 
 /* 5. CSS validation: syntax, balance, and linking */
 for (const f of walk('css', '.css')) {
@@ -141,9 +142,11 @@ if (Array.isArray(ITIN)) {
 ok(!!ctx.SITE_DATA, 'SITE_DATA not defined');
 const FL = ctx.FLIGHTS_DATA;
 ok(FL && Array.isArray(FL.routes) && FL.routes.length > 0, 'FLIGHTS_DATA.routes missing');
+const expandedOutboundRoutes = new Set(['edi-to-tokyo-b', 'lhr-to-tokyo-b']);
 if (FL && FL.routes) {
   for (const r of FL.routes) {
-    ok(Array.isArray(r.options) && r.options.length <= 5 && r.options.length > 0, `route ${r.id || '?'} must have 1-5 options`);
+    const withinCap = expandedOutboundRoutes.has(r.id) || r.options.length <= 5;
+    ok(Array.isArray(r.options) && r.options.length > 0 && withinCap, `route ${r.id || '?'} option count invalid (${r.options && r.options.length})`);
   }
 }
 
@@ -178,14 +181,54 @@ const parseUtcMs = (dtStr, iata) => {
   return Date.UTC(y, m - 1, d, hh - offsetHours, mm);
 };
 if (FL && FL.routes) {
+  const allowedMultiAirlines = new Set([
+    'British Airways', 'Finnair', 'Lufthansa', 'SWISS',
+    'Austrian', 'Austrian Airlines', 'LOT Polish Airlines', 'Etihad Airways',
+  ]);
   for (const r of FL.routes) {
+    let prevOpt = null;
     for (const opt of r.options || []) {
-      const f = opt.legs && opt.legs[0];
-      const l = opt.legs && opt.legs[opt.legs.length - 1];
-      ok(f && l && f.from in AIRPORT_TZ_OFFSETS && l.to in AIRPORT_TZ_OFFSETS, `airport unknown in option ${opt.id}`);
+      const legs = opt.legs || [];
+      const f = legs[0];
+      const l = legs[legs.length - 1];
+      ok(legs.length > 0, `option ${opt.id} has no legs`);
+      for (const leg of legs) {
+        ok(leg.from in AIRPORT_TZ_OFFSETS && leg.to in AIRPORT_TZ_OFFSETS, `airport unknown in option ${opt.id} (${leg.from}-${leg.to})`);
+      }
+      for (let i = 0; i < legs.length - 1; i++) {
+        const cur = legs[i];
+        const nxt = legs[i + 1];
+        ok(cur.to === nxt.from, `option ${opt.id} leg ${i + 1}→${i + 2} airport mismatch: ${cur.to} != ${nxt.from}`);
+        if (cur.to in AIRPORT_TZ_OFFSETS && nxt.from in AIRPORT_TZ_OFFSETS) {
+          ok(parseUtcMs(nxt.dep, nxt.from) > parseUtcMs(cur.arr, cur.to), `option ${opt.id} leg ${i + 1}→${i + 2} non-positive layover`);
+        }
+      }
       if (f && l && f.from in AIRPORT_TZ_OFFSETS && l.to in AIRPORT_TZ_OFFSETS) {
-        const durHours = (parseUtcMs(l.arr, l.to) - parseUtcMs(f.dep, f.from)) / 3600000;
+        const depUtc = parseUtcMs(f.dep, f.from);
+        const arrUtc = parseUtcMs(l.arr, l.to);
+        const durMs = arrUtc - depUtc;
+        const durHours = durMs / 3600000;
         ok(durHours > 1 && durHours < 35, `flight duration for ${opt.id} unreasonable: ${durHours.toFixed(1)}h`);
+        if (expandedOutboundRoutes.has(r.id)) {
+          ok(f.dep.startsWith('2026-12-24'), `option ${opt.id} must depart 2026-12-24 (got ${f.dep})`);
+          ok(['HND', 'NRT'].includes(l.to), `option ${opt.id} must arrive HND or NRT (got ${l.to})`);
+          ok(l.arr.slice(0, 10) <= '2026-12-25', `option ${opt.id} must arrive on or before 2026-12-25 (got ${l.arr})`);
+          if (r.id === 'edi-to-tokyo-b') {
+            const hasLhrTransit = legs.slice(0, -1).some((leg) => leg.to === 'LHR');
+            ok(legs.length <= (hasLhrTransit ? 3 : 2), `option ${opt.id} exceeds leg limit (${legs.length} legs, LHR transit: ${hasLhrTransit})`);
+          } else if (r.id === 'lhr-to-tokyo-b') {
+            ok(legs.length <= 2, `option ${opt.id} exceeds 2-leg limit (${legs.length} legs)`);
+            if (legs.length > 1) {
+              for (const leg of legs) ok(allowedMultiAirlines.has(leg.airline), `option ${opt.id} uses disallowed multi-leg airline "${leg.airline}"`);
+            }
+          }
+        }
+        if (prevOpt) {
+          const inOrder = prevOpt.durMs < durMs
+            || (prevOpt.durMs === durMs && (prevOpt.stops < legs.length || (prevOpt.stops === legs.length && prevOpt.arrUtc <= arrUtc)));
+          ok(inOrder, `route ${r.id}: ${opt.id} (${(durMs / 60000)}m) out of sort order after ${prevOpt.id} (${(prevOpt.durMs / 60000)}m)`);
+        }
+        prevOpt = { id: opt.id, durMs, stops: legs.length, arrUtc };
       }
     }
   }
@@ -196,7 +239,7 @@ ok(exists('data-src/flights'), 'data-src/flights missing');
 ok(!html.includes('data-src/'), 'index.html must not reference data-src/');
 
 /* 8b. CSV-first rule (AGENTS.md): every curated leg in flights-data.js must exist in its route's CSV archive.
-       CSV may hold more candidate legs than the 5 curated options. File: <route id with _>_<yyyymmdd>.csv */
+       CSV may hold more candidate legs than the curated options. File: <route id with _>_<yyyymmdd>.csv */
 const norm = (s) => s.replace(/\s+/g, '');
 const csvFiles = fs.readdirSync(path.join(root, 'data-src/flights')).filter((f) => f.endsWith('.csv'));
 if (FL && FL.routes) {

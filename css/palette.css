@@ -24,7 +24,7 @@
   /* ── Text Colours — Light Mode ── */
   --text-primary: #1A1A2E;
   --text-secondary: #4A5568;
-  --text-muted: #718096;
+  --text-muted: #596577;
   --text-on-dark: #FFFFFF;
   --text-on-dark-2: rgba(255, 255, 255, 0.72);
 
@@ -45,22 +45,14 @@
   --marker-fuji: #075AAA;
   --marker-hakone: #C9A96E;
   --marker-nagoya: #2AAFAF;
-  --marker-kyoto: #BA0C2F;
   --marker-nara: #2874AD;
-  --marker-osaka: #D4163C;
 
   /* ── Map Route Line Colours — Light Mode ── */
   --route-drive: #075AAA;
-  --route-shinkansen: #BA0C2F;
-  --route-local: #C9A96E;
 
   /* ── Tag & Badge Palette — Light Mode ── */
   --tag-city-bg: rgba(235, 34, 38, 0.08);
   --tag-city-color: #C42026;
-  --tag-nature-bg: rgba(42, 175, 175, 0.10);
-  --tag-nature-color: #1D8888;
-  --tag-culture-bg: rgba(201, 169, 110, 0.12);
-  --tag-culture-color: #8A6A2E;
   --tag-pace-bg: rgba(7, 90, 170, 0.09);
   --tag-pace-color: #075AAA;
   --tag-transport-bg: rgba(1, 41, 92, 0.08);
@@ -126,16 +118,10 @@
 
   /* ── Map Route Line Colours — Dark Mode ── */
   --route-drive: #60BBFF;
-  --route-shinkansen: #FF7070;
-  --route-local: #F5D070;
 
   /* ── Tag & Badge Palette — Dark Mode ── */
   --tag-city-bg: rgba(235, 34, 38, 0.18);
   --tag-city-color: #FF8E8E;
-  --tag-nature-bg: rgba(42, 175, 175, 0.18);
-  --tag-nature-color: #5FE5D7;
-  --tag-culture-bg: rgba(201, 169, 110, 0.18);
-  --tag-culture-color: #D9B870;
   --tag-pace-bg: rgba(7, 90, 170, 0.18);
   --tag-pace-color: #7DBEF7;
   --tag-transport-bg: rgba(90, 160, 240, 0.15);

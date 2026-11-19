@@ -13,7 +13,7 @@
 | Booking | Details |
 |---|---|
 | Hotel, 25–27 Dec (2 nights) | Villa Fontaine Tokyo Nihombashi Mitsukoshimae — ¥58,604 |
-| Hotel, 27–28 Dec (1 night) | Hotel Kagetsuen, Sengokuhara, Hakone — ¥33,264 |
+| Hotel, 27–28 Dec (1 night) | WPU HOTEL Hakone, Gora, Hakone — ¥38,724 |
 | Hotel, 28–31 Dec (3 nights) | Villa Fontaine Tokyo Hamamatsucho — ¥86,002 |
 | Car rental (paid online, ¥48,400) | Toyota Rent a Car, C3 Corolla Touring Hybrid with winter tyres. Pick up 27 Dec 09:00 at Tokyo Sta. Nihonbashi Ext. Shop; return 28 Dec by 20:00 at Nishi-Shimbashi Shop |
 
@@ -30,8 +30,8 @@
 - 🌙 **Dark / Light mode toggle** — persistent across sessions via `localStorage`; maps switch styles automatically (Positron ↔ Fiord)
 - 🚉 **JR Station Sign Route Board** — Authentic Japanese station sign (駅名標) timeline with Kanji, Furigana, Romaji, Station Codes & day badges for the six journey stops
 - 📅 **7 expandable day cards** with morning / afternoon / evening schedules and meal picks, plus on-page **choice toggles** (Day 4: Odawara Castle Park vs Hakone Shrine in the morning, and Kamakura / Enoshima / Yokohama in the afternoon)
-- 🗺️ **Interactive route map** (MapLibre GL JS) — the self-drive loop from Tokyo through Kawaguchiko, Hakone and Odawara to Tokyo Hamamatsucho
-- 🗾 **Per-day mini-maps** — lazy-initialised MapLibre map inside each accordion day card
+- 🗺️ **Interactive route map** (MapLibre GL JS) — the self-drive loop from Tokyo through Kawaguchiko, Hakone and Odawara to Tokyo Hamamatsucho, with touch-friendly `cooperativeGestures` and `+`/`-` zoom controls on mobile
+- 🗾 **Per-day mini-maps** — lazy-initialised MapLibre map inside each accordion day card, with touch-friendly `cooperativeGestures` and `+`/`-` zoom controls on mobile
 - 🎌 **Senior-friendly Bilingual Switcher** — Always-visible English & Traditional Chinese (`EN | 繁中`) toggle in top navigation bar with high-contrast tactile active pills
 - 💴 **Live currency conversion** — JPY → HKD or GBP via open.er-api.com
 - 🧭 **Trip-story page order** — Overview → Itinerary → Map → Hotels → Car → Flights → Budget → Tips → Packing; the top menu and footer links follow exactly the same order
@@ -42,7 +42,7 @@
 - ♿ **Accessibility (a11y)** — Full keyboard navigation (`Tab`, `Enter`, `Space`), ARIA expanded states, semantic HTML
 - 📱 **Strict Anti-Orphan Layout** — 4 overview cards (4 columns desktop, 2x2 tablet), 3 hotel cards and 3 car-booking cards (3 columns desktop, stacked on tablet/mobile) with zero orphan cards
 - 🚗 **Car Rental section** — one section for the paid booking: shop addresses, phone numbers, pick-up and return notes, included options and price breakdown
-- ✈️ **Flight Options** — tabs for the Tokyo round trip (outbound 24–25 Dec, return 31 Dec – 1 Jan) and Hong Kong → Edinburgh on 21 Jan 2027, up to 5 options per route, rendered from `data/flights/flights-data.js`. Each curated leg is first recorded in a CSV under `data-src/flights/` (CSV-first rule; the CSV may hold more candidates than the 5 curated options, and `scripts/validate.mjs` fails if a curated leg is missing from its CSV). Candidates are fetched with `python scripts/fetch-flights.py <FROM> <TO> <yyyy-mm-dd>` (Google Flights via `fast-flights`, no browser; browser is the fallback)
+- ✈️ **Flight Options** — tabs for the Tokyo round trip (outbound 24–25 Dec, return 31 Dec – 1 Jan) and Hong Kong → Edinburgh on 21 Jan 2027, rendered from `data/flights/flights-data.js` (expanded outbound options on `EDI → TYO` and `LHR → TYO` including Etihad Airways, LOT Polish Airlines, and mixed-airline connections; up to 5 options on return/HKG–EDI routes). Each curated leg is first recorded in a CSV under `data-src/flights/` (CSV-first rule; the CSV may hold more candidates than the curated options, and `scripts/validate.mjs` fails if a curated leg is missing from its CSV). Candidates are fetched with `python scripts/fetch-flights.py <FROM> <TO> <yyyy-mm-dd>` (Google Flights via `fast-flights`, no browser; browser is the fallback)
 - ⌨️ **Keyboard & motion friendly** — visible focus rings, skip link, `aria-pressed` switchers, `prefers-reduced-motion` support, back-to-top button
 
 ---
@@ -68,7 +68,9 @@
 │   └── images/             # hero-fuji-winter.webp, og-1200x630.jpg (social preview)
 │
 ├── scripts/validate.mjs    # Dev/CI checks: `node scripts/validate.mjs` (syntax, assets, SW list, data)
+├── scripts/test.mjs        # JS unit tests (`node --test scripts/test.mjs`)
 ├── scripts/fetch-flights.py    # Live flight fetcher (fast-flights): prints CSV rows for data-src/flights; deps in scripts/requirements.txt
+├── scripts/test_fetch_flights.py  # Python unit tests (`python -m unittest scripts/test_fetch_flights.py`)
 │
 ├── css/                    # Modular Design System
 │   ├── palette.css         # Central tokens, brand colours, dark mode overrides
@@ -80,7 +82,7 @@
 │   └── responsive.css      # Responsive media queries (must stay last)
 │
 ├── data/                   # Data Modules (Universal format)
-│   ├── flights/flights-data.js   # FLIGHTS_DATA — airport `tz` table + 5 routes, up to 5 options each
+│   ├── flights/flights-data.js   # FLIGHTS_DATA — airport `tz` table + 5 routes (expanded EDI/LHR→TYO, ≤5 on others)
 │   ├── site-data.js        # Overview, tips, packing, budget, confirmed hotels, car booking
 │   └── itinerary-data.js   # 7-day schedule, blocks, option toggles, location coordinates
 │

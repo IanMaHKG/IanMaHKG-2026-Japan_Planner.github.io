@@ -4,9 +4,17 @@
  * scroll observers, particle backgrounds, filters, and booking widgets.
  */
 
+function safeGetStorage(key) {
+  try { return localStorage.getItem(key); } catch (e) { return null; }
+}
+
+function safeSetStorage(key, val) {
+  try { localStorage.setItem(key, val); } catch (e) { /* ignore storage restrictions */ }
+}
+
 /* ─── Language Selector ─── */
 function initLanguageSelector() {
-  const currentLang = localStorage.getItem('user-lang') || 'en';
+  const currentLang = safeGetStorage('user-lang') === 'zh-hk' ? 'zh-hk' : 'en';
   setLanguage(currentLang);
 
   const btns = document.querySelectorAll('.lang-btn');
@@ -14,7 +22,7 @@ function initLanguageSelector() {
     btn.classList.toggle('active', btn.dataset.lang === currentLang);
     btn.setAttribute('aria-pressed', String(btn.dataset.lang === currentLang));
     btn.addEventListener('click', (e) => {
-      const selected = e.currentTarget.dataset.lang;
+      const selected = e.currentTarget.dataset.lang === 'zh-hk' ? 'zh-hk' : 'en';
       setLanguage(selected);
       btns.forEach(b => {
         b.classList.toggle('active', b.dataset.lang === selected);
@@ -25,22 +33,24 @@ function initLanguageSelector() {
 }
 
 function setLanguage(lang) {
+  const safeLang = lang === 'zh-hk' ? 'zh-hk' : 'en';
   document.body.classList.remove('lang-en', 'lang-zh-hk');
-  document.body.classList.add(lang === 'zh-hk' ? 'lang-zh-hk' : 'lang-en');
-  document.documentElement.setAttribute('lang', lang === 'zh-hk' ? 'zh-Hant' : 'en');
-  localStorage.setItem('user-lang', lang);
+  document.body.classList.add(safeLang === 'zh-hk' ? 'lang-zh-hk' : 'lang-en');
+  document.documentElement.setAttribute('lang', safeLang === 'zh-hk' ? 'zh-Hant' : 'en');
+  safeSetStorage('user-lang', safeLang);
 
   const switcher = document.querySelector('.lang-switcher');
-  if (switcher) switcher.classList.toggle('slide-right', lang === 'zh-hk');
+  if (switcher) switcher.classList.toggle('slide-right', safeLang === 'zh-hk');
 
-  window.dispatchEvent(new CustomEvent('langchange', { detail: { lang } }));
+  window.dispatchEvent(new CustomEvent('langchange', { detail: { lang: safeLang } }));
 }
 
 /* ─── Theme (Dark / Light Mode) ─── */
 function initTheme() {
   const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const saved = localStorage.getItem('user-theme') || (prefersDark ? 'dark' : 'light');
-  setTheme(saved, true);
+  const saved = safeGetStorage('user-theme');
+  const initialTheme = saved === 'dark' || saved === 'light' ? saved : (prefersDark ? 'dark' : 'light');
+  setTheme(initialTheme, true);
 
   const btn = document.getElementById('theme-toggle');
   if (btn) {
@@ -52,17 +62,18 @@ function initTheme() {
 }
 
 function setTheme(theme, isInitial = false) {
-  document.documentElement.setAttribute('data-theme', theme);
-  if (!isInitial) localStorage.setItem('user-theme', theme);
+  const safeTheme = theme === 'dark' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', safeTheme);
+  if (!isInitial) safeSetStorage('user-theme', safeTheme);
   const themeBtn = document.getElementById('theme-toggle');
-  if (themeBtn) themeBtn.setAttribute('aria-pressed', String(theme === 'dark'));
+  if (themeBtn) themeBtn.setAttribute('aria-pressed', String(safeTheme === 'dark'));
 
   if (!isInitial) {
     document.documentElement.classList.add('theme-transitioning');
     setTimeout(() => document.documentElement.classList.remove('theme-transitioning'), 400);
   }
 
-  window.dispatchEvent(new CustomEvent('themechange', { detail: { theme } }));
+  window.dispatchEvent(new CustomEvent('themechange', { detail: { theme: safeTheme } }));
 }
 
 /* ─── Sticky Nav & Active Spy ─── */
@@ -101,27 +112,43 @@ function initNav() {
       nav.classList.toggle('scrolled', window.scrollY > 80);
     }
     topBtn.classList.toggle('visible', window.scrollY > 600);
-    updateActiveNav();
   }, { passive: true });
+
+  const pairs = getNavPairs();
+  if (pairs.length && typeof IntersectionObserver !== 'undefined') {
+    const linkBySec = new Map(pairs.map(({ sec, link }) => [sec, link]));
+    const spy = new IntersectionObserver((entries) => {
+      const hit = entries.find(e => e.isIntersecting);
+      if (hit) setActiveNavLink(linkBySec.get(hit.target));
+    }, { rootMargin: '-25% 0px -65% 0px' });
+    pairs.forEach(({ sec }) => spy.observe(sec));
+  }
+}
+
+let _navPairs = null;
+function getNavPairs() {
+  if (!_navPairs) {
+    _navPairs = [...document.querySelectorAll('section[id], header[id]')].map(sec => ({
+      sec,
+      link: document.querySelector(`.nav-links a[href="#${sec.getAttribute('id')}"]`)
+    })).filter(p => p.link);
+  }
+  return _navPairs;
+}
+
+function setActiveNavLink(activeLink) {
+  getNavPairs().forEach(({ link }) => link.classList.toggle('active', link === activeLink));
 }
 
 function updateActiveNav() {
-  const sections = document.querySelectorAll('section[id], header[id]');
   const scrollPos = window.scrollY + 120;
-
-  sections.forEach(sec => {
+  for (const { sec, link } of getNavPairs()) {
     const top = sec.offsetTop;
-    const height = sec.offsetHeight;
-    const id = sec.getAttribute('id');
-    const link = document.querySelector(`.nav-links a[href="#${id}"]`);
-
-    if (link) {
-      if (scrollPos >= top && scrollPos < top + height) {
-        document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-        link.classList.add('active');
-      }
+    if (scrollPos >= top && scrollPos < top + sec.offsetHeight) {
+      setActiveNavLink(link);
+      break;
     }
-  });
+  }
 }
 
 /* ─── Hero Particle Canvas ─── */
@@ -161,7 +188,7 @@ function initScrollReveal() {
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.01 });
 
   reveals.forEach(el => observer.observe(el));
 }
@@ -175,7 +202,8 @@ function initSmoothScroll() {
       const target = document.querySelector(targetId);
       if (target) {
         e.preventDefault();
-        const offset = 70;
+        const navEl = document.getElementById('main-nav');
+        const offset = (navEl ? navEl.offsetHeight : 60) + 10;
         const bodyRect = document.body.getBoundingClientRect().top;
         const targetRect = target.getBoundingClientRect().top;
         const targetPos = targetRect - bodyRect - offset;
@@ -209,14 +237,14 @@ function initFilters() {
 }
 
 if (typeof window !== 'undefined') {
-      window.initLanguageSelector = initLanguageSelector;
-  window.setLanguage          = setLanguage;
-  window.initTheme             = initTheme;
-  window.setTheme              = setTheme;
-  window.initNav               = initNav;
-  window.updateActiveNav       = updateActiveNav;
-  window.initParticles         = initParticles;
-  window.initScrollReveal      = initScrollReveal;
-  window.initSmoothScroll      = initSmoothScroll;
-  window.initFilters           = initFilters;
+  window.initLanguageSelector = initLanguageSelector;
+  window.setLanguage = setLanguage;
+  window.initTheme = initTheme;
+  window.setTheme = setTheme;
+  window.initNav = initNav;
+  window.updateActiveNav = updateActiveNav;
+  window.initParticles = initParticles;
+  window.initScrollReveal = initScrollReveal;
+  window.initSmoothScroll = initSmoothScroll;
+  window.initFilters = initFilters;
 }

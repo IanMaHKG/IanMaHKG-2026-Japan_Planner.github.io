@@ -165,7 +165,15 @@ function toggleDay(header) {
   // Close all other open cards and destroy their map contexts
   document.querySelectorAll('.day-card.open').forEach(c => {
     if (c !== card) {
+      // Collapse cards above `card` without transition so layout settles before scrolling
+      const precedes = Boolean(c.compareDocumentPosition(card) & Node.DOCUMENT_POSITION_FOLLOWING);
+      const otherBody = precedes ? c.querySelector('.day-body') : null;
+      if (otherBody) otherBody.style.transition = 'none';
       c.classList.remove('open');
+      if (otherBody) {
+        void otherBody.offsetHeight;
+        otherBody.style.transition = '';
+      }
       const hdr = c.querySelector('.day-header');
       if (hdr) hdr.setAttribute('aria-expanded', 'false');
       if (typeof window.destroyDayMap === 'function') window.destroyDayMap(c.id);
@@ -185,8 +193,8 @@ function toggleDay(header) {
 
       const triggerMapInit = () => {
         if (mapEl.dataset.mapInited) {
-          if (mapEl._leafletMap) mapEl._leafletMap.invalidateSize();
-          if (mapEl._leafletFitAll) mapEl._leafletFitAll();
+          if (mapEl._dayMap) mapEl._dayMap.invalidateSize();
+          if (mapEl._dayFitAll) mapEl._dayFitAll();
         } else {
           window.initDayMap(dayId);
         }
@@ -195,7 +203,7 @@ function toggleDay(header) {
       if (prefersReducedMotion) {
         triggerMapInit();
       } else {
-        const targetProp = window.matchMedia('(orientation: landscape) and (min-width: 800px)').matches
+        const targetProp = window.matchMedia('(orientation: landscape) and (min-width: 800px) and (min-height: 521px)').matches
           ? 'width' : 'height';
 
         let revealed = false;
@@ -213,9 +221,14 @@ function toggleDay(header) {
       }
     }
 
-    setTimeout(() => {
-      card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 150);
+    requestAnimationFrame(() => {
+      const navEl = document.getElementById('main-nav');
+      const offset = (navEl ? navEl.offsetHeight : 60) + 12;
+      let docTop = 0;
+      for (let el = card; el; el = el.offsetParent) docTop += el.offsetTop + el.clientTop;
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: Math.max(0, docTop - offset), behavior: reduce ? 'auto' : 'smooth' });
+    });
   } else {
     if (typeof window.destroyDayMap === 'function') window.destroyDayMap(card.id);
   }

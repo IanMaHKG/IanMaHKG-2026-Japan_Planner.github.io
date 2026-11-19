@@ -372,7 +372,7 @@ const ITINERARY_DATA = [
     },
     "title": {
       "en": "Self-Drive Day 1 — Lake Kawaguchi (河口湖), Arakurayama Sengen Park (新倉山淺間公園), Lake Yamanaka (山中湖) & Lake Ashi (蘆之湖)",
-      "zh": "自駕第 1 天 — 河口湖、新倉山淺間公園、山中湖與蘆之湖，入住箱根仙石原溫泉酒店"
+      "zh": "自駕第 1 天 — 河口湖、新倉山淺間公園、山中湖與蘆之湖，入住箱根強羅溫泉酒店"
     },
     "tags": [
       {
@@ -475,17 +475,17 @@ const ITINERARY_DATA = [
         },
         "activity": {
           "title": {
-            "en": "Lake Ashi (蘆之湖) Sunset & Check In at Hotel Kagetsuen (ホテル花月園)",
-            "zh": "蘆之湖日落與入住箱根仙石原花月園酒店"
+            "en": "Lake Ashi (蘆之湖) Sunset & Check In at WPU HOTEL Hakone (強羅)",
+            "zh": "蘆之湖日落與入住箱根強羅 WPU HOTEL Hakone"
           },
           "desc": {
-            "en": "Drive south via Gotemba and the Otome Pass to the <strong>northern shore of Lake Ashi (Togendai area)</strong> for a lakeside stroll and sunset (about 16:00–16:30). Then check in at <strong>Hotel Kagetsuen (ホテル花月園)</strong> in Sengokuhara (about 10 minutes away), soak in the hot spring and relax. <strong>Arrive before dark</strong> — mountain roads can be icy after sunset.",
-            "zh": "經御殿場及乙女峠南下，前往<strong>蘆之湖北岸（桃源台一帶）</strong>漫步並欣賞日落（約 16:00–16:30）。隨後入住仙石原的<strong>ホテル花月園 (Hotel Kagetsuen)</strong>（車程約 10 分鐘），浸溫泉放鬆身心。<strong>請務必在天黑前抵達</strong>，日落後山路可能結冰。"
+            "en": "Drive south via Gotemba and the Otome Pass to the <strong>northern shore of Lake Ashi (Togendai area)</strong> for a lakeside stroll and sunset (about 16:00–16:30). Then drive about 20–30 minutes to Gora (Gora 1320-179) and check in at <strong>WPU HOTEL Hakone (WPÜ HAKONE)</strong> (check-in 15:00–22:00), soak in the indoor milky-white hot spring (evening session until 22:30) and relax. Free on-site parking for approx. 10 cars is up the slope to the left of the entrance (first-come, first-served, no reservations; use nearby coin parking if full). <strong>Arrive before dark</strong> — mountain roads can be icy after sunset.",
+            "zh": "經御殿場及乙女峠南下，前往<strong>蘆之湖北岸（桃源台一帶）</strong>漫步並欣賞日落（約 16:00–16:30）。隨後駕車約 20–30 分鐘前往強羅（1320-179）入住 <strong>WPU HOTEL Hakone (WPÜ HAKONE)</strong>（入住時間 15:00–22:00），浸室內乳白色天然溫泉放鬆身心（晚間開放至 22:30）。酒店入口左側斜坡設有約 10 個免費先到先得車位（不設預約），滿車時可使用附近收費停車場。<strong>請務必在天黑前抵達</strong>，日落後山路可能結冰。"
           },
           "meal": {
             "icon": "🍱",
-            "en": "<strong>Dinner:</strong> At the hotel or a nearby Sengokuhara restaurant — please confirm your meal plan in the booking confirmation.",
-            "zh": "<strong>晚餐：</strong> 於酒店或仙石原附近餐廳享用 — 請查閱訂房確認電郵內的餐飲安排。"
+            "en": "<strong>Dinner:</strong> At the hotel's 1F WPÜ DINING HAKONE (from 17:00) or a nearby Gora restaurant (such as Tamura Ginkatsutei) — please check your booking confirmation for your meal plan.",
+            "zh": "<strong>晚餐：</strong> 於酒店 1 樓 WPÜ DINING HAKONE（17:00 起）或強羅附近餐廳（如田むら銀かつ亭）享用 — 餐飲安排請查閱訂房確認電郵。"
           },
           "locations": [
             {
@@ -497,11 +497,11 @@ const ITINERARY_DATA = [
               }
             },
             {
-              "lat": 35.2578,
-              "lng": 139.0036,
+              "lat": 35.2511,
+              "lng": 139.0477,
               "label": {
-                "en": "Hotel Kagetsuen, Sengokuhara",
-                "zh": "仙石原 ホテル花月園"
+                "en": "WPU HOTEL Hakone (Gora)",
+                "zh": "強羅 WPU HOTEL Hakone"
               }
             }
           ]
@@ -563,8 +563,8 @@ const ITINERARY_DATA = [
           },
           "meal": {
             "icon": "🍳",
-            "en": "<strong>Breakfast:</strong> At the hotel (or a nearby Sengokuhara café if breakfast is not included).",
-            "zh": "<strong>早餐：</strong> 於酒店享用（如房價不含早餐，可到仙石原附近咖啡店）。"
+            "en": "<strong>Breakfast:</strong> At the hotel or a nearby Gora café (e.g. Coffee Camp near Gora Station) — check your confirmation to see whether breakfast is included.",
+            "zh": "<strong>早餐：</strong> 於酒店或強羅站附近咖啡店（如 Coffee Camp）享用 — 請查閱訂房確認電郵了解是否已含早餐。"
           },
           "options": [
             {

@@ -8,16 +8,30 @@ let JPY_EXCHANGE_RATES = {
   gbp: 0.0050   // approx. Aug 2026
 };
 
+let activeCurrency = 'hkd';
+
+function safeGetStorage(key) {
+  try { return localStorage.getItem(key); } catch (e) { return null; }
+}
+
+function safeSetStorage(key, val) {
+  try { localStorage.setItem(key, val); } catch (e) { /* ignore storage restrictions */ }
+}
+
+function normaliseCurrency(curr) {
+  return curr === 'gbp' ? 'gbp' : 'hkd';
+}
+
 /* ─── Init ─── */
 function initCurrencySelector() {
-  const currentCurr = localStorage.getItem('user-curr') || 'hkd';
+  const currentCurr = normaliseCurrency(safeGetStorage('user-curr'));
   setCurrency(currentCurr);
 
   const btns = document.querySelectorAll('.curr-btn');
   btns.forEach(btn => {
     btn.classList.toggle('active', btn.dataset.curr === currentCurr);
     btn.addEventListener('click', (e) => {
-      const selected = e.currentTarget.dataset.curr;
+      const selected = normaliseCurrency(e.currentTarget.dataset.curr);
       setCurrency(selected);
       btns.forEach(b => b.classList.toggle('active', b.dataset.curr === selected));
     });
@@ -54,13 +68,14 @@ async function fetchExchangeRates() {
 
 /* ─── Apply Currency to Body & Switcher ─── */
 function setCurrency(curr) {
+  activeCurrency = normaliseCurrency(curr);
   document.body.classList.remove('curr-hkd', 'curr-gbp');
-  document.body.classList.add(curr === 'gbp' ? 'curr-gbp' : 'curr-hkd');
-  localStorage.setItem('user-curr', curr);
+  document.body.classList.add(activeCurrency === 'gbp' ? 'curr-gbp' : 'curr-hkd');
+  safeSetStorage('user-curr', activeCurrency);
 
   const switcher = document.querySelector('.currency-switcher');
   if (switcher) {
-    switcher.classList.toggle('slide-right', curr === 'gbp');
+    switcher.classList.toggle('slide-right', activeCurrency === 'gbp');
   }
 
   updateConvertedBudgets();
@@ -68,7 +83,8 @@ function setCurrency(curr) {
 
 /* ─── Recalculate & Display Converted Budget Values ─── */
 function updateConvertedBudgets() {
-  const activeCurr = localStorage.getItem('user-curr') || 'hkd';
+  const stored = safeGetStorage('user-curr');
+  const activeCurr = stored ? normaliseCurrency(stored) : activeCurrency;
   const rate = JPY_EXCHANGE_RATES[activeCurr];
   const symbol = activeCurr === 'gbp' ? '£' : '$';
   const isGbp = activeCurr === 'gbp';
@@ -109,6 +125,7 @@ function updateConvertedBudgets() {
 
 if (typeof window !== 'undefined') {
   window.JPY_EXCHANGE_RATES = JPY_EXCHANGE_RATES;
+  window.normaliseCurrency = normaliseCurrency;
   window.initCurrencySelector = initCurrencySelector;
   window.fetchExchangeRates = fetchExchangeRates;
   window.setCurrency = setCurrency;

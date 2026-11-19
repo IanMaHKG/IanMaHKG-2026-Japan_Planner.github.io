@@ -151,7 +151,14 @@
 .flight-legs-table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed;
 }
+
+.flight-legs-table thead th:nth-child(1) { width: 16%; }
+.flight-legs-table thead th:nth-child(2) { width: 32%; }
+.flight-legs-table thead th:nth-child(3) { width: 22%; }
+.flight-legs-table thead th:nth-child(4) { width: 15%; }
+.flight-legs-table thead th:nth-child(5) { width: 15%; }
 
 .flight-legs-table thead th {
   font-size: 0.68rem;

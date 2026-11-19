@@ -246,7 +246,7 @@
   border: 1px solid rgba(255, 255, 255, 0.16) !important;
   border-radius: 12px !important;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
-  padding: 12px 14px !important;
+  padding: 12px 32px 12px 14px !important;
 }
 
 [data-theme="dark"] .maplibregl-popup-tip {

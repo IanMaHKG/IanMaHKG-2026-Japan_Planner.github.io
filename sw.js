@@ -18,7 +18,7 @@
 
 const CACHE_NAME = 'japan-planner-__BUILD__';
 const RUNTIME_CACHE = 'japan-planner-runtime';
-const RUNTIME_MAX_ENTRIES = 120;
+const RUNTIME_MAX_ENTRIES = 250;
 
 const STATIC_ASSETS = [
   './',
@@ -33,8 +33,10 @@ const STATIC_ASSETS = [
   './assets/airlines/ay.svg',
   './assets/airlines/ba.svg',
   './assets/airlines/cx.svg',
+  './assets/airlines/ey.svg',
       './assets/airlines/jl.svg',
   './assets/airlines/lh.svg',
+  './assets/airlines/lo.svg',
   './assets/airlines/lx.svg',
     './assets/airlines/nh.svg',
   './assets/airlines/qr.svg',
@@ -82,9 +84,13 @@ const STATIC_ASSETS = [
 /* Install: cache all essential core assets */
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
+    caches.open(CACHE_NAME).then(async (cache) => {
       // cache:'reload' bypasses the browser HTTP cache so a new build never precaches stale files
-      return cache.addAll(STATIC_ASSETS.map((u) => new Request(u, { cache: 'reload' })));
+      const local = STATIC_ASSETS.filter((u) => !u.startsWith('http'));
+      const external = STATIC_ASSETS.filter((u) => u.startsWith('http'));
+      await cache.addAll(local.map((u) => new Request(u, { cache: 'reload' })));
+      // Best-effort CDN precache so an external outage never blocks local offline caching
+      await Promise.allSettled(external.map((u) => cache.add(new Request(u, { cache: 'reload' }))));
     }).then(() => self.skipWaiting())
   );
 });
@@ -115,16 +121,22 @@ self.addEventListener('fetch', (event) => {
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
 
-  // External (exchange-rate API, map tiles, fonts): network-first, capped runtime cache fallback
+  // External (exchange-rate API, map tiles, fonts): network-first with short timeout, runtime cache fallback
   if (url.origin !== location.origin) {
+    const ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+    const timer = ctrl ? setTimeout(() => ctrl.abort(), 4000) : null;
     event.respondWith(
-      fetch(req).then((res) => {
+      fetch(req, ctrl ? { signal: ctrl.signal } : undefined).then((res) => {
+        if (timer) clearTimeout(timer);
         if (res && (res.status === 200 || res.type === 'opaque')) {
           const copy = res.clone();
           event.waitUntil(caches.open(RUNTIME_CACHE).then((c) => c.put(req, copy)).then(trimRuntimeCache));
         }
         return res;
-      }).catch(() => caches.match(req))
+      }).catch(() => {
+        if (timer) clearTimeout(timer);
+        return caches.match(req);
+      })
     );
     return;
   }

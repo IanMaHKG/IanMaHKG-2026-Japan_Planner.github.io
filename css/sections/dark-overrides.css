@@ -48,7 +48,7 @@
 [data-theme="dark"] .meal-rec {
   background: rgba(201, 169, 110, 0.12);
   border-left-color: var(--ba-gold);
-  color: var(--text-secondary);
+  color: #C9D1D9;
 }
 [data-theme="dark"] .meal-rec strong { color: var(--ba-gold); }
 
@@ -70,12 +70,10 @@
 }
 
 [data-theme="dark"] .hotel-leg-body h4 { color: var(--text-primary); }
-[data-theme="dark"] .hotel-leg-card.highlight-card {
-  background: var(--bg-card);
-  border-color: rgba(235, 34, 38, 0.3);
-}
 [data-theme="dark"] .hotel-leg-btn { color: var(--text-primary) !important; }
 [data-theme="dark"] .maplibregl-popup-close-button { color: var(--text-secondary) !important; }
+[data-theme="dark"] .rental-price-total td { color: var(--text-primary); }
 
-/* Contrast fix (WCAG AA): active day filter tab — white text on the bright dark-mode blue was 2.4:1 */
-[data-theme="dark"] .day-tab.active { background: #2A6BB8; border-color: #2A6BB8; }
+/* Contrast fix (WCAG AA): white text on the bright dark-mode blue was 2.4:1 */
+[data-theme="dark"] .day-tab.active,
+[data-theme="dark"] .activity-option-btn.active { background: #2A6BB8; border-color: #2A6BB8; color: #FFFFFF; }
